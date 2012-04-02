@@ -15,11 +15,24 @@ jQuery(document).ready(function(){
     {
       name: "Position0",
       url: "/Test1/test_ad1.js"
-    }  ,
-      {
-        name: "Position4",
+    },
+    {
+        name: "Position1",
         url: "/Test1/test_ad1.js"
-      }
+    },
+    {
+      name: "Position4",
+      url: "/Test4/test_ad4.js"
+    },
+    {
+      name: "Position5",
+      url: "/Test5/test_ad5.js"
+    },
+    {
+      name: "Position6",
+      url: "/Test6/test_ad6.js"
+    }
+      
     ]);
   
   

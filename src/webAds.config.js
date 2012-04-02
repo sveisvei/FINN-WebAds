@@ -11,5 +11,5 @@ FINN.data.defaultConfig = {
   "Position1" : {container: 'banner-tab'},
   "Position2" : {container: 'banner-tab'},
   "Position3" : {container: 'banner-tab'},
-  "all"       : {}
+  "all"       : {container: 'banners'}
 };
