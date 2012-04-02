@@ -1,0 +1,1 @@
+document.write((Date.now() + "").substr(-5) + '<div><strong>HURRA4 for '+Math.round(Math.random()*1000)+'</strong></div>');

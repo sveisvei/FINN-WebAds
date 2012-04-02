@@ -3,8 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes');
+var express = require('express'),
+    routes = require('./routes');
 
 var app = module.exports = express.createServer();
 
@@ -17,6 +17,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/../../src'));
+  app.use(express.static(__dirname + '/../Tests'));
 });
 
 app.configure('development', function(){
@@ -31,5 +33,14 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
+
+var fs = require('fs');
+app.get('/finn/webads', function(req, res){
+  fs.readFile(__dirname + '/public/iframe.html', 'utf8', function(err, data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
+
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("FINN webAds-test server listening on port %d in %s mode", app.address().port, app.settings.env);
