@@ -49,7 +49,7 @@ class Banner
     $body = @iframe.$iframe.contents().find('body');
     size = {width: $body.outerWidth(), height: $body.outerHeight()};
     @iframe.$iframe.css(size).attr('height', size.height).attr('width', size.width);
-    console.log('iframe:', size)
+    console.log('iframe: size', size, 'height', size.height, 'width', size.width);
   
   setContainer: (@container) ->
     #TODO

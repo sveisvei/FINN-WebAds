@@ -66,7 +66,7 @@
         height: $body.outerHeight()
       };
       this.iframe.$iframe.css(size).attr('height', size.height).attr('width', size.width);
-      return console.log('iframe:', size);
+      return console.log('iframe: size', size, 'height', size.height, 'width', size.width);
     };
 
     Banner.prototype.setContainer = function(container) {

@@ -1,0 +1,1 @@
+document.write('<div><img src="#" /></div>')

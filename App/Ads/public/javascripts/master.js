@@ -17,8 +17,8 @@ jQuery(document).ready(function(){
       url: "/Test1/test_ad1.js"
     },
     {
-        name: "Position1",
-        url: "/Test1/test_ad1.js"
+      name: "Position1",
+      url: "/Test1/test_ad1.js"
     },
     {
       name: "Position4",
@@ -31,6 +31,10 @@ jQuery(document).ready(function(){
     {
       name: "Position6",
       url: "/Test6/test_ad6.js"
+    },
+    {
+      name: "Position7",
+      url: "/Test6/test_ad7.js"
     }
       
     ]);

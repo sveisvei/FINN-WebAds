@@ -1,1 +1,1 @@
-document.write('<div style="width: 411px; height: 111px;">' + (Date.now() + "").substr(-5) + '<br/><strong>HURRA for '+banner.name+' '+Math.round(Math.random()*1000)+'</strong></div>');
+document.write('<div style="width: 411px; height: 111px;">' + (Date.now() + "").substr(-5) + '<br/></div>');
