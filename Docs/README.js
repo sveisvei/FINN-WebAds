@@ -1,3 +1,8 @@
+Notes
+  - RefreshAll
+    - Hva med prioritering???
+  - 1x1, 1x2, 3x3
+
 Visjon
   - få det testbart, crossbrowser.
     - on-demand testing

@@ -5,15 +5,16 @@ var FINN = FINN||{};
   var defaultConfig = data.defaultConfig = data.defaultConfig||{};
   
   // exports
-  F.webAds = {
-    renderContext : renderContext,
-    queue         : queue,
-    render        : render,
-    renderAll     : renderAll,
-    expose        : expose,
-    refreshAll    : refreshAll,
-    resolve       : resolve
-  };
+  F.webAds = F.webAds||{};
+  var w = F.webAds;
+  w.renderContext  = renderContext;
+  w.queue          = queue;
+  w.render         = render;
+  w.renderAll      = renderAll;
+  w.expose         = expose;
+  w.refreshAll     = refreshAll;
+  w.resolve        = resolve;
+  w.plugins        = w.plugins||{};
   
   var jsub = $.sub();
   var globalExpose = {
@@ -22,13 +23,18 @@ var FINN = FINN||{};
     inDapIf   : true,
     inFIF     : undefined,
     swfobject : window.swfobject,
-    webAds    : F.webAds
+    webAds    : w,
+    plugins   : w.plugins
   };
   
   var bannerMap = {};
   var callbacks = {};
-    
+  var configMap = {};
   
+  function config(name, obj){
+    configMap[name] = obj;
+  }
+      
   function addToMap(){
     var defaults  = defaultConfig[this.name]||defaultConfig.all;
     var obj       = $.extend({}, defaults, this);

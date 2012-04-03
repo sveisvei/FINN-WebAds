@@ -61,9 +61,6 @@ class Banner
     idoc.write('<scr' + 'ipt type="text/javascript" src="'+@url+'"></scr'+'ipt>');
     return @
   
-  resize: () ->
-    #TODOx
-    
   refresh: () ->
     @iframe.$wrapper.replaceWith(@iframe.html());
     

@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
     },
     {
       name: "Position7",
-      url: "/Test6/test_ad7.js"
+      url: "/Test7/test_ad7.js"
     }
       
     ]);
@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
   
   
   $("ul.tabs").on('click', 'li', function(){
-    $("div.tabs").html('<h1>'+$(this).text()+'</h1><div class="webads" id="banner-tab"></div>');
+    $("div.tabs").html('<h1>'+$(this).text()+'</h1><p>Oh lalala</p><div class="webads" id="banner-tab"></div>');
     FINN.webAds.renderContext('div.tabs');
   });
   
