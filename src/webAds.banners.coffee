@@ -8,7 +8,7 @@ class Iframe
   refresh: () ->
     #force refresh of rendring
     currSrc = @$iframe.attr('src');
-    @$iframe.attr('src', 'about:blank')
+    #@$iframe.attr('src', 'about:blank')
     @$iframe.attr('src', if currSrc is '/finn/webads/#' + @name then '/finn/webads#' + @name else '/finn/webads/#' + @name )
     
   

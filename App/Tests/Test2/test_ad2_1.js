@@ -1,1 +1,0 @@
-document.write('<div style="position:relative;"><div style="width:200px;height: 550px;">' + (Date.now() + "").substr(-5) + '</div></div>');

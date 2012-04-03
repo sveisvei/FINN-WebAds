@@ -12,6 +12,7 @@ var FINN = FINN||{};
   w.render         = render;
   w.renderAll      = renderAll;
   w.expose         = expose;
+  w.refresh        = refresh;
   w.refreshAll     = refreshAll;
   w.resolve        = resolve;
   w.plugins        = w.plugins||{};
@@ -22,7 +23,6 @@ var FINN = FINN||{};
     $         : jsub,
     inDapIf   : true,
     inFIF     : undefined,
-    swfobject : window.swfobject,
     webAds    : w,
     plugins   : w.plugins
   };
@@ -36,9 +36,9 @@ var FINN = FINN||{};
   }
       
   function addToMap(){
-    var defaults  = defaultConfig[this.name]||defaultConfig.all;
-    var obj       = $.extend({}, defaults, this);
-    return (bannerMap[this.name] = new F.Banner(obj, globalExpose));
+    var objWithDefaults = $.extend({}, defaultConfig.all, defaultConfig[this.name], this);
+    var banner = new F.Banner(objWithDefaults, globalExpose);
+    return (bannerMap[this.name] = banner);
   }
       
   function render(name, callback){
@@ -59,7 +59,7 @@ var FINN = FINN||{};
         if (typeof this === 'function') this();
       });
       callbacks[name] = null;
-      $(document).trigger(name+'.ready', bannerMap[name]);
+      $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
   }
 

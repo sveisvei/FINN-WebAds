@@ -18,7 +18,6 @@
     Iframe.prototype.refresh = function() {
       var currSrc;
       currSrc = this.$iframe.attr('src');
-      this.$iframe.attr('src', 'about:blank');
       return this.$iframe.attr('src', currSrc === '/finn/webads/#' + this.name ? '/finn/webads#' + this.name : '/finn/webads/#' + this.name);
     };
 

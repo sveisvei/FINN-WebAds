@@ -1,1 +1,0 @@
-swfobject.embedSWF("/Test3/980x150.swf", "flashbanner", "980", "150", "9.0.0");

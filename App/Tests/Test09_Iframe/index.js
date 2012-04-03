@@ -1,0 +1,1 @@
+document.write('<iframe src="/Test09_Iframe/iframe.html"></iframe>')
