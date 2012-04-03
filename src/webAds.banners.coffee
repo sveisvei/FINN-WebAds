@@ -86,7 +86,10 @@ class Banner
   insert: () ->
     console.log 'insert;', @name    
     @active = true;
-    jQuery("#"+@container).addClass('webads-processed').append(@iframe.html())
+    $container = if typeof @container is 'string' then jQuery("#"+@container) else @container
+    $container
+      .addClass('webads-processed')
+      .append(@iframe.html())
     return @
   
 window.FINN.Banner = Banner

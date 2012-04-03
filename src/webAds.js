@@ -15,6 +15,8 @@ var FINN = FINN||{};
   w.refresh        = refresh;
   w.refreshAll     = refreshAll;
   w.resolve        = resolve;
+  w.collectDataPositions = collectDataPositions;
+  w.config         = config;
   w.plugins        = w.plugins||{};
   
   var jsub = $.sub();
@@ -32,11 +34,16 @@ var FINN = FINN||{};
   var configMap = {};
   
   function config(name, obj){
-    configMap[name] = obj;
+    configMap[name] = $.extend(configMap[name] , obj);
   }
       
   function addToMap(){
-    var objWithDefaults = $.extend({}, defaultConfig.all, defaultConfig[this.name], this);
+    var objWithDefaults = $.extend(
+      {}, 
+      defaultConfig.all, 
+      defaultConfig[this.name], 
+      configMap[this.name],
+      this);
     var banner = new F.Banner(objWithDefaults, globalExpose);
     return (bannerMap[this.name] = banner);
   }
@@ -51,7 +58,13 @@ var FINN = FINN||{};
       }
     }
   }
-
+  
+  function collectDataPositions(){
+    $("div.webads[data-banner-position]").each(function(){
+      var position = $(this).data('banner-position');
+      config(position, {container: $(this)})
+    });
+  }
   
   function resolve(name){
     if (callbacks[name] && callbacks[name].length > 0){
@@ -74,7 +87,7 @@ var FINN = FINN||{};
     }
   }
   
-  function queue(obj){
+  function queue(obj){    
     if ($.isArray(obj)){
       $.each(obj, addToMap);
     } else {

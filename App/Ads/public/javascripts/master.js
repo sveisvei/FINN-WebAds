@@ -1,9 +1,20 @@
 jQuery(document).ready(function(){
   
-  FINN.webAds.queue([{
+  FINN.webAds.collectDataPositions()
+  
+  FINN.webAds.queue([
+    {
+      name: "Position0",
+      url: "/Test01/index.js"
+    },
+    {
       name: "Top",
       url: "/Test01/index.js"
     },   
+    {
+      name: "Position1",
+      url: "/Test01/index.js"
+    },
     {
       name: "Position2",
       url: "/Test02/index.js"
@@ -12,14 +23,7 @@ jQuery(document).ready(function(){
       name: "Position3",
       url: "/Test03/index.js"
     },
-    {
-      name: "Position0",
-      url: "/Test01/index.js"
-    },
-    {
-      name: "Position1",
-      url: "/Test01/index.js"
-    },
+
     {
       name: "Position4",
       url: "/Test04/index.js"
@@ -55,7 +59,6 @@ jQuery(document).ready(function(){
       url: "/Test11_Image/index.js"
     }      
     ]);
-  
   
   
   FINN.webAds.render('Top', function(){

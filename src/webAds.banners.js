@@ -108,9 +108,11 @@
     };
 
     Banner.prototype.insert = function() {
+      var $container;
       console.log('insert;', this.name);
       this.active = true;
-      jQuery("#" + this.container).addClass('webads-processed').append(this.iframe.html());
+      $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
+      $container.addClass('webads-processed').append(this.iframe.html());
       return this;
     };
 
