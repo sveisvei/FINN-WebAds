@@ -60,8 +60,8 @@ var FINN = FINN||{};
   }
   
   function collectDataPositions(){
-    $("div.webads[data-banner-position]").each(function(){
-      var position = $(this).data('banner-position');
+    $("div.webads[data-banner-position],div.webads[data-position]").each(function(){
+      var position = $(this).data('banner-position')||$(this).data('position');
       config(position, {container: $(this)})
     });
   }
