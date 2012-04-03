@@ -16,6 +16,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
+  app.use(express.compiler({src: __dirname + '/../../src', dest: __dirname + '/../../src', enable: ['coffeescript']}));
+  
   app.use(express.static(__dirname + '/public'));
   app.use(express.static(__dirname + '/../../src'));
   app.use(express.static(__dirname + '/../Tests'));

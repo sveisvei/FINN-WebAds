@@ -42,7 +42,6 @@ var FINN = FINN||{};
   }
       
   function render(name, callback){
-    bannerMap[name].render();
     bannerMap[name].insert();
     if (typeof callback === 'function'){
       if (callbacks[name] && $.isArray(callbacks[name])){
@@ -70,7 +69,7 @@ var FINN = FINN||{};
     for(var key in bannerMap){
       banner = bannerMap[key];      
       if (banner.active === false){
-        banner.render().insert();
+        banner.insert();
       }      
     }
   }
@@ -125,25 +124,4 @@ var FINN = FINN||{};
   
   function expose(name){return bannerMap[name].expose();}
   
-
-  
 })(FINN, jQuery);
-
-/*
-
-
-var webAds = webAds.add([{name: "left", url: "", insert: "banner"}]);
-
-webAds.autoRender = false;
-
-webAds.config('Faktabox', {insert: "bannerTop"})
-webAds.render("Faktabox");
-
-webAds.on('done.Top', function(){
-  webAds.renderAll();
-});
-
-
-webAds.
-
-*/

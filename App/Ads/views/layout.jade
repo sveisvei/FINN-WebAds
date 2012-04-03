@@ -10,3 +10,5 @@ html
     script(type='text/javascript', src='/webAds.js')    
     script(type='text/javascript', src='/javascripts/master.js')
   body!= body
+    script
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');

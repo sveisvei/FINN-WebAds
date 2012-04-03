@@ -15,6 +15,13 @@
       return this.$wrapper.remove();
     };
 
+    Iframe.prototype.refresh = function() {
+      var currSrc;
+      currSrc = this.$iframe.attr('src');
+      this.$iframe.attr('src', 'about:blank');
+      return this.$iframe.attr('src', currSrc === '/finn/webads/#' + this.name ? '/finn/webads#' + this.name : '/finn/webads/#' + this.name);
+    };
+
     Iframe.prototype.html = function() {
       var div, iframe, innerDiv;
       div = document.createElement('div');
@@ -53,20 +60,26 @@
       this.name = this.params.name;
       this.url = this.params.url;
       this.container = this.params.container;
+      this.width = this.params.width;
+      this.height = this.params.height;
+      this.iframe = new Iframe(this.name, this.params);
       this.active = false;
-      console.log('new Banner;', this.name, this.exposeObj);
+      console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
     Banner.prototype.onload = function() {
-      var $body, size;
-      console.log('loaded:', this.name);
+      var $body;
+      console.log('onload:', this.name);
       $body = this.iframe.$iframe.contents().find('body');
-      size = {
-        width: $body.outerWidth(),
-        height: $body.outerHeight()
-      };
-      this.iframe.$iframe.css(size).attr('height', size.height).attr('width', size.width);
-      return console.log('iframe: size', size, 'height', size.height, 'width', size.width);
+      return this.resize($body.outerWidth(), $body.outerHeight());
+    };
+
+    Banner.prototype.resize = function(width, height) {
+      console.log('iframe: resize:', height, 'width', width);
+      return this.iframe.$iframe.css({
+        height: height,
+        width: width
+      }).attr('height', height).attr('width', width);
     };
 
     Banner.prototype.setContainer = function(container) {
@@ -85,21 +98,13 @@
       return this;
     };
 
-    Banner.prototype.resize = function() {};
-
     Banner.prototype.refresh = function() {
-      return this.iframe.$wrapper.replaceWith(this.iframe.html());
+      return this.iframe.refresh();
     };
 
     Banner.prototype.remove = function() {
       this.active = false;
       this.iframe.remove();
-      return this;
-    };
-
-    Banner.prototype.render = function() {
-      console.log('render:', this.name);
-      this.iframe = new Iframe(this.name, this.params);
       return this;
     };
 

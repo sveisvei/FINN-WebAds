@@ -11,7 +11,7 @@ var FINN = FINN||{};
   plugins.context = context;
   
   function overlay(banner){
-    console.log('Overlay', banner.name);
+    console.log('PLUGIN -> Overlay ', banner.name);
   }
   
   function popup(){

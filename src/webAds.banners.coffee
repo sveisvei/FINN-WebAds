@@ -4,7 +4,14 @@ class Iframe
   constructor: (@name, @options = {}, @id = 'webad-' + @name) ->
   remove: () ->
     @$wrapper.remove();
+  
+  refresh: () ->
+    #force refresh of rendring
+    currSrc = @$iframe.attr('src');
+    @$iframe.attr('src', 'about:blank')
+    @$iframe.attr('src', if currSrc is '/finn/webads/#' + @name then '/finn/webads#' + @name else '/finn/webads/#' + @name )
     
+  
   html: ()->    
     div       = document.createElement('div')
     innerDiv  = document.createElement('div')
@@ -41,20 +48,26 @@ class Banner
     @name       = @params.name
     @url        = @params.url
     @container  = @params.container
-    @active     = false;
-    console.log 'new Banner;', @name, @exposeObj
+    @width      = @params.width
+    @height     = @params.height
+    @iframe     = new Iframe(@name, @params)    
+    @active     = false;    
+    console.log '-> new Banner;', @name, @exposeObj
   
   onload: () ->
-    console.log('loaded:', @name)
+    console.log('onload:', @name)
     $body = @iframe.$iframe.contents().find('body');
-    size = {width: $body.outerWidth(), height: $body.outerHeight()};
-    @iframe.$iframe.css(size).attr('height', size.height).attr('width', size.width);
-    console.log('iframe: size', size, 'height', size.height, 'width', size.width);
+    @resize($body.outerWidth(), $body.outerHeight())
+  
+  resize: (width, height) ->
+    console.log('iframe: resize:', height, 'width', width);    
+    @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
   
   setContainer: (@container) ->
     #TODO
     
-  expose: () -> return $.extend {}, @exposeObj, {banner: @}
+  expose: () -> 
+    return $.extend {}, @exposeObj, {banner: @}
 
   injectScript: (idoc, iwin) ->
     console.log('inject:', @name)
@@ -62,18 +75,14 @@ class Banner
     return @
   
   refresh: () ->
-    @iframe.$wrapper.replaceWith(@iframe.html());
+    #@iframe.$wrapper.replaceWith(@iframe.html());
+    @iframe.refresh();
     
   remove: () ->
     @active = false;
     @iframe.remove()
     return @
-    
-  render: () ->
-    console.log 'render:', @name
-    @iframe = new Iframe(@name, @params)
-    return @
-    
+
   insert: () ->
     console.log 'insert;', @name    
     @active = true;
