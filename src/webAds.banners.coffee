@@ -56,23 +56,42 @@ class Banner
     @height     = @params.height
     @iframe     = new Iframe(@name, @params)    
     @active     = false;
-    @retries    = 10;
-    @timer      = 10;
+    @retries    = 5;
+    @timer      = 50;
     console.log '-> new Banner;', @name, @exposeObj
   
   config: (key, value) ->
     @[key] = value;
   
   onload: () ->
-    console.log('onload:', @name)
+    console.log('BANNER ONLOAD:', @name)
     $wrapper = @iframe.$iframe.contents().find('#webAd');
-    @resize( $wrapper.width(),  $wrapper.height())
+    width = $wrapper.width();
+    height = $wrapper.height()
+    
+    invalidSize = (width is null or width <= 25 or height is null or height <= 25)
+    
+    return @pollForNewSize() if invalidSize
+    
+    @resize( width,  height)
+    
     $("body").addClass @params.bodyClass if @params.bodyClass
     @params.done(@) if @params.done and typeof @params.done is 'function'
     return @
   
+  # TODO
   pollForNewSize: () ->
-  
+    console.warn('POLL',@name, @timer, @retries);
+    @timer += @timer
+    @retries -= 1
+    banner = @
+    cb = () -> 
+      console.log('POLL cb', banner && banner.name)    
+      banner.onload()
+    setTimeout(cb, @timer) if (@retries > 0)
+    return @
+    
+    
   resize: (@width, @height) ->    
     console.log('iframe: ', @name, '. resize:', height, 'width', width);    
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
@@ -87,6 +106,9 @@ class Banner
     return @
   
   refresh: () ->
+    console.log('REFRESH', @name)
+    @retries = 5
+    @timer = 50
     #@iframe.$wrapper.replaceWith(@iframe.html());
     @iframe.refresh();
     
