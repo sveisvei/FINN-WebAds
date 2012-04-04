@@ -1,11 +1,9 @@
 (function() {
-  var Banner, Iframe, iframeUrl;
+  var Banner, Iframe;
 
   if (window.FINN == null) window.FINN = {};
 
   if (FINN.webAds == null) FINN.webAds = {};
-
-  iframeUrl = FINN.webAds.iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
 
   Iframe = (function() {
 
@@ -20,14 +18,16 @@
     };
 
     Iframe.prototype.refresh = function() {
-      var currSrc, url;
+      var currSrc, iframeUrl, url;
+      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       currSrc = this.$iframe.attr('src');
       url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
       return this.$iframe.attr('src', url);
     };
 
     Iframe.prototype.html = function() {
-      var div, iframe, innerDiv;
+      var div, iframe, iframeUrl, innerDiv;
+      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       div = document.createElement('div');
       innerDiv = document.createElement('div');
       iframe = document.createElement('iframe');

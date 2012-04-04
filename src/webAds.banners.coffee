@@ -1,7 +1,6 @@
 window.FINN ?= {}
 
 FINN.webAds ?= {}
-iframeUrl = FINN.webAds.iframeUrl = FINN.webAds.iframeUrl ||"/finn/webads";
 
 class Iframe
   constructor: (@name, @options = {}, @id = 'webad-' + @name) ->
@@ -9,12 +8,15 @@ class Iframe
     @$wrapper.remove();
   
   refresh: () ->
+    iframeUrl = FINN.webAds.iframeUrl||"/finn/webads";    
     currSrc = @$iframe.attr('src');
     url = if currSrc is "#{iframeUrl}?refresh##{@name}" then "#{iframeUrl}##{@name}" else "#{iframeUrl}?refresh##{@name}"
     @$iframe.attr('src', url)
     
   
   html: ()->    
+    iframeUrl = FINN.webAds.iframeUrl||"/finn/webads";
+    
     div       = document.createElement('div')
     innerDiv  = document.createElement('div')
     iframe    = document.createElement('iframe')
