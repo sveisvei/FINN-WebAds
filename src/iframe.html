@@ -9,8 +9,7 @@
     body,html { background: transparent; display: inline-block; }
     #webAd {display: inline-block; vertical-align:bottom; padding:0;margin:0;}
     </style>
-    <script type="text/javascript" src="/javascripts/swfobject.js">
-    </script>
+    
     <script type="text/javascript"> 
         var bannerPosition = document.location.hash.substring(1);
         (function(document, window, parent, webAds){
@@ -31,6 +30,8 @@
           webAds.resolve(bannerPosition);
         }, 0)
       });</script>
+	<a style="text-decoration: none;position: absolute; z-index: 999;top:2px;right:5px;" href="#asd" onclick="banner.refresh();return false;">(reload)</a>
+
 </body>
 
 </html>
