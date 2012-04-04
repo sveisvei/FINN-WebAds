@@ -33,8 +33,13 @@ var FINN = FINN||{};
   var callbacks = {};
   var configMap = {};
   
-  function config(name, obj){
-    configMap[name] = $.extend(configMap[name] , obj);
+  function config(name, key, value){
+    configMap[name]       = configMap[name]||{};
+    configMap[name][key]  = value;
+    
+    if(bannerMap[name]){
+      bannerMap[name].config(key, value);
+    }
   }
       
   function addToMap(){
@@ -59,10 +64,12 @@ var FINN = FINN||{};
     }
   }
   
-  function collectDataPositions(){
-    $("div.webads[data-banner-position]").each(function(){
-      var position = $(this).data('banner-position');
-      config(position, {container: $(this)});
+  function collectDataPositions(selector){
+    selector = selector||"body";
+    $(selector).find("div.webads[data-banner-position]").each(function(){
+      var $this = $(this);
+      var position = $this)data('banner-position');
+      config(position, 'container', $this);
     });
   }
   
@@ -118,6 +125,7 @@ var FINN = FINN||{};
   }
   
   function renderContext(selector){
+    collectDataPositions(selector);
     $(selector).find(".webads").filter(function(){
       return !$(this).hasClass('webads-processed');
     }).each(function(){

@@ -62,6 +62,11 @@ jQuery(document).ready(function(){
     {
       name: "Position12",
       url: "/Test12/index.js"
+    },
+    {
+      name: "Position12a",
+      url: "/Test12/index.js",
+      container: "banner-tab"
     }
     ]);
   

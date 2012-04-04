@@ -1,7 +1,11 @@
 (function() {
-  var Banner, Iframe;
+  var Banner, Iframe, iframeUrl;
 
   if (window.FINN == null) window.FINN = {};
+
+  if (FINN.webAds == null) FINN.webAds = {};
+
+  iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
 
   Iframe = (function() {
 
@@ -16,9 +20,10 @@
     };
 
     Iframe.prototype.refresh = function() {
-      var currSrc;
+      var currSrc, url;
       currSrc = this.$iframe.attr('src');
-      return this.$iframe.attr('src', currSrc === '/finn/webads?refresh#' + this.name ? '/finn/webads#' + this.name : '/finn/webads?refresh#' + this.name);
+      url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
+      return this.$iframe.attr('src', url);
     };
 
     Iframe.prototype.html = function() {
@@ -28,8 +33,8 @@
       iframe = document.createElement('iframe');
       innerDiv.className = 'inner';
       div.id = this.id;
-      div.className = 'advertising webads ' + this.id;
-      iframe.src = '/finn/webads#' + this.name;
+      div.className = "advertising webads " + this.id;
+      iframe.src = "" + iframeUrl + "#" + this.name;
       iframe.scrolling = 'no';
       iframe.className = 'webad-iframe';
       iframe.marginWidth = 0;
@@ -65,6 +70,10 @@
       this.active = false;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
+
+    Banner.prototype.config = function(key, value) {
+      return this[key] = value;
+    };
 
     Banner.prototype.onload = function() {
       var $wrapper;

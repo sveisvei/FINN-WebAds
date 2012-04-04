@@ -1,15 +1,17 @@
 window.FINN ?= {}
 
+FINN.webAds ?= {}
+iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
+
 class Iframe
   constructor: (@name, @options = {}, @id = 'webad-' + @name) ->
   remove: () ->
     @$wrapper.remove();
   
   refresh: () ->
-    #force refresh of rendring
     currSrc = @$iframe.attr('src');
-    #@$iframe.attr('src', 'about:blank')
-    @$iframe.attr('src', if currSrc is '/finn/webads?refresh#' + @name then '/finn/webads#' + @name else '/finn/webads?refresh#' + @name )
+    url = if currSrc is "#{iframeUrl}?refresh##{@name}" then "#{iframeUrl}##{@name}" else "#{iframeUrl}?refresh##{@name}"
+    @$iframe.attr('src', url)
     
   
   html: ()->    
@@ -19,9 +21,9 @@ class Iframe
     
     innerDiv.className  = 'inner'
     div.id              = @id
-    div.className       = ('advertising webads ' + @id)
+    div.className       = "advertising webads #{@id}"
     
-    iframe.src        = '/finn/webads#' + @name
+    iframe.src        = "#{iframeUrl}##{@name}"
     iframe.scrolling  = 'no'
     iframe.className  = 'webad-iframe'
     # IE 7-8
@@ -53,6 +55,9 @@ class Banner
     @iframe     = new Iframe(@name, @params)    
     @active     = false;    
     console.log '-> new Banner;', @name, @exposeObj
+  
+  config: (key, value) ->
+    @[key] = value;
   
   onload: () ->
     console.log('onload:', @name)

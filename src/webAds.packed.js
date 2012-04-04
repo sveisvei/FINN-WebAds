@@ -1,7 +1,11 @@
 (function() {
-  var Banner, Iframe;
+  var Banner, Iframe, iframeUrl;
 
   if (window.FINN == null) window.FINN = {};
+
+  if (FINN.webAds == null) FINN.webAds = {};
+
+  iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
 
   Iframe = (function() {
 
@@ -16,9 +20,10 @@
     };
 
     Iframe.prototype.refresh = function() {
-      var currSrc;
+      var currSrc, url;
       currSrc = this.$iframe.attr('src');
-      return this.$iframe.attr('src', currSrc === '/finn/webads?refresh#' + this.name ? '/finn/webads#' + this.name : '/finn/webads?refresh#' + this.name);
+      url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
+      return this.$iframe.attr('src', url);
     };
 
     Iframe.prototype.html = function() {
@@ -28,8 +33,8 @@
       iframe = document.createElement('iframe');
       innerDiv.className = 'inner';
       div.id = this.id;
-      div.className = 'advertising webads ' + this.id;
-      iframe.src = '/finn/webads#' + this.name;
+      div.className = "advertising webads " + this.id;
+      iframe.src = "" + iframeUrl + "#" + this.name;
       iframe.scrolling = 'no';
       iframe.className = 'webad-iframe';
       iframe.marginWidth = 0;
@@ -66,19 +71,30 @@
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
+    Banner.prototype.config = function(key, value) {
+      return this[key] = value;
+    };
+
     Banner.prototype.onload = function() {
-      var $body;
+      var $wrapper;
       console.log('onload:', this.name);
-      $body = this.iframe.$iframe.contents().find('body');
-      return this.resize($body.outerWidth(), $body.outerHeight());
+      $wrapper = this.iframe.$iframe.contents().find('#webAd');
+      this.resize($wrapper.width(), $wrapper.height());
+      if (this.params.done && typeof this.params.done === 'function') {
+        this.params.done(this);
+      }
+      return this;
     };
 
     Banner.prototype.resize = function(width, height) {
+      this.width = width;
+      this.height = height;
       console.log('iframe: ', this.name, '. resize:', height, 'width', width);
-      return this.iframe.$iframe.css({
+      this.iframe.$iframe.css({
         height: height,
         width: width
       }).attr('height', height).attr('width', width);
+      return this;
     };
 
     Banner.prototype.setContainer = function(container) {
@@ -126,9 +142,17 @@
 var FINN  = FINN || {};
 FINN.data = FINN.data || {};
 
-function fixTopPosition(){}
-function fixLeftBanner(){}
-function fixWallpaper(){}
+function fixTopPosition(banner){
+  console.log(banner.name, 'fixTopPosition')
+}
+function fixLeftBanner(banner){
+  console.log(banner.name, 'fixLeftBanner')
+  
+}
+function fixWallpaper(banner){
+  console.log(banner.name, 'fixWallpaper')
+  
+}
 
 
 FINN.data.defaultConfig = {
@@ -253,8 +277,13 @@ FINN.data.defaultConfig = {
   var callbacks = {};
   var configMap = {};
   
-  function config(name, obj){
-    configMap[name] = $.extend(configMap[name] , obj);
+  function config(name, key, value){
+    configMap[name]       = configMap[name]||{};
+    configMap[name][key]  = value;
+    
+    if(bannerMap[name]){
+      bannerMap[name].config(key, value);
+    }
   }
       
   function addToMap(){
@@ -279,10 +308,12 @@ FINN.data.defaultConfig = {
     }
   }
   
-  function collectDataPositions(){
-    $("div.webads[data-banner-position]").each(function(){
-      var position = $(this).data('banner-position');
-      config(position, {container: $(this)});
+  function collectDataPositions(selector){
+    selector = selector||"body";
+    $(selector).find("div.webads[data-banner-position]").each(function(){
+      var $this = $(this);
+      var position = $this)data('banner-position');
+      config(position, 'container', $this);
     });
   }
   
@@ -338,6 +369,7 @@ FINN.data.defaultConfig = {
   }
   
   function renderContext(selector){
+    collectDataPositions(selector);
     $(selector).find(".webads").filter(function(){
       return !$(this).hasClass('webads-processed');
     }).each(function(){
