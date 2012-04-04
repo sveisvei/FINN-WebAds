@@ -55,12 +55,19 @@ var FINN = FINN||{};
   }
       
   function render(name, callback){
-    bannerMap[name].insert();
-    if (typeof callback === 'function'){
-      if (callbacks[name] && $.isArray(callbacks[name])){
-        callbacks[name].push(callback);
-      } else {
-        callbacks[name] = [callback];
+    console.log('RENDER', name);
+    var banner = bannerMap[name];
+    if (!banner || banner.active){
+      console.log('BANNER', banner && banner.name, banner && banner.active);
+      callback(banner);
+    } else {
+      banner.insert();
+      if (typeof callback === 'function'){
+        if (callbacks[name] && $.isArray(callbacks[name])){
+          callbacks[name].push(callback);
+        } else {
+          callbacks[name] = [callback];
+        }
       }
     }
   }
@@ -77,22 +84,37 @@ var FINN = FINN||{};
   function resolve(name){
     if (callbacks[name] && callbacks[name].length > 0){
       $.each(callbacks[name], function(){
-        if (typeof this === 'function') this();
+        if (typeof this === 'function') this(bannerMap[name]);
       });
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
   }
 
-  function renderAll(){
-    //loop keys, render all that isnt rendered.
+  function renderUnactive(){
     var banner;
     for(var key in bannerMap){
       banner = bannerMap[key];      
       if (banner.active === false){
         banner.insert();
-      }      
+      }
     }
+  }
+  
+  function renderAll(commaList){ 
+    commaList         = commaList || "Top,Right1";
+    var priorityList  = commaList.split(',');
+    var next          = priorityList.shift();
+    
+    function loop(){
+      if (priorityList.length <= 0){
+        renderUnactive();
+      } else {
+        render(priorityList.shift(), loop);
+      }
+    }
+    
+    render(next, loop);    
   }
   
   function renderLazy(parent){

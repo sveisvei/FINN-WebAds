@@ -71,9 +71,7 @@ jQuery(document).ready(function(){
     ]);
   
   
-  FINN.webAds.render('Top', function(){
-    FINN.webAds.renderAll();    
-  });
+  FINN.webAds.renderAll('Top'); 
   
   
   // TODO, not working??

@@ -68,6 +68,8 @@
       this.height = this.params.height;
       this.iframe = new Iframe(this.name, this.params);
       this.active = false;
+      this.retries = 10;
+      this.timer = 10;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
@@ -80,11 +82,14 @@
       console.log('onload:', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       this.resize($wrapper.width(), $wrapper.height());
+      if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
       return this;
     };
+
+    Banner.prototype.pollForNewSize = function() {};
 
     Banner.prototype.resize = function(width, height) {
       this.width = width;
@@ -95,10 +100,6 @@
         width: width
       }).attr('height', height).attr('width', width);
       return this;
-    };
-
-    Banner.prototype.setContainer = function(container) {
-      this.container = container;
     };
 
     Banner.prototype.expose = function() {

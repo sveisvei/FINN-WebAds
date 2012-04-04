@@ -68,6 +68,8 @@
       this.height = this.params.height;
       this.iframe = new Iframe(this.name, this.params);
       this.active = false;
+      this.retries = 10;
+      this.timer = 10;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
@@ -80,11 +82,14 @@
       console.log('onload:', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       this.resize($wrapper.width(), $wrapper.height());
+      if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
       return this;
     };
+
+    Banner.prototype.pollForNewSize = function() {};
 
     Banner.prototype.resize = function(width, height) {
       this.width = width;
@@ -95,10 +100,6 @@
         width: width
       }).attr('height', height).attr('width', width);
       return this;
-    };
-
-    Banner.prototype.setContainer = function(container) {
-      this.container = container;
     };
 
     Banner.prototype.expose = function() {
@@ -151,7 +152,6 @@ function fixLeftBanner(banner){
 }
 function fixWallpaper(banner){
   console.log(banner.name, 'fixWallpaper')
-  
 }
 
 
@@ -168,9 +168,15 @@ FINN.data.defaultConfig = {
       bodyClass: 'banner-has-dominant-campaign',
       done: fixLeftBanner
   },
+  "Right1": {
+      width: 240
+  },
   "Right2": {
       width: 240,
       height: 500
+  },
+  "Right3": {
+      width: 240
   },
   "Middle": {
       width: 580,
@@ -187,6 +193,16 @@ FINN.data.defaultConfig = {
       height: 0,
       onload: $.noop
   },
+  "Txt_1": {},
+  "Txt_2": {},
+  "Txt_3": {},
+  "Txt_4": {},
+  "Txt_5": {},
+  "Txt_6": {},
+  "Txt_7": {},
+  "Txt_8": {},
+  "Txt_9": {},
+  "Txt_10": {},
   "Position0" : {width: 500, height: 120, container: 'banners'},
   "Position1" : {container: 'banner-tab'},
   "Position2" : {container: 'banner-tab'},
@@ -299,12 +315,19 @@ FINN.data.defaultConfig = {
   }
       
   function render(name, callback){
-    bannerMap[name].insert();
-    if (typeof callback === 'function'){
-      if (callbacks[name] && $.isArray(callbacks[name])){
-        callbacks[name].push(callback);
-      } else {
-        callbacks[name] = [callback];
+    console.log('RENDER', name);
+    var banner = bannerMap[name];
+    if (!banner || banner.active){
+      console.log('BANNER', banner && banner.name, banner && banner.active);
+      callback(banner);
+    } else {
+      banner.insert();
+      if (typeof callback === 'function'){
+        if (callbacks[name] && $.isArray(callbacks[name])){
+          callbacks[name].push(callback);
+        } else {
+          callbacks[name] = [callback];
+        }
       }
     }
   }
@@ -321,22 +344,37 @@ FINN.data.defaultConfig = {
   function resolve(name){
     if (callbacks[name] && callbacks[name].length > 0){
       $.each(callbacks[name], function(){
-        if (typeof this === 'function') this();
+        if (typeof this === 'function') this(bannerMap[name]);
       });
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
   }
 
-  function renderAll(){
-    //loop keys, render all that isnt rendered.
+  function renderUnactive(){
     var banner;
     for(var key in bannerMap){
       banner = bannerMap[key];      
       if (banner.active === false){
         banner.insert();
-      }      
+      }
     }
+  }
+  
+  function renderAll(commaList){ 
+    commaList         = commaList || "Top,Right1";
+    var priorityList  = commaList.split(',');
+    var next          = priorityList.shift();
+    
+    function loop(){
+      if (priorityList.length <= 0){
+        renderUnactive();
+      } else {
+        render(priorityList.shift(), loop);
+      }
+    }
+    
+    render(next, loop);    
   }
   
   function renderLazy(parent){

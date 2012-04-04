@@ -55,7 +55,9 @@ class Banner
     @width      = @params.width
     @height     = @params.height
     @iframe     = new Iframe(@name, @params)    
-    @active     = false;    
+    @active     = false;
+    @retries    = 10;
+    @timer      = 10;
     console.log '-> new Banner;', @name, @exposeObj
   
   config: (key, value) ->
@@ -65,17 +67,17 @@ class Banner
     console.log('onload:', @name)
     $wrapper = @iframe.$iframe.contents().find('#webAd');
     @resize( $wrapper.width(),  $wrapper.height())
+    $("body").addClass @params.bodyClass if @params.bodyClass
     @params.done(@) if @params.done and typeof @params.done is 'function'
     return @
+  
+  pollForNewSize: () ->
   
   resize: (@width, @height) ->    
     console.log('iframe: ', @name, '. resize:', height, 'width', width);    
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
     return @
   
-  setContainer: (@container) ->
-    #TODO
-    
   expose: () -> 
     return $.extend {}, @exposeObj, {banner: @}
 

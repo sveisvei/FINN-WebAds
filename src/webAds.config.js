@@ -10,7 +10,6 @@ function fixLeftBanner(banner){
 }
 function fixWallpaper(banner){
   console.log(banner.name, 'fixWallpaper')
-  
 }
 
 
@@ -27,9 +26,15 @@ FINN.data.defaultConfig = {
       bodyClass: 'banner-has-dominant-campaign',
       done: fixLeftBanner
   },
+  "Right1": {
+      width: 240
+  },
   "Right2": {
       width: 240,
       height: 500
+  },
+  "Right3": {
+      width: 240
   },
   "Middle": {
       width: 580,
@@ -46,6 +51,16 @@ FINN.data.defaultConfig = {
       height: 0,
       onload: $.noop
   },
+  "Txt_1": {},
+  "Txt_2": {},
+  "Txt_3": {},
+  "Txt_4": {},
+  "Txt_5": {},
+  "Txt_6": {},
+  "Txt_7": {},
+  "Txt_8": {},
+  "Txt_9": {},
+  "Txt_10": {},
   "Position0" : {width: 500, height: 120, container: 'banners'},
   "Position1" : {container: 'banner-tab'},
   "Position2" : {container: 'banner-tab'},
