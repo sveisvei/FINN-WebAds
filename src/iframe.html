@@ -17,16 +17,17 @@
           for(var key in exposeList){ 
             window[key] = exposeList[key];
           }
-          
-          jQuery(window).on("load", function(){
-              banner.onload();
-              webAds.resolve(bannerPosition);
-          });
         })(document, window, parent, parent.FINN.webAds);
     </script>
 </head>
 <body>
       <script type="text/javascript">banner.injectScript(this.document, this.window);</script>
+      <script type="text/javascript">jQuery(window).on("load", function(){
+        setTimeout(function(){
+          banner.onload();
+          webAds.resolve(bannerPosition);
+        }, 0)
+      });</script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ class Iframe
     #force refresh of rendring
     currSrc = @$iframe.attr('src');
     #@$iframe.attr('src', 'about:blank')
-    @$iframe.attr('src', if currSrc is '/finn/webads/#' + @name then '/finn/webads#' + @name else '/finn/webads/#' + @name )
+    @$iframe.attr('src', if currSrc is '/finn/webads?refresh#' + @name then '/finn/webads#' + @name else '/finn/webads?refresh#' + @name )
     
   
   html: ()->    
@@ -60,7 +60,7 @@ class Banner
     @resize($body.outerWidth(), $body.outerHeight())
   
   resize: (width, height) ->
-    console.log('iframe: resize:', height, 'width', width);    
+    console.log('iframe: ', @name, '. resize:', height, 'width', width);    
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
   
   setContainer: (@container) ->

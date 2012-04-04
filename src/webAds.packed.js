@@ -282,7 +282,7 @@ FINN.data.defaultConfig = {
   function collectDataPositions(){
     $("div.webads[data-banner-position]").each(function(){
       var position = $(this).data('banner-position');
-      config(position, {container: $(this)})
+      config(position, {container: $(this)});
     });
   }
   

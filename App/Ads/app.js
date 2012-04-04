@@ -20,7 +20,7 @@ app.configure(function(){
   
   app.use(express.static(__dirname + '/public'));
   app.use(express.static(__dirname + '/../../src'));
-  app.use(express.static(__dirname + '/../Tests'));
+  app.use(express.static(__dirname + '/../../test/Cases'));
 });
 
 app.configure('development', function(){
@@ -47,7 +47,7 @@ app.get("/finn/realestate/homes/rotationdemo.json", function(req, res){
 
 var fs = require('fs');
 app.get('/finn/webads', function(req, res){
-  fs.readFile(__dirname + '/public/iframe.html', 'utf8', function(err, data){
+  fs.readFile(__dirname + '/../../src/iframe.html', 'utf8', function(err, data){
     if (err) throw err;
     res.send(data);
   });
