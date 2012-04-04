@@ -1,9 +1,17 @@
 var FINN  = FINN || {};
 FINN.data = FINN.data || {};
 
-function fixTopPosition(){}
-function fixLeftBanner(){}
-function fixWallpaper(){}
+function fixTopPosition(banner){
+  console.log(banner.name, 'fixTopPosition')
+}
+function fixLeftBanner(banner){
+  console.log(banner.name, 'fixLeftBanner')
+  
+}
+function fixWallpaper(banner){
+  console.log(banner.name, 'fixWallpaper')
+  
+}
 
 
 FINN.data.defaultConfig = {

@@ -56,12 +56,15 @@ class Banner
   
   onload: () ->
     console.log('onload:', @name)
-    $body = @iframe.$iframe.contents().find('body');
-    @resize($body.outerWidth(), $body.outerHeight())
+    $wrapper = @iframe.$iframe.contents().find('#webAd');
+    @resize( $wrapper.width(),  $wrapper.height())
+    @params.done(@) if @params.done and typeof @params.done is 'function'
+    return @
   
-  resize: (width, height) ->
+  resize: (@width, @height) ->    
     console.log('iframe: ', @name, '. resize:', height, 'width', width);    
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
+    return @
   
   setContainer: (@container) ->
     #TODO

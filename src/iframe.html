@@ -7,6 +7,7 @@
     object, embed, img, div, p, a, img, iframe { display: block; }
     html { overflow: hidden; } 
     body,html { background: transparent; display: inline-block; }
+    #webAd {display: inline-block; vertical-align:bottom; padding:0;margin:0;}
     </style>
     <script type="text/javascript" src="/javascripts/swfobject.js">
     </script>
@@ -21,7 +22,9 @@
     </script>
 </head>
 <body>
+  <div id="webAd">
       <script type="text/javascript">banner.injectScript(this.document, this.window);</script>
+  </div>
       <script type="text/javascript">jQuery(window).on("load", function(){
         setTimeout(function(){
           banner.onload();

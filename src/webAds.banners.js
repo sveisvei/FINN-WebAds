@@ -67,18 +67,25 @@
     }
 
     Banner.prototype.onload = function() {
-      var $body;
+      var $wrapper;
       console.log('onload:', this.name);
-      $body = this.iframe.$iframe.contents().find('body');
-      return this.resize($body.outerWidth(), $body.outerHeight());
+      $wrapper = this.iframe.$iframe.contents().find('#webAd');
+      this.resize($wrapper.width(), $wrapper.height());
+      if (this.params.done && typeof this.params.done === 'function') {
+        this.params.done(this);
+      }
+      return this;
     };
 
     Banner.prototype.resize = function(width, height) {
+      this.width = width;
+      this.height = height;
       console.log('iframe: ', this.name, '. resize:', height, 'width', width);
-      return this.iframe.$iframe.css({
+      this.iframe.$iframe.css({
         height: height,
         width: width
       }).attr('height', height).attr('width', width);
+      return this;
     };
 
     Banner.prototype.setContainer = function(container) {
