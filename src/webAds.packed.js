@@ -5,7 +5,7 @@
 
   if (FINN.webAds == null) FINN.webAds = {};
 
-  iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
+  iframeUrl = FINN.webAds.iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
 
   Iframe = (function() {
 
@@ -312,7 +312,7 @@ FINN.data.defaultConfig = {
     selector = selector||"body";
     $(selector).find("div.webads[data-banner-position]").each(function(){
       var $this = $(this);
-      var position = $this)data('banner-position');
+      var position = $this.data('banner-position');
       config(position, 'container', $this);
     });
   }

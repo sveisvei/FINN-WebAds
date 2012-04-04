@@ -68,7 +68,7 @@ var FINN = FINN||{};
     selector = selector||"body";
     $(selector).find("div.webads[data-banner-position]").each(function(){
       var $this = $(this);
-      var position = $this)data('banner-position');
+      var position = $this.data('banner-position');
       config(position, 'container', $this);
     });
   }
