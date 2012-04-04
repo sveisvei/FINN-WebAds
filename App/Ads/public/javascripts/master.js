@@ -58,6 +58,11 @@ jQuery(document).ready(function(){
       name: "Position11",
       url: "/Test11_Image/index.js"
     }      
+    ,
+    {
+      name: "Position12",
+      url: "/Test12/index.js"
+    }
     ]);
   
   

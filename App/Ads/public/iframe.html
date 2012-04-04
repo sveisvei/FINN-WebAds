@@ -8,14 +8,16 @@
     html { overflow: hidden; } 
     body,html { background: transparent; display: inline-block; }
     </style>
-    <script type="text/javascript" src="/javascripts/swfobject.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="/javascripts/swfobject.js">
+    </script>
+    <script type="text/javascript"> 
         var bannerPosition = document.location.hash.substring(1);
         (function(document, window, parent, webAds){
           var exposeList = webAds.expose(bannerPosition);
           for(var key in exposeList){ 
             window[key] = exposeList[key];
           }
+          
           jQuery(window).on("load", function(){
               banner.onload();
               webAds.resolve(bannerPosition);
@@ -24,10 +26,7 @@
     </script>
 </head>
 <body>
-    <script type="text/javascript">
-      banner.injectScript(this.document, this.window);
-    </script>
-    <a style="text-decoration: none;position: absolute; z-index: 999;top:2px;right:5px;" href="#asd" onclick="banner.refresh();return false;">(r)</a>
+      <script type="text/javascript">banner.injectScript(this.document, this.window);</script>
 </body>
 
 </html>
