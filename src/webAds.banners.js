@@ -5,7 +5,7 @@
 
   if (FINN.webAds == null) FINN.webAds = {};
 
-  iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
+  iframeUrl = FINN.webAds.iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
 
   Iframe = (function() {
 

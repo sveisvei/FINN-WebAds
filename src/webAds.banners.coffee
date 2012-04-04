@@ -1,7 +1,7 @@
 window.FINN ?= {}
 
 FINN.webAds ?= {}
-iframeUrl = FINN.webAds.iframeUrl = "/finn/webads";
+iframeUrl = FINN.webAds.iframeUrl = FINN.webAds.iframeUrl ||"/finn/webads";
 
 class Iframe
   constructor: (@name, @options = {}, @id = 'webad-' + @name) ->
