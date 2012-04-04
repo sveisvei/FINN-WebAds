@@ -18,7 +18,7 @@
     Iframe.prototype.refresh = function() {
       var currSrc;
       currSrc = this.$iframe.attr('src');
-      return this.$iframe.attr('src', currSrc === '/finn/webads/#' + this.name ? '/finn/webads#' + this.name : '/finn/webads/#' + this.name);
+      return this.$iframe.attr('src', currSrc === '/finn/webads?refresh#' + this.name ? '/finn/webads#' + this.name : '/finn/webads?refresh#' + this.name);
     };
 
     Iframe.prototype.html = function() {
@@ -74,7 +74,7 @@
     };
 
     Banner.prototype.resize = function(width, height) {
-      console.log('iframe: resize:', height, 'width', width);
+      console.log('iframe: ', this.name, '. resize:', height, 'width', width);
       return this.iframe.$iframe.css({
         height: height,
         width: width
