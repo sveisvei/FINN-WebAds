@@ -369,13 +369,20 @@ FINN.data.defaultConfig = {
   }
   
   function renderContext(selector){
+    console.log('renderContext', selector);
     collectDataPositions(selector);
     $(selector).find(".webads").filter(function(){
       return !$(this).hasClass('webads-processed');
     }).each(function(){
       var $this = $(this);
       $this.addClass('webads-processed');
-      renderAdsWithContainer($this.attr('id'));
+      var position = $this.data('banner-position');
+      var id       = $this.attr('id');
+      if (position){
+        render(position);
+      } else if (id) {
+        renderAdsWithContainer(id);
+      }
     });
   }
   
