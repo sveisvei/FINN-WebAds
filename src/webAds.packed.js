@@ -255,6 +255,7 @@ FINN.data.defaultConfig = {
   w.queue          = queue;
   w.render         = render;
   w.renderAll      = renderAll;
+  w.renderLazy     = renderLazy;
   w.expose         = expose;
   w.refresh        = refresh;
   w.refreshAll     = refreshAll;
@@ -338,6 +339,11 @@ FINN.data.defaultConfig = {
     }
   }
   
+  function renderLazy(parent){
+    $(parent).find('.webads-lazy').removeClass('webads-lazy').addClass('webads');
+    renderContext(parent);
+  }
+  
   function queue(obj){    
     if ($.isArray(obj)){
       $.each(obj, addToMap);
@@ -371,6 +377,7 @@ FINN.data.defaultConfig = {
   function renderContext(selector){
     console.log('renderContext', selector);
     collectDataPositions(selector);
+    
     $(selector).find(".webads").filter(function(){
       return !$(this).hasClass('webads-processed');
     }).each(function(){
