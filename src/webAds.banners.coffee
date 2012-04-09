@@ -14,9 +14,8 @@ class Iframe
     @$iframe.attr('src', url)
     
   
-  html: ()->    
+  makeIframe: ()->    
     iframeUrl = FINN.webAds.iframeUrl||"/finn/webads";
-    
     div       = document.createElement('div')
     innerDiv  = document.createElement('div')
     iframe    = document.createElement('iframe')
@@ -60,8 +59,7 @@ class Banner
     @timer      = 50;
     console.log '-> new Banner;', @name, @exposeObj
   
-  config: (key, value) ->
-    @[key] = value;
+  config: (key, value) -> @[key] = value;
   
   onload: () ->
     console.log('BANNER ONLOAD:', @name)
@@ -81,12 +79,12 @@ class Banner
   
   # TODO
   pollForNewSize: () ->
-    console.warn('POLL',@name, @timer, @retries);
+    console.warn('POLL for new size: ',@name, ', timer:', @timer, ' retries:', @retries);
     @timer += @timer
     @retries -= 1
     banner = @
     cb = () -> 
-      console.log('POLL cb', banner && banner.name)    
+      console.log('POLL CB!', banner && banner.name)
       banner.onload()
     setTimeout(cb, @timer) if (@retries > 0)
     return @
@@ -122,7 +120,8 @@ class Banner
     @active = true;
     $container = if typeof @container is 'string' then jQuery("#"+@container) else @container
     $container.addClass('webads-processed')
-      .append(@iframe.html())
+      .append(@iframe.makeIframe());
+    console.log($container, $container.get())
     return @
   
 window.FINN.Banner = Banner

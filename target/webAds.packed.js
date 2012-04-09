@@ -68,8 +68,8 @@
       this.height = this.params.height;
       this.iframe = new Iframe(this.name, this.params);
       this.active = false;
-      this.retries = 10;
-      this.timer = 10;
+      this.retries = 5;
+      this.timer = 50;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
@@ -78,10 +78,14 @@
     };
 
     Banner.prototype.onload = function() {
-      var $wrapper;
-      console.log('onload:', this.name);
+      var $wrapper, height, invalidSize, width;
+      console.log('BANNER ONLOAD:', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
-      this.resize($wrapper.width(), $wrapper.height());
+      width = $wrapper.width();
+      height = $wrapper.height();
+      invalidSize = width === null || width <= 25 || height === null || height <= 25;
+      if (invalidSize) return this.pollForNewSize();
+      this.resize(width, height);
       if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
@@ -89,7 +93,19 @@
       return this;
     };
 
-    Banner.prototype.pollForNewSize = function() {};
+    Banner.prototype.pollForNewSize = function() {
+      var banner, cb;
+      console.warn('POLL', this.name, this.timer, this.retries);
+      this.timer += this.timer;
+      this.retries -= 1;
+      banner = this;
+      cb = function() {
+        console.log('POLL cb', banner && banner.name);
+        return banner.onload();
+      };
+      if (this.retries > 0) setTimeout(cb, this.timer);
+      return this;
+    };
 
     Banner.prototype.resize = function(width, height) {
       this.width = width;
@@ -115,6 +131,9 @@
     };
 
     Banner.prototype.refresh = function() {
+      console.log('REFRESH', this.name);
+      this.retries = 5;
+      this.timer = 50;
       return this.iframe.refresh();
     };
 

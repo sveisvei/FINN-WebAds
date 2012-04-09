@@ -58,8 +58,9 @@ var FINN = FINN||{};
     console.log('RENDER', name);
     var banner = bannerMap[name];
     if (!banner || banner.active){
-      console.log('BANNER', banner && banner.name, banner && banner.active);
-      callback(banner);
+      console.log('BANNER active =>', banner && banner.name, ':', banner && banner.active);
+      if (callback && typeof callback === 'function') callback(banner);
+      return banner;
     } else {
       banner.insert();
       if (typeof callback === 'function'){
@@ -69,6 +70,7 @@ var FINN = FINN||{};
           callbacks[name] = [callback];
         }
       }
+      return banner;
     }
   }
   

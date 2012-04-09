@@ -1,3 +1,4 @@
+console.log('DEBUG');
 document.write('<div id="adId"></div>')
   setTimeout(function(){
     var ad = document.getElementById('adId');

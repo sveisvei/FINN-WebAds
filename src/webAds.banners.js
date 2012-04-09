@@ -25,7 +25,7 @@
       return this.$iframe.attr('src', url);
     };
 
-    Iframe.prototype.html = function() {
+    Iframe.prototype.makeIframe = function() {
       var div, iframe, iframeUrl, innerDiv;
       iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       div = document.createElement('div');
@@ -95,12 +95,12 @@
 
     Banner.prototype.pollForNewSize = function() {
       var banner, cb;
-      console.warn('POLL', this.name, this.timer, this.retries);
+      console.warn('POLL for new size: ', this.name, ', timer:', this.timer, ' retries:', this.retries);
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
       cb = function() {
-        console.log('POLL cb', banner && banner.name);
+        console.log('POLL CB!', banner && banner.name);
         return banner.onload();
       };
       if (this.retries > 0) setTimeout(cb, this.timer);
@@ -148,7 +148,8 @@
       console.log('insert;', this.name);
       this.active = true;
       $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
-      $container.addClass('webads-processed').append(this.iframe.html());
+      $container.addClass('webads-processed').append(this.iframe.makeIframe());
+      console.log($container, $container.get());
       return this;
     };
 
