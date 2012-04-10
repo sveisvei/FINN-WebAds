@@ -1,18 +1,23 @@
 buster.testRunner.timeout = 1000;
 
-buster.testCase("WebAds", {
-  "setUp": function() {
-    $("body").append('<div id="banners"></div>');
-    FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
-  },
+var cases = [{name: "Test01", url: "/Test01/index.js", "expectations": {width: 411, height: 111, retries: 5}}];
 
-  "should render async banner after 1 retry": function(done) {
+var testCases = {};
+testCases["setUp"] = function() {
+  $("body").append('<div id="banners"></div>');
+  FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
+};
+testCases["tearDown"] = function(){};
+
+testCases["Cases/"] = {};
+$.each(cases, function(){
+  var testCase = this;
+  testCases["Cases/"][testCase.name] = function(done){
 
     var spy = sinon.spy();
-
     var banner = FINN.webAds.queue({
-      name: 'tester',
-      url: buster.env.path + 'Cases/Test12/index.js',
+      name: testCase.name,
+      url: buster.env.path + 'Cases' + testCase.url,
       container: 'banners',
       done: spy
     });
@@ -21,26 +26,28 @@ buster.testCase("WebAds", {
     refute(banner.resolved);
     refute(spy.called);
 
-    FINN.webAds.render('tester', function() {
+    FINN.webAds.render(testCase.name, function() {
 
+      $.each(testCase.expectations, function(k, v){
+        assert.equals(banner[k], v, k)
+      });
       assert(banner.active);
-      assert.equals(banner.height, 300);
-      assert.equals(banner.width, 200);
-      assert.equals(banner.retries, 4);
 
       setTimeout(function() {
         assert(banner.resolved);
         assert(spy.called);
         done();
-      },
-      0);
+      }, 0);
     });
 
-    FINN.webAds.render('tester', function() {
+    FINN.webAds.render(testCase.name, function() {
       refute(banner.resolved);
     });
 
     assert(banner.active);
-
   }
 });
+
+
+
+buster.testCase("WebAds", testCases);

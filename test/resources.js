@@ -21,9 +21,6 @@ var resources = [
   },
   { 
     path: "/Cases/",        backend: "http://localhost:3000/" 
-  },
-  { 
-    path: "/javascripts/",  backend: "http://localhost:3000/javascripts/" 
   }
 ];
 
