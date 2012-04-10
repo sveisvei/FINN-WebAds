@@ -34,6 +34,11 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+app.get('*', function(req, res, next){
+  console.log('request')
+  next();
+})
+
 // Routes
 
 app.get('/', function(req, res){

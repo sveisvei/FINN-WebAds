@@ -11,6 +11,7 @@ config["My tests"] = {
     sources: [
         "src/webAds.config.js",
         "src/webAds.plugins.js",
+        "src/webAds.plugin.swfobject.js",
         "src/webAds.banners.js", 
         "src/webAds.manager.js"
     ],

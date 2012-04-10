@@ -21,6 +21,7 @@ var FINN = FINN||{};
   w.config         = config;
   w.getFromServer  = getFromServer;
   w.plugins        = w.plugins||{};
+  w.base           = "/";
   
   var jsub = $.sub();
   var globalExpose = {

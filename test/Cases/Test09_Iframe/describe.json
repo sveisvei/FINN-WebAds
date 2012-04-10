@@ -1,7 +1,7 @@
 {
   "name": "Test09",
   "expectations": {
-    "width" : 0,
-    "height" : 0
+    "width" : 300,
+    "height" : 150
   }
 }

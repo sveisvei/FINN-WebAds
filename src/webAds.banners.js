@@ -74,6 +74,7 @@
       this.retries = 5;
       this.timer = 50;
       this.resolved = false;
+      this.failed = false;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
@@ -110,8 +111,10 @@
     };
 
     Banner.prototype.fail = function(reason) {
+      console.error('FAILED -> ', this.name, '->', reason);
       if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
-      return console.error('FAILED -> ', this.name, '->', reason);
+      this.failed = true;
+      return this.resolve();
     };
 
     Banner.prototype.pollForNewSize = function() {

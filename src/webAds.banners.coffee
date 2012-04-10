@@ -60,6 +60,7 @@ class Banner
     @retries    = 5;
     @timer      = 50;
     @resolved   = false;
+    @failed     = false;
     console.log '-> new Banner;', @name, @exposeObj
   
   config: (key, value) -> @[key] = value;
@@ -85,14 +86,15 @@ class Banner
   resolve: () ->
     $("body").addClass(@params.bodyClass) if @params.bodyClass        
     
-    @params.done(@) if @params.done and typeof @params.done is 'function'    
-    
+    @params.done(@) if @params.done and typeof @params.done is 'function'        
     webAds.resolve(@name) if not @resolved
     @resolved = true
   
   fail: (reason) ->
-    $("body").addClass(@params.bodyFailClass) if @params.bodyFailClass        
-    console.error('FAILED -> ', @name, '->', reason);
+    console.error('FAILED -> ', @name, '->', reason);    
+    $("body").addClass(@params.bodyFailClass) if @params.bodyFailClass  
+    @failed = true;
+    @resolve()
     
   
   pollForNewSize: () ->

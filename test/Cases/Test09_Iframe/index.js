@@ -1,1 +1,1 @@
-document.write('<iframe src="/Test09_Iframe/iframe.html"></iframe>')
+document.write('<iframe src="'+webAds.base+'Test09_Iframe/iframe.html"></iframe>')
