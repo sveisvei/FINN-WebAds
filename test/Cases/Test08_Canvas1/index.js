@@ -29,8 +29,6 @@ setTimeout(function(){
   
   render();
   
-  console.log('asd');
-  
   banner.onload()
 }, 2000);
 

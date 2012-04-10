@@ -1,43 +1,43 @@
-buster.testRunner.timeout = 1000
+buster.testRunner.timeout = 1000;
 
 buster.testCase("WebAds", {
     "setUp": function(){
       $("body").append('<div id="banners"></div>');
       FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
     },
+    
     "should render async banner after 1 retry": function (done) {
       
-      
-      
-       FINN.webAds.queue({
-         name: 'test',
-         url: buster.env.path + 'Cases/Test12/index.js',
-         container: 'banners'
-       });       
+      var banner = FINN.webAds.queue({
+         name       : 'tester',
+         url        : buster.env.path + 'Cases/Test12/index.js',
+         container  : 'banners',
+         done       : function(){
+         }
+       });   
        
-       var topBanner = FINN.webAds.render('test', function(){
-         // is this onload?
-         assert(topBanner.active);
-         assert.equals(topBanner.height, undefined)
-         assert.equals(topBanner.width, undefined)
-         assert.equals(topBanner.retries, 4)
-         // banner actually there? this fails....
-         // content injected?
+       refute(banner.active)
+       refute(banner.resolved)
+       
+      FINN.webAds.render('tester', function(){
+
+         assert(banner.active);
+         assert.equals(banner.height, 300)
+         assert.equals(banner.width, 200)
+         assert.equals(banner.retries, 4)
+         
+         setTimeout(function(){
+            assert(banner.resolved)         
+
+            done()
+         }, 0);
        });
-       /*
-       TODO, need rewrite of callbacks from render. Need to be sure all internals are done before calling done();
-       resolve calls callbacks now, but isnt a good idea.
        
-       topBanner.on('complete', function(){
-         
-         
-         done();
-       });*/
+       FINN.webAds.render('tester', function(){
+         refute(banner.resolved)
+       });
        
-       assert(topBanner.active)
-       //mhm, why do we not get a callback from the iframe?
-       
-       //done()
-       
+       assert(banner.active)
+
     }
 });

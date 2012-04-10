@@ -13,13 +13,18 @@ var HTML        = {'Content-Type' : 'text/html; charset=utf-8'};
 */
 
 
-var resources = [{
-  path    : '/finn/webads',
-  content : fs.readFileSync('src/iframe.html', 'utf8'),
-  headers : HTML
-},
-{ path: "/Cases/", backend: "http://localhost:3000/" }
-
+var resources = [
+  {
+    path    : '/finn/webads',
+    content : fs.readFileSync('src/iframe.html', 'utf8'),
+    headers : HTML
+  },
+  { 
+    path: "/Cases/",        backend: "http://localhost:3000/" 
+  },
+  { 
+    path: "/javascripts/",  backend: "http://localhost:3000/javascripts/" 
+  }
 ];
 
 module.exports = resources;

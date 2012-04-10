@@ -1,9 +1,7 @@
 /*!	SWFObject v2.2 <http://code.google.com/p/swfobject/> 
 	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
 */
-
-var swfobject = function() {
-	
+var exposeSwfObject = function(document, window) {
 	var UNDEF = "undefined",
 		OBJECT = "object",
 		SHOCKWAVE_FLASH = "Shockwave Flash",
@@ -774,4 +772,6 @@ var swfobject = function() {
 			} 
 		}
 	};
-}();
+};
+var swfobject = exposeSwfObject(document, window);
+FINN.webAds.plugins.register('swfobject', exposeSwfObject);

@@ -1,6 +1,7 @@
 var FINN = FINN||{};
 
 (function(F, $){
+  "use strict";
   var data          = F.data = F.data||{};
   var defaultConfig = data.defaultConfig = data.defaultConfig||{};
   
@@ -148,9 +149,8 @@ var FINN = FINN||{};
   }
   
   function removeAll(){
-    var banner;
     for(var key in bannerMap){
-      bannerMap[key].remove();         
+      bannerMap[name] && bannerMap[key].remove();         
     }
   }
   

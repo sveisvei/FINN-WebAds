@@ -4,7 +4,7 @@ var files = [
   'webAds.banners.js',
   'webAds.config.js',
   'webAds.plugins.js',
-  'webAds.js'
+  'webAds.manager.js'
 ];
 
 var content = [];

@@ -9,8 +9,10 @@ config["My tests"] = {
       "App/Ads/public/javascripts/jquery.js"
     ],
     sources: [
-        "src/webAds.*.js", 
-        "src/webAds.js"
+        "src/webAds.config.js",
+        "src/webAds.plugins.js",
+        "src/webAds.banners.js", 
+        "src/webAds.manager.js"
     ],
     tests: [
         "test/*-test.js"

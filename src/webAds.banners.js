@@ -1,9 +1,12 @@
 (function() {
-  var Banner, Iframe;
+  "use strict";
+  var Banner, Iframe, webAds;
 
   if (window.FINN == null) window.FINN = {};
 
   if (FINN.webAds == null) FINN.webAds = {};
+
+  webAds = FINN.webAds;
 
   Iframe = (function() {
 
@@ -19,7 +22,7 @@
 
     Iframe.prototype.refresh = function() {
       var currSrc, iframeUrl, url;
-      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
+      iframeUrl = webAds.iframeUrl || "/finn/webads";
       currSrc = this.$iframe.attr('src');
       url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
       return this.$iframe.attr('src', url);
@@ -27,7 +30,7 @@
 
     Iframe.prototype.makeIframe = function() {
       var div, iframe, iframeUrl, innerDiv;
-      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
+      iframeUrl = webAds.iframeUrl || "/finn/webads";
       div = document.createElement('div');
       innerDiv = document.createElement('div');
       iframe = document.createElement('iframe');
@@ -70,6 +73,7 @@
       this.active = false;
       this.retries = 5;
       this.timer = 50;
+      this.resolved = false;
       console.log('-> new Banner;', this.name, this.exposeObj);
     }
 
@@ -86,11 +90,22 @@
       invalidSize = width === null || width <= 25 || height === null || height <= 25;
       if (invalidSize) return this.pollForNewSize();
       this.resize(width, height);
+      this.resolve();
+      return this;
+    };
+
+    Banner.prototype.resolve = function() {
       if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
-      return this;
+      if (!this.resolved) webAds.resolve(this.name);
+      return this.resolved = true;
+    };
+
+    Banner.prototype.fail = function(reason) {
+      if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
+      return console.error('FAILED -> ', this.name, '->', reason);
     };
 
     Banner.prototype.pollForNewSize = function() {
@@ -100,17 +115,21 @@
       this.retries -= 1;
       banner = this;
       cb = function() {
-        console.log('POLL CB!', banner && banner.name);
+        console.warn('POLL CB!', banner && banner.name);
         return banner.onload();
       };
-      if (this.retries > 0) setTimeout(cb, this.timer);
+      if (this.retries > 0) {
+        setTimeout(cb, this.timer);
+      } else {
+        this.fail("timeout");
+      }
       return this;
     };
 
     Banner.prototype.resize = function(width, height) {
       this.width = width;
       this.height = height;
-      console.log('iframe: ', this.name, '. resize:', height, 'width', width);
+      console.log('resize banner=> ', this.name, '. resize:', height, 'width', width);
       this.iframe.$iframe.css({
         height: height,
         width: width
@@ -132,6 +151,7 @@
 
     Banner.prototype.refresh = function() {
       console.log('REFRESH', this.name);
+      this.resolved = false;
       this.retries = 5;
       this.timer = 50;
       return this.iframe.refresh();
@@ -139,6 +159,7 @@
 
     Banner.prototype.remove = function() {
       this.active = false;
+      this.resolved = false;
       this.iframe.remove();
       return this;
     };
@@ -149,7 +170,6 @@
       this.active = true;
       $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       $container.addClass('webads-processed').append(this.iframe.makeIframe());
-      console.log($container, $container.get());
       return this;
     };
 

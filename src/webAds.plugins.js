@@ -1,10 +1,13 @@
 var FINN = FINN||{};
 
 (function(F, $){
-  "use scrict";
+  "use strict";
   FINN.webAds = FINN.webAds||{};
   var plugins = FINN.webAds.plugins = FINN.webAds.plugins||{};
   
+  plugins.register = function(name, value){
+    plugins[name] = value;
+  };
   plugins.overlay = overlay;
   plugins.popup   = popup;
   plugins.dialog  = dialog;

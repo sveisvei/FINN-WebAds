@@ -1,7 +1,5 @@
-console.log('DEBUG');
 document.write('<div id="adId"></div>')
-  setTimeout(function(){
+setTimeout(function(){
     var ad = document.getElementById('adId');
-    console.log('Test12 settimeout')
-    ad.innerHTML = '<h1>BETTER LATE THAN NEVER</h1>';
-  }, 100);
+    ad.innerHTML = '<h1 style="width:200px;height:300px;padding:0;margin:0;">BETTER LATE THAN NEVER</h1>';
+}, 100);
