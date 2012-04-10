@@ -13,9 +13,6 @@ module.exports = function collectTestCases(dir, callback){
         url: "/" + file + "/index.js"
       })
     });
-    callback({webAds: result});
-    
+    callback({webAds: result});    
   });
-  
-  
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Test07",
+  "name": "Test07-ShouldFail",
   "expectations": {
     "retries": 0,
     "failed": true

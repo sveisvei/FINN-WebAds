@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
       url: "/Test01/index.js"
   }]);
   
-  FINN.webAds.renderAll('Top');
+  FINN.webAds.renderAll('Top,Left1');
   
   
   // TODO, not working??

@@ -23,6 +23,16 @@ var FINN = FINN||{};
   w.plugins        = w.plugins||{};
   w.base           = "/";
   
+  /*
+    TODO:
+    callback when all is done
+    events:
+      webAds.ready
+      webAds.done
+      webAds.done.all
+      webAds.done.Top
+  */
+  
   var jsub = $.sub();
   var globalExpose = {
     jQuery    : jsub,
@@ -81,8 +91,9 @@ var FINN = FINN||{};
       
   function render(name, callback){
     var banner = bannerMap[name];
-    banner.log('render called from manager')
-    if (!banner || banner.active){
+    if (!banner){
+      //hæ
+    } else if (banner.active){
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {

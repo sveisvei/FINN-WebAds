@@ -8,10 +8,12 @@ function collectTestCases(callback){
     FINN.webAds.base      = buster.env.path + "Cases/";    
     FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
   };
-  testCases["tearDown"] = function(){};
+  testCases["tearDown"] = function(){
+    $("#banners").remove();
+  };
   testCases["should render"]   = {};
   
-  function ready(cases){
+  function createTests(cases){
     $.each(cases, function(){
       var testCase = this;
       testCases["should render"][testCase.name] = function(done){
@@ -51,12 +53,15 @@ function collectTestCases(callback){
     });
     callback(testCases)
   }
-    
+  
+  // WARNING: getting tests from resouces.js
   $.getJSON(buster.env.path + "testcases", function(data){
-    ready(data.testcases);
+    createTests(data.testcases);
   });
   
 } 
 
-collectTestCases(function(cases){ buster.testCase("WebAds", cases); })
+collectTestCases(function(cases){ 
+  buster.testCase("WebAds", cases); 
+});
 

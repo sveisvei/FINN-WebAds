@@ -1,3 +1,3 @@
-document.write('<div id="api"><img src="#" /></div>')
+document.write('<div id="api"><img src="" /></div>')
 var api = document.getElementById('api');
 plugins.overlay(banner);
