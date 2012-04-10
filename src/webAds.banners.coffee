@@ -66,11 +66,16 @@ class Banner
   
   onload: () ->
     console.log('BANNER ONLOAD:', @name)
+    @processSize()
+    return @
+  
+  processSize: () ->
+    console.log('BANNER processSize', @name)
     $wrapper  = @iframe.$iframe.contents().find('#webAd');
     width     = $wrapper.width();
     height    = $wrapper.height()
     
-    invalidSize = (width is null or width <= 25 or height is null or height <= 25)
+    invalidSize = (width is null or width <= 31 or height is null or height <= 31)
     return @pollForNewSize() if invalidSize
     
     @resize( width,  height)
@@ -92,13 +97,14 @@ class Banner
   
   pollForNewSize: () ->
     console.warn('POLL for new size: ',@name, ', timer:', @timer, ' retries:', @retries);
-    @timer += @timer
-    @retries -= 1
-    banner = @
-    cb = () -> 
-      console.warn('POLL CB!', banner && banner.name)
-      banner.onload()
+    @timer    += @timer
+    @retries  -= 1
+    banner    =  @
+
     if (@retries > 0)
+      cb = () -> 
+        console.warn('POLL CB!', banner && banner.name)
+        banner.processSize()
       setTimeout(cb, @timer) 
     else
       @fail("timeout")

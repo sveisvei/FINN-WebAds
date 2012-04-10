@@ -65,10 +65,10 @@ var FINN  = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
-    "Position0" : {width: 500, height: 120, container: 'banners'},
-    "Position1" : {container: 'banner-tab'},
-    "Position2" : {container: 'banner-tab'},
-    "Position3" : {container: 'banner-tab'},
+    "Test01" : {width: 500, height: 120, container: 'banners'},
+    "Test02" : {container: 'banner-tab'},
+    "Test04" : {container: 'banner-tab'},
+    "Test05" : {container: 'banner-tab'},
     "all"       : {container: 'banners'}
   };
   

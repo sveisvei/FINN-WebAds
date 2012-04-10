@@ -1,7 +1,6 @@
-document.write('<canvas id="canvasId" width="165px" height="145px"></canvas>')
-function render(){
-  var canvas = document.getElementById('canvasId');
-  if (!canvas.getContext) return;
+document.write('<canvas id="canvasId" width="165px" height="145px"><div style="width:165px;height:145px;">canvas fallback</div></canvas>')
+
+function render(canvas){
   var context = canvas.getContext("2d");
   var width = 125;  // Triangle Width
   var height = 105; // Triangle Height
@@ -19,16 +18,17 @@ function render(){
   context.fill();
 }
 
-render();
+var canvas = document.getElementById('canvasId');
+if (canvas.getContext) {
+  
+  render(canvas);
 
-setTimeout(function(){
-  var canvas = document.getElementById('canvasId');
-  
-  canvas.width = '500';
-  canvas.height = '145';
-  
-  render();
-  
-  banner.onload()
-}, 2000);
+  setTimeout(function(){
+    canvas.width = '500';
+    canvas.height = '145';
 
+    render(canvas);
+
+    banner.processSize();
+  }, 2000); 
+}

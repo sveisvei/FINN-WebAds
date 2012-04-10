@@ -82,12 +82,18 @@
     };
 
     Banner.prototype.onload = function() {
-      var $wrapper, height, invalidSize, width;
       console.log('BANNER ONLOAD:', this.name);
+      this.processSize();
+      return this;
+    };
+
+    Banner.prototype.processSize = function() {
+      var $wrapper, height, invalidSize, width;
+      console.log('BANNER processSize', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       width = $wrapper.width();
       height = $wrapper.height();
-      invalidSize = width === null || width <= 25 || height === null || height <= 25;
+      invalidSize = width === null || width <= 31 || height === null || height <= 31;
       if (invalidSize) return this.pollForNewSize();
       this.resize(width, height);
       this.resolve();
@@ -114,11 +120,11 @@
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
-      cb = function() {
-        console.warn('POLL CB!', banner && banner.name);
-        return banner.onload();
-      };
       if (this.retries > 0) {
+        cb = function() {
+          console.warn('POLL CB!', banner && banner.name);
+          return banner.processSize();
+        };
         setTimeout(cb, this.timer);
       } else {
         this.fail("timeout");
@@ -247,10 +253,10 @@ var FINN  = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
-    "Position0" : {width: 500, height: 120, container: 'banners'},
-    "Position1" : {container: 'banner-tab'},
-    "Position2" : {container: 'banner-tab'},
-    "Position3" : {container: 'banner-tab'},
+    "Test01" : {width: 500, height: 120, container: 'banners'},
+    "Test02" : {container: 'banner-tab'},
+    "Test04" : {container: 'banner-tab'},
+    "Test05" : {container: 'banner-tab'},
     "all"       : {container: 'banners'}
   };
   
@@ -331,6 +337,7 @@ var FINN = FINN||{};
   w.resolve        = resolve;
   w.collectDataPositions = collectDataPositions;
   w.config         = config;
+  w.getFromServer  = getFromServer;
   w.plugins        = w.plugins||{};
   
   var jsub = $.sub();
@@ -354,6 +361,20 @@ var FINN = FINN||{};
     if(bannerMap[name]){
       bannerMap[name].config(key, value);
     }
+  }
+  
+  function getFromServer(callback, dontQueue){
+    console.log('CONTACTING HELIOS');
+    $.getJSON('/heliosAds', function(data){
+      if(typeof dontQueue === 'undefined') {
+        console.log('queue');
+        queue(data.webAds);
+      }
+      
+      if (callback && typeof callback === 'function') callback(null, data.webAds);
+    }, function(err){
+      if (callback && typeof callback === 'function') callback(err, null);
+    });
   }
       
   function addToMap(){

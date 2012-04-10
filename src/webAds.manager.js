@@ -19,6 +19,7 @@ var FINN = FINN||{};
   w.resolve        = resolve;
   w.collectDataPositions = collectDataPositions;
   w.config         = config;
+  w.getFromServer  = getFromServer;
   w.plugins        = w.plugins||{};
   
   var jsub = $.sub();
@@ -42,6 +43,20 @@ var FINN = FINN||{};
     if(bannerMap[name]){
       bannerMap[name].config(key, value);
     }
+  }
+  
+  function getFromServer(callback, dontQueue){
+    console.log('CONTACTING HELIOS');
+    $.getJSON('/heliosAds', function(data){
+      if(typeof dontQueue === 'undefined') {
+        console.log('queue');
+        queue(data.webAds);
+      }
+      
+      if (callback && typeof callback === 'function') callback(null, data.webAds);
+    }, function(err){
+      if (callback && typeof callback === 'function') callback(err, null);
+    });
   }
       
   function addToMap(){

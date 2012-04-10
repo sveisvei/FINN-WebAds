@@ -1,77 +1,22 @@
+var FINN = FINN||{};
 jQuery(document).ready(function(){
+
+  // adBlocker
+  if(!FINN.webAds) return;
   
   FINN.webAds.collectDataPositions()
   
-  FINN.webAds.queue([
-    {
-      name: "Position0",
-      url: "/Test01/index.js"
-    },
-    {
-      name: "Top",
-      url: "/Test01/index.js"
-    },   
-    {
-      name: "Position1",
-      url: "/Test01/index.js"
-    },
-    {
-      name: "Position2",
-      url: "/Test02/index.js"
-    },
-    {
-      name: "Position3",
-      url: "/Test03/index.js"
-    },
-
-    {
-      name: "Position4",
-      url: "/Test04/index.js"
-    },
-    {
-      name: "Position5",
-      url: "/Test05/index.js"
-    },
-    {
-      name: "Position6",
-      url: "/Test06/index.js"
-    },
-    {
-      name: "Position7",
-      url: "/Test07/index.js"
-    }
-    ,
-    {
-      name: "Position8",
-      url: "/Test08_Canvas1/index.js"
-    }
-    ,
-    {
-      name: "Position9",
-      url: "/Test09_Iframe/index.js"
-    },
-    {
-      name: "Position10",
-      url: "/Test10_Iframe2/index.js"
-    },
-    {
-      name: "Position11",
-      url: "/Test11_Image/index.js"
-    }      
-    ,
-    {
-      name: "Position12",
-      url: "/Test12/index.js"
-    },
-    {
-      name: "Position12a",
-      url: "/Test12/index.js",
-      container: "banner-tab"
-    }
-    ]);
+  FINN.webAds.getFromServer(function(err, data){
+      console.log('GOT FROM SERVER', err, data);
+      FINN.webAds.renderAll('Top');
+  });
   
+  FINN.webAds.queue([{
+      name: "Left1",
+      url: "/Test01/index.js"
+  }]);
   
-  FINN.webAds.renderAll('Top'); 
+  FINN.webAds.renderAll('Top');
   
   
   // TODO, not working??

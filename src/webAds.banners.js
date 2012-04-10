@@ -82,12 +82,18 @@
     };
 
     Banner.prototype.onload = function() {
-      var $wrapper, height, invalidSize, width;
       console.log('BANNER ONLOAD:', this.name);
+      this.processSize();
+      return this;
+    };
+
+    Banner.prototype.processSize = function() {
+      var $wrapper, height, invalidSize, width;
+      console.log('BANNER processSize', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       width = $wrapper.width();
       height = $wrapper.height();
-      invalidSize = width === null || width <= 25 || height === null || height <= 25;
+      invalidSize = width === null || width <= 31 || height === null || height <= 31;
       if (invalidSize) return this.pollForNewSize();
       this.resize(width, height);
       this.resolve();
@@ -114,11 +120,11 @@
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
-      cb = function() {
-        console.warn('POLL CB!', banner && banner.name);
-        return banner.onload();
-      };
       if (this.retries > 0) {
+        cb = function() {
+          console.warn('POLL CB!', banner && banner.name);
+          return banner.processSize();
+        };
         setTimeout(cb, this.timer);
       } else {
         this.fail("timeout");

@@ -3,12 +3,15 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-    routes = require('./routes');
+var express = require('express');
+var fs = require('fs');
+var path = require('path');
 
 var app = module.exports = express.createServer();
 
 // Configuration
+
+var cases = fs.realpathSync(__dirname + '/../../test/Cases');
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -20,7 +23,7 @@ app.configure(function(){
   
   app.use(express.static(__dirname + '/public'));
   app.use(express.static(__dirname + '/../../src'));
-  app.use(express.static(__dirname + '/../../test/Cases'));
+  app.use(express.static(cases));
 });
 
 app.configure('development', function(){
@@ -33,8 +36,19 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+  res.render('index', { title: 'Webads' })  
+});
 
+// helios.server
+var collectTestCases = require('./collectTestCases.js');
+app.get('/heliosAds', function(req, res){
+  collectTestCases(cases, function(result){
+    res.send(result);
+  });
+});
+
+// plugin
 app.get("/finn/realestate/homes/rotationdemo.json", function(req, res){
   setTimeout(function(){
     res.send(
@@ -45,7 +59,7 @@ app.get("/finn/realestate/homes/rotationdemo.json", function(req, res){
 
 });
 
-var fs = require('fs');
+// serve iframe
 app.get('/finn/webads', function(req, res){
   fs.readFile(__dirname + '/../../src/iframe.html', 'utf8', function(err, data){
     if (err) throw err;
