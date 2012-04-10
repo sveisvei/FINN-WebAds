@@ -1,63 +1,76 @@
-buster.testRunner.timeout = 250;
+var DEFAULT_TIMEOUT = 250;
+buster.testRunner.timeout = DEFAULT_TIMEOUT;
 
-function collectTestCases(callback){
+var webAds = FINN.webAds;
+
+function collectTestCases(cb){
   var testCases = {};
   
   testCases["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
-    FINN.webAds.base      = buster.env.path + "Cases/";    
-    FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
+    webAds.base      = buster.env.path + "Cases/";    
+    webAds.iframeUrl = buster.env.path + "finn/webads";
   };
+  
   testCases["tearDown"] = function(){
     $("#banners").remove();
   };
+  
   testCases["should render"]   = {};
   
-  function createTests(cases){
-    $.each(cases, function(){
-      var testCase = this;
-      testCases["should render"][testCase.name] = function(done){
-        buster.testRunner.timeout = testCase.timeout||250;       
+  function createTest(){
+    var testCase = this;
+    testCases["should render"][testCase.name] = function(done){
+      buster.testRunner.timeout = testCase.timeout||DEFAULT_TIMEOUT;       
 
-        var spy = sinon.spy();
-        var banner = FINN.webAds.queue({
-          name      : testCase.name,
-          url       : buster.env.path + testCase.url.substring(1),
-          container : 'banners',
-          done      : spy
-        });
-
-        refute(banner.active);
-        refute(banner.resolved);
-        refute(spy.called);
-
-        FINN.webAds.render(testCase.name, function() {
-          $.each(testCase.expectations, function(k, v){
-            assert.equals(banner[k], v, k)
-          });
-          assert(banner.active);
-
-          setTimeout(function() {
-            assert(banner.resolved);
-            assert(spy.called);
-            done();
-          }, 100);
-        });
-
-        FINN.webAds.render(testCase.name, function() {
-          refute(banner.resolved);
-        });
-
-        assert(banner.active);
+      var firstInFirstOutSpy = sinon.spy();
+      var doneSpy = sinon.spy();
+      
+      var bannerInitObj = {
+        name      : testCase.name,
+        url       : buster.env.path + testCase.url.substring(1),
+        container : 'banners',
+        done      : doneSpy
+      };
+      if (testCase.forceDelay) { // TODO!
+        bannerInitObj.url += '?forceDelay=' + testCase.forceDelay        
       }
-    });
-    callback(testCases)
+      var banner  = webAds.queue(bannerInitObj);
+
+      refute(banner.active);
+      refute(banner.resolved);
+      refute(doneSpy.called);
+      
+      webAds.render(testCase.name, firstInFirstOutSpy);            
+      webAds.render(testCase.name, function() {
+        if (testCase['expectations']){
+          $.each(testCase['expectations'], function(key, val){
+            assert.equals(banner[key], val, key);
+          });
+        }
+        assert(banner.active);
+        assert(doneSpy.calledOnce);
+        assert(firstInFirstOutSpy.calledOnce);
+
+        setTimeout(function() {
+          assert(banner.resolved);
+          done();
+        }, 100);
+      });
+      
+
+
+      assert(banner.active);
+    }
+  }
+  
+  function createTests(d){
+    $.each(d.testcases, createTest);
+    cb(testCases)
   }
   
   // WARNING: getting tests from resouces.js
-  $.getJSON(buster.env.path + "testcases", function(data){
-    createTests(data.testcases);
-  });
+  $.getJSON(buster.env.path + "testcases", createTests);
   
 } 
 

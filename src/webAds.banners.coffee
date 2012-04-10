@@ -66,7 +66,7 @@ class Banner
   
   log: (msg) ->
     if window.console and window.console.log
-      args = [@name, Date.now() - @now].concat(Array.prototype.slice.call(arguments))
+      args = [@name + "->", Date.now() - @now].concat(Array.prototype.slice.call(arguments))
       console.log.apply(console, args)
     else
       alert(msg)

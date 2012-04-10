@@ -1,0 +1,10 @@
+{
+  "forceDelay": 500,
+  "description": "The app setTimeouts",
+  "timeout": 2200,
+  "expectations": {
+    "width": 980,
+    "height": 150,
+    "retries": 5
+  }
+}

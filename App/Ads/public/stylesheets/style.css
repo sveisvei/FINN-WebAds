@@ -33,9 +33,12 @@ div.tabs {
   background-color: #f1f1f1;
   margin-bottom: 10px;
   border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  display: inline-block;
 }
 .advertising iframe {
-  background-color: #aaa;
+  background-color: #fff;
 }
 
 
@@ -53,6 +56,7 @@ ul.actions li a{
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px 10px;
+  margin-right: 5px;
 }
 ul.actions li a:hover{
   background:black;

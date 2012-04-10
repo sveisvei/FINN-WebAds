@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
   
   FINN.webAds.getFromServer(function(err, data){
       console.log('GOT FROM SERVER', err, data);
-      FINN.webAds.renderAll('Top');
+      FINN.webAds.renderAll('Top,Left1');
   });
   
   FINN.webAds.queue([{
@@ -16,17 +16,15 @@ jQuery(document).ready(function(){
       url: "/Test01/index.js"
   }]);
   
-  FINN.webAds.renderAll('Top,Left1');
-  
   
   // TODO, not working??
   $(document).on('bannerReady', function(e, banner){
-    console.log('EVENT ---> BANNER READY:', banner.name);
+    console.warn('EVENT ---> BANNER READY:', banner.name);
   });
   
   
   $(document).on('bannerReady.Top', function(e, banner){
-    console.log('EVENT ---> bannerReady.Top', e, banner);
+    console.warn('EVENT ---> bannerReady.Top', e, banner);
   });
   
 

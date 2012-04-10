@@ -6,10 +6,13 @@ module.exports = function collectTestCases(dir, callback){
   fs.readdir(dir, function(err, files){
     
     files.forEach(function(file, i){
+      if (file.match(/^\./)){
+        return;
+      }
       var testdir = dir + '/' + file;      
       var describe = require(testdir + "/describe.json");
       result.push({
-        name: describe.name,
+        name: describe.name||file,
         url: "/" + file + "/index.js"
       })
     });

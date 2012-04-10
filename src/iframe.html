@@ -10,11 +10,11 @@
     #webAd {display: inline-block; vertical-align:bottom; padding:0;margin:0;}
     </style>
     <script type="text/javascript">
-        var bannerPosition = document.location.hash.substring(1);
-        (function(document, window, parent, webAds){
+        (function(document, window, parent, webAds, bannerPosition){
+          "use strict";
           var exposeList = webAds.expose(bannerPosition);
           for(var key in exposeList){ window[key] = exposeList[key]; }
-        })(document, window, parent, parent.FINN.webAds);
+        })(document, window, parent, parent.FINN.webAds, document.location.hash.substring(1));
     </script>
 </head>
 <body>

@@ -33,6 +33,13 @@ var FINN = FINN||{};
       webAds.done.Top
   */
   
+  var eventMap = {};
+  
+  w.on = on;
+  function on(key, callback){
+    
+  } 
+  
   var jsub = $.sub();
   var globalExpose = {
     jQuery    : jsub,

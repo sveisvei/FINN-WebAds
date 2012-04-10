@@ -2,7 +2,17 @@
 <html>
 <body style="padding:0;margin:0;">
   <div style="width:200px;height:200px;background:blue;">
-    200x200
+    <p style="text-align:center;color:white;padding:10px;margin:0;display:block;font-size:220%;font-weight:bold;letter-spacing:0.2em;">
+      200x200 valid iframe
+      <span id="ftw" style="display:block;font-weight: normal;line-height:1em;font-size:16px;"></span>
+      <script type="text/javascript">
+        var ftw = document.getElementById('ftw');
+        var ftwins = ['ftw', '', 'super!', 'hooray', 'for ECMA', '', 'for shitz', '', 'for shizzle', ''];
+        setInterval(function(){
+          ftw.innerHTML = ftwins[Math.round(Math.random() * 10)];
+        }, 2000);
+      </script>
+    </p>
   </div>
 </body>
 </html>

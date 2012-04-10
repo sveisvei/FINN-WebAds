@@ -82,7 +82,7 @@
     Banner.prototype.log = function(msg) {
       var args;
       if (window.console && window.console.log) {
-        args = [this.name, Date.now() - this.now].concat(Array.prototype.slice.call(arguments));
+        args = [this.name + "->", Date.now() - this.now].concat(Array.prototype.slice.call(arguments));
         return console.log.apply(console, args);
       } else {
         return alert(msg);

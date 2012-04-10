@@ -10,6 +10,9 @@ var testFoldersPath  = __dirname + "/Cases";
 var testFolders = fs.readdirSync(testFoldersPath);
 
 testFolders.forEach(function(folderName, i){
+  if (folderName.match(/^\./)){
+    return;
+  }
   var testDir = testFoldersPath + "/" + folderName;
   var testDirFiles = fs.readdirSync(testDir);
   
@@ -35,6 +38,5 @@ var resources = [{
     content: JSON.stringify({testcases: testCases}),
     headers: APP_JSON
 }];
-
 
 module.exports = resources;
