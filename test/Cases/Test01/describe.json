@@ -2,6 +2,7 @@
   "name": "Top",
   "expectations": {
     "width" : 411,
-    "height" : 111
+    "height" : 111,
+    "retries" : 5
   }
 }

@@ -2,6 +2,7 @@
   "name": "Test02",
   "expectations": {
     "width" : 200,
-    "height" : 550
+    "height" : 550,
+    "retries" : 5
   }
 }

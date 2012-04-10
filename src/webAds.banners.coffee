@@ -56,22 +56,30 @@ class Banner
     @width      = @params.width
     @height     = @params.height
     @iframe     = new Iframe(@name, @params)    
-    @active     = false;
-    @retries    = 5;
-    @timer      = 50;
-    @resolved   = false;
-    @failed     = false;
-    console.log '-> new Banner;', @name, @exposeObj
+    @active     = false
+    @retries    = 5
+    @timer      = 50
+    @resolved   = false
+    @failed     = false
+    @now        = Date.now()    
+    @log('new Banner()');
   
+  log: (msg) ->
+    if window.console and window.console.log
+      args = [@name, Date.now() - @now].concat(Array.prototype.slice.call(arguments))
+      console.log.apply(console, args)
+    else
+      alert(msg)
+    
   config: (key, value) -> @[key] = value;
   
   onload: () ->
-    console.log('BANNER ONLOAD:', @name)
+    @log('onload')
     @processSize()
     return @
   
   processSize: () ->
-    console.log('BANNER processSize', @name)
+    @log('processSize')
     $wrapper  = @iframe.$iframe.contents().find('#webAd');
     width     = $wrapper.width();
     height    = $wrapper.height()
@@ -91,21 +99,21 @@ class Banner
     @resolved = true
   
   fail: (reason) ->
-    console.error('FAILED -> ', @name, '->', reason);    
+    @log('Failed '+reason)
     $("body").addClass(@params.bodyFailClass) if @params.bodyFailClass  
     @failed = true;
     @resolve()
     
   
   pollForNewSize: () ->
-    console.warn('POLL for new size: ',@name, ', timer:', @timer, ' retries:', @retries);
+    @log('pollForNewSize ' + @timer + ' retries: '+ @retries)
     @timer    += @timer
     @retries  -= 1
     banner    =  @
 
     if (@retries > 0)
       cb = () -> 
-        console.warn('POLL CB!', banner && banner.name)
+        banner.log('pollForNewSize setTimeout')
         banner.processSize()
       setTimeout(cb, @timer) 
     else
@@ -115,7 +123,7 @@ class Banner
     
     
   resize: (@width, @height) -> #autoset on bannerclass
-    console.log('resize banner=> ', @name, '. resize:', height, 'width', width);    
+    @log('resize banner=> height:'+ height+ 'width'+ width)
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
     return @
   
@@ -123,25 +131,26 @@ class Banner
     return $.extend {}, @exposeObj, {banner: @}
 
   injectScript: (idoc, iwin) ->
-    console.log('inject:', @name)
+    @log('injectScript')
     idoc.write('<scr' + 'ipt type="text/javascript" src="'+@url+'"></scr'+'ipt>');
     return @
   
   refresh: () ->
-    console.log('REFRESH', @name)
+    @log('refresh')
     @resolved = false
     @retries  = 5
     @timer    = 50
     @iframe.refresh();
     
   remove: () ->
+    @log('remove')
     @active = false;
     @resolved = false;
     @iframe.remove()
     return @
 
   insert: () ->
-    console.log 'insert;', @name    
+    @log('insert')
     @active = true;
     $container = if typeof @container is 'string' then jQuery("#"+@container) else @container
     $container.addClass('webads-processed').append(@iframe.makeIframe());

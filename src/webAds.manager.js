@@ -47,10 +47,8 @@ var FINN = FINN||{};
   }
   
   function getFromServer(callback, dontQueue){
-    console.log('CONTACTING HELIOS');
     $.getJSON('/heliosAds', function(data){
       if(typeof dontQueue === 'undefined') {
-        console.log('queue');
         queue(data.webAds);
       }
       
@@ -71,22 +69,34 @@ var FINN = FINN||{};
     return (bannerMap[this.name] = banner);
   }
       
+  function insertCallback(name, callback){
+    if (typeof callback === 'function'){
+      if (callbacks[name] && $.isArray(callbacks[name])){
+        callbacks[name].push(callback);
+      } else {
+        callbacks[name] = [callback];
+      }
+    }
+  }    
+      
   function render(name, callback){
-    console.log('RENDER', name);
     var banner = bannerMap[name];
+    banner.log('render called from manager')
     if (!banner || banner.active){
-      console.log('BANNER active =>', banner && banner.name, ':', banner && banner.active);
-      if (callback && typeof callback === 'function') callback(banner);
+      banner.log('banner is active');
+      if (callback && typeof callback === 'function') {
+        if (banner.resolved) {
+          banner.log('is resolved, calling callback direct')
+          callback(banner);          
+        } else {
+          banner.log('deferring callback')
+          insertCallback(name, callback)          
+        }
+      }
       return banner;
     } else {
       banner.insert();
-      if (typeof callback === 'function'){
-        if (callbacks[name] && $.isArray(callbacks[name])){
-          callbacks[name].push(callback);
-        } else {
-          callbacks[name] = [callback];
-        }
-      }
+      insertCallback(name, callback)
       return banner;
     }
   }

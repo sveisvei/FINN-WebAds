@@ -1,5 +1,4 @@
-buster.testRunner.timeout = 3000;
-
+buster.testRunner.timeout = 250;
 
 function collectTestCases(callback){
   var testCases = {};
@@ -10,12 +9,14 @@ function collectTestCases(callback){
     FINN.webAds.iframeUrl = buster.env.path + "finn/webads";
   };
   testCases["tearDown"] = function(){};
-  testCases["Cases/"]   = {};
+  testCases["should render"]   = {};
   
   function ready(cases){
     $.each(cases, function(){
       var testCase = this;
-      testCases["Cases/"][testCase.name] = function(done){
+      testCases["should render"][testCase.name] = function(done){
+        buster.testRunner.timeout = testCase.timeout||250;       
+
         var spy = sinon.spy();
         var banner = FINN.webAds.queue({
           name      : testCase.name,
