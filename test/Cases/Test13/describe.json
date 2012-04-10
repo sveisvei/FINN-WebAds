@@ -1,7 +1,7 @@
 {
   "forceDelay": 500,
   "description": "The app setTimeouts",
-  "timeout": 2200,
+  "timeout": 2400,
   "expectations": {
     "width": 980,
     "height": 150,

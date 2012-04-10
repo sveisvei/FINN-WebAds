@@ -74,22 +74,32 @@
       this.retries = 5;
       this.timer = 50;
       this.resolved = false;
-      console.log('-> new Banner;', this.name, this.exposeObj);
+      this.failed = false;
+      this.now = Date.now();
+      this.log('new Banner()');
     }
+
+    Banner.prototype.log = function(msg) {
+      if (window.console && window.console.log) {
+        return console.log(this.name + "->", Date.now() - this.now, msg);
+      } else {
+        return alert(msg);
+      }
+    };
 
     Banner.prototype.config = function(key, value) {
       return this[key] = value;
     };
 
     Banner.prototype.onload = function() {
-      console.log('BANNER ONLOAD:', this.name);
+      this.log('onload');
       this.processSize();
       return this;
     };
 
     Banner.prototype.processSize = function() {
       var $wrapper, height, invalidSize, width;
-      console.log('BANNER processSize', this.name);
+      this.log('processSize');
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       width = $wrapper.width();
       height = $wrapper.height();
@@ -110,19 +120,22 @@
     };
 
     Banner.prototype.fail = function(reason) {
+      this.log('Failed ' + reason);
       if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
-      return console.error('FAILED -> ', this.name, '->', reason);
+      this.failed = true;
+      this.iframe.$wrapper.addClass('webads-failed');
+      return this.resolve();
     };
 
     Banner.prototype.pollForNewSize = function() {
       var banner, cb;
-      console.warn('POLL for new size: ', this.name, ', timer:', this.timer, ' retries:', this.retries);
+      this.log('pollForNewSize ' + this.timer + ' retries: ' + this.retries);
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
       if (this.retries > 0) {
         cb = function() {
-          console.warn('POLL CB!', banner && banner.name);
+          banner.log('pollForNewSize setTimeout');
           return banner.processSize();
         };
         setTimeout(cb, this.timer);
@@ -135,7 +148,7 @@
     Banner.prototype.resize = function(width, height) {
       this.width = width;
       this.height = height;
-      console.log('resize banner=> ', this.name, '. resize:', height, 'width', width);
+      this.log('resize banner=> height:' + height + 'width' + width);
       this.iframe.$iframe.css({
         height: height,
         width: width
@@ -150,13 +163,13 @@
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
-      console.log('inject:', this.name);
+      this.log('injectScript');
       idoc.write('<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>');
       return this;
     };
 
     Banner.prototype.refresh = function() {
-      console.log('REFRESH', this.name);
+      this.log('refresh');
       this.resolved = false;
       this.retries = 5;
       this.timer = 50;
@@ -164,6 +177,7 @@
     };
 
     Banner.prototype.remove = function() {
+      this.log('remove');
       this.active = false;
       this.resolved = false;
       this.iframe.remove();
@@ -172,7 +186,7 @@
 
     Banner.prototype.insert = function() {
       var $container;
-      console.log('insert;', this.name);
+      this.log('insert');
       this.active = true;
       $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       $container.addClass('webads-processed').append(this.iframe.makeIframe());
@@ -205,17 +219,17 @@ var FINN  = FINN || {};
   }
 
 
-  FINN.data.defaultConfig = {
+  FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
     "Top": {
         width: 992,
         height: 150,
-        bodyFailClass:'banner-has-no-top-banner',
+        bodyFailClass:'has-no-top-placement',
         done: fixTopPosition
     },  
     "Left1": {
         width: 240,
         height: 500,
-        bodyClass: 'banner-has-dominant-campaign',
+        bodyClass: 'has-dominant-campaign',
         done: fixLeftBanner
     },
     "Right1": {
@@ -258,7 +272,7 @@ var FINN  = FINN || {};
     "Test04" : {container: 'banner-tab'},
     "Test05" : {container: 'banner-tab'},
     "all"       : {container: 'banners'}
-  };
+  });
   
   
 })(FINN, jQuery);
@@ -338,7 +352,26 @@ var FINN = FINN||{};
   w.collectDataPositions = collectDataPositions;
   w.config         = config;
   w.getFromServer  = getFromServer;
+  w.cleanUp        = cleanUp;
   w.plugins        = w.plugins||{};
+  w.base           = "/";
+  
+  /*
+    TODO:
+    callback when all is done
+    events:
+      webAds.ready
+      webAds.done
+      webAds.done.all
+      webAds.done.Top
+  */
+  
+  var eventMap = {};
+  
+  w.on = on;
+  function on(key, callback){
+    
+  } 
   
   var jsub = $.sub();
   var globalExpose = {
@@ -354,6 +387,13 @@ var FINN = FINN||{};
   var callbacks = {};
   var configMap = {};
   
+  function cleanUp(){
+    bannerMap = {};
+    callbacks = {};
+    configMap = {};
+  }
+  
+  
   function config(name, key, value){
     configMap[name]       = configMap[name]||{};
     configMap[name][key]  = value;
@@ -364,10 +404,8 @@ var FINN = FINN||{};
   }
   
   function getFromServer(callback, dontQueue){
-    console.log('CONTACTING HELIOS');
     $.getJSON('/heliosAds', function(data){
       if(typeof dontQueue === 'undefined') {
-        console.log('queue');
         queue(data.webAds);
       }
       
@@ -388,22 +426,35 @@ var FINN = FINN||{};
     return (bannerMap[this.name] = banner);
   }
       
+  function insertCallback(name, callback){
+    if (typeof callback === 'function'){
+      if (callbacks[name] && $.isArray(callbacks[name])){
+        callbacks[name].push(callback);
+      } else {
+        callbacks[name] = [callback];
+      }
+    }
+  }    
+      
   function render(name, callback){
-    console.log('RENDER', name);
     var banner = bannerMap[name];
-    if (!banner || banner.active){
-      console.log('BANNER active =>', banner && banner.name, ':', banner && banner.active);
-      if (callback && typeof callback === 'function') callback(banner);
+    if (!banner){
+      //hæ
+    } else if (banner.active){
+      banner.log('banner is active');
+      if (callback && typeof callback === 'function') {
+        if (banner.resolved) {
+          banner.log('is resolved, calling callback direct')
+          callback(banner);          
+        } else {
+          banner.log('deferring callback')
+          insertCallback(name, callback)          
+        }
+      }
       return banner;
     } else {
       banner.insert();
-      if (typeof callback === 'function'){
-        if (callbacks[name] && $.isArray(callbacks[name])){
-          callbacks[name].push(callback);
-        } else {
-          callbacks[name] = [callback];
-        }
-      }
+      insertCallback(name, callback)
       return banner;
     }
   }

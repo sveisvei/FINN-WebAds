@@ -1,4 +1,4 @@
-var DEFAULT_TIMEOUT = 250;
+var DEFAULT_TIMEOUT = 450;
 buster.testRunner.timeout = DEFAULT_TIMEOUT;
 
 var webAds = FINN.webAds;
@@ -13,6 +13,7 @@ function collectTestCases(cb){
   };
   
   testCases["tearDown"] = function(){
+    webAds.cleanUp();
     $("#banners").remove();
   };
   

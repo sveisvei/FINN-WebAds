@@ -17,17 +17,17 @@ var FINN  = FINN || {};
   }
 
 
-  FINN.data.defaultConfig = {
+  FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
     "Top": {
         width: 992,
         height: 150,
-        bodyFailClass:'banner-has-no-top-banner',
+        bodyFailClass:'has-no-top-placement',
         done: fixTopPosition
     },  
     "Left1": {
         width: 240,
         height: 500,
-        bodyClass: 'banner-has-dominant-campaign',
+        bodyClass: 'has-dominant-campaign',
         done: fixLeftBanner
     },
     "Right1": {
@@ -70,7 +70,7 @@ var FINN  = FINN || {};
     "Test04" : {container: 'banner-tab'},
     "Test05" : {container: 'banner-tab'},
     "all"       : {container: 'banners'}
-  };
+  });
   
   
 })(FINN, jQuery);

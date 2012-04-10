@@ -66,8 +66,9 @@ class Banner
   
   log: (msg) ->
     if window.console and window.console.log
-      args = [@name + "->", Date.now() - @now].concat(Array.prototype.slice.call(arguments))
-      console.log.apply(console, args)
+      #args = [@name + "->", Date.now() - @now].concat(Array.prototype.slice.call(arguments))
+      #console.log.apply(console.log, args)
+      console.log(@name + "->", Date.now() - @now, msg);
     else
       alert(msg)
     
@@ -102,6 +103,7 @@ class Banner
     @log('Failed '+reason)
     $("body").addClass(@params.bodyFailClass) if @params.bodyFailClass  
     @failed = true;
+    @iframe.$wrapper.addClass('webads-failed')
     @resolve()
     
   

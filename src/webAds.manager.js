@@ -20,6 +20,7 @@ var FINN = FINN||{};
   w.collectDataPositions = collectDataPositions;
   w.config         = config;
   w.getFromServer  = getFromServer;
+  w.cleanUp        = cleanUp;
   w.plugins        = w.plugins||{};
   w.base           = "/";
   
@@ -53,6 +54,13 @@ var FINN = FINN||{};
   var bannerMap = {};
   var callbacks = {};
   var configMap = {};
+  
+  function cleanUp(){
+    bannerMap = {};
+    callbacks = {};
+    configMap = {};
+  }
+  
   
   function config(name, key, value){
     configMap[name]       = configMap[name]||{};
