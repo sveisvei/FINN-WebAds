@@ -2,7 +2,8 @@
   "name": "Test12",
   "expectations": {
     "width" : 220,
-    "height" : 320
+    "height" : 320,
+    "retries": 4
   },
   "timeout": 1000
 }

@@ -125,6 +125,7 @@ class Banner
     
     
   resize: (@width, @height) -> #autoset on bannerclass
+    #todo, init width/height shouldnt be the same properties because of tests....
     @log('resize banner=> height:'+ height+ 'width'+ width)
     @iframe.$iframe.css({height: height, width: width}).attr('height', height).attr('width', width);
     return @

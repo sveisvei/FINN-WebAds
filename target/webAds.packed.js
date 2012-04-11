@@ -210,9 +210,8 @@ var FINN  = FINN || {};
   function fixTopPosition(banner){
     console.log(banner.name, 'fixTopPosition');
   }
-  function fixLeftBanner(banner){
+  function fixLeftPosition(banner){
     console.log(banner.name, 'fixLeftBanner');
-
   }
   function fixWallpaper(banner){
     console.log(banner.name, 'fixWallpaper');
@@ -230,7 +229,7 @@ var FINN  = FINN || {};
         width: 240,
         height: 500,
         bodyClass: 'has-dominant-campaign',
-        done: fixLeftBanner
+        done: fixLeftPosition
     },
     "Right1": {
         width: 240
@@ -257,21 +256,21 @@ var FINN  = FINN || {};
         height: 0,
         onload: $.noop
     },
-    "Txt_1": {},
-    "Txt_2": {},
-    "Txt_3": {},
-    "Txt_4": {},
-    "Txt_5": {},
-    "Txt_6": {},
-    "Txt_7": {},
-    "Txt_8": {},
-    "Txt_9": {},
-    "Txt_10": {},
-    "Test01" : {width: 500, height: 120, container: 'banners'},
-    "Test02" : {container: 'banner-tab'},
-    "Test04" : {container: 'banner-tab'},
-    "Test05" : {container: 'banner-tab'},
-    "all"       : {container: 'banners'}
+    "Txt_1"   : {},
+    "Txt_2"   : {},
+    "Txt_3"   : {},
+    "Txt_4"   : {},
+    "Txt_5"   : {},
+    "Txt_6"   : {},
+    "Txt_7"   : {},
+    "Txt_8"   : {},
+    "Txt_9"   : {},
+    "Txt_10"  : {},
+    "Test01"  : {width: 500, height: 120, container: 'banners'},
+    "Test02"  : {container: 'banner-tab'},
+    "Test04"  : {container: 'banner-tab'},
+    "Test05"  : {container: 'banner-tab'},
+    "all"     : {container: 'banners'}
   });
   
   
@@ -370,7 +369,7 @@ var FINN = FINN||{};
   
   w.on = on;
   function on(key, callback){
-    
+    // TODO
   } 
   
   var jsub = $.sub();

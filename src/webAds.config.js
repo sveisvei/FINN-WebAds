@@ -10,7 +10,6 @@ var FINN  = FINN || {};
   }
   function fixLeftPosition(banner){
     console.log(banner.name, 'fixLeftBanner');
-
   }
   function fixWallpaper(banner){
     console.log(banner.name, 'fixWallpaper');
