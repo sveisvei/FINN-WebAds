@@ -8,21 +8,23 @@ var FINN = FINN||{};
   // exports
   F.webAds = F.webAds||{};
   var w = F.webAds;
-  w.renderContext  = renderContext;
-  w.queue          = queue;
-  w.render         = render;
-  w.renderAll      = renderAll;
-  w.renderLazy     = renderLazy;
-  w.expose         = expose;
-  w.refresh        = refresh;
-  w.refreshAll     = refreshAll;
-  w.resolve        = resolve;
-  w.collectDataPositions = collectDataPositions;
-  w.config         = config;
-  w.getFromServer  = getFromServer;
-  w.cleanUp        = cleanUp;
-  w.plugins        = w.plugins||{};
-  w.base           = "/";
+  w.renderContext         = renderContext;
+  w.queue                 = queue;
+  w.render                = render;
+  w.renderAll             = renderAll;
+  w.renderLazy            = renderLazy;
+  w.expose                = expose;
+  w.refresh               = refresh;
+  w.refreshAll            = refreshAll;
+  w.refreshFromServer     = refreshFromServer; //TODO
+  w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  w.resolve               = resolve;
+  w.collectDataPositions  = collectDataPositions;
+  w.config                = config;
+  w.getFromServer         = getFromServer;
+  w.cleanUp               = cleanUp;
+  w.plugins               = w.plugins||{};
+  w.base                  = "/";
   
   /*
     TODO:
@@ -36,10 +38,13 @@ var FINN = FINN||{};
   
   var eventMap = {};
   
-  w.on = on;
+  w.on = on; //TODO
   function on(key, callback){
     // TODO
   } 
+  
+  function refreshFromServer(){}// TODO
+  function refreshAllFromServer(){}//TODO
   
   var jsub = $.sub();
   var globalExpose = {

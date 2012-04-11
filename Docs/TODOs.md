@@ -20,3 +20,7 @@
 - unit-tester av internals
 - flere testcaser
 - Reporte feil via cassandra/statistikk
+
+
+- Helios-parameters-refresh / søkeparametere === refreshFromServer / refreshAllFromServer
+bruker github: bskog
