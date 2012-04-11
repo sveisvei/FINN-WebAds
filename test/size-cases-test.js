@@ -33,7 +33,7 @@ function collectTestCases(cb){
         container : 'banners',
         done      : doneSpy
       };
-      if (testCase.forceDelay) { // TODO!
+      if (testCase.forceDelay) {
         bannerInitObj.url += '?forceDelay=' + testCase.forceDelay        
       }
       var banner  = webAds.queue(bannerInitObj);
