@@ -1,12 +1,9 @@
 (function() {
-  "use strict";
-  var Banner, Iframe, webAds;
+  var Banner, Iframe;
 
   if (window.FINN == null) window.FINN = {};
 
   if (FINN.webAds == null) FINN.webAds = {};
-
-  webAds = FINN.webAds;
 
   Iframe = (function() {
 
@@ -22,15 +19,15 @@
 
     Iframe.prototype.refresh = function() {
       var currSrc, iframeUrl, url;
-      iframeUrl = webAds.iframeUrl || "/finn/webads";
+      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       currSrc = this.$iframe.attr('src');
       url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
       return this.$iframe.attr('src', url);
     };
 
-    Iframe.prototype.makeIframe = function() {
+    Iframe.prototype.html = function() {
       var div, iframe, iframeUrl, innerDiv;
-      iframeUrl = webAds.iframeUrl || "/finn/webads";
+      iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       div = document.createElement('div');
       innerDiv = document.createElement('div');
       iframe = document.createElement('iframe');
@@ -73,82 +70,47 @@
       this.active = false;
       this.retries = 5;
       this.timer = 50;
-      this.resolved = false;
-      this.failed = false;
-      this.now = Date.now();
-      this.log('new Banner()');
+      console.log('-> new Banner;', this.name, this.exposeObj);
     }
-
-    Banner.prototype.log = function(msg) {
-      if (window.console && window.console.log) {
-        return console.log(this.name + "->", Date.now() - this.now, msg);
-      } else {
-        return alert(msg);
-      }
-    };
 
     Banner.prototype.config = function(key, value) {
       return this[key] = value;
     };
 
     Banner.prototype.onload = function() {
-      this.log('onload');
-      this.processSize();
-      return this;
-    };
-
-    Banner.prototype.processSize = function() {
       var $wrapper, height, invalidSize, width;
-      this.log('processSize');
+      console.log('BANNER ONLOAD:', this.name);
       $wrapper = this.iframe.$iframe.contents().find('#webAd');
       width = $wrapper.width();
       height = $wrapper.height();
-      invalidSize = width === null || width <= 31 || height === null || height <= 31;
+      invalidSize = width === null || width <= 25 || height === null || height <= 25;
       if (invalidSize) return this.pollForNewSize();
       this.resize(width, height);
-      this.resolve();
-      return this;
-    };
-
-    Banner.prototype.resolve = function() {
       if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
-      if (!this.resolved) webAds.resolve(this.name);
-      return this.resolved = true;
-    };
-
-    Banner.prototype.fail = function(reason) {
-      this.log('Failed ' + reason);
-      if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
-      this.failed = true;
-      this.iframe.$wrapper.addClass('webads-failed');
-      return this.resolve();
+      return this;
     };
 
     Banner.prototype.pollForNewSize = function() {
       var banner, cb;
-      this.log('pollForNewSize ' + this.timer + ' retries: ' + this.retries);
+      console.warn('POLL', this.name, this.timer, this.retries);
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
-      if (this.retries > 0) {
-        cb = function() {
-          banner.log('pollForNewSize setTimeout');
-          return banner.processSize();
-        };
-        setTimeout(cb, this.timer);
-      } else {
-        this.fail("timeout");
-      }
+      cb = function() {
+        console.log('POLL cb', banner && banner.name);
+        return banner.onload();
+      };
+      if (this.retries > 0) setTimeout(cb, this.timer);
       return this;
     };
 
     Banner.prototype.resize = function(width, height) {
       this.width = width;
       this.height = height;
-      this.log('resize banner=> height:' + height + 'width' + width);
+      console.log('iframe: ', this.name, '. resize:', height, 'width', width);
       this.iframe.$iframe.css({
         height: height,
         width: width
@@ -163,33 +125,30 @@
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
-      this.log('injectScript');
+      console.log('inject:', this.name);
       idoc.write('<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>');
       return this;
     };
 
     Banner.prototype.refresh = function() {
-      this.log('refresh');
-      this.resolved = false;
+      console.log('REFRESH', this.name);
       this.retries = 5;
       this.timer = 50;
       return this.iframe.refresh();
     };
 
     Banner.prototype.remove = function() {
-      this.log('remove');
       this.active = false;
-      this.resolved = false;
       this.iframe.remove();
       return this;
     };
 
     Banner.prototype.insert = function() {
       var $container;
-      this.log('insert');
+      console.log('insert;', this.name);
       this.active = true;
       $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
-      $container.addClass('webads-processed').append(this.iframe.makeIframe());
+      $container.addClass('webads-processed').append(this.iframe.html());
       return this;
     };
 
@@ -201,91 +160,80 @@
 
 }).call(this);
 var FINN  = FINN || {};
+FINN.data = FINN.data || {};
+
+function fixTopPosition(banner){
+  console.log(banner.name, 'fixTopPosition')
+}
+function fixLeftBanner(banner){
+  console.log(banner.name, 'fixLeftBanner')
+  
+}
+function fixWallpaper(banner){
+  console.log(banner.name, 'fixWallpaper')
+}
+
+
+FINN.data.defaultConfig = {
+  "Top": {
+      width: 992,
+      height: 150,
+      bodyFailClass:'banner-has-no-top-banner',
+      done: fixTopPosition
+  },  
+  "Left1": {
+      width: 240,
+      height: 500,
+      bodyClass: 'banner-has-dominant-campaign',
+      done: fixLeftBanner
+  },
+  "Right1": {
+      width: 240
+  },
+  "Right2": {
+      width: 240,
+      height: 500
+  },
+  "Right3": {
+      width: 240
+  },
+  "Middle": {
+      width: 580,
+      height: 400,
+      container: "banners-middle"
+  },
+  "Wallpaper": {
+      width: 0,
+      height: 0,
+      onload: fixWallpaper
+  },
+  "Survey": {
+      width: 0,
+      height: 0,
+      onload: $.noop
+  },
+  "Txt_1": {},
+  "Txt_2": {},
+  "Txt_3": {},
+  "Txt_4": {},
+  "Txt_5": {},
+  "Txt_6": {},
+  "Txt_7": {},
+  "Txt_8": {},
+  "Txt_9": {},
+  "Txt_10": {},
+  "Position0" : {width: 500, height: 120, container: 'banners'},
+  "Position1" : {container: 'banner-tab'},
+  "Position2" : {container: 'banner-tab'},
+  "Position3" : {container: 'banner-tab'},
+  "all"       : {container: 'banners'}
+};var FINN = FINN||{};
 
 (function(F, $){
-  "use strict";
-  
-  FINN.data = FINN.data || {};
-
-  function fixTopPosition(banner){
-    console.log(banner.name, 'fixTopPosition');
-  }
-  function fixLeftPosition(banner){
-    console.log(banner.name, 'fixLeftBanner');
-  }
-  function fixWallpaper(banner){
-    console.log(banner.name, 'fixWallpaper');
-  }
-
-
-  FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
-    "Top": {
-        width: 992,
-        height: 150,
-        bodyFailClass:'has-no-top-placement',
-        done: fixTopPosition
-    },  
-    "Left1": {
-        width: 240,
-        height: 500,
-        bodyClass: 'has-dominant-campaign',
-        done: fixLeftPosition
-    },
-    "Right1": {
-        width: 240
-    },
-    "Right2": {
-        width: 240,
-        height: 500
-    },
-    "Right3": {
-        width: 240
-    },
-    "Middle": {
-        width: 580,
-        height: 400,
-        container: "banners-middle"
-    },
-    "Wallpaper": {
-        width: 0,
-        height: 0,
-        onload: fixWallpaper
-    },
-    "Survey": {
-        width: 0,
-        height: 0,
-        onload: $.noop
-    },
-    "Txt_1"   : {},
-    "Txt_2"   : {},
-    "Txt_3"   : {},
-    "Txt_4"   : {},
-    "Txt_5"   : {},
-    "Txt_6"   : {},
-    "Txt_7"   : {},
-    "Txt_8"   : {},
-    "Txt_9"   : {},
-    "Txt_10"  : {},
-    "Test01"  : {width: 500, height: 120, container: 'banners'},
-    "Test02"  : {container: 'banner-tab'},
-    "Test04"  : {container: 'banner-tab'},
-    "Test05"  : {container: 'banner-tab'},
-    "all"     : {container: 'banners'}
-  });
-  
-  
-})(FINN, jQuery);
-
-var FINN = FINN||{};
-
-(function(F, $){
-  "use strict";
+  "use scrict";
   FINN.webAds = FINN.webAds||{};
   var plugins = FINN.webAds.plugins = FINN.webAds.plugins||{};
   
-  plugins.register = function(name, value){
-    plugins[name] = value;
-  };
   plugins.overlay = overlay;
   plugins.popup   = popup;
   plugins.dialog  = dialog;
@@ -332,7 +280,6 @@ var FINN = FINN||{};
 })(FINN, jQuery);var FINN = FINN||{};
 
 (function(F, $){
-  "use strict";
   var data          = F.data = F.data||{};
   var defaultConfig = data.defaultConfig = data.defaultConfig||{};
   
@@ -350,27 +297,7 @@ var FINN = FINN||{};
   w.resolve        = resolve;
   w.collectDataPositions = collectDataPositions;
   w.config         = config;
-  w.getFromServer  = getFromServer;
-  w.cleanUp        = cleanUp;
   w.plugins        = w.plugins||{};
-  w.base           = "/";
-  
-  /*
-    TODO:
-    callback when all is done
-    events:
-      webAds.ready
-      webAds.done
-      webAds.done.all
-      webAds.done.Top
-  */
-  
-  var eventMap = {};
-  
-  w.on = on;
-  function on(key, callback){
-    // TODO
-  } 
   
   var jsub = $.sub();
   var globalExpose = {
@@ -386,13 +313,6 @@ var FINN = FINN||{};
   var callbacks = {};
   var configMap = {};
   
-  function cleanUp(){
-    bannerMap = {};
-    callbacks = {};
-    configMap = {};
-  }
-  
-  
   function config(name, key, value){
     configMap[name]       = configMap[name]||{};
     configMap[name][key]  = value;
@@ -400,18 +320,6 @@ var FINN = FINN||{};
     if(bannerMap[name]){
       bannerMap[name].config(key, value);
     }
-  }
-  
-  function getFromServer(callback, dontQueue){
-    $.getJSON('/heliosAds', function(data){
-      if(typeof dontQueue === 'undefined') {
-        queue(data.webAds);
-      }
-      
-      if (callback && typeof callback === 'function') callback(null, data.webAds);
-    }, function(err){
-      if (callback && typeof callback === 'function') callback(err, null);
-    });
   }
       
   function addToMap(){
@@ -425,36 +333,21 @@ var FINN = FINN||{};
     return (bannerMap[this.name] = banner);
   }
       
-  function insertCallback(name, callback){
-    if (typeof callback === 'function'){
-      if (callbacks[name] && $.isArray(callbacks[name])){
-        callbacks[name].push(callback);
-      } else {
-        callbacks[name] = [callback];
-      }
-    }
-  }    
-      
   function render(name, callback){
+    console.log('RENDER', name);
     var banner = bannerMap[name];
-    if (!banner){
-      //hæ
-    } else if (banner.active){
-      banner.log('banner is active');
-      if (callback && typeof callback === 'function') {
-        if (banner.resolved) {
-          banner.log('is resolved, calling callback direct')
-          callback(banner);          
-        } else {
-          banner.log('deferring callback')
-          insertCallback(name, callback)          
-        }
-      }
-      return banner;
+    if (!banner || banner.active){
+      console.log('BANNER', banner && banner.name, banner && banner.active);
+      callback(banner);
     } else {
       banner.insert();
-      insertCallback(name, callback)
-      return banner;
+      if (typeof callback === 'function'){
+        if (callbacks[name] && $.isArray(callbacks[name])){
+          callbacks[name].push(callback);
+        } else {
+          callbacks[name] = [callback];
+        }
+      }
     }
   }
   
@@ -532,8 +425,9 @@ var FINN = FINN||{};
   }
   
   function removeAll(){
+    var banner;
     for(var key in bannerMap){
-      bannerMap[name] && bannerMap[key].remove();         
+      bannerMap[key].remove();         
     }
   }
   

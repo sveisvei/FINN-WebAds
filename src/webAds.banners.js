@@ -1,15 +1,13 @@
-(function() {
+var FINN = FINN||{};
+
+(function(F, $) {
   "use strict";
+
   var Banner, Iframe, webAds;
-
-  if (window.FINN == null) window.FINN = {};
-
   if (FINN.webAds == null) FINN.webAds = {};
-
   webAds = FINN.webAds;
 
   Iframe = (function() {
-
     function Iframe(name, options, id) {
       this.name = name;
       this.options = options != null ? options : {};
@@ -40,27 +38,28 @@
       iframe.src = "" + iframeUrl + "#" + this.name;
       iframe.scrolling = 'no';
       iframe.className = 'webad-iframe';
+      // IE 7-8      
       iframe.marginWidth = 0;
       iframe.marginHeight = 0;
       iframe.frameBorder = '0';
       iframe.allowTransparency = 'true';
+      //Safari will will not show iframe until scroll with width/height == 0px      
       iframe.width = this.options.width || 100;
       iframe.height = this.options.height || 100;
       iframe.style.border = '0px';
       iframe.style.width = (this.options.width || 100) + 'px';
       iframe.style.height = (this.options.height || 100) + 'px';
+      // Wrap iframe inside 2 divs      
       innerDiv.appendChild(iframe);
       div.appendChild(innerDiv);
+      // Add reference for selecting injected iframe      
       this.$iframe = $(iframe);
-      return this.$wrapper = $(div);
+      return (this.$wrapper = $(div));
     };
-
     return Iframe;
-
   })();
 
   Banner = (function() {
-
     function Banner(params, exposeObj) {
       this.params = params;
       this.exposeObj = exposeObj != null ? exposeObj : {};
@@ -88,7 +87,7 @@
     };
 
     Banner.prototype.config = function(key, value) {
-      return this[key] = value;
+      return (this[key] = value);
     };
 
     Banner.prototype.onload = function() {
@@ -116,7 +115,7 @@
         this.params.done(this);
       }
       if (!this.resolved) webAds.resolve(this.name);
-      return this.resolved = true;
+      return (this.resolved = true);
     };
 
     Banner.prototype.fail = function(reason) {
@@ -148,6 +147,8 @@
     Banner.prototype.resize = function(width, height) {
       this.width = width;
       this.height = height;
+      //autoset on bannerclass
+      //todo, init width/height shouldnt be the same properties because of tests....
       this.log('resize banner=> height:' + height + 'width' + width);
       this.iframe.$iframe.css({
         height: height,
@@ -192,11 +193,9 @@
       $container.addClass('webads-processed').append(this.iframe.makeIframe());
       return this;
     };
-
     return Banner;
-
   })();
 
-  window.FINN.Banner = Banner;
+  FINN.Banner = Banner;
 
-}).call(this);
+}).call(this, FINN, jQuery);
