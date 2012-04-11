@@ -20,7 +20,6 @@ Visjon
   - dynamisk størrelser
   - alt skal være inni iframe.
   - Toppbanner må lastes først, for companion ads. (kø-basert). Trottle max 5 om gangen.
-
   - Fallback til ($("body").outerHeight())
 
 

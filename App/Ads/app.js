@@ -28,8 +28,6 @@ app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-require('./lib/addTestCases.js');
-
 app.get('*', function(req, res, next){  
   if (req.param('forceDelay', false)) {
     console.log('forced delay on request for ' + req.param('forceDelay') + 'ms');
