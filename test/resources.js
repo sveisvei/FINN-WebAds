@@ -26,8 +26,7 @@ testFolders.forEach(function(folderName, i){
 
 var resources = [{
     path    : '/finn/webads',
-    content : fs.readFileSync('src/iframe.html', 'utf8'),
-    headers : HTML
+    backend : 'localhost:3000/finn/webads'
   },
   {
     path: "/Cases/",        
