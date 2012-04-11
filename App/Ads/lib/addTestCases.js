@@ -1,5 +1,5 @@
 
-var cradle = require('cradle');
+/*var cradle = require('cradle');
 cradle.setup({
   host: "finn.iriscouch.com",
   cache: true,
@@ -27,7 +27,7 @@ db.exists(function(err, exist){
       })
     });
   }
-});
+});*/
 
 function getAll(){}
 
