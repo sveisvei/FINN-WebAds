@@ -9,7 +9,6 @@
   - Repl
     - kommando test, autotest?
 
-- Fjerne coffee, rydde i js build.
 - Browserstack 
 - Unifisere CSS
 - Plugins (avklare med marius hva produktet er)
