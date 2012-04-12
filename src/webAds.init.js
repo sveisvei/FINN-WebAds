@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-  "use scrict";  
+  "use strict";  
   var FINN = FINN||{};
   if(!FINN.webAds) return;  
   if(!FINN.webAds.loadOnReady){
