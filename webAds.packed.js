@@ -66,23 +66,25 @@ var FINN = FINN||{};
       this.name = this.params.name;
       this.url = this.params.url;
       this.container = this.params.container;
-      this.width = this.params.width;
-      this.height = this.params.height;
+      this.width = 0;
+      this.height = 0;
       this.iframe = new Iframe(this.name, this.params);
       this.active = false;
       this.retries = 5;
       this.timer = 50;
       this.resolved = false;
       this.failed = false;
-      this.now = Date.now();
       this.log('new Banner()');
     }
 
     Banner.prototype.log = function(msg) {
+      if(!this.now){
+        this.now = Date.now();        
+      }
       if (window.console && window.console.log) {
         return console.log(this.name + "->", Date.now() - this.now, msg);
       } else {
-        return alert(msg);
+        //return alert(msg);
       }
     };
 
@@ -158,9 +160,7 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.expose = function() {
-      return $.extend({}, this.exposeObj, {
-        banner: this
-      });
+      return $.extend({}, this.exposeObj, { banner: this });
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
@@ -172,6 +172,7 @@ var FINN = FINN||{};
     Banner.prototype.refresh = function() {
       this.log('refresh');
       this.resolved = false;
+      this.failed = false;
       this.retries = 5;
       this.timer = 50;
       return this.iframe.refresh();
@@ -186,10 +187,9 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.insert = function() {
-      var $container;
       this.log('insert');
       this.active = true;
-      $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
+      var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       $container.addClass('webads-processed').append(this.iframe.makeIframe());
       return this;
     };
@@ -199,82 +199,119 @@ var FINN = FINN||{};
   FINN.Banner = Banner;
 
 }).call(this, FINN, jQuery);
-var FINN  = FINN || {};
+var FINN = FINN || {};
 
-(function(F, $){
+(function(F, $) {
   "use strict";
-  
+
   FINN.data = FINN.data || {};
 
-  function fixTopPosition(banner){
-    console.log(banner.name, 'fixTopPosition');
-  }
-  function fixLeftPosition(banner){
-    console.log(banner.name, 'fixLeftBanner');
-  }
-  function fixWallpaper(banner){
-    console.log(banner.name, 'fixWallpaper');
+  function fixTopPosition(banner) {
+    banner.log('cb fixTopPosition');
+    if (banner.failed) {
+      return;
+    }
+    var width = banner.width;
+    var isSmallBanner = width <= 768;
+    var isNotCompanion = width >= 800 && width < 992;
+    var isDominant = width > 992;
+    if (isSmallBanner || isNotCompanion) {
+      banner.iframe.$wrapper.css('width', '980px');
+    } else if (isDominant) {
+      banner.iframe.$wrapper.css('margin-left', "-12px");
+    }
   }
 
+  function fixLeftPosition(banner) {
+    banner.log('cb fixLeftBanner');
+    if (!banner.failed && banner.width > 50) {
+      banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
+    }
+  }
+
+  function fixWallpaper(banner) {
+    banner.log('cb fixWallpaper');
+    var bgImage = banner.iframe.$iframe.contents().find("img");
+    if (bgImage.size() > 0 && bgImage.width() !== 1) {
+      var src = bgImage.attr('src');
+      if (src !== '' && src.indexOf('empty.gif') === -1) {
+        var css = {
+          'background': ' transparent url(\"' + src + '\") 50% 0% no-repeat',
+          'background-attachment': 'fixed'
+        };
+        $("body").css(css);
+      }
+    }
+  }
 
   FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
     "Top": {
-        width: 992,
-        height: 150,
-        bodyFailClass:'has-no-top-placement',
-        done: fixTopPosition
-    },  
+      width: 992,
+      height: 150,
+      bodyFailClass: 'has-no-top-placement',
+      done: fixTopPosition
+    },
     "Left1": {
-        width: 240,
-        height: 500,
-        bodyClass: 'has-dominant-campaign',
-        done: fixLeftPosition
+      width: 240,
+      height: 500,
+      bodyClass: 'has-dominant-campaign',
+      done: fixLeftPosition
     },
     "Right1": {
-        width: 240
+      width: 240
     },
     "Right2": {
-        width: 240,
-        height: 500
+      width: 240,
+      height: 500
     },
     "Right3": {
-        width: 240
+      width: 240
     },
     "Middle": {
-        width: 580,
-        height: 400,
-        container: "banners-middle"
+      width: 580,
+      height: 400,
+      container: "banners-middle"
     },
     "Wallpaper": {
-        width: 0,
-        height: 0,
-        onload: fixWallpaper
+      width: 0,
+      height: 0,
+      onload: fixWallpaper
     },
     "Survey": {
-        width: 0,
-        height: 0,
-        onload: $.noop
+      width: 0,
+      height: 0,
+      onload: $.noop
     },
-    "Txt_1"   : {},
-    "Txt_2"   : {},
-    "Txt_3"   : {},
-    "Txt_4"   : {},
-    "Txt_5"   : {},
-    "Txt_6"   : {},
-    "Txt_7"   : {},
-    "Txt_8"   : {},
-    "Txt_9"   : {},
-    "Txt_10"  : {},
-    "Test01"  : {width: 500, height: 120, container: 'banners'},
-    "Test02"  : {container: 'banner-tab'},
-    "Test04"  : {container: 'banner-tab'},
-    "Test05"  : {container: 'banner-tab'},
-    "all"     : {container: 'banners'}
+    "Txt_1": {},
+    "Txt_2": {},
+    "Txt_3": {},
+    "Txt_4": {},
+    "Txt_5": {},
+    "Txt_6": {},
+    "Txt_7": {},
+    "Txt_8": {},
+    "Txt_9": {},
+    "Txt_10": {},
+    "Test01": {
+      width: 500,
+      height: 120,
+      container: 'banners'
+    },
+    "Test02": {
+      container: 'banner-tab'
+    },
+    "Test04": {
+      container: 'banner-tab'
+    },
+    "Test05": {
+      container: 'banner-tab'
+    },
+    "all": {
+      container: 'banners'
+    }
   });
-  
-  
-})(FINN, jQuery);
 
+})(FINN, jQuery);
 var FINN = FINN||{};
 
 (function(F, $){
@@ -338,21 +375,23 @@ var FINN = FINN||{};
   // exports
   F.webAds = F.webAds||{};
   var w = F.webAds;
-  w.renderContext  = renderContext;
-  w.queue          = queue;
-  w.render         = render;
-  w.renderAll      = renderAll;
-  w.renderLazy     = renderLazy;
-  w.expose         = expose;
-  w.refresh        = refresh;
-  w.refreshAll     = refreshAll;
-  w.resolve        = resolve;
-  w.collectDataPositions = collectDataPositions;
-  w.config         = config;
-  w.getFromServer  = getFromServer;
-  w.cleanUp        = cleanUp;
-  w.plugins        = w.plugins||{};
-  w.base           = "/";
+  w.renderContext         = renderContext;
+  w.queue                 = queue;
+  w.render                = render;
+  w.renderAll             = renderAll;
+  w.renderLazy            = renderLazy;
+  w.expose                = expose;
+  w.refresh               = refresh;
+  w.refreshAll            = refreshAll;
+  w.refreshFromServer     = refreshFromServer; //TODO
+  w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  w.resolve               = resolve;
+  w.collectDataPositions  = collectDataPositions;
+  w.config                = config;
+  w.getFromServer         = getFromServer;
+  w.cleanUp               = cleanUp;
+  w.plugins               = w.plugins||{};
+  w.base                  = "/";
   
   /*
     TODO:
@@ -366,10 +405,13 @@ var FINN = FINN||{};
   
   var eventMap = {};
   
-  w.on = on;
+  w.on = on; //TODO
   function on(key, callback){
     // TODO
   } 
+  
+  function refreshFromServer(){}// TODO
+  function refreshAllFromServer(){}//TODO
   
   var jsub = $.sub();
   var globalExpose = {

@@ -10,7 +10,7 @@ var files = [
 var content = [];
 
 var dir = __dirname + "/../src/";
-var target = __dirname + "/../target/";
+var target = __dirname + "/../";
 
 files.forEach(function(file, i){
   console.log('Packing', file);
