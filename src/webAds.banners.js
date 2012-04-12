@@ -66,23 +66,25 @@ var FINN = FINN||{};
       this.name = this.params.name;
       this.url = this.params.url;
       this.container = this.params.container;
-      this.width = this.params.width;
-      this.height = this.params.height;
+      this.width = 0;
+      this.height = 0;
       this.iframe = new Iframe(this.name, this.params);
       this.active = false;
       this.retries = 5;
       this.timer = 50;
       this.resolved = false;
       this.failed = false;
-      this.now = Date.now();
       this.log('new Banner()');
     }
 
     Banner.prototype.log = function(msg) {
+      if(!this.now){
+        this.now = Date.now();        
+      }
       if (window.console && window.console.log) {
         return console.log(this.name + "->", Date.now() - this.now, msg);
       } else {
-        return alert(msg);
+        //return alert(msg);
       }
     };
 
@@ -158,9 +160,7 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.expose = function() {
-      return $.extend({}, this.exposeObj, {
-        banner: this
-      });
+      return $.extend({}, this.exposeObj, { banner: this });
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
@@ -172,6 +172,7 @@ var FINN = FINN||{};
     Banner.prototype.refresh = function() {
       this.log('refresh');
       this.resolved = false;
+      this.failed = false;
       this.retries = 5;
       this.timer = 50;
       return this.iframe.refresh();
@@ -186,10 +187,9 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.insert = function() {
-      var $container;
       this.log('insert');
       this.active = true;
-      $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
+      var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       $container.addClass('webads-processed').append(this.iframe.makeIframe());
       return this;
     };

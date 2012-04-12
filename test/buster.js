@@ -2,11 +2,11 @@ var config = module.exports;
 var resources = require('./resources');
 
 config["My tests"] = {
-    env: "browser",        // or "node"
+    env: "browser",
     rootPath: "../",
     resources: resources,    
     libs: [
-      "App/Ads/public/javascripts/jquery.js"
+      "App/public/javascripts/jquery.js"
     ],
     sources: [
         "src/webAds.config.js",
