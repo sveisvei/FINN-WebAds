@@ -23,7 +23,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.static(__dirname + '/../../src'), { maxAge: 0 });
+  app.use(express.static(__dirname + '/../src'), { maxAge: 0 });
   app.use(express.static(cases, { maxAge: 0 }));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));  
 });

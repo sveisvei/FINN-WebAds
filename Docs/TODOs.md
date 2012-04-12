@@ -23,4 +23,4 @@
 
 
 - Helios-parameters-refresh / søkeparametere === refreshFromServer / refreshAllFromServer
-bruker github: bskog
+- heliosbackend svarer med nye urler via ajax
