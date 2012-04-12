@@ -1,3 +1,9 @@
 {
-  "description": ""
+  "name":"Wallpaper",
+  "description": "",
+  "expectations":{
+    "width": 0,
+    "height": 0,
+    "retries": 5
+  }
 }

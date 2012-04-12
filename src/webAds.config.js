@@ -72,11 +72,11 @@ var FINN = FINN || {};
       container: "banners-middle"
     },
     "Wallpaper": {
-      ignoreSizeCheck: true,
+      hidden: true,
       done: fixWallpaper
     },
     "Survey": {
-      ignoreSizeCheck: true,      
+      hidden: true,      
       done: $.noop
     },
     "Txt_1": {},

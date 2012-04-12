@@ -94,7 +94,12 @@ var FINN = FINN||{};
 
     Banner.prototype.onload = function() {
       this.log('onload');
-      this.processSize();
+      if (this.params.hidden) {
+        this.log('hidden ignoreSizeCheck');
+        this.resolve();
+      } else {
+        this.processSize();
+      }
       return this;
     };
 
@@ -273,14 +278,12 @@ var FINN = FINN || {};
       container: "banners-middle"
     },
     "Wallpaper": {
-      width: 0,
-      height: 0,
-      onload: fixWallpaper
+      hidden: true,
+      done: fixWallpaper
     },
     "Survey": {
-      width: 0,
-      height: 0,
-      onload: $.noop
+      hidden: true,      
+      done: $.noop
     },
     "Txt_1": {},
     "Txt_2": {},
