@@ -94,7 +94,11 @@ var FINN = FINN||{};
 
     Banner.prototype.onload = function() {
       this.log('onload');
-      this.processSize();
+      if (this.params.ignoreSizeCheck) {
+        this.resolve();
+      } else {
+        this.processSize();
+      }
       return this;
     };
 

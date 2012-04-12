@@ -2,8 +2,8 @@ var fs  = require('fs');
 var _ = require("underscore");
 
 var APP_JSON    = {'Content-Type' : 'application/json; charset=utf-8'};
-var TEXT_PLAIN  = {'Content-Type' : 'text/plain; charset=utf-8'};
-var HTML        = {'Content-Type' : 'text/html; charset=utf-8'};
+/*var TEXT_PLAIN  = {'Content-Type' : 'text/plain; charset=utf-8'};
+var HTML        = {'Content-Type' : 'text/html; charset=utf-8'};*/
 
 var testCases   = [];
 var testFoldersPath  = __dirname + "/Cases";
@@ -36,6 +36,7 @@ var resources = [{
     path: '/testcases',
     content: JSON.stringify({testcases: testCases}),
     headers: APP_JSON
-}];
+  }
+];
 
 module.exports = resources;

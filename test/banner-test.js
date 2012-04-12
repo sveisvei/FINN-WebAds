@@ -1,3 +1,0 @@
-buster.testCase("Banner", {
-  
-}); 

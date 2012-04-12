@@ -11,6 +11,9 @@
 
 - Browserstack 
 - Unifisere CSS
+- config
+  - ignore sizecheck
+  
 - Plugins (avklare med marius hva produktet er)
 - IE7-IE8 support
 - Dominant + Companion logikk

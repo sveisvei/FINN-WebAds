@@ -72,14 +72,12 @@ var FINN = FINN || {};
       container: "banners-middle"
     },
     "Wallpaper": {
-      width: 0,
-      height: 0,
-      onload: fixWallpaper
+      ignoreSizeCheck: true,
+      done: fixWallpaper
     },
     "Survey": {
-      width: 0,
-      height: 0,
-      onload: $.noop
+      ignoreSizeCheck: true,      
+      done: $.noop
     },
     "Txt_1": {},
     "Txt_2": {},
