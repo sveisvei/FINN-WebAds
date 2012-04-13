@@ -35,6 +35,9 @@ var FINN = FINN||{};
       innerDiv.className = 'inner';
       div.id = this.id;
       div.className = "advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '');
+      if (this.options.hidden ){
+        div.style.display = "none";
+      }
       iframe.src = "" + iframeUrl + "#" + this.name;
       iframe.scrolling = 'no';
       iframe.className = 'webad-iframe';
@@ -78,14 +81,15 @@ var FINN = FINN||{};
     }
 
     Banner.prototype.log = function(msg) {
-      if(!this.now){
+      console.log(this.name+":"+msg);
+      /*if(!this.now){
         this.now = Date.now();        
       }
       if (window.console && window.console.log) {
         return console.log(this.name + "->", Date.now() - this.now, msg);
       } else {
         //return alert(msg);
-      }
+      }*/
     };
 
     Banner.prototype.config = function(key, value) {
@@ -104,25 +108,29 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.processSize = function() {
-      var $wrapper, height, invalidSize, width;
       this.log('processSize');
-      $wrapper = this.iframe.$iframe.contents().find('#webAd');
-      width = $wrapper.width();
-      height = $wrapper.height();
-      invalidSize = width === null || width <= 31 || height === null || height <= 31;
-      if (invalidSize) return this.pollForNewSize();
+      var $webAd    = this.iframe.$iframe.contents().find('#webAd');
+      var width       = $webAd.width();
+      var height      = $webAd.height();
+      var invalidSize = width === null || width <= 31 || height === null || height <= 31;
+      
+      if (invalidSize) return this.pollForNewSize(width, height);
+      
       this.resize(width, height);
       this.resolve();
       return this;
     };
 
     Banner.prototype.resolve = function() {
-      if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
+      if (this.params.bodyClass && !this.failed) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
-      if (!this.resolved) webAds.resolve(this.name);
-      return (this.resolved = true);
+      if (!this.resolved) {
+        this.resolved = true;      
+        webAds.resolve(this.name);
+      }
+      return this;
     };
 
     Banner.prototype.fail = function(reason) {
@@ -133,7 +141,7 @@ var FINN = FINN||{};
       return this.resolve();
     };
 
-    Banner.prototype.pollForNewSize = function() {
+    Banner.prototype.pollForNewSize = function(width, height) {
       var banner, cb;
       this.log('pollForNewSize ' + this.timer + ' retries: ' + this.retries);
       this.timer += this.timer;
@@ -146,6 +154,8 @@ var FINN = FINN||{};
         };
         setTimeout(cb, this.timer);
       } else {
+        this.width = width;
+        this.height = height;
         this.fail("timeout");
       }
       return this;
@@ -228,7 +238,7 @@ var FINN = FINN || {};
   }
 
   function fixLeftPosition(banner) {
-    banner.log('cb fixLeftBanner');
+    banner.log('cb fixLeftBanner'+ banner.failed);
     if (!banner.failed && banner.width > 50) {
       banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
     }
@@ -487,7 +497,7 @@ var FINN = FINN||{};
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
-          banner.log('is resolved, calling callback direct')
+          banner.log('is resolved, calling callback direct');
           callback(banner);          
         } else {
           banner.log('deferring callback')
@@ -519,6 +529,29 @@ var FINN = FINN||{};
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
+    resolveAll();
+  }
+  
+  function resolveAll(){
+    var allResolved = true;
+    var banner;
+    for(var key in bannerMap){
+      banner = bannerMap[key];      
+      if (banner.resolved !== true){
+        allResolved = false;
+        break;
+      }
+    }
+    if (allResolved){
+      if (callbacks['all'] && callbacks['all'].length > 0){
+        $.each(callbacks['all'], function(){
+          if (typeof this === 'function') this(bannerMap);
+        });
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   function renderUnactive(){
@@ -531,8 +564,9 @@ var FINN = FINN||{};
     }
   }
   
-  function renderAll(commaList){ 
-    commaList         = commaList || "Top,Right1";
+  function renderAll(commaList, callback){ 
+    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
+    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
     var next          = priorityList.shift();
     
@@ -543,7 +577,7 @@ var FINN = FINN||{};
         render(priorityList.shift(), loop);
       }
     }
-    
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
     render(next, loop);    
   }
   
@@ -577,12 +611,11 @@ var FINN = FINN||{};
   
   function removeAll(){
     for(var key in bannerMap){
-      bannerMap[name] && bannerMap[key].remove();         
+      bannerMap[key] && bannerMap[key].remove();         
     }
   }
   
   function renderContext(selector){
-    console.log('renderContext', selector);
     collectDataPositions(selector);
     
     $(selector).find(".webads").filter(function(){
