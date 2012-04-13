@@ -28,34 +28,15 @@ app.configure(function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));  
 });
 
+app.get('/', function(req, res){ res.render('index', { title: 'Webads', layout: false }); });
+app.get('/companion', function(req, res){ res.render('companion', { title: 'Webads', layout: false }); });
 
-app.get('*', function(req, res, next){  
-  if (req.param('forceDelay', false)) {
-    console.log('forced delay on request for ' + req.param('forceDelay') + 'ms');
-    setTimeout(function(){ 
-      next(); 
-    }, req.param('forceDelay')*1)
-  } else {
-    next();
-  }
-});
-
-app.get('/', function(req, res){ res.render('index', { title: 'Webads' }); });
-
+require('./lib/forceDelay')(app);
 require('./lib/plugins')(app);
 
 // helios.server
 app.get('/heliosAds', function(req, res){
   collectTestCases(cases + "/render", function(result){ res.send(result); });
-});
-
-
-// serve iframe
-app.get('/finn/webads', function(req, res){
-  fs.readFile(__dirname + '/../src/iframe.html', 'utf8', function(err, data){
-    if (err) throw err;
-    res.send(data);
-  });
 });
 
 app.listen(3000);

@@ -13,7 +13,7 @@ function collectTestCases(cb){
     $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
     $("body").append('<div id="banners"></div>');
     webAds.base      = buster.env.path + "Cases/config/";    
-    webAds.iframeUrl = buster.env.path + "finn/webads";
+    webAds.iframeUrl = buster.env.path + "iframe.html";
   };
   
   testCases["tearDown"] = function(){
@@ -62,7 +62,9 @@ function collectTestCases(cb){
         }
         $.each(testCase.tests, function(){
           var test = this;
-          webAds.render(test.name, function(banner){
+          webAds.render(test.name, function(err, banner){
+            refute(err)
+            
             if (test['expectations']){
               $.each(test['expectations'], function(key, val){
                 assert.equals(banner[key], val, key);
@@ -91,7 +93,7 @@ function collectTestCases(cb){
 
       webAds.queue(preparedWebAdsData);
       
-      webAds.renderAll('Top,Left1', function(banners){
+      webAds.renderAll('Top,Left1', function(err, banners){
         assert.equals(Object.keys(banners).length, testCase.tests.length);
         generalExpectations();
         checkBannerExpectations()

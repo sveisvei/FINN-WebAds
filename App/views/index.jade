@@ -1,27 +1,43 @@
-ul.actions
-  li 
-    a#refreshAll(href="#action=RefreshAll") Update all
+!!!
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type='text/javascript', src='/javascripts/consolelogshim.js')
+    script(type='text/javascript', src='/javascripts/jquery.js')
+    script(type='text/javascript', src='/webAds.config.js')
+    script(type='text/javascript', src='/webAds.plugins.js')
+    script(type='text/javascript', src='/webAds.plugin.swfobject.js')            
+    script(type='text/javascript', src='/webAds.banners.js')
+    script(type='text/javascript', src='/webAds.manager.js')    
+    script(type='text/javascript', src='/javascripts/index.js')
+  body
+    ul.actions
+      li 
+        a#refreshAll(href="#action=RefreshAll") Update all
+
+    div.webads#banners
+
+    h1= title
+    p Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok. Lorem Ipsum har tålt tidens tann usedvanlig godt, og har i tillegg til å bestå gjennom fem århundrer også tålt spranget over til elektronisk typografi uten vesentlige endringer. Lorem Ipsum ble gjort allment kjent i 1960-årene ved lanseringen av Letraset-ark med avsnitt fra Lorem Ipsum, og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
+
+    div.webads#banners2(data-banner-position="Top")
+
+    ul.tabs
+      li tab1
+      li tab2
+      li tab3
+      li tab4
+      li tab5
+
+    div.tabs
+      h1 Tab1
+      div#banner-tab.webads
+
+
+
+    div
+
+
     
-div.webads#banners
-
-h1= title
-p Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok. Lorem Ipsum har tålt tidens tann usedvanlig godt, og har i tillegg til å bestå gjennom fem århundrer også tålt spranget over til elektronisk typografi uten vesentlige endringer. Lorem Ipsum ble gjort allment kjent i 1960-årene ved lanseringen av Letraset-ark med avsnitt fra Lorem Ipsum, og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
-
-div.webads#banners2(data-banner-position="Top")
-
-ul.tabs
-  li tab1
-  li tab2
-  li tab3
-  li tab4
-  li tab5
-  
-div.tabs
-  h1 Tab1
-  div#banner-tab.webads
-  
-
-
-div
-
-
+    

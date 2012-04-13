@@ -10,6 +10,13 @@ html
     script(type='text/javascript', src='/webAds.plugin.swfobject.js')            
     script(type='text/javascript', src='/webAds.banners.js')
     script(type='text/javascript', src='/webAds.manager.js')    
-    script(type='text/javascript', src='/javascripts/master.js')
+    script(type='text/javascript', src='/javascripts/companion.js')
   body
-    != body
+    ul.actions
+      li 
+        a#refreshAll(href="#action=RefreshAll") Update all
+
+    div.webads#banners
+
+    div.container
+      div container

@@ -4,8 +4,10 @@ jQuery(document).ready(function(){
   // adBlocker
   if(!FINN.webAds) return;
   
-  FINN.webAds.base      = "/render/";    
-  FINN.webAds.collectDataPositions()
+  FINN.webAds.base      = "/render/";   
+  FINN.webAds.iframeUrl = "/iframe.html";
+   
+  FINN.webAds.collectDataPositions();
   
   FINN.webAds.getFromServer(function(err, data){
       console.log('GOT FROM SERVER', err, data);

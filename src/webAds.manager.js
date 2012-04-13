@@ -76,12 +76,14 @@ var FINN = FINN||{};
     }
   }
   
-  function getFromServer(callback, dontQueue){
-    $.getJSON('/heliosAds', function(data){
-      if(typeof dontQueue === 'undefined') {
-        queue(data.webAds);
-      }
-      
+  function getFromServer(url, callback, dontQueue){
+    var firstArgIsUsed = (typeof url === 'function');
+    dontQueue   = firstArgIsUsed ? callback     : dontQueue;
+    callback    = firstArgIsUsed ? url          : callback;
+    url         = firstArgIsUsed ? '/heliosAds' : url ||'/heliosAds';
+    
+    $.getJSON(url, function(data){
+      if (typeof dontQueue === 'undefined') { queue(data.webAds); }
       if (callback && typeof callback === 'function') callback(null, data.webAds);
     }, function(err){
       if (callback && typeof callback === 'function') callback(err, null);
@@ -112,13 +114,13 @@ var FINN = FINN||{};
   function render(name, callback){
     var banner = bannerMap[name];
     if (!banner){
-      //hæ
+      callback(new Error('Banner '+name+' not queued'), null);
     } else if (banner.active){
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
           banner.log('is resolved, calling callback direct');
-          callback(banner);          
+          callback(null, banner);          
         } else {
           banner.log('deferring callback')
           insertCallback(name, callback)          
@@ -144,7 +146,7 @@ var FINN = FINN||{};
   function resolve(name){
     if (callbacks[name] && callbacks[name].length > 0){
       $.each(callbacks[name], function(){
-        if (typeof this === 'function') this(bannerMap[name]);
+        if (typeof this === 'function') this(null, bannerMap[name]);
       });
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
@@ -165,7 +167,7 @@ var FINN = FINN||{};
     if (allResolved){
       if (callbacks['all'] && callbacks['all'].length > 0){
         $.each(callbacks['all'], function(){
-          if (typeof this === 'function') this(bannerMap);
+          if (typeof this === 'function') this(null, bannerMap);
         });
       }
       return true;
@@ -188,7 +190,6 @@ var FINN = FINN||{};
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
-    var next          = priorityList.shift();
     
     function loop(){
       if (priorityList.length <= 0){
@@ -198,7 +199,7 @@ var FINN = FINN||{};
       }
     }
     if (callback && typeof callback === 'function') insertCallback('all', callback);
-    render(next, loop);    
+    loop();
   }
   
   function renderLazy(parent){

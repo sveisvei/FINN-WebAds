@@ -9,7 +9,7 @@ function collectTestCases(cb){
   testCases["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
     webAds.base      = buster.env.path + "Cases/render/";    
-    webAds.iframeUrl = buster.env.path + "finn/webads";
+    webAds.iframeUrl = buster.env.path + "iframe.html";
   };
   
   testCases["tearDown"] = function(){
@@ -43,7 +43,7 @@ function collectTestCases(cb){
       refute(doneSpy.called);
       
       webAds.render(testCase.name, firstInFirstOutSpy);            
-      webAds.render(testCase.name, function() {
+      webAds.render(testCase.name, function(err, banner) {
         if (testCase['expectations']){
           $.each(testCase['expectations'], function(key, val){
             assert.equals(banner[key], val, key);
