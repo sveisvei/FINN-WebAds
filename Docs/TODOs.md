@@ -25,3 +25,7 @@
 - heliosbackend svarer med nye urler via ajax
 - Plugins (avklare med marius hva produktet er)
 - Reporte feil via cassandra/statistikk
+
+- Forenkle
+  - fjerne jade
+  - rydde opp unødvendig ting som gjøre det vanskelig for andre

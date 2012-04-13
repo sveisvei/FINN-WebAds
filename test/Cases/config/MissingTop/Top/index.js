@@ -1,1 +1,1 @@
-document.write('<div style="width:1px;height:1px;">'+banner.name+'</div>')
+document.write('<div style="width:'+banner.params.setWidth+'px;height:'+banner.params.setHeight+'px;">'+banner.name+'</div>')

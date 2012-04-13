@@ -55,10 +55,13 @@ configSetupFolders.forEach(function(folderName, i){
     var testCase = {name: folderName, tests: []}
     var describe = require(setupDir + "/describe.json");    
     _.extend(testCase, describe);
+    
     var folderContent = fs.readdirSync(setupDir);
     folderContent.forEach(function(testName, g){
+      if(testName.indexOf('.') !== -1){
+        return;
+      }
       var testDirName = setupDir + "/" + testName;
-      //var testContent = fs.readdirSync(testDirName);
       testCase.tests.push({
         name: testName,
         description: folderName + "-" + testName,
