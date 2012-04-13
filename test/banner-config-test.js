@@ -1,4 +1,4 @@
-var DEFAULT_TIMEOUT2 = 1750;
+var DEFAULT_TIMEOUT2 = 450;
 buster.testRunner.timeout = DEFAULT_TIMEOUT2;
 
 var webAds = FINN.webAds;
@@ -9,6 +9,7 @@ function collectTestCases(cb){
   var testCases = {};
   
   testCases["setUp"] = function() {
+    $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
     $("body").append('<div id="banners"></div>');
     webAds.base      = buster.env.path + "Cases/config/";    
     webAds.iframeUrl = buster.env.path + "finn/webads";
@@ -54,15 +55,33 @@ function collectTestCases(cb){
         var len = testCase.tests.length;
         function doDone(){
           len--
-          buster.log(len);
-          if(len===0){
+          if(len === 0){
             done();
           }
         }
         $.each(testCase.tests, function(){
-          buster.log(this.name);
-          webAds.render(this.name, function(banner){
-            buster.log('callback', banner.name);
+          var test = this;
+          webAds.render(test.name, function(banner){
+            if (test['expectations']){
+              $.each(test['expectations'], function(key, val){
+                assert.equals(banner[key], val, key);
+              });
+            }
+            if (test.isHidden){
+              assert(banner.iframe.$wrapper.is(':hidden'))
+            }
+            
+            if (test.setWidth){
+              assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);              
+            }
+            if (test.setHeight){
+              assert.equals(banner.height, test.setHeight, 'width via test.setHeight on'+test.name);              
+            }
+            assert(banner.active);
+            assert(banner.resolved);
+            if (!(test.expectations && test.expectations.failed)){
+              refute(banner.failed, testCase.name + " " + banner.name + ' failed rendring.');              
+            }
             doDone();
           });
         });
@@ -71,49 +90,11 @@ function collectTestCases(cb){
 
       webAds.queue(preparedWebAdsData);
       
-      webAds.render('Top', function(topbanner){
-        console.log(topbanner.name, 'done')
-        webAds.render('Left1', function(leftbanner){
-          console.log(leftbanner.name, 'done')
-          
-          webAds.renderAll();
-          assert(true);
-          generalExpectations();
-          checkBannerExpectations()
-        })
+      webAds.renderAll('Top,Left1', function(banners){
+        assert.equals(Object.keys(banners).length, testCase.tests.length);
+        generalExpectations();
+        checkBannerExpectations()
       });
-      
-      /*buster.testRunner.timeout = testCase.timeout||DEFAULT_TIMEOUT;       
-
-      var doneSpy = sinon.spy();
-      
-      var bannerInitObj = {
-        name      : testCase.name,
-        url       : buster.env.path + testCase.url.substring(1),
-        container : 'banners',
-        done      : doneSpy
-      };
-
-      var banner  = webAds.queue(bannerInitObj);
-
-      refute(banner.active);
-      refute(banner.resolved);
-      refute(doneSpy.called);
-      
-      webAds.render(testCase.name, function() {
-        assert(banner.active);
-        assert(doneSpy.calledOnce);
-        assert(firstInFirstOutSpy.calledOnce);
-
-        setTimeout(function() {
-          assert(banner.resolved);
-          done();
-        }, 100);
-      });
-      
-
-
-      assert(banner.active);*/
     }
   }
   

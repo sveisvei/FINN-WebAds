@@ -5,7 +5,6 @@
   - Strapon
   - Reise
 
-- Browserstack 
 - Unifisere CSS
 - Dominant + Companion logikk - Wallpaper + Survey
 
@@ -21,7 +20,9 @@
 
 - non-helios-content === refreshFromServer osv må ignoreres.
 
-- Helios-parameters-refresh / søkeparametere === refreshFromServer / refreshAllFromServer
+- Helios-parameters-refresh / søkeparametere === refreshFromServer
+ / refreshAllFromServer
+- heliosparameters, helioskeywords
 - heliosbackend svarer med nye urler via ajax
 - Plugins (avklare med marius hva produktet er)
 - Reporte feil via cassandra/statistikk

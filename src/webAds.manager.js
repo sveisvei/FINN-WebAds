@@ -117,7 +117,7 @@ var FINN = FINN||{};
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
-          banner.log('is resolved, calling callback direct')
+          banner.log('is resolved, calling callback direct');
           callback(banner);          
         } else {
           banner.log('deferring callback')
@@ -149,6 +149,29 @@ var FINN = FINN||{};
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
+    resolveAll();
+  }
+  
+  function resolveAll(){
+    var allResolved = true;
+    var banner;
+    for(var key in bannerMap){
+      banner = bannerMap[key];      
+      if (banner.resolved !== true){
+        allResolved = false;
+        break;
+      }
+    }
+    if (allResolved){
+      if (callbacks['all'] && callbacks['all'].length > 0){
+        $.each(callbacks['all'], function(){
+          if (typeof this === 'function') this(bannerMap);
+        });
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   function renderUnactive(){
@@ -161,8 +184,9 @@ var FINN = FINN||{};
     }
   }
   
-  function renderAll(commaList){ 
-    commaList         = commaList || "Top,Right1";
+  function renderAll(commaList, callback){ 
+    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
+    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
     var next          = priorityList.shift();
     
@@ -173,7 +197,7 @@ var FINN = FINN||{};
         render(priorityList.shift(), loop);
       }
     }
-    
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
     render(next, loop);    
   }
   
@@ -207,12 +231,11 @@ var FINN = FINN||{};
   
   function removeAll(){
     for(var key in bannerMap){
-      bannerMap[name] && bannerMap[key].remove();         
+      bannerMap[key] && bannerMap[key].remove();         
     }
   }
   
   function renderContext(selector){
-    console.log('renderContext', selector);
     collectDataPositions(selector);
     
     $(selector).find(".webads").filter(function(){

@@ -12,6 +12,10 @@ var resources = [{
   {
     path: "/Cases/",        
     backend: "localhost:3000/" 
+  },
+  {
+    path: "src/webAds.css",
+    backend: "localhost:3000/webAds.css"
   }  
 ];
 
@@ -62,11 +66,11 @@ configSetupFolders.forEach(function(folderName, i){
         return;
       }
       var testDirName = setupDir + "/" + testName;
-      testCase.tests.push({
+      testCase.tests.push(_.extend({
         name: testName,
         description: folderName + "-" + testName,
         url: '/Cases/config/' + folderName + '/' + testName + '/index.js',        
-      });    
+      }, require(setupDir + "/" + testName + "/describe.json")));    
     });
     configTests.push(testCase);    
   }  

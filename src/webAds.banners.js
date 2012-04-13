@@ -35,6 +35,9 @@ var FINN = FINN||{};
       innerDiv.className = 'inner';
       div.id = this.id;
       div.className = "advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '');
+      if (this.options.hidden ){
+        div.style.display = "none";
+      }
       iframe.src = "" + iframeUrl + "#" + this.name;
       iframe.scrolling = 'no';
       iframe.className = 'webad-iframe';
@@ -105,25 +108,29 @@ var FINN = FINN||{};
     };
 
     Banner.prototype.processSize = function() {
-      var $wrapper, height, invalidSize, width;
       this.log('processSize');
-      $wrapper = this.iframe.$iframe.contents().find('#webAd');
-      width = $wrapper.width();
-      height = $wrapper.height();
-      invalidSize = width === null || width <= 31 || height === null || height <= 31;
-      if (invalidSize) return this.pollForNewSize();
+      var $webAd    = this.iframe.$iframe.contents().find('#webAd');
+      var width       = $webAd.width();
+      var height      = $webAd.height();
+      var invalidSize = width === null || width <= 31 || height === null || height <= 31;
+      
+      if (invalidSize) return this.pollForNewSize(width, height);
+      
       this.resize(width, height);
       this.resolve();
       return this;
     };
 
     Banner.prototype.resolve = function() {
-      if (this.params.bodyClass) $("body").addClass(this.params.bodyClass);
+      if (this.params.bodyClass && !this.failed) $("body").addClass(this.params.bodyClass);
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
-      if (!this.resolved) webAds.resolve(this.name);
-      return (this.resolved = true);
+      if (!this.resolved) {
+        this.resolved = true;      
+        webAds.resolve(this.name);
+      }
+      return this;
     };
 
     Banner.prototype.fail = function(reason) {
@@ -134,7 +141,7 @@ var FINN = FINN||{};
       return this.resolve();
     };
 
-    Banner.prototype.pollForNewSize = function() {
+    Banner.prototype.pollForNewSize = function(width, height) {
       var banner, cb;
       this.log('pollForNewSize ' + this.timer + ' retries: ' + this.retries);
       this.timer += this.timer;
@@ -147,6 +154,8 @@ var FINN = FINN||{};
         };
         setTimeout(cb, this.timer);
       } else {
+        this.width = width;
+        this.height = height;
         this.fail("timeout");
       }
       return this;

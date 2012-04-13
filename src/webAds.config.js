@@ -22,7 +22,7 @@ var FINN = FINN || {};
   }
 
   function fixLeftPosition(banner) {
-    banner.log('cb fixLeftBanner');
+    banner.log('cb fixLeftBanner'+ banner.failed);
     if (!banner.failed && banner.width > 50) {
       banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
     }
