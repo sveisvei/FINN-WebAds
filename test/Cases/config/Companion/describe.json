@@ -2,5 +2,5 @@
   "expectations": {
     "notBodyClass": ["has-no-top-placement", "has-dominant-campaign"]
   },
-  "timeout": 2000
+  "timeout": 2500
 }

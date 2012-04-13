@@ -1,5 +1,6 @@
 {
   "expectations": {
     "bodyClass": ["has-dominant-campaign"]
-  }
+  },
+  "timeout": 600  
 }

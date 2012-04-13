@@ -9,6 +9,7 @@ function collectTestCases(cb){
   var testCases = {};
   
   testCases["setUp"] = function() {
+    // css injection here might not work because of timing issues.
     $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
     $("body").append('<div id="banners"></div>');
     webAds.base      = buster.env.path + "Cases/config/";    
@@ -45,7 +46,7 @@ function collectTestCases(cb){
           //notBodyClass
           if (testCase.expectations.notBodyClass){
             $.each(testCase.expectations.notBodyClass, function(i){
-              assert(!$("body").hasClass(this), 'body should not have class '+ this);
+              refute($("body").hasClass(this), 'body should not have class '+ this);
             });              
           }
         }
@@ -55,7 +56,7 @@ function collectTestCases(cb){
         var len = testCase.tests.length;
         function doDone(){
           len--
-          if(len === 0){
+          if(len <= 0){
             done();
           }
         }
@@ -67,14 +68,14 @@ function collectTestCases(cb){
                 assert.equals(banner[key], val, key);
               });
             }
-            if (test.isHidden){
+            if (typeof test.isHidden !== 'undefined' && test.isHidden === true){
               assert(banner.iframe.$wrapper.is(':hidden'))
             }
             
-            if (test.setWidth){
+            if (typeof test.setWidth !== 'undefined'){
               assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);              
             }
-            if (test.setHeight){
+            if (typeof test.setHeight !== 'undefined'){
               assert.equals(banner.height, test.setHeight, 'width via test.setHeight on'+test.name);              
             }
             assert(banner.active);

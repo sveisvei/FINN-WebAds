@@ -3,5 +3,5 @@
     "bodyClass": ["has-no-top-placement"],
     "noBodyClass": ["has-dominant-campaign"]    
   },
-  "timeout": 2000
+  "timeout": 2500
 }

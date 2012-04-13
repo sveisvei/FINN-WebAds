@@ -19,4 +19,5 @@ config["My tests"] = {
     tests: [
         "test/*-test.js"
     ]
+    //, extensions: [require("buster-lint")]    
 };

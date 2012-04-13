@@ -19,6 +19,7 @@ function render(canvas){
 }
 
 var canvas = document.getElementById('canvasId');
+
 if (canvas.getContext) {
   
   render(canvas);
