@@ -13,7 +13,7 @@ module.exports = function collectTestCases(dir, callback){
       var describe = require(testdir + "/describe.json");
       result.push({
         name: describe.name||file,
-        url: "/" + file + "/index.js"
+        url: "/render/" + file + "/index.js"
       })
     });
     callback({webAds: result});    

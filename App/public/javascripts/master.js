@@ -4,6 +4,7 @@ jQuery(document).ready(function(){
   // adBlocker
   if(!FINN.webAds) return;
   
+  FINN.webAds.base      = "/render/";    
   FINN.webAds.collectDataPositions()
   
   FINN.webAds.getFromServer(function(err, data){
@@ -13,7 +14,7 @@ jQuery(document).ready(function(){
   
   FINN.webAds.queue([{
       name: "Left1",
-      url: "/Test01/index.js"
+      url: "/render/Test01/index.js"
   }]);
   
   

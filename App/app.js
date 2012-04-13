@@ -46,7 +46,7 @@ require('./lib/plugins')(app);
 
 // helios.server
 app.get('/heliosAds', function(req, res){
-  collectTestCases(cases, function(result){ res.send(result); });
+  collectTestCases(cases + "/render", function(result){ res.send(result); });
 });
 
 

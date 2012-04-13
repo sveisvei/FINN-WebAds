@@ -8,7 +8,7 @@ function collectTestCases(cb){
   
   testCases["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
-    webAds.base      = buster.env.path + "Cases/";    
+    webAds.base      = buster.env.path + "Cases/render/";    
     webAds.iframeUrl = buster.env.path + "finn/webads";
   };
   
@@ -71,7 +71,7 @@ function collectTestCases(cb){
   }
   
   // WARNING: getting tests from resouces.js
-  $.getJSON(buster.env.path + "testcases", createTests);
+  $.getJSON(buster.env.path + "testcases-render-test", createTests);
   
 } 
 

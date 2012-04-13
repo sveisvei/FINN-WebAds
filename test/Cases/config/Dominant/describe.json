@@ -1,0 +1,5 @@
+{
+  "expectations": {
+    "bodyClass": ["has-dominant-campaign"]
+  }
+}

@@ -5,10 +5,6 @@
   - Strapon
   - Reise
 
-- Implementere buster server og app i samme fil.
-  - Repl
-    - kommando test, autotest?
-
 - Browserstack 
 - Unifisere CSS
 - Dominant + Companion logikk - Wallpaper + Survey
@@ -16,6 +12,7 @@
 - config - ignore sizecheck
   
 - IE7-IE8 support
+  - IE7 spacing i bunn
 
 - callback når alle er rendret - events når ferdig rendret
 - unit-tester av internals

@@ -1,0 +1,1 @@
+document.write('<div style="width:1px;height:1px;">'+banner.name+'</div>')

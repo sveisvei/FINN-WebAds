@@ -78,14 +78,15 @@ var FINN = FINN||{};
     }
 
     Banner.prototype.log = function(msg) {
-      if(!this.now){
+      console.log(this.name+":"+msg);
+      /*if(!this.now){
         this.now = Date.now();        
       }
       if (window.console && window.console.log) {
         return console.log(this.name + "->", Date.now() - this.now, msg);
       } else {
         //return alert(msg);
-      }
+      }*/
     };
 
     Banner.prototype.config = function(key, value) {

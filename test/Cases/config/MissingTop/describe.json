@@ -1,0 +1,6 @@
+{
+  "expectations": {
+    "bodyClass": ["has-no-top-placement"]    
+  },
+  "timeout": 2000
+}
