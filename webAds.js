@@ -605,6 +605,7 @@ var FINN = FINN||{};
   }
   
   function refresh(name, cb){
+    console.log('refresh', name)    
     bannerMap[name].refresh();
     // .refresh command resets banner.resolved
     if (cb && typeof cb === 'function'){    
@@ -613,17 +614,32 @@ var FINN = FINN||{};
   }
   
   function refreshAll(commaList, callback){
+    console.log('REFRESH ALL', commaList);
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
     
+    var alreadyRendered = [];
+    function shouldRefresh(key){
+      var res = true;
+      $.each(alreadyRendered, function(){
+        if (this === key){ return (res = false); }
+      });
+      return res;
+    }
+    
     function loop(){
       if (priorityList.length <= 0){
         for(var key in bannerMap){
-          bannerMap[key].refresh();
+          console.log('key:', key, 'bool', shouldRefresh(key));          
+          if (shouldRefresh(key)){
+            refresh(key);
+          }
         }
       } else {
-        render(priorityList.shift(), loop);
+        var name = priorityList.shift();
+        alreadyRendered.push(name)
+        refresh(name, loop);
       }
     }
     if (callback && typeof callback === 'function') insertCallback('all', callback);
