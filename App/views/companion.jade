@@ -20,6 +20,7 @@ html
     aside.webads#banners  
     div.wrapper.container
       p Container
+      include partials/menu      
       div#banners-middle
     
     script
@@ -28,7 +29,7 @@ html
         // adBlocker
         if(!FINN.webAds) return;
 
-        FINN.webAds.base      = "/render/";    
+        FINN.webAds.base      = "/config/";    
         FINN.webAds.iframeUrl = "/iframe.html";
 
         //TODO URL

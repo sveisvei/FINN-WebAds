@@ -1,0 +1,2497 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'update', '-g' ]
+info using npm@1.1.15
+info using node@v0.6.14
+verbose config file /Users/sverosak/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+verbose caching /usr/local/lib/node_modules/ace/package.json
+verbose loadDefaults ace@0.0.2
+verbose caching /usr/local/lib/node_modules/aol_lounge/package.json
+verbose loadDefaults aol_lounge@0.0.1
+verbose caching /usr/local/lib/node_modules/asset/package.json
+verbose loadDefaults asset@0.4.10
+verbose caching /usr/local/lib/node_modules/bar/package.json
+verbose loadDefaults bar@0.1.1
+verbose caching /usr/local/lib/node_modules/buster/package.json
+verbose caching /usr/local/lib/node_modules/cluster/package.json
+verbose loadDefaults cluster@0.7.7
+verbose caching /usr/local/lib/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/coffee-watcher/package.json
+verbose loadDefaults coffee-watcher@1.3.0
+verbose caching /usr/local/lib/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/connect/package.json
+verbose caching /usr/local/lib/node_modules/cssom/package.json
+verbose loadDefaults cssom@0.2.3
+verbose caching /usr/local/lib/node_modules/cssom-papandreou/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/package.json
+verbose loadDefaults DevWatcher@0.0.1
+verbose caching /usr/local/lib/node_modules/express/package.json
+verbose caching /usr/local/lib/node_modules/expresso/package.json
+verbose loadDefaults expresso@0.9.2
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/package.json
+verbose loadDefaults FINN-styl-e@0.0.12
+verbose caching /usr/local/lib/node_modules/FINN-STYLE/package.json
+verbose loadDefaults FINN-styl-e@0.0.12
+verbose caching /usr/local/lib/node_modules/html2jade/package.json
+verbose loadDefaults html2jade@0.1.17
+verbose caching /usr/local/lib/node_modules/http-proxy/package.json
+verbose loadDefaults http-proxy@0.8.0
+verbose caching /usr/local/lib/node_modules/ircbot/package.json
+verbose loadDefaults ircbot@0.0.2
+verbose caching /usr/local/lib/node_modules/jade/package.json
+verbose loadDefaults jade@0.22.0
+verbose caching /usr/local/lib/node_modules/js2coffee/package.json
+verbose loadDefaults js2coffee@0.1.3
+verbose caching /usr/local/lib/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.13
+verbose caching /usr/local/lib/node_modules/kassit/package.json
+verbose loadDefaults kassit@0.1.5
+verbose caching /usr/local/lib/node_modules/my_realtime_app/package.json
+verbose loadDefaults my_realtime_app@0.0.1
+verbose caching /usr/local/lib/node_modules/n/package.json
+verbose loadDefaults n@0.7.1
+verbose caching /usr/local/lib/node_modules/nib/package.json
+verbose caching /usr/local/lib/node_modules/node-inspector/package.json
+verbose loadDefaults node-inspector@0.1.10
+verbose caching /usr/local/lib/node_modules/node-proxy/package.json
+verbose loadDefaults node-proxy@0.5.2
+verbose caching /usr/local/lib/node_modules/nodemon/package.json
+verbose loadDefaults nodemon@0.6.12
+verbose caching /usr/local/lib/node_modules/nodester-cli/package.json
+verbose caching /usr/local/lib/node_modules/prompt/package.json
+verbose loadDefaults prompt@0.1.12
+verbose caching /usr/local/lib/node_modules/pdfkit/package.json
+verbose loadDefaults pdfkit@0.1.6
+verbose caching /usr/local/lib/node_modules/recruitment_proxy_test/package.json
+verbose loadDefaults recruitment_proxy_test@0.0.1
+verbose caching /usr/local/lib/node_modules/slider/package.json
+verbose loadDefaults slider@1.0.3
+verbose caching /usr/local/lib/node_modules/smartdc/package.json
+verbose loadDefaults smartdc@6.5.3
+verbose smartdc@6.5.3 linking default bins
+verbose caching /usr/local/lib/node_modules/socketstream/package.json
+verbose loadDefaults socketstream@0.3.0beta1
+verbose caching /usr/local/lib/node_modules/stitch/package.json
+verbose loadDefaults stitch@0.3.3
+verbose caching /usr/local/lib/node_modules/stylus/package.json
+verbose caching /usr/local/lib/node_modules/testling/package.json
+verbose loadDefaults testling@0.0.1
+verbose caching /usr/local/lib/node_modules/uglify-js/package.json
+verbose loadDefaults uglify-js@1.2.6
+verbose caching /usr/local/lib/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/watch-tree/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/canvas/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/canvas/package.json
+verbose loadDefaults canvas@0.10.3
+verbose caching /usr/local/lib/node_modules/npm/package.json
+silly smartdc@6.5.3.bin { 'sdc-addmachinetags': 'bin/sdc-addmachinetags',
+silly smartdc@6.5.3.bin   'sdc-createinstrumentation': 'bin/sdc-createinstrumentation',
+silly smartdc@6.5.3.bin   'sdc-createkey': 'bin/sdc-createkey',
+silly smartdc@6.5.3.bin   'sdc-createmachine': 'bin/sdc-createmachine',
+silly smartdc@6.5.3.bin   'sdc-createmachinesnapshot': 'bin/sdc-createmachinesnapshot',
+silly smartdc@6.5.3.bin   'sdc-deleteinstrumentation': 'bin/sdc-deleteinstrumentation',
+silly smartdc@6.5.3.bin   'sdc-deletekey': 'bin/sdc-deletekey',
+silly smartdc@6.5.3.bin   'sdc-deletemachine': 'bin/sdc-deletemachine',
+silly smartdc@6.5.3.bin   'sdc-deletemachinemetadata': 'bin/sdc-deletemachinemetadata',
+silly smartdc@6.5.3.bin   'sdc-deletemachinesnapshot': 'bin/sdc-deletemachinesnapshot',
+silly smartdc@6.5.3.bin   'sdc-deletemachinetag': 'bin/sdc-deletemachinetag',
+silly smartdc@6.5.3.bin   'sdc-describeanalytics': 'bin/sdc-describeanalytics',
+silly smartdc@6.5.3.bin   'sdc-getdataset': 'bin/sdc-getdataset',
+silly smartdc@6.5.3.bin   'sdc-getinstrumentation': 'bin/sdc-getinstrumentation',
+silly smartdc@6.5.3.bin   'sdc-getkey': 'bin/sdc-getkey',
+silly smartdc@6.5.3.bin   'sdc-getmachine': 'bin/sdc-getmachine',
+silly smartdc@6.5.3.bin   'sdc-getmachinemetadata': 'bin/sdc-getmachinemetadata',
+silly smartdc@6.5.3.bin   'sdc-getmachinesnapshot': 'bin/sdc-getmachinesnapshot',
+silly smartdc@6.5.3.bin   'sdc-getmachinetag': 'bin/sdc-getmachinetag',
+silly smartdc@6.5.3.bin   'sdc-getpackage': 'bin/sdc-getpackage',
+silly smartdc@6.5.3.bin   'sdc-listdatacenters': 'bin/sdc-listdatacenters',
+silly smartdc@6.5.3.bin   'sdc-listdatasets': 'bin/sdc-listdatasets',
+silly smartdc@6.5.3.bin   'sdc-listinstrumentations': 'bin/sdc-listinstrumentations',
+silly smartdc@6.5.3.bin   'sdc-listkeys': 'bin/sdc-listkeys',
+silly smartdc@6.5.3.bin   'sdc-listmachines': 'bin/sdc-listmachines',
+silly smartdc@6.5.3.bin   'sdc-listmachinesnapshots': 'bin/sdc-listmachinesnapshots',
+silly smartdc@6.5.3.bin   'sdc-listmachinetags': 'bin/sdc-listmachinetags',
+silly smartdc@6.5.3.bin   'sdc-listpackages': 'bin/sdc-listpackages',
+silly smartdc@6.5.3.bin   'sdc-rebootmachine': 'bin/sdc-rebootmachine',
+silly smartdc@6.5.3.bin   'sdc-resizemachine': 'bin/sdc-resizemachine',
+silly smartdc@6.5.3.bin   'sdc-setup': 'bin/sdc-setup',
+silly smartdc@6.5.3.bin   'sdc-startmachine': 'bin/sdc-startmachine',
+silly smartdc@6.5.3.bin   'sdc-startmachinefromsnapshot': 'bin/sdc-startmachinefromsnapshot',
+silly smartdc@6.5.3.bin   'sdc-stopmachine': 'bin/sdc-stopmachine',
+silly smartdc@6.5.3.bin   'sdc-updatemachinemetadata': 'bin/sdc-updatemachinemetadata' }
+verbose cache add [ 'ace', '*' ]
+silly cache add: name, spec, args [ 'ace', '*', [ 'ace', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'ace', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'ace', '', false ]
+verbose cache add [ 'aol_lounge', '*' ]
+silly cache add: name, spec, args [ 'aol_lounge', '*', [ 'aol_lounge', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'aol_lounge', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'aol_lounge', '', false ]
+verbose cache add [ 'asset', '*' ]
+silly cache add: name, spec, args [ 'asset', '*', [ 'asset', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'asset', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'asset', '', false ]
+verbose cache add [ 'bar', '*' ]
+silly cache add: name, spec, args [ 'bar', '*', [ 'bar', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'bar', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'bar', '', false ]
+verbose cache add [ 'buster', '*' ]
+silly cache add: name, spec, args [ 'buster', '*', [ 'buster', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'buster', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'buster', '', false ]
+verbose cache add [ 'cluster', '*' ]
+silly cache add: name, spec, args [ 'cluster', '*', [ 'cluster', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'cluster', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'cluster', '', false ]
+verbose cache add [ 'coffee-script', '*' ]
+silly cache add: name, spec, args [ 'coffee-script', '*', [ 'coffee-script', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'coffee-script', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'coffee-script', '', false ]
+verbose cache add [ 'coffee-watcher', '*' ]
+silly cache add: name, spec, args [ 'coffee-watcher', '*', [ 'coffee-watcher', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'coffee-watcher', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'coffee-watcher', '', false ]
+verbose cache add [ 'colors', '*' ]
+silly cache add: name, spec, args [ 'colors', '*', [ 'colors', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'colors', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'colors', '', false ]
+verbose cache add [ 'connect', '*' ]
+silly cache add: name, spec, args [ 'connect', '*', [ 'connect', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'connect', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'connect', '', false ]
+verbose cache add [ 'cssom', '*' ]
+silly cache add: name, spec, args [ 'cssom', '*', [ 'cssom', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'cssom', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'cssom', '', false ]
+verbose cache add [ 'cssom-papandreou', '*' ]
+silly cache add: name, spec, args [ 'cssom-papandreou', '*', [ 'cssom-papandreou', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'cssom-papandreou', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'cssom-papandreou', '', false ]
+verbose cache add [ 'DevWatcher', '*' ]
+silly cache add: name, spec, args [ 'DevWatcher', '*', [ 'DevWatcher', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'DevWatcher', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'DevWatcher', '', false ]
+verbose cache add [ 'express', '*' ]
+silly cache add: name, spec, args [ 'express', '*', [ 'express', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'express', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'express', '', false ]
+verbose cache add [ 'expresso', '*' ]
+silly cache add: name, spec, args [ 'expresso', '*', [ 'expresso', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'expresso', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'expresso', '', false ]
+verbose cache add [ 'FINN-styl-e', '*' ]
+silly cache add: name, spec, args [ 'FINN-styl-e', '*', [ 'FINN-styl-e', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'FINN-styl-e', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'FINN-styl-e', '', false ]
+verbose cache add [ 'html2jade', '*' ]
+silly cache add: name, spec, args [ 'html2jade', '*', [ 'html2jade', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'html2jade', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'html2jade', '', false ]
+verbose cache add [ 'http-proxy', '*' ]
+silly cache add: name, spec, args [ 'http-proxy', '*', [ 'http-proxy', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'http-proxy', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'http-proxy', '', false ]
+verbose cache add [ 'ircbot', '*' ]
+silly cache add: name, spec, args [ 'ircbot', '*', [ 'ircbot', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'ircbot', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'ircbot', '', false ]
+verbose cache add [ 'jade', '*' ]
+silly cache add: name, spec, args [ 'jade', '*', [ 'jade', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'jade', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'jade', '', false ]
+verbose cache add [ 'js2coffee', '*' ]
+silly cache add: name, spec, args [ 'js2coffee', '*', [ 'js2coffee', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'js2coffee', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'js2coffee', '', false ]
+verbose cache add [ 'jsdom', '*' ]
+silly cache add: name, spec, args [ 'jsdom', '*', [ 'jsdom', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'jsdom', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'jsdom', '', false ]
+verbose cache add [ 'kassit', '*' ]
+silly cache add: name, spec, args [ 'kassit', '*', [ 'kassit', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'kassit', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'kassit', '', false ]
+verbose cache add [ 'my_realtime_app', '*' ]
+silly cache add: name, spec, args [ 'my_realtime_app', '*', [ 'my_realtime_app', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'my_realtime_app', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'my_realtime_app', '', false ]
+verbose cache add [ 'n', '*' ]
+silly cache add: name, spec, args [ 'n', '*', [ 'n', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'n', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'n', '', false ]
+verbose cache add [ 'nib', '*' ]
+silly cache add: name, spec, args [ 'nib', '*', [ 'nib', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'nib', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'nib', '', false ]
+verbose cache add [ 'node-inspector', '*' ]
+silly cache add: name, spec, args [ 'node-inspector', '*', [ 'node-inspector', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'node-inspector', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'node-inspector', '', false ]
+verbose cache add [ 'node-proxy', '*' ]
+silly cache add: name, spec, args [ 'node-proxy', '*', [ 'node-proxy', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'node-proxy', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'node-proxy', '', false ]
+verbose cache add [ 'nodemon', '*' ]
+silly cache add: name, spec, args [ 'nodemon', '*', [ 'nodemon', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'nodemon', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'nodemon', '', false ]
+verbose cache add [ 'nodester-cli', '*' ]
+silly cache add: name, spec, args [ 'nodester-cli', '*', [ 'nodester-cli', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'nodester-cli', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'nodester-cli', '', false ]
+verbose cache add [ 'prompt', '*' ]
+silly cache add: name, spec, args [ 'prompt', '*', [ 'prompt', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'prompt', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'prompt', '', false ]
+verbose cache add [ 'pdfkit', '*' ]
+silly cache add: name, spec, args [ 'pdfkit', '*', [ 'pdfkit', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'pdfkit', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'pdfkit', '', false ]
+verbose cache add [ 'recruitment_proxy_test', '*' ]
+silly cache add: name, spec, args [ 'recruitment_proxy_test',
+silly cache add: name, spec, args   '*',
+silly cache add: name, spec, args   [ 'recruitment_proxy_test', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'recruitment_proxy_test', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'recruitment_proxy_test', '', false ]
+verbose cache add [ 'slider', '*' ]
+silly cache add: name, spec, args [ 'slider', '*', [ 'slider', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'slider', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'slider', '', false ]
+verbose cache add [ 'socketstream', '*' ]
+silly cache add: name, spec, args [ 'socketstream', '*', [ 'socketstream', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'socketstream', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'socketstream', '', false ]
+verbose cache add [ 'stitch', '*' ]
+silly cache add: name, spec, args [ 'stitch', '*', [ 'stitch', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'stitch', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'stitch', '', false ]
+verbose cache add [ 'stylus', '*' ]
+silly cache add: name, spec, args [ 'stylus', '*', [ 'stylus', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'stylus', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'stylus', '', false ]
+verbose cache add [ 'testling', '*' ]
+silly cache add: name, spec, args [ 'testling', '*', [ 'testling', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'testling', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'testling', '', false ]
+verbose cache add [ 'uglify-js', '*' ]
+silly cache add: name, spec, args [ 'uglify-js', '*', [ 'uglify-js', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'uglify-js', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'uglify-js', '', false ]
+verbose cache add [ 'underscore', '*' ]
+silly cache add: name, spec, args [ 'underscore', '*', [ 'underscore', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'underscore', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'underscore', '', false ]
+verbose cache add [ 'watch-tree', '*' ]
+silly cache add: name, spec, args [ 'watch-tree', '*', [ 'watch-tree', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'watch-tree', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'watch-tree', '', false ]
+verbose cache add [ 'canvas', '*' ]
+silly cache add: name, spec, args [ 'canvas', '*', [ 'canvas', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'canvas', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'canvas', '', false ]
+verbose cache add [ 'npm', '*' ]
+silly cache add: name, spec, args [ 'npm', '*', [ 'npm', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'npm', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'npm', '', false ]
+verbose cache add [ 'smartdc', '*' ]
+silly cache add: name, spec, args [ 'smartdc', '*', [ 'smartdc', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'smartdc', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'smartdc', '', false ]
+verbose raw, before any munging aol_lounge
+verbose url resolving [ 'https://registry.npmjs.org/', './aol_lounge' ]
+verbose url resolved https://registry.npmjs.org/aol_lounge
+http GET https://registry.npmjs.org/aol_lounge
+verbose raw, before any munging DevWatcher
+verbose url resolving [ 'https://registry.npmjs.org/', './DevWatcher' ]
+verbose url resolved https://registry.npmjs.org/DevWatcher
+http GET https://registry.npmjs.org/DevWatcher
+verbose raw, before any munging FINN-styl-e
+verbose url resolving [ 'https://registry.npmjs.org/', './FINN-styl-e' ]
+verbose url resolved https://registry.npmjs.org/FINN-styl-e
+http GET https://registry.npmjs.org/FINN-styl-e
+verbose raw, before any munging my_realtime_app
+verbose url resolving [ 'https://registry.npmjs.org/', './my_realtime_app' ]
+verbose url resolved https://registry.npmjs.org/my_realtime_app
+http GET https://registry.npmjs.org/my_realtime_app
+verbose raw, before any munging recruitment_proxy_test
+verbose url resolving [ 'https://registry.npmjs.org/', './recruitment_proxy_test' ]
+verbose url resolved https://registry.npmjs.org/recruitment_proxy_test
+http GET https://registry.npmjs.org/recruitment_proxy_test
+verbose raw, before any munging buster
+verbose url resolving [ 'https://registry.npmjs.org/', './buster' ]
+verbose url resolved https://registry.npmjs.org/buster
+verbose etag "8L1YGC983NTSGTTVS9G3DDKH"
+http GET https://registry.npmjs.org/buster
+verbose raw, before any munging bar
+verbose url resolving [ 'https://registry.npmjs.org/', './bar' ]
+verbose url resolved https://registry.npmjs.org/bar
+verbose etag "8WBLU6VYKOL862MZEANSXQ5XB"
+http GET https://registry.npmjs.org/bar
+verbose raw, before any munging asset
+verbose url resolving [ 'https://registry.npmjs.org/', './asset' ]
+verbose url resolved https://registry.npmjs.org/asset
+verbose etag "BSKVP7DE2X360D9EXY97RCHFQ"
+http GET https://registry.npmjs.org/asset
+verbose raw, before any munging ace
+verbose url resolving [ 'https://registry.npmjs.org/', './ace' ]
+verbose url resolved https://registry.npmjs.org/ace
+verbose etag "53Y8MTRJ19VEORTIY9OYVF2RQ"
+http GET https://registry.npmjs.org/ace
+verbose raw, before any munging coffee-script
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script' ]
+verbose url resolved https://registry.npmjs.org/coffee-script
+verbose etag "14EPSDZN3HKGZ2LC4K5KY9PBT"
+http GET https://registry.npmjs.org/coffee-script
+verbose raw, before any munging cluster
+verbose url resolving [ 'https://registry.npmjs.org/', './cluster' ]
+verbose url resolved https://registry.npmjs.org/cluster
+verbose etag "6REYUOEOOAZI0VJCF2E7FJL9P"
+http GET https://registry.npmjs.org/cluster
+verbose raw, before any munging cssom
+verbose url resolving [ 'https://registry.npmjs.org/', './cssom' ]
+verbose url resolved https://registry.npmjs.org/cssom
+verbose etag "A8V9SX0YLQ5DPWMJYUT4VOSBD"
+http GET https://registry.npmjs.org/cssom
+verbose raw, before any munging coffee-watcher
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-watcher' ]
+verbose url resolved https://registry.npmjs.org/coffee-watcher
+verbose etag "2BYWMUFBOKSTW8GDAHVW624P0"
+http GET https://registry.npmjs.org/coffee-watcher
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "E67K86DW20A25PWKB29742EU5"
+http GET https://registry.npmjs.org/colors
+verbose raw, before any munging cssom-papandreou
+verbose url resolving [ 'https://registry.npmjs.org/', './cssom-papandreou' ]
+verbose url resolved https://registry.npmjs.org/cssom-papandreou
+verbose etag "5E7M3QSZTY9FI3C6AO2HAX0KV"
+http GET https://registry.npmjs.org/cssom-papandreou
+verbose raw, before any munging http-proxy
+verbose url resolving [ 'https://registry.npmjs.org/', './http-proxy' ]
+verbose url resolved https://registry.npmjs.org/http-proxy
+verbose etag "8NAPDLPHV656TPFYKVJ36XXWY"
+http GET https://registry.npmjs.org/http-proxy
+verbose raw, before any munging expresso
+verbose url resolving [ 'https://registry.npmjs.org/', './expresso' ]
+verbose url resolved https://registry.npmjs.org/expresso
+verbose etag "1S7VFJ3RGWDGZZ2QNVHROK6X2"
+http GET https://registry.npmjs.org/expresso
+verbose raw, before any munging html2jade
+verbose url resolving [ 'https://registry.npmjs.org/', './html2jade' ]
+verbose url resolved https://registry.npmjs.org/html2jade
+verbose etag "8BU2VLV7JTZBNNB3NFYSXC8YZ"
+http GET https://registry.npmjs.org/html2jade
+verbose raw, before any munging ircbot
+verbose url resolving [ 'https://registry.npmjs.org/', './ircbot' ]
+verbose url resolved https://registry.npmjs.org/ircbot
+verbose etag "5DIAD51ND5Y2EIH2HZIRES8LS"
+http GET https://registry.npmjs.org/ircbot
+verbose raw, before any munging js2coffee
+verbose url resolving [ 'https://registry.npmjs.org/', './js2coffee' ]
+verbose url resolved https://registry.npmjs.org/js2coffee
+verbose etag "827A6D8SRY2HQRNX7L7FY01PA"
+http GET https://registry.npmjs.org/js2coffee
+verbose raw, before any munging kassit
+verbose url resolving [ 'https://registry.npmjs.org/', './kassit' ]
+verbose url resolved https://registry.npmjs.org/kassit
+verbose etag "66NFCVFJE50RZ3ZIC1QL179C0"
+http GET https://registry.npmjs.org/kassit
+verbose raw, before any munging nib
+verbose url resolving [ 'https://registry.npmjs.org/', './nib' ]
+verbose url resolved https://registry.npmjs.org/nib
+verbose etag "7WGQS2CPO17TIK8N7P5MIFUNS"
+http GET https://registry.npmjs.org/nib
+verbose raw, before any munging n
+verbose url resolving [ 'https://registry.npmjs.org/', './n' ]
+verbose url resolved https://registry.npmjs.org/n
+verbose etag "EVMAN2RAGSSR0YVNNM3XGCC3P"
+http GET https://registry.npmjs.org/n
+verbose raw, before any munging node-proxy
+verbose url resolving [ 'https://registry.npmjs.org/', './node-proxy' ]
+verbose url resolved https://registry.npmjs.org/node-proxy
+verbose etag "CUEZRTAP62HPU3HIVCZU6Z35K"
+http GET https://registry.npmjs.org/node-proxy
+verbose raw, before any munging prompt
+verbose url resolving [ 'https://registry.npmjs.org/', './prompt' ]
+verbose url resolved https://registry.npmjs.org/prompt
+verbose etag "BASI9EXEP8LFB1YMBUKEQ5ZNB"
+http GET https://registry.npmjs.org/prompt
+verbose raw, before any munging socketstream
+verbose url resolving [ 'https://registry.npmjs.org/', './socketstream' ]
+verbose url resolved https://registry.npmjs.org/socketstream
+verbose etag "747FOZGB2HVKNWYU3PH4RC5K7"
+http GET https://registry.npmjs.org/socketstream
+verbose raw, before any munging node-inspector
+verbose url resolving [ 'https://registry.npmjs.org/', './node-inspector' ]
+verbose url resolved https://registry.npmjs.org/node-inspector
+verbose etag "6LNDTBIRXHSP4A7FR5BUZ8MA0"
+http GET https://registry.npmjs.org/node-inspector
+verbose raw, before any munging pdfkit
+verbose url resolving [ 'https://registry.npmjs.org/', './pdfkit' ]
+verbose url resolved https://registry.npmjs.org/pdfkit
+verbose etag "750585UN4LR6DDKIYZUSNVI5"
+http GET https://registry.npmjs.org/pdfkit
+verbose raw, before any munging uglify-js
+verbose url resolving [ 'https://registry.npmjs.org/', './uglify-js' ]
+verbose url resolved https://registry.npmjs.org/uglify-js
+verbose etag "AIL8H2G6HZWLFHQRVQKH3GLFZ"
+http GET https://registry.npmjs.org/uglify-js
+verbose raw, before any munging stitch
+verbose url resolving [ 'https://registry.npmjs.org/', './stitch' ]
+verbose url resolved https://registry.npmjs.org/stitch
+verbose etag "DOJW5OD2I0AMG9JLITMYHWLG9"
+http GET https://registry.npmjs.org/stitch
+verbose raw, before any munging slider
+verbose url resolving [ 'https://registry.npmjs.org/', './slider' ]
+verbose url resolved https://registry.npmjs.org/slider
+verbose etag "44PPO0TR0NC1URZ3QIW2DB8GO"
+http GET https://registry.npmjs.org/slider
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "BYBW4JRYI3NLXGOKRYR35NFD9"
+http GET https://registry.npmjs.org/underscore
+verbose raw, before any munging testling
+verbose url resolving [ 'https://registry.npmjs.org/', './testling' ]
+verbose url resolved https://registry.npmjs.org/testling
+verbose etag "6J89BNMRCDDUEPQNORR0UWQAI"
+http GET https://registry.npmjs.org/testling
+verbose raw, before any munging connect
+verbose url resolving [ 'https://registry.npmjs.org/', './connect' ]
+verbose url resolved https://registry.npmjs.org/connect
+verbose etag "DTBTWT3DUCT3NLSC9C1U5MLIC"
+http GET https://registry.npmjs.org/connect
+verbose raw, before any munging express
+verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+verbose url resolved https://registry.npmjs.org/express
+verbose etag "8TD9VJDU5S6ZQ545KE4QT4X5E"
+http GET https://registry.npmjs.org/express
+verbose raw, before any munging watch-tree
+verbose url resolving [ 'https://registry.npmjs.org/', './watch-tree' ]
+verbose url resolved https://registry.npmjs.org/watch-tree
+verbose etag "CWJ7IKLRVF7MI7UXXYIA6OGQR"
+http GET https://registry.npmjs.org/watch-tree
+verbose raw, before any munging jsdom
+verbose url resolving [ 'https://registry.npmjs.org/', './jsdom' ]
+verbose url resolved https://registry.npmjs.org/jsdom
+verbose etag "5TCC808FB372RR09PMJVT48RR"
+http GET https://registry.npmjs.org/jsdom
+verbose raw, before any munging jade
+verbose url resolving [ 'https://registry.npmjs.org/', './jade' ]
+verbose url resolved https://registry.npmjs.org/jade
+verbose etag "4ZVSRU1H6BR8EZ8G7FI4V2N5D"
+http GET https://registry.npmjs.org/jade
+verbose raw, before any munging nodester-cli
+verbose url resolving [ 'https://registry.npmjs.org/', './nodester-cli' ]
+verbose url resolved https://registry.npmjs.org/nodester-cli
+verbose etag "39O3VABCLXTXQBZLS6GXGY16A"
+http GET https://registry.npmjs.org/nodester-cli
+verbose raw, before any munging canvas
+verbose url resolving [ 'https://registry.npmjs.org/', './canvas' ]
+verbose url resolved https://registry.npmjs.org/canvas
+verbose etag "47YMXVQEWICHPESJHEN7UTN7I"
+http GET https://registry.npmjs.org/canvas
+verbose raw, before any munging smartdc
+verbose url resolving [ 'https://registry.npmjs.org/', './smartdc' ]
+verbose url resolved https://registry.npmjs.org/smartdc
+verbose etag "5Z3HVTRP8JK26ICER9M8J8G7Z"
+http GET https://registry.npmjs.org/smartdc
+verbose raw, before any munging nodemon
+verbose url resolving [ 'https://registry.npmjs.org/', './nodemon' ]
+verbose url resolved https://registry.npmjs.org/nodemon
+verbose etag "DOP9PSF8TGXKFC3OVSLS1Z6VB"
+http GET https://registry.npmjs.org/nodemon
+verbose raw, before any munging stylus
+verbose url resolving [ 'https://registry.npmjs.org/', './stylus' ]
+verbose url resolved https://registry.npmjs.org/stylus
+verbose etag "D014GA5D2GB4BB6OVA6JZBDO9"
+http GET https://registry.npmjs.org/stylus
+verbose raw, before any munging npm
+verbose url resolving [ 'https://registry.npmjs.org/', './npm' ]
+verbose url resolved https://registry.npmjs.org/npm
+verbose etag "5GQZYG4ASGFJ3XFRSRAT9UA7G"
+http GET https://registry.npmjs.org/npm
+http 404 https://registry.npmjs.org/my_realtime_app
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+verbose from cache /usr/local/lib/node_modules/my_realtime_app/package.json
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/connect-couchdb/package.json
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/cradle/package.json
+verbose loadDefaults cradle@0.6.3
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/express/package.json
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/moment/package.json
+verbose loadDefaults moment@1.5.0
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/nodemailer/package.json
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/pdfkit/package.json
+verbose loadDefaults pdfkit@0.1.6
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/socketstream/package.json
+verbose loadDefaults socketstream@0.3.0beta1
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/ss-clientjade/package.json
+verbose loadDefaults ss-clientjade@0.0.2
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/ss-coffee/package.json
+verbose loadDefaults ss-coffee@0.1.1
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/ss-hogan/package.json
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/ss-jade/package.json
+verbose loadDefaults ss-jade@0.1.1
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/ss-stylus/package.json
+verbose loadDefaults ss-stylus@0.1.2
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/my_realtime_app/node_modules/flate/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/my_realtime_app/node_modules/flate/package.json
+verbose loadDefaults flate@1.0.5
+verbose cache add [ 'ss-coffee', '0.1.x' ]
+silly cache add: name, spec, args [ 'ss-coffee', '0.1.x', [ 'ss-coffee', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'ss-coffee', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'ss-coffee', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'ss-stylus', '0.1.x' ]
+silly cache add: name, spec, args [ 'ss-stylus', '0.1.x', [ 'ss-stylus', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'ss-stylus', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'ss-stylus', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'ss-jade', '0.1.x' ]
+silly cache add: name, spec, args [ 'ss-jade', '0.1.x', [ 'ss-jade', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'ss-jade', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'ss-jade', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'ss-hogan', '0.1.x' ]
+silly cache add: name, spec, args [ 'ss-hogan', '0.1.x', [ 'ss-hogan', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'ss-hogan', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'ss-hogan', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'nodemailer', '0.3.x' ]
+silly cache add: name, spec, args [ 'nodemailer', '0.3.x', [ 'nodemailer', '0.3.x' ] ]
+verbose parsed url { pathname: '0.3.x', path: '0.3.x', href: '0.3.x' }
+verbose addNamed [ 'nodemailer', '0.3.x' ]
+verbose addNamed [ null, '>=0.3.0- <0.4.0-' ]
+silly name, range, hasData [ 'nodemailer', '>=0.3.0- <0.4.0-', false ]
+verbose cache add [ 'ss-clientjade', '0.x.x' ]
+silly cache add: name, spec, args [ 'ss-clientjade', '0.x.x', [ 'ss-clientjade', '0.x.x' ] ]
+verbose parsed url { pathname: '0.x.x', path: '0.x.x', href: '0.x.x' }
+verbose addNamed [ 'ss-clientjade', '0.x.x' ]
+verbose addNamed [ null, '>=0.0.0- <1.0.0-' ]
+silly name, range, hasData [ 'ss-clientjade', '>=0.0.0- <1.0.0-', false ]
+verbose cache add [ 'pdfkit', '0.1.x' ]
+silly cache add: name, spec, args [ 'pdfkit', '0.1.x', [ 'pdfkit', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'pdfkit', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'pdfkit', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'express', '2.5.x' ]
+silly cache add: name, spec, args [ 'express', '2.5.x', [ 'express', '2.5.x' ] ]
+verbose parsed url { pathname: '2.5.x', path: '2.5.x', href: '2.5.x' }
+verbose addNamed [ 'express', '2.5.x' ]
+verbose addNamed [ null, '>=2.5.0- <2.6.0-' ]
+silly name, range, hasData [ 'express', '>=2.5.0- <2.6.0-', false ]
+verbose cache add [ 'cradle', '0.6.x' ]
+silly cache add: name, spec, args [ 'cradle', '0.6.x', [ 'cradle', '0.6.x' ] ]
+verbose parsed url { pathname: '0.6.x', path: '0.6.x', href: '0.6.x' }
+verbose addNamed [ 'cradle', '0.6.x' ]
+verbose addNamed [ null, '>=0.6.0- <0.7.0-' ]
+silly name, range, hasData [ 'cradle', '>=0.6.0- <0.7.0-', false ]
+verbose cache add [ 'connect-couchdb', '0.2.x' ]
+silly cache add: name, spec, args [ 'connect-couchdb', '0.2.x', [ 'connect-couchdb', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'connect-couchdb', '0.2.x' ]
+verbose addNamed [ null, '>=0.2.0- <0.3.0-' ]
+silly name, range, hasData [ 'connect-couchdb', '>=0.2.0- <0.3.0-', false ]
+verbose cache add [ 'moment', '*' ]
+silly cache add: name, spec, args [ 'moment', '*', [ 'moment', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'moment', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'moment', '', false ]
+verbose raw, before any munging ss-jade
+verbose url resolving [ 'https://registry.npmjs.org/', './ss-jade' ]
+verbose url resolved https://registry.npmjs.org/ss-jade
+verbose etag "EY58TWM9W6JNDNWY6SM6BX035"
+http GET https://registry.npmjs.org/ss-jade
+verbose raw, before any munging ss-hogan
+verbose url resolving [ 'https://registry.npmjs.org/', './ss-hogan' ]
+verbose url resolved https://registry.npmjs.org/ss-hogan
+verbose etag "L1CCHP6AXJON1LC6IEKTYT1S"
+http GET https://registry.npmjs.org/ss-hogan
+verbose raw, before any munging ss-stylus
+verbose url resolving [ 'https://registry.npmjs.org/', './ss-stylus' ]
+verbose url resolved https://registry.npmjs.org/ss-stylus
+verbose etag "9LB85BUZN8AHBRR6DZP0PTG0H"
+http GET https://registry.npmjs.org/ss-stylus
+verbose raw, before any munging pdfkit
+verbose url resolving [ 'https://registry.npmjs.org/', './pdfkit' ]
+verbose url resolved https://registry.npmjs.org/pdfkit
+verbose etag "750585UN4LR6DDKIYZUSNVI5"
+http GET https://registry.npmjs.org/pdfkit
+verbose raw, before any munging ss-coffee
+verbose url resolving [ 'https://registry.npmjs.org/', './ss-coffee' ]
+verbose url resolved https://registry.npmjs.org/ss-coffee
+verbose etag "DX8PAP5I8E9H0H88PEZ6FSQSX"
+http GET https://registry.npmjs.org/ss-coffee
+verbose raw, before any munging express
+verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+verbose url resolved https://registry.npmjs.org/express
+verbose etag "8TD9VJDU5S6ZQ545KE4QT4X5E"
+http GET https://registry.npmjs.org/express
+verbose raw, before any munging ss-clientjade
+verbose url resolving [ 'https://registry.npmjs.org/', './ss-clientjade' ]
+verbose url resolved https://registry.npmjs.org/ss-clientjade
+verbose etag "4QYTK7F8LQUA45ISLWQ028OPE"
+http GET https://registry.npmjs.org/ss-clientjade
+verbose raw, before any munging moment
+verbose url resolving [ 'https://registry.npmjs.org/', './moment' ]
+verbose url resolved https://registry.npmjs.org/moment
+verbose etag "AY27B8LX5Y76X4SSS95P80PNP"
+http GET https://registry.npmjs.org/moment
+verbose raw, before any munging connect-couchdb
+verbose url resolving [ 'https://registry.npmjs.org/', './connect-couchdb' ]
+verbose url resolved https://registry.npmjs.org/connect-couchdb
+verbose etag "BSFY2OGSRMCLTRM7KOBULTSU2"
+http GET https://registry.npmjs.org/connect-couchdb
+verbose raw, before any munging cradle
+verbose url resolving [ 'https://registry.npmjs.org/', './cradle' ]
+verbose url resolved https://registry.npmjs.org/cradle
+verbose etag "D30KJN3AJ0QJN012Q8Y9ZQORL"
+http GET https://registry.npmjs.org/cradle
+verbose raw, before any munging nodemailer
+verbose url resolving [ 'https://registry.npmjs.org/', './nodemailer' ]
+verbose url resolved https://registry.npmjs.org/nodemailer
+verbose etag "3JDXCANPCUF62KV35OISPNJ2T"
+http GET https://registry.npmjs.org/nodemailer
+http 404 https://registry.npmjs.org/FINN-styl-e
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+verbose from cache /usr/local/lib/node_modules/FINN-styl-e/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/argsparser/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/connect/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/cssom-papandreou/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/expresso/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/eyes/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/mkdirp/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/nib/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/stylus/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/stylus-blueprint/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/stylus-sprite/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/vows/package.json
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/watch/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/FINN-styl-e/node_modules/canvas/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/canvas/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/FINN-styl-e/node_modules/hashlib/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/hashlib/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/FINN-styl-e/node_modules/node-gd/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/FINN-styl-e/node_modules/node-gd/package.json
+verbose loadDefaults gd@0.0.2
+verbose cache add [ 'connect', '>=1.7.1' ]
+silly cache add: name, spec, args [ 'connect', '>=1.7.1', [ 'connect', '>=1.7.1' ] ]
+verbose parsed url { pathname: '=1.7.1', path: '=1.7.1', href: '=1.7.1' }
+verbose addNamed [ 'connect', '>=1.7.1' ]
+verbose addNamed [ null, '>=1.7.1' ]
+silly name, range, hasData [ 'connect', '>=1.7.1', false ]
+verbose cache add [ 'stylus', '>=0.19.0' ]
+silly cache add: name, spec, args [ 'stylus', '>=0.19.0', [ 'stylus', '>=0.19.0' ] ]
+verbose parsed url { pathname: '=0.19.0', path: '=0.19.0', href: '=0.19.0' }
+verbose addNamed [ 'stylus', '>=0.19.0' ]
+verbose addNamed [ null, '>=0.19.0' ]
+silly name, range, hasData [ 'stylus', '>=0.19.0', false ]
+verbose cache add [ 'nib', '>=0.3.1' ]
+silly cache add: name, spec, args [ 'nib', '>=0.3.1', [ 'nib', '>=0.3.1' ] ]
+verbose parsed url { pathname: '=0.3.1', path: '=0.3.1', href: '=0.3.1' }
+verbose addNamed [ 'nib', '>=0.3.1' ]
+verbose addNamed [ null, '>=0.3.1' ]
+silly name, range, hasData [ 'nib', '>=0.3.1', false ]
+verbose cache add [ 'stylus-blueprint', '>=0.2.0' ]
+silly cache add: name, spec, args [ 'stylus-blueprint',
+silly cache add: name, spec, args   '>=0.2.0',
+silly cache add: name, spec, args   [ 'stylus-blueprint', '>=0.2.0' ] ]
+verbose parsed url { pathname: '=0.2.0', path: '=0.2.0', href: '=0.2.0' }
+verbose addNamed [ 'stylus-blueprint', '>=0.2.0' ]
+verbose addNamed [ null, '>=0.2.0' ]
+silly name, range, hasData [ 'stylus-blueprint', '>=0.2.0', false ]
+verbose cache add [ 'canvas', '>=0.8.2' ]
+silly cache add: name, spec, args [ 'canvas', '>=0.8.2', [ 'canvas', '>=0.8.2' ] ]
+verbose parsed url { pathname: '=0.8.2', path: '=0.8.2', href: '=0.8.2' }
+verbose addNamed [ 'canvas', '>=0.8.2' ]
+verbose addNamed [ null, '>=0.8.2' ]
+silly name, range, hasData [ 'canvas', '>=0.8.2', false ]
+verbose cache add [ 'underscore', '>=1.2.0' ]
+silly cache add: name, spec, args [ 'underscore', '>=1.2.0', [ 'underscore', '>=1.2.0' ] ]
+verbose parsed url { pathname: '=1.2.0', path: '=1.2.0', href: '=1.2.0' }
+verbose addNamed [ 'underscore', '>=1.2.0' ]
+verbose addNamed [ null, '>=1.2.0' ]
+silly name, range, hasData [ 'underscore', '>=1.2.0', false ]
+verbose cache add [ 'colors', '>=0.5.1' ]
+silly cache add: name, spec, args [ 'colors', '>=0.5.1', [ 'colors', '>=0.5.1' ] ]
+verbose parsed url { pathname: '=0.5.1', path: '=0.5.1', href: '=0.5.1' }
+verbose addNamed [ 'colors', '>=0.5.1' ]
+verbose addNamed [ null, '>=0.5.1' ]
+silly name, range, hasData [ 'colors', '>=0.5.1', false ]
+verbose cache add [ 'node-fs', '>=0.1.0' ]
+silly cache add: name, spec, args [ 'node-fs', '>=0.1.0', [ 'node-fs', '>=0.1.0' ] ]
+verbose parsed url { pathname: '=0.1.0', path: '=0.1.0', href: '=0.1.0' }
+verbose addNamed [ 'node-fs', '>=0.1.0' ]
+verbose addNamed [ null, '>=0.1.0' ]
+silly name, range, hasData [ 'node-fs', '>=0.1.0', false ]
+verbose cache add [ 'hashlib', '>=1.0.1' ]
+silly cache add: name, spec, args [ 'hashlib', '>=1.0.1', [ 'hashlib', '>=1.0.1' ] ]
+verbose parsed url { pathname: '=1.0.1', path: '=1.0.1', href: '=1.0.1' }
+verbose addNamed [ 'hashlib', '>=1.0.1' ]
+verbose addNamed [ null, '>=1.0.1' ]
+silly name, range, hasData [ 'hashlib', '>=1.0.1', false ]
+verbose cache add [ 'vows', '>=0.5.12' ]
+silly cache add: name, spec, args [ 'vows', '>=0.5.12', [ 'vows', '>=0.5.12' ] ]
+verbose parsed url { pathname: '=0.5.12', path: '=0.5.12', href: '=0.5.12' }
+verbose addNamed [ 'vows', '>=0.5.12' ]
+verbose addNamed [ null, '>=0.5.12' ]
+silly name, range, hasData [ 'vows', '>=0.5.12', false ]
+verbose cache add [ 'eyes', '>=0.1.6' ]
+silly cache add: name, spec, args [ 'eyes', '>=0.1.6', [ 'eyes', '>=0.1.6' ] ]
+verbose parsed url { pathname: '=0.1.6', path: '=0.1.6', href: '=0.1.6' }
+verbose addNamed [ 'eyes', '>=0.1.6' ]
+verbose addNamed [ null, '>=0.1.6' ]
+silly name, range, hasData [ 'eyes', '>=0.1.6', false ]
+verbose cache add [ 'expresso', '>=0.9.2' ]
+silly cache add: name, spec, args [ 'expresso', '>=0.9.2', [ 'expresso', '>=0.9.2' ] ]
+verbose parsed url { pathname: '=0.9.2', path: '=0.9.2', href: '=0.9.2' }
+verbose addNamed [ 'expresso', '>=0.9.2' ]
+verbose addNamed [ null, '>=0.9.2' ]
+silly name, range, hasData [ 'expresso', '>=0.9.2', false ]
+verbose cache add [ 'watch', '>=0.3.3' ]
+silly cache add: name, spec, args [ 'watch', '>=0.3.3', [ 'watch', '>=0.3.3' ] ]
+verbose parsed url { pathname: '=0.3.3', path: '=0.3.3', href: '=0.3.3' }
+verbose addNamed [ 'watch', '>=0.3.3' ]
+verbose addNamed [ null, '>=0.3.3' ]
+silly name, range, hasData [ 'watch', '>=0.3.3', false ]
+verbose cache add [ 'mkdirp', '*' ]
+silly cache add: name, spec, args [ 'mkdirp', '*', [ 'mkdirp', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'mkdirp', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'mkdirp', '', false ]
+verbose cache add [ 'argsparser', '*' ]
+silly cache add: name, spec, args [ 'argsparser', '*', [ 'argsparser', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'argsparser', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'argsparser', '', false ]
+verbose cache add [ 'stylus-sprite', '*' ]
+silly cache add: name, spec, args [ 'stylus-sprite', '*', [ 'stylus-sprite', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'stylus-sprite', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'stylus-sprite', '', false ]
+verbose cache add [ 'cssom-papandreou', '*' ]
+silly cache add: name, spec, args [ 'cssom-papandreou', '*', [ 'cssom-papandreou', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'cssom-papandreou', '*' ]
+verbose cache add [ 'node-gd', '*' ]
+silly cache add: name, spec, args [ 'node-gd', '*', [ 'node-gd', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'node-gd', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'node-gd', '', false ]
+verbose raw, before any munging nib
+verbose url resolving [ 'https://registry.npmjs.org/', './nib' ]
+verbose url resolved https://registry.npmjs.org/nib
+verbose etag "7WGQS2CPO17TIK8N7P5MIFUNS"
+http GET https://registry.npmjs.org/nib
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "BYBW4JRYI3NLXGOKRYR35NFD9"
+http GET https://registry.npmjs.org/underscore
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "E67K86DW20A25PWKB29742EU5"
+http GET https://registry.npmjs.org/colors
+verbose raw, before any munging expresso
+verbose url resolving [ 'https://registry.npmjs.org/', './expresso' ]
+verbose url resolved https://registry.npmjs.org/expresso
+verbose etag "1S7VFJ3RGWDGZZ2QNVHROK6X2"
+http GET https://registry.npmjs.org/expresso
+verbose raw, before any munging stylus-blueprint
+verbose url resolving [ 'https://registry.npmjs.org/', './stylus-blueprint' ]
+verbose url resolved https://registry.npmjs.org/stylus-blueprint
+verbose etag "BB36Z6HSIZEWDS0ASZTSW5O12"
+http GET https://registry.npmjs.org/stylus-blueprint
+verbose raw, before any munging node-fs
+verbose url resolving [ 'https://registry.npmjs.org/', './node-fs' ]
+verbose url resolved https://registry.npmjs.org/node-fs
+verbose etag "DVGGTBSFVUAYXH798JNWQIBA1"
+http GET https://registry.npmjs.org/node-fs
+verbose raw, before any munging hashlib
+verbose url resolving [ 'https://registry.npmjs.org/', './hashlib' ]
+verbose url resolved https://registry.npmjs.org/hashlib
+verbose etag "D41JM3J4EYECVAPVPUN21BHDM"
+http GET https://registry.npmjs.org/hashlib
+verbose raw, before any munging watch
+verbose url resolving [ 'https://registry.npmjs.org/', './watch' ]
+verbose url resolved https://registry.npmjs.org/watch
+verbose etag "2CF10QH839L4LSZ2582E6OKM3"
+http GET https://registry.npmjs.org/watch
+verbose raw, before any munging connect
+verbose url resolving [ 'https://registry.npmjs.org/', './connect' ]
+verbose url resolved https://registry.npmjs.org/connect
+verbose etag "DTBTWT3DUCT3NLSC9C1U5MLIC"
+http GET https://registry.npmjs.org/connect
+verbose raw, before any munging canvas
+verbose url resolving [ 'https://registry.npmjs.org/', './canvas' ]
+verbose url resolved https://registry.npmjs.org/canvas
+verbose etag "47YMXVQEWICHPESJHEN7UTN7I"
+http GET https://registry.npmjs.org/canvas
+verbose raw, before any munging stylus
+verbose url resolving [ 'https://registry.npmjs.org/', './stylus' ]
+verbose url resolved https://registry.npmjs.org/stylus
+verbose etag "D014GA5D2GB4BB6OVA6JZBDO9"
+http GET https://registry.npmjs.org/stylus
+verbose raw, before any munging vows
+verbose url resolving [ 'https://registry.npmjs.org/', './vows' ]
+verbose url resolved https://registry.npmjs.org/vows
+verbose etag "308ZV06X1XZHNT12WJ8OK1JZX"
+http GET https://registry.npmjs.org/vows
+verbose raw, before any munging argsparser
+verbose url resolving [ 'https://registry.npmjs.org/', './argsparser' ]
+verbose url resolved https://registry.npmjs.org/argsparser
+verbose etag "F15DL7TYKN7SX064OKKG4GR35"
+http GET https://registry.npmjs.org/argsparser
+verbose raw, before any munging mkdirp
+verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+verbose url resolved https://registry.npmjs.org/mkdirp
+verbose etag "95YPAPQRNXLBBERBYQC7GOA1J"
+http GET https://registry.npmjs.org/mkdirp
+verbose raw, before any munging node-gd
+verbose url resolving [ 'https://registry.npmjs.org/', './node-gd' ]
+verbose url resolved https://registry.npmjs.org/node-gd
+verbose etag "9VYTR7DJ25Q5AXRG1V4S6LDF7"
+http GET https://registry.npmjs.org/node-gd
+verbose raw, before any munging eyes
+verbose url resolving [ 'https://registry.npmjs.org/', './eyes' ]
+verbose url resolved https://registry.npmjs.org/eyes
+verbose etag "3DKI1TMGIUK2CPJ1YXN1D61BV"
+http GET https://registry.npmjs.org/eyes
+verbose raw, before any munging stylus-sprite
+verbose url resolving [ 'https://registry.npmjs.org/', './stylus-sprite' ]
+verbose url resolved https://registry.npmjs.org/stylus-sprite
+verbose etag "6JR1L8NOTAAETMW3OJPN9KGCF"
+http GET https://registry.npmjs.org/stylus-sprite
+http 404 https://registry.npmjs.org/DevWatcher
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+verbose from cache /usr/local/lib/node_modules/DevWatcher/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/argsparser/package.json
+verbose loadDefaults argsparser@0.0.6
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.2.0
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/connect/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/express/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/http-proxy/package.json
+verbose loadDefaults http-proxy@0.8.0
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/nib/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/socket.io/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/stylus/package.json
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/uglify-js/package.json
+verbose loadDefaults uglify-js@1.2.6
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.3.1
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/watch/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/DevWatcher/node_modules/hashlib/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/hashlib/package.json
+verbose loadDefaults hashlib@1.0.1
+verbose cache add [ 'connect', '*' ]
+silly cache add: name, spec, args [ 'connect', '*', [ 'connect', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'connect', '*' ]
+verbose cache add [ 'express', '*' ]
+silly cache add: name, spec, args [ 'express', '*', [ 'express', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'express', '*' ]
+verbose cache add [ 'colors', '*' ]
+silly cache add: name, spec, args [ 'colors', '*', [ 'colors', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'colors', '*' ]
+verbose cache add [ 'coffee-script', '*' ]
+silly cache add: name, spec, args [ 'coffee-script', '*', [ 'coffee-script', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'coffee-script', '*' ]
+verbose cache add [ 'uglify-js', '*' ]
+silly cache add: name, spec, args [ 'uglify-js', '*', [ 'uglify-js', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'uglify-js', '*' ]
+verbose cache add [ 'socket.io', '*' ]
+silly cache add: name, spec, args [ 'socket.io', '*', [ 'socket.io', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'socket.io', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'socket.io', '', false ]
+verbose cache add [ 'stylus', '*' ]
+silly cache add: name, spec, args [ 'stylus', '*', [ 'stylus', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'stylus', '*' ]
+verbose cache add [ 'nib', '*' ]
+silly cache add: name, spec, args [ 'nib', '*', [ 'nib', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'nib', '*' ]
+verbose cache add [ 'argsparser', '*' ]
+silly cache add: name, spec, args [ 'argsparser', '*', [ 'argsparser', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'argsparser', '*' ]
+verbose cache add [ 'underscore', '*' ]
+silly cache add: name, spec, args [ 'underscore', '*', [ 'underscore', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'underscore', '*' ]
+verbose cache add [ 'watch', '*' ]
+silly cache add: name, spec, args [ 'watch', '*', [ 'watch', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'watch', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'watch', '', false ]
+verbose cache add [ 'hashlib', '*' ]
+silly cache add: name, spec, args [ 'hashlib', '*', [ 'hashlib', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'hashlib', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'hashlib', '', false ]
+verbose cache add [ 'http-proxy', '*' ]
+silly cache add: name, spec, args [ 'http-proxy', '*', [ 'http-proxy', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'http-proxy', '*' ]
+verbose raw, before any munging watch
+verbose url resolving [ 'https://registry.npmjs.org/', './watch' ]
+verbose url resolved https://registry.npmjs.org/watch
+verbose etag "2CF10QH839L4LSZ2582E6OKM3"
+http GET https://registry.npmjs.org/watch
+verbose raw, before any munging hashlib
+verbose url resolving [ 'https://registry.npmjs.org/', './hashlib' ]
+verbose url resolved https://registry.npmjs.org/hashlib
+verbose etag "D41JM3J4EYECVAPVPUN21BHDM"
+http GET https://registry.npmjs.org/hashlib
+verbose raw, before any munging socket.io
+verbose url resolving [ 'https://registry.npmjs.org/', './socket.io' ]
+verbose url resolved https://registry.npmjs.org/socket.io
+verbose etag "CR00LA7QNZXQR4DNT5CKVEZCI"
+http GET https://registry.npmjs.org/socket.io
+http 404 https://registry.npmjs.org/recruitment_proxy_test
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+verbose from cache /usr/local/lib/node_modules/recruitment_proxy_test/package.json
+http 404 https://registry.npmjs.org/aol_lounge
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+verbose from cache /usr/local/lib/node_modules/aol_lounge/package.json
+verbose caching /usr/local/lib/node_modules/recruitment_proxy_test/node_modules/http-proxy/package.json
+verbose loadDefaults http-proxy@0.8.0
+verbose cache add [ 'http-proxy', '>=0.8.0' ]
+silly cache add: name, spec, args [ 'http-proxy', '>=0.8.0', [ 'http-proxy', '>=0.8.0' ] ]
+verbose parsed url { pathname: '=0.8.0', path: '=0.8.0', href: '=0.8.0' }
+verbose addNamed [ 'http-proxy', '>=0.8.0' ]
+verbose addNamed [ null, '>=0.8.0' ]
+silly name, range, hasData [ 'http-proxy', '>=0.8.0', false ]
+verbose caching /usr/local/lib/node_modules/aol_lounge/node_modules/request/package.json
+verbose loadDefaults request@2.9.153
+verbose cache add [ 'request', '>= 1.9.5' ]
+silly cache add: name, spec, args [ 'request', '>= 1.9.5', [ 'request', '>= 1.9.5' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'request', '>= 1.9.5' ]
+verbose addNamed [ null, '>=1.9.5' ]
+silly name, range, hasData [ 'request', '>=1.9.5', false ]
+verbose raw, before any munging http-proxy
+verbose url resolving [ 'https://registry.npmjs.org/', './http-proxy' ]
+verbose url resolved https://registry.npmjs.org/http-proxy
+verbose etag "8NAPDLPHV656TPFYKVJ36XXWY"
+http GET https://registry.npmjs.org/http-proxy
+verbose raw, before any munging request
+verbose url resolving [ 'https://registry.npmjs.org/', './request' ]
+verbose url resolved https://registry.npmjs.org/request
+verbose etag "4R7V42VU61HTEWC6A8Y4OTGQP"
+http GET https://registry.npmjs.org/request
+http 304 https://registry.npmjs.org/buster
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"8L1YGC983NTSGTTVS9G3DDKH"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:20 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag buster from cache
+silly name, range, hasData 2 [ 'buster', '', true ]
+silly versions [ 'buster',
+silly versions   [ '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.3.0',
+silly versions     '0.4.0',
+silly versions     '0.4.1',
+silly versions     '0.4.2',
+silly versions     '0.4.3',
+silly versions     '0.4.4',
+silly versions     '0.4.5',
+silly versions     '0.4.6' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '66daa0ce261c6711686c44edbc06eca3834cbb63',
+verbose bin dist     tarball: 'http://registry.npmjs.org/buster/-/buster-0.4.6.tgz' } ]
+verbose caching /Users/sverosak/.npm/buster/0.4.6/package/package.json
+verbose loadDefaults buster@0.4.6
+verbose from cache /usr/local/lib/node_modules/buster/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-static/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-test-cli/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/sinon-buster/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-assertions/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-core/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-evented-logger/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-format/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/buster-test/package.json
+verbose caching /usr/local/lib/node_modules/buster/node_modules/sinon/package.json
+verbose cache add [ 'buster-core', '>=0.5.1' ]
+silly cache add: name, spec, args [ 'buster-core', '>=0.5.1', [ 'buster-core', '>=0.5.1' ] ]
+verbose parsed url { pathname: '=0.5.1', path: '=0.5.1', href: '=0.5.1' }
+verbose addNamed [ 'buster-core', '>=0.5.1' ]
+verbose addNamed [ null, '>=0.5.1' ]
+silly name, range, hasData [ 'buster-core', '>=0.5.1', false ]
+verbose cache add [ 'buster-test', '>=0.4' ]
+silly cache add: name, spec, args [ 'buster-test', '>=0.4', [ 'buster-test', '>=0.4' ] ]
+verbose parsed url { pathname: '=0.4', path: '=0.4', href: '=0.4' }
+verbose addNamed [ 'buster-test', '>=0.4' ]
+verbose addNamed [ null, '>=0.4.0-' ]
+silly name, range, hasData [ 'buster-test', '>=0.4.0-', false ]
+verbose cache add [ 'buster-assertions', '>=0.9' ]
+silly cache add: name, spec, args [ 'buster-assertions',
+silly cache add: name, spec, args   '>=0.9',
+silly cache add: name, spec, args   [ 'buster-assertions', '>=0.9' ] ]
+verbose parsed url { pathname: '=0.9', path: '=0.9', href: '=0.9' }
+verbose addNamed [ 'buster-assertions', '>=0.9' ]
+verbose addNamed [ null, '>=0.9.0-' ]
+silly name, range, hasData [ 'buster-assertions', '>=0.9.0-', false ]
+verbose cache add [ 'buster-format', '>=0.5.1' ]
+silly cache add: name, spec, args [ 'buster-format', '>=0.5.1', [ 'buster-format', '>=0.5.1' ] ]
+verbose parsed url { pathname: '=0.5.1', path: '=0.5.1', href: '=0.5.1' }
+verbose addNamed [ 'buster-format', '>=0.5.1' ]
+verbose addNamed [ null, '>=0.5.1' ]
+silly name, range, hasData [ 'buster-format', '>=0.5.1', false ]
+verbose cache add [ 'buster-evented-logger', '>=0.4.2' ]
+silly cache add: name, spec, args [ 'buster-evented-logger',
+silly cache add: name, spec, args   '>=0.4.2',
+silly cache add: name, spec, args   [ 'buster-evented-logger', '>=0.4.2' ] ]
+verbose parsed url { pathname: '=0.4.2', path: '=0.4.2', href: '=0.4.2' }
+verbose addNamed [ 'buster-evented-logger', '>=0.4.2' ]
+verbose addNamed [ null, '>=0.4.2' ]
+silly name, range, hasData [ 'buster-evented-logger', '>=0.4.2', false ]
+verbose cache add [ 'buster-test-cli', '>=0.4.6' ]
+silly cache add: name, spec, args [ 'buster-test-cli',
+silly cache add: name, spec, args   '>=0.4.6',
+silly cache add: name, spec, args   [ 'buster-test-cli', '>=0.4.6' ] ]
+verbose parsed url { pathname: '=0.4.6', path: '=0.4.6', href: '=0.4.6' }
+verbose addNamed [ 'buster-test-cli', '>=0.4.6' ]
+verbose addNamed [ null, '>=0.4.6' ]
+silly name, range, hasData [ 'buster-test-cli', '>=0.4.6', false ]
+verbose cache add [ 'sinon', '>=1.3.1' ]
+silly cache add: name, spec, args [ 'sinon', '>=1.3.1', [ 'sinon', '>=1.3.1' ] ]
+verbose parsed url { pathname: '=1.3.1', path: '=1.3.1', href: '=1.3.1' }
+verbose addNamed [ 'sinon', '>=1.3.1' ]
+verbose addNamed [ null, '>=1.3.1' ]
+silly name, range, hasData [ 'sinon', '>=1.3.1', false ]
+verbose cache add [ 'sinon-buster', '>=0.4.1' ]
+silly cache add: name, spec, args [ 'sinon-buster', '>=0.4.1', [ 'sinon-buster', '>=0.4.1' ] ]
+verbose parsed url { pathname: '=0.4.1', path: '=0.4.1', href: '=0.4.1' }
+verbose addNamed [ 'sinon-buster', '>=0.4.1' ]
+verbose addNamed [ null, '>=0.4.1' ]
+silly name, range, hasData [ 'sinon-buster', '>=0.4.1', false ]
+verbose cache add [ 'buster-static', '>=0.3' ]
+silly cache add: name, spec, args [ 'buster-static', '>=0.3', [ 'buster-static', '>=0.3' ] ]
+verbose parsed url { pathname: '=0.3', path: '=0.3', href: '=0.3' }
+verbose addNamed [ 'buster-static', '>=0.3' ]
+verbose addNamed [ null, '>=0.3.0-' ]
+silly name, range, hasData [ 'buster-static', '>=0.3.0-', false ]
+verbose raw, before any munging buster-test
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-test' ]
+verbose url resolved https://registry.npmjs.org/buster-test
+verbose etag "CQ3H07066K4ABPFNLAKIA10I6"
+http GET https://registry.npmjs.org/buster-test
+verbose raw, before any munging buster-core
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-core' ]
+verbose url resolved https://registry.npmjs.org/buster-core
+verbose etag "42OIXNMDYOP7A6KOWOFDFLXDT"
+http GET https://registry.npmjs.org/buster-core
+verbose raw, before any munging buster-assertions
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-assertions' ]
+verbose url resolved https://registry.npmjs.org/buster-assertions
+verbose etag "CINRHBC9FCFLVWPW7Z8E86N2W"
+http GET https://registry.npmjs.org/buster-assertions
+verbose raw, before any munging buster-format
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-format' ]
+verbose url resolved https://registry.npmjs.org/buster-format
+verbose etag "438P1GPJ15KQWB071ACVO7NUR"
+http GET https://registry.npmjs.org/buster-format
+verbose raw, before any munging buster-evented-logger
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-evented-logger' ]
+verbose url resolved https://registry.npmjs.org/buster-evented-logger
+verbose etag "4FKKEOLSTEV5R5P8Z3TE70LWC"
+http GET https://registry.npmjs.org/buster-evented-logger
+verbose raw, before any munging sinon-buster
+verbose url resolving [ 'https://registry.npmjs.org/', './sinon-buster' ]
+verbose url resolved https://registry.npmjs.org/sinon-buster
+verbose etag "1IUPJLIIN9W619P7UEBKR0R4S"
+http GET https://registry.npmjs.org/sinon-buster
+verbose raw, before any munging sinon
+verbose url resolving [ 'https://registry.npmjs.org/', './sinon' ]
+verbose url resolved https://registry.npmjs.org/sinon
+verbose etag "94BQL4K0ADAS0M7L4C8TTYZ4B"
+http GET https://registry.npmjs.org/sinon
+verbose raw, before any munging buster-test-cli
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-test-cli' ]
+verbose url resolved https://registry.npmjs.org/buster-test-cli
+verbose etag "2BR5Q91SZHKLTUSZQANM3T2P5"
+http GET https://registry.npmjs.org/buster-test-cli
+verbose raw, before any munging buster-static
+verbose url resolving [ 'https://registry.npmjs.org/', './buster-static' ]
+verbose url resolved https://registry.npmjs.org/buster-static
+verbose etag "DFJ0V1K4OHSGV4QL2VEW6M0KQ"
+http GET https://registry.npmjs.org/buster-static
+http 200 https://registry.npmjs.org/bar
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"8PJDNXCQKBT5EJ8RS86GN0GRZ"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:21 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '1730' } ]
+silly name, range, hasData 2 [ 'bar', '', true ]
+silly versions [ 'bar', [ '0.1.0', '0.1.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'f98a2fc5343d9f844bafb17f5d382549dcd5c7a9',
+verbose bin dist     tarball: 'http://registry.npmjs.org/bar/-/bar-0.1.1.tgz' } ]
+verbose caching /Users/sverosak/.npm/bar/0.1.1/package/package.json
+verbose loadDefaults bar@0.1.1
+verbose from cache /usr/local/lib/node_modules/bar/package.json
+WARN eventemitter2@0.1.3 package.json: 'contributers' should probably be 'contributors'
+verbose caching /usr/local/lib/node_modules/bar/node_modules/eventemitter2/package.json
+verbose loadDefaults eventemitter2@0.1.3
+verbose caching /usr/local/lib/node_modules/bar/node_modules/optimist/package.json
+verbose loadDefaults optimist@0.3.1
+verbose caching /usr/local/lib/node_modules/bar/node_modules/watch/package.json
+verbose cache add [ 'watch', '>= 0.3.2' ]
+silly cache add: name, spec, args [ 'watch', '>= 0.3.2', [ 'watch', '>= 0.3.2' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'watch', '>= 0.3.2' ]
+verbose addNamed [ null, '>=0.3.2' ]
+silly name, range, hasData [ 'watch', '>=0.3.2', false ]
+verbose cache add [ 'optimist', '>= 0.2.4' ]
+silly cache add: name, spec, args [ 'optimist', '>= 0.2.4', [ 'optimist', '>= 0.2.4' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'optimist', '>= 0.2.4' ]
+verbose addNamed [ null, '>=0.2.4' ]
+silly name, range, hasData [ 'optimist', '>=0.2.4', false ]
+verbose raw, before any munging watch
+verbose url resolving [ 'https://registry.npmjs.org/', './watch' ]
+verbose url resolved https://registry.npmjs.org/watch
+verbose etag "2CF10QH839L4LSZ2582E6OKM3"
+http GET https://registry.npmjs.org/watch
+verbose raw, before any munging optimist
+verbose url resolving [ 'https://registry.npmjs.org/', './optimist' ]
+verbose url resolved https://registry.npmjs.org/optimist
+verbose etag "9JLEPZI53WCVD6BA872I1HHTC"
+http GET https://registry.npmjs.org/optimist
+http 200 https://registry.npmjs.org/asset
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"39V8HHZ7U5ET5DSGJH3IMI8H6"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:21 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '13014' } ]
+http 200 https://registry.npmjs.org/ace
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"ABX4CNAUPCEJ7659OO1LZZP1"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:21 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '13285' } ]
+silly name, range, hasData 2 [ 'ace', '', true ]
+silly versions [ 'ace', [ '0.0.1', '0.0.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '5bff7a128cb2b18fa6f62867ab3518daeafeae83',
+verbose bin dist     tarball: 'http://registry.npmjs.org/ace/-/ace-0.0.2.tgz' } ]
+silly name, range, hasData 2 [ 'asset', '', true ]
+silly versions [ 'asset', [] ]
+verbose from cache /usr/local/lib/node_modules/asset/package.json
+verbose caching /usr/local/lib/node_modules/asset/node_modules/mkdirp/package.json
+verbose loadDefaults mkdirp@0.0.5
+verbose caching /usr/local/lib/node_modules/asset/node_modules/request/package.json
+verbose loadDefaults request@1.9.5
+verbose cache add [ 'request', '1.9.5' ]
+silly cache add: name, spec, args [ 'request', '1.9.5', [ 'request', '1.9.5' ] ]
+verbose parsed url { pathname: '1.9.5', path: '1.9.5', href: '1.9.5' }
+verbose addNamed [ 'request', '1.9.5' ]
+verbose addNamed [ '1.9.5', '1.9.5' ]
+verbose cache add [ 'mkdirp', '0.0.5' ]
+silly cache add: name, spec, args [ 'mkdirp', '0.0.5', [ 'mkdirp', '0.0.5' ] ]
+verbose parsed url { pathname: '0.0.5', path: '0.0.5', href: '0.0.5' }
+verbose addNamed [ 'mkdirp', '0.0.5' ]
+verbose addNamed [ '0.0.5', '0.0.5' ]
+verbose caching /Users/sverosak/.npm/ace/0.0.2/package/package.json
+verbose loadDefaults ace@0.0.2
+verbose from cache /usr/local/lib/node_modules/ace/package.json
+verbose raw, before any munging request/1.9.5
+verbose url resolving [ 'https://registry.npmjs.org/', './request/1.9.5' ]
+verbose url resolved https://registry.npmjs.org/request/1.9.5
+verbose etag "A728U9K2HN47F8UA38QTZBDS1"
+http GET https://registry.npmjs.org/request/1.9.5
+verbose caching /usr/local/lib/node_modules/ace/node_modules/fibers/package.json
+verbose loadDefaults fibers@0.6.5
+verbose caching /usr/local/lib/node_modules/ace/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/ace/node_modules/optimist/package.json
+verbose loadDefaults optimist@0.3.1
+verbose caching /usr/local/lib/node_modules/ace/node_modules/strata/package.json
+verbose loadDefaults strata@0.11.0
+verbose cache add [ 'strata', 'git://github.com/maccman/strata.git' ]
+silly cache add: name, spec, args [ 'strata',
+silly cache add: name, spec, args   'git://github.com/maccman/strata.git',
+silly cache add: name, spec, args   [ 'strata', 'git://github.com/maccman/strata.git' ] ]
+verbose parsed url { protocol: 'git:',
+verbose parsed url   slashes: true,
+verbose parsed url   host: 'github.com',
+verbose parsed url   hostname: 'github.com',
+verbose parsed url   href: 'git://github.com/maccman/strata.git',
+verbose parsed url   pathname: '/maccman/strata.git',
+verbose parsed url   path: '/maccman/strata.git' }
+verbose addRemoteGit [ 'git://github.com/maccman/strata.git', 'master' ]
+verbose cache add [ 'fibers', 'git://github.com/laverdet/node-fibers.git#master' ]
+silly cache add: name, spec, args [ 'fibers',
+silly cache add: name, spec, args   'git://github.com/laverdet/node-fibers.git#master',
+silly cache add: name, spec, args   [ 'fibers', 'git://github.com/laverdet/node-fibers.git#master' ] ]
+verbose parsed url { protocol: 'git:',
+verbose parsed url   slashes: true,
+verbose parsed url   host: 'github.com',
+verbose parsed url   hostname: 'github.com',
+verbose parsed url   href: 'git://github.com/laverdet/node-fibers.git#master',
+verbose parsed url   hash: '#master',
+verbose parsed url   pathname: '/laverdet/node-fibers.git',
+verbose parsed url   path: '/laverdet/node-fibers.git' }
+verbose addRemoteGit [ 'git://github.com/laverdet/node-fibers.git', 'master' ]
+verbose cache add [ 'mime', '1.2.4' ]
+silly cache add: name, spec, args [ 'mime', '1.2.4', [ 'mime', '1.2.4' ] ]
+verbose parsed url { pathname: '1.2.4', path: '1.2.4', href: '1.2.4' }
+verbose addNamed [ 'mime', '1.2.4' ]
+verbose addNamed [ '1.2.4', '1.2.4' ]
+verbose cache add [ 'optimist', '0.3.1' ]
+silly cache add: name, spec, args [ 'optimist', '0.3.1', [ 'optimist', '0.3.1' ] ]
+verbose parsed url { pathname: '0.3.1', path: '0.3.1', href: '0.3.1' }
+verbose addNamed [ 'optimist', '0.3.1' ]
+verbose addNamed [ '0.3.1', '0.3.1' ]
+verbose raw, before any munging mkdirp/0.0.5
+verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp/0.0.5' ]
+verbose url resolved https://registry.npmjs.org/mkdirp/0.0.5
+verbose etag "7XYX29APZYQ35V2YEQSAFC1JO"
+http GET https://registry.npmjs.org/mkdirp/0.0.5
+silly exec git "clone" "git://github.com/maccman/strata.git" "/tmp/npm-1334581941490/1334581941490-0.8408918576315045"
+silly spawning [ 'git',
+silly spawning   [ 'clone',
+silly spawning     'git://github.com/maccman/strata.git',
+silly spawning     '/tmp/npm-1334581941490/1334581941490-0.8408918576315045' ],
+silly spawning   null ]
+silly exec git "clone" "git://github.com/laverdet/node-fibers.git" "/tmp/npm-1334581941490/1334581941490-0.7564018154516816"
+silly spawning [ 'git',
+silly spawning   [ 'clone',
+silly spawning     'git://github.com/laverdet/node-fibers.git',
+silly spawning     '/tmp/npm-1334581941490/1334581941490-0.7564018154516816' ],
+silly spawning   null ]
+verbose raw, before any munging optimist/0.3.1
+verbose url resolving [ 'https://registry.npmjs.org/', './optimist/0.3.1' ]
+verbose url resolved https://registry.npmjs.org/optimist/0.3.1
+verbose etag "27DYN7Q27CGC5MZ2WZ7DGVOCP"
+http GET https://registry.npmjs.org/optimist/0.3.1
+verbose raw, before any munging mime/1.2.4
+verbose url resolving [ 'https://registry.npmjs.org/', './mime/1.2.4' ]
+verbose url resolved https://registry.npmjs.org/mime/1.2.4
+verbose etag "1ELWJ5L0Q89YWYZWQYGPZR9LU"
+http GET https://registry.npmjs.org/mime/1.2.4
+http 200 https://registry.npmjs.org/coffee-script
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"3MXVQP0QD2XFCXILWESP4GNJ3"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:21 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '15615' } ]
+silly name, range, hasData 2 [ 'coffee-script', '', true ]
+silly versions [ 'coffee-script',
+silly versions   [ '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.9.0',
+silly versions     '0.9.1',
+silly versions     '0.9.2',
+silly versions     '0.9.3',
+silly versions     '0.9.4',
+silly versions     '0.9.5',
+silly versions     '0.9.6',
+silly versions     '1.0.0',
+silly versions     '1.0.1',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.2.0',
+silly versions     '1.3.0',
+silly versions     '1.3.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '4da0f14eb44e809e8c1d598f5513d7302a91afd7',
+verbose bin dist     tarball: 'http://registry.npmjs.org/coffee-script/-/coffee-script-1.3.1.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/coffee-script/-/coffee-script-1.3.1.tgz',
+verbose addRemoteTarball   '4da0f14eb44e809e8c1d598f5513d7302a91afd7' ]
+verbose fetch to /tmp/npm-1334581941490/1334581941519-0.5737446921411902/tmp.tgz
+http GET https://registry.npmjs.org/coffee-script/-/coffee-script-1.3.1.tgz
+http 200 https://registry.npmjs.org/cluster
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"AWEFMSPLGPF0A0M1QN6NWPIJ2"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:21 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '37973' } ]
+silly name, range, hasData 2 [ 'cluster', '', true ]
+silly versions [ 'cluster',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.3.2',
+silly versions     '0.3.3',
+silly versions     '0.4.0',
+silly versions     '0.4.1',
+silly versions     '0.4.2',
+silly versions     '0.5.0',
+silly versions     '0.5.1',
+silly versions     '0.5.2',
+silly versions     '0.5.3',
+silly versions     '0.5.4',
+silly versions     '0.5.5',
+silly versions     '0.5.6',
+silly versions     '0.5.7',
+silly versions     '0.6.0',
+silly versions     '0.6.1',
+silly versions     '0.6.2',
+silly versions     '0.6.3',
+silly versions     '0.6.4',
+silly versions     '0.6.5',
+silly versions     '0.6.6',
+silly versions     '0.6.7',
+silly versions     '0.6.8',
+silly versions     '0.6.9',
+silly versions     '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.7.3',
+silly versions     '0.7.4',
+silly versions     '0.7.5',
+silly versions     '0.7.6',
+silly versions     '0.7.7' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'e497e267cc956bd0b0513adb4aa393357d0085ef',
+verbose bin dist     tarball: 'http://registry.npmjs.org/cluster/-/cluster-0.7.7.tgz' } ]
+verbose caching /Users/sverosak/.npm/cluster/0.7.7/package/package.json
+verbose loadDefaults cluster@0.7.7
+verbose from cache /usr/local/lib/node_modules/cluster/package.json
+verbose caching /usr/local/lib/node_modules/cluster/node_modules/log/package.json
+verbose loadDefaults log@1.3.0
+verbose caching /usr/local/lib/node_modules/cluster/node_modules/mkdirp/package.json
+verbose cache add [ 'log', '>= 1.2.0' ]
+silly cache add: name, spec, args [ 'log', '>= 1.2.0', [ 'log', '>= 1.2.0' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'log', '>= 1.2.0' ]
+verbose addNamed [ null, '>=1.2.0' ]
+silly name, range, hasData [ 'log', '>=1.2.0', false ]
+verbose cache add [ 'mkdirp', '>= 0.0.1' ]
+silly cache add: name, spec, args [ 'mkdirp', '>= 0.0.1', [ 'mkdirp', '>= 0.0.1' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'mkdirp', '>= 0.0.1' ]
+verbose addNamed [ null, '>=0.0.1' ]
+silly name, range, hasData [ 'mkdirp', '>=0.0.1', false ]
+verbose raw, before any munging mkdirp
+verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+verbose url resolved https://registry.npmjs.org/mkdirp
+verbose etag "95YPAPQRNXLBBERBYQC7GOA1J"
+http GET https://registry.npmjs.org/mkdirp
+verbose raw, before any munging log
+verbose url resolving [ 'https://registry.npmjs.org/', './log' ]
+verbose url resolved https://registry.npmjs.org/log
+verbose etag "DW0OF4AZTPWL01B393CPG86RU"
+http GET https://registry.npmjs.org/log
+http 304 https://registry.npmjs.org/cssom
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"A8V9SX0YLQ5DPWMJYUT4VOSBD"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag cssom from cache
+silly name, range, hasData 2 [ 'cssom', '', true ]
+silly versions [ 'cssom', [ '0.2.0', '0.2.1', '0.2.2', '0.2.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '7f9a236c0b05dbc06945ae055ba1c6d8eab91c69',
+verbose bin dist     tarball: 'http://registry.npmjs.org/cssom/-/cssom-0.2.3.tgz' } ]
+http 304 https://registry.npmjs.org/colors
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"E67K86DW20A25PWKB29742EU5"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag colors from cache
+silly name, range, hasData 2 [ 'colors', '', true ]
+silly versions [ 'colors', [ '0.3.0', '0.5.0', '0.5.1', '0.6.0', '0.6.0-1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '6dbb68ceb8bc60f2b313dcc5ce1599f06d19e67a',
+verbose bin dist     tarball: 'http://registry.npmjs.org/colors/-/colors-0.6.0-1.tgz' } ]
+verbose caching /Users/sverosak/.npm/cssom/0.2.3/package/package.json
+verbose loadDefaults cssom@0.2.3
+verbose from cache /usr/local/lib/node_modules/cssom/package.json
+verbose caching /Users/sverosak/.npm/colors/0.6.0-1/package/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose from cache /usr/local/lib/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/DevWatcher/node_modules/colors/package.json
+http 200 https://registry.npmjs.org/coffee-watcher
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"2X857PMS7Q4UCWA8QS0O5O10F"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '3026' } ]
+silly name, range, hasData 2 [ 'coffee-watcher', '', true ]
+silly versions [ 'coffee-watcher', [ '1.0.0', '1.1.0', '1.3.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '7f28b192eb76ee1b558fab6dcd6cf9528716ccfe',
+verbose bin dist     tarball: 'http://registry.npmjs.org/coffee-watcher/-/coffee-watcher-1.3.0.tgz' } ]
+verbose caching /Users/sverosak/.npm/coffee-watcher/1.3.0/package/package.json
+verbose loadDefaults coffee-watcher@1.3.0
+verbose from cache /usr/local/lib/node_modules/coffee-watcher/package.json
+http 200 https://registry.npmjs.org/cssom-papandreou
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"9RSA6NQ5C6HTFWSWASLVUXMR"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '8599' } ]
+silly name, range, hasData 2 [ 'cssom-papandreou', '', true ]
+silly versions [ 'cssom-papandreou',
+silly versions   [ '0.2.0-patch1',
+silly versions     '0.2.1-patch1',
+silly versions     '0.2.2-patch1',
+silly versions     '0.2.2-patch2',
+silly versions     '0.2.2-patch3',
+silly versions     '0.2.3-patch1',
+silly versions     '0.2.3-patch2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'fb914790420dd5a71d9a961851d608ae4e286aa3',
+verbose bin dist     tarball: 'http://registry.npmjs.org/cssom-papandreou/-/cssom-papandreou-0.2.3-patch2.tgz' } ]
+verbose caching /Users/sverosak/.npm/cssom-papandreou/0.2.3-patch2/package/package.json
+verbose loadDefaults cssom-papandreou@0.2.3-patch2
+verbose from cache /usr/local/lib/node_modules/cssom-papandreou/package.json
+verbose from cache /usr/local/lib/node_modules/FINN-styl-e/node_modules/cssom-papandreou/package.json
+http 200 https://registry.npmjs.org/http-proxy
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"AY271EGC34EL1NB2US1QRT7FM"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '24031' } ]
+silly name, range, hasData 2 [ 'http-proxy', '', true ]
+silly versions [ 'http-proxy', [ '0.8.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'b366d265688ffcaa9e3c77ead20d154ddf94489e',
+verbose bin dist     tarball: 'http://registry.npmjs.org/http-proxy/-/http-proxy-0.8.0.tgz' } ]
+verbose caching /Users/sverosak/.npm/http-proxy/0.8.0/package/package.json
+verbose loadDefaults http-proxy@0.8.0
+verbose from cache /usr/local/lib/node_modules/http-proxy/package.json
+verbose from cache /usr/local/lib/node_modules/DevWatcher/node_modules/http-proxy/package.json
+verbose caching /usr/local/lib/node_modules/http-proxy/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/http-proxy/node_modules/optimist/package.json
+verbose loadDefaults optimist@0.2.8
+verbose caching /usr/local/lib/node_modules/http-proxy/node_modules/pkginfo/package.json
+verbose loadDefaults pkginfo@0.2.3
+verbose cache add [ 'colors', '0.x.x' ]
+silly cache add: name, spec, args [ 'colors', '0.x.x', [ 'colors', '0.x.x' ] ]
+verbose parsed url { pathname: '0.x.x', path: '0.x.x', href: '0.x.x' }
+verbose addNamed [ 'colors', '0.x.x' ]
+verbose addNamed [ null, '>=0.0.0- <1.0.0-' ]
+silly name, range, hasData [ 'colors', '>=0.0.0- <1.0.0-', false ]
+verbose cache add [ 'optimist', '0.2.x' ]
+silly cache add: name, spec, args [ 'optimist', '0.2.x', [ 'optimist', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'optimist', '0.2.x' ]
+verbose addNamed [ null, '>=0.2.0- <0.3.0-' ]
+silly name, range, hasData [ 'optimist', '>=0.2.0- <0.3.0-', false ]
+verbose cache add [ 'pkginfo', '0.2.x' ]
+silly cache add: name, spec, args [ 'pkginfo', '0.2.x', [ 'pkginfo', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'pkginfo', '0.2.x' ]
+verbose addNamed [ null, '>=0.2.0- <0.3.0-' ]
+silly name, range, hasData [ 'pkginfo', '>=0.2.0- <0.3.0-', false ]
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/http-proxy/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/http-proxy/node_modules/optimist/package.json
+verbose loadDefaults optimist@0.2.8
+verbose caching /usr/local/lib/node_modules/DevWatcher/node_modules/http-proxy/node_modules/pkginfo/package.json
+verbose loadDefaults pkginfo@0.2.3
+verbose cache add [ 'colors', '0.x.x' ]
+silly cache add: name, spec, args [ 'colors', '0.x.x', [ 'colors', '0.x.x' ] ]
+verbose parsed url { pathname: '0.x.x', path: '0.x.x', href: '0.x.x' }
+verbose addNamed [ 'colors', '0.x.x' ]
+verbose cache add [ 'optimist', '0.2.x' ]
+silly cache add: name, spec, args [ 'optimist', '0.2.x', [ 'optimist', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'optimist', '0.2.x' ]
+verbose cache add [ 'pkginfo', '0.2.x' ]
+silly cache add: name, spec, args [ 'pkginfo', '0.2.x', [ 'pkginfo', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'pkginfo', '0.2.x' ]
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "E67K86DW20A25PWKB29742EU5"
+http GET https://registry.npmjs.org/colors
+verbose raw, before any munging optimist
+verbose url resolving [ 'https://registry.npmjs.org/', './optimist' ]
+verbose url resolved https://registry.npmjs.org/optimist
+verbose etag "9JLEPZI53WCVD6BA872I1HHTC"
+http GET https://registry.npmjs.org/optimist
+verbose raw, before any munging pkginfo
+verbose url resolving [ 'https://registry.npmjs.org/', './pkginfo' ]
+verbose url resolved https://registry.npmjs.org/pkginfo
+verbose etag "EE0LOENF8JDFCK6UYMSRF0HG"
+http GET https://registry.npmjs.org/pkginfo
+http 200 https://registry.npmjs.org/expresso
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"BHBLO91CXT965UGK7MB6SH7G"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '18238' } ]
+http 200 https://registry.npmjs.org/kassit
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"1LS9R9FKWU39SZCZ0GVAGY7P1"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '5600' } ]
+http 200 https://registry.npmjs.org/html2jade
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"8CQ1PVWORPHY1KD4NVQF9CAL0"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '15183' } ]
+silly name, range, hasData 2 [ 'kassit', '', true ]
+silly versions [ 'kassit', [] ]
+verbose from cache /usr/local/lib/node_modules/kassit/package.json
+silly name, range, hasData 2 [ 'html2jade', '', true ]
+silly versions [ 'html2jade',
+silly versions   [ '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.0.8',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.15',
+silly versions     '0.1.16',
+silly versions     '0.1.17' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '2ce3321496b4c0c75ff03e50b03b92a23e2e22a7',
+verbose bin dist     tarball: 'http://registry.npmjs.org/html2jade/-/html2jade-0.1.17.tgz' } ]
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.1
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/eco/package.json
+verbose loadDefaults eco@1.1.0-rc-1
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/express/package.json
+verbose loadDefaults express@2.4.3
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/inflect/package.json
+verbose loadDefaults inflect@0.1.0
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/less/package.json
+verbose loadDefaults less@1.1.4
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/uglify-js/package.json
+verbose loadDefaults uglify-js@1.0.6
+verbose caching /usr/local/lib/node_modules/kassit/node_modules/uglifycss/package.json
+verbose loadDefaults uglifycss@0.0.3
+verbose cache add [ 'coffee-script', '1.1.1' ]
+silly cache add: name, spec, args [ 'coffee-script', '1.1.1', [ 'coffee-script', '1.1.1' ] ]
+verbose parsed url { pathname: '1.1.1', path: '1.1.1', href: '1.1.1' }
+verbose addNamed [ 'coffee-script', '1.1.1' ]
+verbose addNamed [ '1.1.1', '1.1.1' ]
+verbose cache add [ 'eco', '1.1.0-rc-1' ]
+silly cache add: name, spec, args [ 'eco', '1.1.0-rc-1', [ 'eco', '1.1.0-rc-1' ] ]
+verbose parsed url { pathname: '1.1.0-rc-1',
+verbose parsed url   path: '1.1.0-rc-1',
+verbose parsed url   href: '1.1.0-rc-1' }
+verbose addNamed [ 'eco', '1.1.0-rc-1' ]
+verbose addNamed [ '1.1.0-rc-1', '1.1.0-rc-1' ]
+verbose cache add [ 'express', '2.4.3' ]
+silly cache add: name, spec, args [ 'express', '2.4.3', [ 'express', '2.4.3' ] ]
+verbose parsed url { pathname: '2.4.3', path: '2.4.3', href: '2.4.3' }
+verbose addNamed [ 'express', '2.4.3' ]
+verbose addNamed [ '2.4.3', '2.4.3' ]
+verbose cache add [ 'inflect', '0.1.0' ]
+silly cache add: name, spec, args [ 'inflect', '0.1.0', [ 'inflect', '0.1.0' ] ]
+verbose parsed url { pathname: '0.1.0', path: '0.1.0', href: '0.1.0' }
+verbose addNamed [ 'inflect', '0.1.0' ]
+verbose addNamed [ '0.1.0', '0.1.0' ]
+verbose cache add [ 'less', '1.1.4' ]
+silly cache add: name, spec, args [ 'less', '1.1.4', [ 'less', '1.1.4' ] ]
+verbose parsed url { pathname: '1.1.4', path: '1.1.4', href: '1.1.4' }
+verbose addNamed [ 'less', '1.1.4' ]
+verbose addNamed [ '1.1.4', '1.1.4' ]
+verbose cache add [ 'uglify-js', '1.0.6' ]
+silly cache add: name, spec, args [ 'uglify-js', '1.0.6', [ 'uglify-js', '1.0.6' ] ]
+verbose parsed url { pathname: '1.0.6', path: '1.0.6', href: '1.0.6' }
+verbose addNamed [ 'uglify-js', '1.0.6' ]
+verbose addNamed [ '1.0.6', '1.0.6' ]
+verbose cache add [ 'uglifycss', '0.0.3' ]
+silly cache add: name, spec, args [ 'uglifycss', '0.0.3', [ 'uglifycss', '0.0.3' ] ]
+verbose parsed url { pathname: '0.0.3', path: '0.0.3', href: '0.0.3' }
+verbose addNamed [ 'uglifycss', '0.0.3' ]
+verbose addNamed [ '0.0.3', '0.0.3' ]
+silly name, range, hasData 2 [ 'expresso', '', true ]
+silly versions [ 'expresso',
+silly versions   [ '0.1.0',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.4.0',
+silly versions     '0.5.0',
+silly versions     '0.6.0',
+silly versions     '0.6.1',
+silly versions     '0.6.2',
+silly versions     '0.6.3',
+silly versions     '0.6.4',
+silly versions     '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.7.3',
+silly versions     '0.7.4',
+silly versions     '0.7.5',
+silly versions     '0.7.6',
+silly versions     '0.7.7',
+silly versions     '0.7.9',
+silly versions     '0.8.0',
+silly versions     '0.8.1',
+silly versions     '0.9.0',
+silly versions     '0.9.1',
+silly versions     '0.9.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '177b260908acaebe45ee16ddf74495a3f55862e8',
+verbose bin dist     tarball: 'http://registry.npmjs.org/expresso/-/expresso-0.9.2.tgz' } ]
+verbose raw, before any munging express/2.4.3
+verbose url resolving [ 'https://registry.npmjs.org/', './express/2.4.3' ]
+verbose url resolved https://registry.npmjs.org/express/2.4.3
+verbose etag "8TD9VJDU5S6ZQ545KE4QT4X5E"
+http GET https://registry.npmjs.org/express/2.4.3
+verbose raw, before any munging coffee-script/1.1.1
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script/1.1.1' ]
+verbose url resolved https://registry.npmjs.org/coffee-script/1.1.1
+verbose etag "A7QQQK4MFEO55G1LGQ5GY00ZA"
+http GET https://registry.npmjs.org/coffee-script/1.1.1
+verbose raw, before any munging eco/1.1.0-rc-1
+verbose url resolving [ 'https://registry.npmjs.org/', './eco/1.1.0-rc-1' ]
+verbose url resolved https://registry.npmjs.org/eco/1.1.0-rc-1
+verbose etag "B8XOR3J2R3WH9Z5MN3H3BJ9O2"
+http GET https://registry.npmjs.org/eco/1.1.0-rc-1
+verbose raw, before any munging inflect/0.1.0
+verbose url resolving [ 'https://registry.npmjs.org/', './inflect/0.1.0' ]
+verbose url resolved https://registry.npmjs.org/inflect/0.1.0
+verbose etag "1IFIUCM0QPUT1TDZN7HYLYX8Q"
+http GET https://registry.npmjs.org/inflect/0.1.0
+verbose raw, before any munging less/1.1.4
+verbose url resolving [ 'https://registry.npmjs.org/', './less/1.1.4' ]
+verbose url resolved https://registry.npmjs.org/less/1.1.4
+verbose etag "75IE72NJCWGNO7VWX7F9RD6VI"
+http GET https://registry.npmjs.org/less/1.1.4
+verbose raw, before any munging uglify-js/1.0.6
+verbose url resolving [ 'https://registry.npmjs.org/', './uglify-js/1.0.6' ]
+verbose url resolved https://registry.npmjs.org/uglify-js/1.0.6
+verbose etag "BEING7K51L4L23XXKHAQ5RWV2"
+http GET https://registry.npmjs.org/uglify-js/1.0.6
+verbose raw, before any munging uglifycss/0.0.3
+verbose url resolving [ 'https://registry.npmjs.org/', './uglifycss/0.0.3' ]
+verbose url resolved https://registry.npmjs.org/uglifycss/0.0.3
+verbose etag "2FAN0RXSFFG550JDXGVGRBRZR"
+http GET https://registry.npmjs.org/uglifycss/0.0.3
+verbose caching /Users/sverosak/.npm/html2jade/0.1.17/package/package.json
+verbose loadDefaults html2jade@0.1.17
+verbose from cache /usr/local/lib/node_modules/html2jade/package.json
+verbose caching /Users/sverosak/.npm/expresso/0.9.2/package/package.json
+verbose loadDefaults expresso@0.9.2
+verbose from cache /usr/local/lib/node_modules/expresso/package.json
+verbose caching /usr/local/lib/node_modules/html2jade/node_modules/commander/package.json
+verbose loadDefaults commander@0.5.2
+verbose caching /usr/local/lib/node_modules/html2jade/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.13
+verbose cache add [ 'jsdom', '>= 0.2.13' ]
+silly cache add: name, spec, args [ 'jsdom', '>= 0.2.13', [ 'jsdom', '>= 0.2.13' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'jsdom', '>= 0.2.13' ]
+verbose addNamed [ null, '>=0.2.13' ]
+silly name, range, hasData [ 'jsdom', '>=0.2.13', false ]
+verbose cache add [ 'commander', '>= 0.5.2' ]
+silly cache add: name, spec, args [ 'commander', '>= 0.5.2', [ 'commander', '>= 0.5.2' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'commander', '>= 0.5.2' ]
+verbose addNamed [ null, '>=0.5.2' ]
+silly name, range, hasData [ 'commander', '>=0.5.2', false ]
+verbose raw, before any munging jsdom
+verbose url resolving [ 'https://registry.npmjs.org/', './jsdom' ]
+verbose url resolved https://registry.npmjs.org/jsdom
+verbose etag "5TCC808FB372RR09PMJVT48RR"
+http GET https://registry.npmjs.org/jsdom
+verbose raw, before any munging commander
+verbose url resolving [ 'https://registry.npmjs.org/', './commander' ]
+verbose url resolved https://registry.npmjs.org/commander
+verbose etag "77XWP5DV4KCWIM2LWJP9FRE3R"
+http GET https://registry.npmjs.org/commander
+http 200 https://registry.npmjs.org/js2coffee
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"AQCIN1RWHX78X1P9EWMO18MZ9"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '8139' } ]
+http 200 https://registry.npmjs.org/ircbot
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"1Y69OBEKE82HLL0K3B56YKL8E"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:22 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '2021' } ]
+silly name, range, hasData 2 [ 'js2coffee', '', true ]
+silly versions [ 'js2coffee',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'cea2e13fd483daab8ac834a3e703015ce240dc80',
+verbose bin dist     tarball: 'http://registry.npmjs.org/js2coffee/-/js2coffee-0.1.3.tgz' } ]
+silly name, range, hasData 2 [ 'ircbot', '', true ]
+silly versions [ 'ircbot', [ '0.0.1', '0.0.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '6b00c65313d4096d15a51b7d8b4addda325d53ba',
+verbose bin dist     tarball: 'http://registry.npmjs.org/ircbot/-/ircbot-0.0.2.tgz' } ]
+verbose caching /Users/sverosak/.npm/ircbot/0.0.2/package/package.json
+verbose loadDefaults ircbot@0.0.2
+verbose from cache /usr/local/lib/node_modules/ircbot/package.json
+verbose caching /Users/sverosak/.npm/js2coffee/0.1.3/package/package.json
+verbose loadDefaults js2coffee@0.1.3
+verbose from cache /usr/local/lib/node_modules/js2coffee/package.json
+verbose caching /usr/local/lib/node_modules/ircbot/node_modules/irc/package.json
+verbose loadDefaults irc@0.3.3
+verbose cache add [ 'irc', '>=0.1.2' ]
+silly cache add: name, spec, args [ 'irc', '>=0.1.2', [ 'irc', '>=0.1.2' ] ]
+verbose parsed url { pathname: '=0.1.2', path: '=0.1.2', href: '=0.1.2' }
+verbose addNamed [ 'irc', '>=0.1.2' ]
+verbose addNamed [ null, '>=0.1.2' ]
+silly name, range, hasData [ 'irc', '>=0.1.2', false ]
+verbose caching /usr/local/lib/node_modules/js2coffee/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.2.0
+verbose caching /usr/local/lib/node_modules/js2coffee/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.3.1
+verbose cache add [ 'underscore', '>= 0.0.1' ]
+silly cache add: name, spec, args [ 'underscore', '>= 0.0.1', [ 'underscore', '>= 0.0.1' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'underscore', '>= 0.0.1' ]
+verbose addNamed [ null, '>=0.0.1' ]
+silly name, range, hasData [ 'underscore', '>=0.0.1', false ]
+verbose cache add [ 'coffee-script', '>= 1.1.0' ]
+silly cache add: name, spec, args [ 'coffee-script', '>= 1.1.0', [ 'coffee-script', '>= 1.1.0' ] ]
+verbose parsed url { pathname: '=', path: '=', href: '=' }
+verbose addNamed [ 'coffee-script', '>= 1.1.0' ]
+verbose addNamed [ null, '>=1.1.0' ]
+silly name, range, hasData [ 'coffee-script', '>=1.1.0', false ]
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "BYBW4JRYI3NLXGOKRYR35NFD9"
+http GET https://registry.npmjs.org/underscore
+verbose raw, before any munging coffee-script
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script' ]
+verbose url resolved https://registry.npmjs.org/coffee-script
+verbose etag "3MXVQP0QD2XFCXILWESP4GNJ3"
+http GET https://registry.npmjs.org/coffee-script
+verbose raw, before any munging irc
+verbose url resolving [ 'https://registry.npmjs.org/', './irc' ]
+verbose url resolved https://registry.npmjs.org/irc
+verbose etag "3QCKM0JUN3V9DCF4EZCWP31U3"
+http GET https://registry.npmjs.org/irc
+verbose git clone git://github.com/laverdet/node-fibers.git Cloning into /tmp/npm-1334581941490/1334581941490-0.7564018154516816...
+silly exec git "checkout" "master"
+silly spawning [ 'git',
+silly spawning   [ 'checkout', 'master' ],
+silly spawning   '/tmp/npm-1334581941490/1334581941490-0.7564018154516816' ]
+verbose git checkout master Already on 'master'
+verbose caching /tmp/npm-1334581941490/1334581941490-0.7564018154516816/package.json
+verbose loadDefaults fibers@0.6.5
+verbose tar.pack [ '/tmp/npm-1334581941490/1334581943171-0.9301337820943445/tmp.tgz',
+verbose tar.pack   '/tmp/npm-1334581941490/1334581941490-0.7564018154516816' ]
+verbose tarball /tmp/npm-1334581941490/1334581943171-0.9301337820943445/tmp.tgz
+verbose folder /tmp/npm-1334581941490/1334581941490-0.7564018154516816
+verbose unpack /tmp/npm-1334581941490/1334581943171-0.9301337820943445/tmp.tgz
+silly gunzTarPerm modes [ '755', '644' ]
+silly extracting entry package.json
+silly extracting entry .npmignore
+silly extracting entry README.md
+silly extracting entry LICENSE
+silly extracting entry fibers.js
+silly extracting entry future.js
+silly extracting entry Makefile
+silly extracting entry src/coroutine.cc
+silly extracting entry src/coroutine.h
+silly extracting entry src/fibers.cc
+silly extracting entry src/libcoro/README
+silly extracting entry src/libcoro/LICENSE
+silly extracting entry src/libcoro/conftest.c
+silly extracting entry src/libcoro/coro.c
+silly extracting entry src/libcoro/coro.h
+silly extracting entry src/Makefile
+silly extracting entry src/platform.mk
+silly extracting entry test/already-running.js
+silly extracting entry test/exec.js
+silly extracting entry test/exit.js
+silly extracting entry test/fibonacci.js
+silly extracting entry test/current.js
+silly extracting entry test/future.js
+silly extracting entry test/illegal-yield.js
+silly extracting entry test/pool.js
+silly extracting entry test/process-title.js
+silly extracting entry test/stack-overflow.js
+silly extracting entry test/child-process.js
+silly extracting entry test/started.js
+silly extracting entry test/bad-context.js
+silly extracting entry test/unwind.js
+silly extracting entry test/finish-multiple.js
+silly extracting entry test.sh
+verbose caching /tmp/npm-1334581941490/1334581943171-0.9301337820943445/package/package.json
+verbose loadDefaults fibers@0.6.5
+verbose from cache /tmp/npm-1334581941490/1334581943171-0.9301337820943445/package/package.json
+verbose tar.pack [ '/Users/sverosak/.npm/fibers/0.6.5/package.tgz',
+verbose tar.pack   '/tmp/npm-1334581941490/1334581943171-0.9301337820943445/package' ]
+verbose tarball /Users/sverosak/.npm/fibers/0.6.5/package.tgz
+verbose folder /tmp/npm-1334581941490/1334581943171-0.9301337820943445/package
+verbose unpack /Users/sverosak/.npm/fibers/0.6.5/package.tgz
+silly gunzTarPerm modes [ '755', '644' ]
+silly extracting entry package.json
+silly extracting entry .npmignore
+silly extracting entry README.md
+silly extracting entry LICENSE
+silly extracting entry fibers.js
+silly extracting entry future.js
+silly extracting entry Makefile
+silly extracting entry src/coroutine.cc
+silly extracting entry src/coroutine.h
+silly extracting entry src/fibers.cc
+silly extracting entry src/libcoro/README
+silly extracting entry src/libcoro/LICENSE
+silly extracting entry src/libcoro/conftest.c
+silly extracting entry src/libcoro/coro.c
+silly extracting entry src/libcoro/coro.h
+silly extracting entry src/Makefile
+silly extracting entry src/platform.mk
+silly extracting entry test/already-running.js
+silly extracting entry test/exec.js
+silly extracting entry test/exit.js
+silly extracting entry test/fibonacci.js
+silly extracting entry test/current.js
+silly extracting entry test/future.js
+silly extracting entry test/illegal-yield.js
+silly extracting entry test/pool.js
+silly extracting entry test/process-title.js
+silly extracting entry test/stack-overflow.js
+silly extracting entry test/child-process.js
+silly extracting entry test/started.js
+silly extracting entry test/bad-context.js
+silly extracting entry test/unwind.js
+silly extracting entry test/finish-multiple.js
+silly extracting entry test.sh
+verbose caching /Users/sverosak/.npm/fibers/0.6.5/package/package.json
+verbose loadDefaults fibers@0.6.5
+silly updated sha bytes 29156
+info shasum da3e8dfd07eb201e3e08c1a48a6e8807a56eb66e
+info shasum /Users/sverosak/.npm/fibers/0.6.5/package.tgz
+verbose from cache /Users/sverosak/.npm/fibers/0.6.5/package/package.json
+verbose chmod /Users/sverosak/.npm/fibers/0.6.5/package.tgz 644
+verbose chown [ '/Users/sverosak/.npm/fibers/0.6.5/package.tgz',
+verbose chown   737141419,
+verbose chown   1503010931 ]
+verbose from cache /usr/local/lib/node_modules/ace/node_modules/fibers/package.json
+verbose git clone git://github.com/maccman/strata.git Cloning into /tmp/npm-1334581941490/1334581941490-0.8408918576315045...
+silly exec git "checkout" "master"
+silly spawning [ 'git',
+silly spawning   [ 'checkout', 'master' ],
+silly spawning   '/tmp/npm-1334581941490/1334581941490-0.8408918576315045' ]
+verbose git checkout master Already on 'master'
+verbose caching /tmp/npm-1334581941490/1334581941490-0.8408918576315045/package.json
+verbose loadDefaults strata@0.11.0
+verbose tar.pack [ '/tmp/npm-1334581941490/1334581943745-0.5759499040432274/tmp.tgz',
+verbose tar.pack   '/tmp/npm-1334581941490/1334581941490-0.8408918576315045' ]
+verbose tarball /tmp/npm-1334581941490/1334581943745-0.5759499040432274/tmp.tgz
+verbose folder /tmp/npm-1334581941490/1334581941490-0.8408918576315045
+verbose unpack /tmp/npm-1334581941490/1334581943745-0.5759499040432274/tmp.tgz
+silly gunzTarPerm modes [ '755', '644' ]
+silly extracting entry package.json
+silly extracting entry .npmignore
+silly extracting entry README.md
+silly extracting entry bin/strata
+silly extracting entry CHANGES
+silly extracting entry doc/01_introduction.js
+silly extracting entry doc/04_errors.js
+silly extracting entry doc/05_middleware.js
+silly extracting entry doc/06_routing.js
+silly extracting entry doc/07_advanced_routing.js
+silly extracting entry doc/03_request_parameters.js
+silly extracting entry doc/09_sessions.js
+silly extracting entry doc/10_redirects.js
+silly extracting entry doc/11_rewriting_urls.js
+silly extracting entry doc/12_file_uploads.js
+silly extracting entry doc/13_gzip_compression.js
+silly extracting entry doc/02_applications.js
+silly extracting entry doc/14_content_negotiation.js
+silly extracting entry doc/08_static_files.js
+silly extracting entry lib/utils.js
+silly extracting entry lib/gzip.js
+silly extracting entry lib/static.js
+silly extracting entry lib/header.js
+silly extracting entry lib/index.js
+silly extracting entry lib/format.js
+silly extracting entry lib/builder.js
+silly extracting entry lib/router.js
+silly extracting entry lib/manual.js
+silly extracting entry lib/mapper.js
+silly extracting entry lib/methodoverride.js
+silly extracting entry lib/flash.js
+silly extracting entry lib/mock.js
+silly extracting entry lib/file.js
+silly extracting entry lib/multipart.js
+silly extracting entry lib/directory.js
+silly extracting entry lib/querystring.js
+silly extracting entry lib/contenttype.js
+silly extracting entry lib/redirect.js
+silly extracting entry lib/contentlength.js
+silly extracting entry lib/request.js
+silly extracting entry lib/commonlogger.js
+silly extracting entry lib/response.js
+silly extracting entry lib/cascade.js
+silly extracting entry lib/rewrite.js
+silly extracting entry lib/jsonp.js
+silly extracting entry lib/lint.js
+silly extracting entry lib/manual/chapter.js
+silly extracting entry lib/session/cookie.js
+silly extracting entry lib/header/accept.js
+silly extracting entry lib/header/acceptcharset.js
+silly extracting entry lib/header/acceptencoding.js
+silly extracting entry lib/header/acceptlanguage.js
+silly extracting entry lib/auth/basic.js
+silly extracting entry SPEC
+silly extracting entry test/utils_test.js
+silly extracting entry test/header_accept_test.js
+silly extracting entry test/header_acceptcharset_test.js
+silly extracting entry test/header_acceptencoding_test.js
+silly extracting entry test/header_acceptlanguage_test.js
+silly extracting entry test/gzip_test.js
+silly extracting entry test/jsonp_test.js
+silly extracting entry test/lint_test.js
+silly extracting entry test/mapper_test.js
+silly extracting entry test/methodoverride_test.js
+silly extracting entry test/mock_test.js
+silly extracting entry test/format_test.js
+silly extracting entry test/multipart_test.js
+silly extracting entry test/flash_test.js
+silly extracting entry test/querystring_test.js
+silly extracting entry test/file_test.js
+silly extracting entry test/redirect_test.js
+silly extracting entry test/contenttype_test.js
+silly extracting entry test/request_test.js
+silly extracting entry test/contentlength_test.js
+silly extracting entry test/response_test.js
+silly extracting entry test/commonlogger_test.js
+silly extracting entry test/rewrite_test.js
+silly extracting entry test/cascade_test.js
+silly extracting entry test/router_test.js
+silly extracting entry test/builder_test.js
+silly extracting entry test/session_cookie_test.js
+silly extracting entry test/auth_basic_test.js
+silly extracting entry test/index_test.js
+silly extracting entry test/_files/index.html
+silly extracting entry test/_files/binary
+silly extracting entry test/_files/filename_and_modification_param
+silly extracting entry test/_files/filename_with_escaped_quotes
+silly extracting entry test/_files/filename_with_percent_escaped_quotes
+silly extracting entry test/_files/filename_with_unescaped_quotes
+silly extracting entry test/_files/filename_with_unescaped_quotes_and_modification_param
+silly extracting entry test/_files/content_type_no_filename
+silly extracting entry test/_files/mixed_files
+silly extracting entry test/_files/none
+silly extracting entry test/_files/test.txt
+silly extracting entry test/_files/test.txt.gz
+silly extracting entry test/_files/text
+silly extracting entry test/_files/text_ie
+silly extracting entry test/_files/webkit
+verbose caching /tmp/npm-1334581941490/1334581943745-0.5759499040432274/package/package.json
+verbose loadDefaults strata@0.11.0
+verbose from cache /tmp/npm-1334581941490/1334581943745-0.5759499040432274/package/package.json
+verbose tar.pack [ '/Users/sverosak/.npm/strata/0.11.0/package.tgz',
+verbose tar.pack   '/tmp/npm-1334581941490/1334581943745-0.5759499040432274/package' ]
+verbose tarball /Users/sverosak/.npm/strata/0.11.0/package.tgz
+verbose folder /tmp/npm-1334581941490/1334581943745-0.5759499040432274/package
+http 200 https://registry.npmjs.org/n
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"AR1QSEKS2V67AJY3QY4IO7TI1"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '14077' } ]
+http 200 https://registry.npmjs.org/prompt
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"CAN613LWRDYME7HBBW6O76K56"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '16937' } ]
+silly name, range, hasData 2 [ 'n', '', true ]
+silly versions [ 'n',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.3.0',
+silly versions     '0.4.0',
+silly versions     '0.4.1',
+silly versions     '0.4.2',
+silly versions     '0.5.0',
+silly versions     '0.5.1',
+silly versions     '0.5.2',
+silly versions     '0.5.3',
+silly versions     '0.5.4',
+silly versions     '0.6.0',
+silly versions     '0.6.1',
+silly versions     '0.7.0',
+silly versions     '0.7.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '5519fa39f2097d92caf6c2ff2c93de381d9d19cd',
+verbose bin dist     tarball: 'http://registry.npmjs.org/n/-/n-0.7.1.tgz' } ]
+silly name, range, hasData 2 [ 'prompt', '', true ]
+silly versions [ 'prompt',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.5',
+silly versions     '0.1.7',
+silly versions     '0.1.8',
+silly versions     '0.1.9',
+silly versions     '0.1.10',
+silly versions     '0.1.11',
+silly versions     '0.1.12' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'd3114e4fb985ac66eaa35586dcb7b3fb3b27bfc6',
+verbose bin dist     tarball: 'http://registry.npmjs.org/prompt/-/prompt-0.1.12.tgz' } ]
+verbose caching /Users/sverosak/.npm/n/0.7.1/package/package.json
+verbose loadDefaults n@0.7.1
+verbose from cache /usr/local/lib/node_modules/n/package.json
+http 200 https://registry.npmjs.org/node-proxy
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"E884DN4PUULXSY8FLXAZ08QLV"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '8145' } ]
+http 200 https://registry.npmjs.org/socketstream
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"451VL0YF3M5KTVA741MIH6GF0"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '21406' } ]
+verbose caching /Users/sverosak/.npm/prompt/0.1.12/package/package.json
+verbose loadDefaults prompt@0.1.12
+verbose from cache /usr/local/lib/node_modules/prompt/package.json
+verbose caching /usr/local/lib/node_modules/prompt/node_modules/async/package.json
+verbose loadDefaults async@0.1.18
+verbose caching /usr/local/lib/node_modules/prompt/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/prompt/node_modules/pkginfo/package.json
+verbose loadDefaults pkginfo@0.2.3
+verbose caching /usr/local/lib/node_modules/prompt/node_modules/winston/package.json
+verbose loadDefaults winston@0.5.11
+verbose cache add [ 'async', '0.1.x' ]
+silly cache add: name, spec, args [ 'async', '0.1.x', [ 'async', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'async', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'async', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'colors', '0.x.x' ]
+silly cache add: name, spec, args [ 'colors', '0.x.x', [ 'colors', '0.x.x' ] ]
+verbose parsed url { pathname: '0.x.x', path: '0.x.x', href: '0.x.x' }
+verbose addNamed [ 'colors', '0.x.x' ]
+verbose cache add [ 'pkginfo', '0.x.x' ]
+silly cache add: name, spec, args [ 'pkginfo', '0.x.x', [ 'pkginfo', '0.x.x' ] ]
+verbose parsed url { pathname: '0.x.x', path: '0.x.x', href: '0.x.x' }
+verbose addNamed [ 'pkginfo', '0.x.x' ]
+verbose addNamed [ null, '>=0.0.0- <1.0.0-' ]
+silly name, range, hasData [ 'pkginfo', '>=0.0.0- <1.0.0-', false ]
+verbose cache add [ 'winston', '0.5.x' ]
+silly cache add: name, spec, args [ 'winston', '0.5.x', [ 'winston', '0.5.x' ] ]
+verbose parsed url { pathname: '0.5.x', path: '0.5.x', href: '0.5.x' }
+verbose addNamed [ 'winston', '0.5.x' ]
+verbose addNamed [ null, '>=0.5.0- <0.6.0-' ]
+silly name, range, hasData [ 'winston', '>=0.5.0- <0.6.0-', false ]
+silly name, range, hasData 2 [ 'node-proxy', '', true ]
+silly versions [ 'node-proxy',
+silly versions   [ '0.3.1', '0.3.2', '0.4.0', '0.5.0', '0.5.1', '0.5.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'c22cc7ddf8c2af0bfa32fed30d3c533b216ef893',
+verbose bin dist     tarball: 'http://registry.npmjs.org/node-proxy/-/node-proxy-0.5.2.tgz' } ]
+silly name, range, hasData 2 [ 'socketstream', '', true ]
+silly versions [ 'socketstream',
+silly versions   [ '0.1.00',
+silly versions     '0.1.01',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.5',
+silly versions     '0.1.6',
+silly versions     '0.1.7',
+silly versions     '0.1.8',
+silly versions     '0.2.6',
+silly versions     '0.2.7' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: 'a0f01e49253aaf0ac9b240a23ae361696afc61a6',
+verbose bin dist     tarball: 'http://registry.npmjs.org/socketstream/-/socketstream-0.2.7.tgz' } ]
+http 200 https://registry.npmjs.org/nib
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"E60NYGLNQW1ZUS7LDD2GGS6Z6"',
+silly get cb     date: 'Mon, 16 Apr 2012 13:12:23 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '16562' } ]
+verbose raw, before any munging pkginfo
+verbose url resolving [ 'https://registry.npmjs.org/', './pkginfo' ]
+verbose url resolved https://registry.npmjs.org/pkginfo
+verbose etag "EE0LOENF8JDFCK6UYMSRF0HG"
+http GET https://registry.npmjs.org/pkginfo
+verbose raw, before any munging winston
+verbose url resolving [ 'https://registry.npmjs.org/', './winston' ]
+verbose url resolved https://registry.npmjs.org/winston
+verbose etag "585OEWYKIV655OJBDME236F1"
+http GET https://registry.npmjs.org/winston
+verbose raw, before any munging async
+verbose url resolving [ 'https://registry.npmjs.org/', './async' ]
+verbose url resolved https://registry.npmjs.org/async
+verbose etag "4O1O7XJ8LJEGORN3D1SZYJA91"
+http GET https://registry.npmjs.org/async
+verbose caching /Users/sverosak/.npm/node-proxy/0.5.2/package/package.json
+verbose loadDefaults node-proxy@0.5.2
+verbose from cache /usr/local/lib/node_modules/node-proxy/package.json
+verbose caching /Users/sverosak/.npm/socketstream/0.2.7/package/package.json
+verbose loadDefaults socketstream@0.2.7
+silly name, range, hasData 2 [ 'nib', '', true ]
+silly versions [ 'nib',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.0.8',
+silly versions     '0.1.0',
+silly versions     '0.2.0',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.3.2',
+silly versions     '0.4.0',
+silly versions     '0.4.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-darwin-x64-11.3.0',
+verbose bin dist   { shasum: '00de45c91d923c0f9f2e64a5199b11cadb75a89f',
+verbose bin dist     tarball: 'http://registry.npmjs.org/nib/-/nib-0.4.1.tgz' } ]
+verbose unpack /Users/sverosak/.npm/strata/0.11.0/package.tgz
+verbose addRemoteTarball [ 'https://registry.npmjs.org/nib/-/nib-0.4.1.tgz',
+verbose addRemoteTarball   '00de45c91d923c0f9f2e64a5199b11cadb75a89f' ]
+silly gunzTarPerm modes [ '755', '644' ]
+verbose fetch to /tmp/npm-1334581941490/1334581944288-0.5029422559309751/tmp.tgz
+http GET https://registry.npmjs.org/nib/-/nib-0.4.1.tgz
+silly extracting entry package.json
+silly extracting entry .npmignore
+silly extracting entry README.md
+silly extracting entry bin/strata
+silly extracting entry CHANGES
+silly extracting entry doc/01_introduction.js
+silly extracting entry doc/04_errors.js
+silly extracting entry doc/05_middleware.js
+silly extracting entry doc/06_routing.js
+silly extracting entry doc/07_advanced_routing.js
+silly extracting entry doc/03_request_parameters.js
+silly extracting entry doc/09_sessions.js
+silly extracting entry doc/10_redirects.js
+silly extracting entry doc/11_rewriting_urls.js
+silly extracting entry doc/12_file_uploads.js
+silly extracting entry doc/13_gzip_compression.js
+silly extracting entry doc/02_applications.js
+silly extracting entry doc/14_content_negotiation.js
+silly extracting entry doc/08_static_files.js
+silly extracting entry lib/utils.js
+silly extracting entry lib/gzip.js
+silly extracting entry lib/static.js
+silly extracting entry lib/header.js
+silly extracting entry lib/index.js
+silly extracting entry lib/format.js
+silly extracting entry lib/builder.js
+silly extracting entry lib/router.js
+silly extracting entry lib/manual.js
+silly extracting entry lib/mapper.js
+silly extracting entry lib/methodoverride.js
+silly extracting entry lib/flash.js
+silly extracting entry lib/mock.js
+silly extracting entry lib/file.js
+silly extracting entry lib/multipart.js
+silly extracting entry lib/directory.js
+silly extracting entry lib/querystring.js
+silly extracting entry lib/contenttype.js
+silly extracting entry lib/redirect.js
+silly extracting entry lib/contentlength.js
+silly extracting entry lib/request.js
+silly extracting entry lib/commonlogger.js
+silly extracting entry lib/response.js
+silly extracting entry lib/cascade.js
+silly extracting entry lib/rewrite.js
+silly extracting entry lib/jsonp.js
+silly extracting entry lib/lint.js
+silly extracting entry lib/manual/chapter.js
+silly extracting entry lib/session/cookie.js
+silly extracting entry lib/header/accept.js
+silly extracting entry lib/header/acceptcharset.js
+silly extracting entry lib/header/acceptencoding.js
+silly extracting entry lib/header/acceptlanguage.js
+silly extracting entry lib/auth/basic.js
+silly extracting entry SPEC
+silly extracting entry test/utils_test.js
+silly extracting entry test/header_accept_test.js
+silly extracting entry test/header_acceptcharset_test.js
+silly extracting entry test/header_acceptencoding_test.js
+silly extracting entry test/header_acceptlanguage_test.js
+silly extracting entry test/gzip_test.js
+silly extracting entry test/jsonp_test.js
+silly extracting entry test/lint_test.js
+silly extracting entry test/mapper_test.js
+silly extracting entry test/methodoverride_test.js
+silly extracting entry test/mock_test.js
+silly extracting entry test/format_test.js
+silly extracting entry test/multipart_test.js
+silly extracting entry test/flash_test.js
+silly extracting entry test/querystring_test.js
+silly extracting entry test/file_test.js
+silly extracting entry test/redirect_test.js
+silly extracting entry test/contenttype_test.js
+silly extracting entry test/request_test.js
+silly extracting entry test/contentlength_test.js
+silly extracting entry test/response_test.js
+silly extracting entry test/commonlogger_test.js
+silly extracting entry test/rewrite_test.js
+silly extracting entry test/cascade_test.js
+silly extracting entry test/router_test.js
+silly extracting entry test/builder_test.js
+silly extracting entry test/session_cookie_test.js
+silly extracting entry test/auth_basic_test.js
+silly extracting entry test/index_test.js
+silly extracting entry test/_files/index.html
+silly extracting entry test/_files/binary
+silly extracting entry test/_files/filename_and_modification_param
+silly extracting entry test/_files/filename_with_escaped_quotes
+silly extracting entry test/_files/filename_with_percent_escaped_quotes
