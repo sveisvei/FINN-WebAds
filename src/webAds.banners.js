@@ -67,8 +67,9 @@ if (typeof Object.create === 'undefined') {
       innerDiv.appendChild(i);
       div.appendChild(innerDiv);
       // Add reference for selecting injected iframe      
-      this.$iframe = $(i);
-      return (this.$wrapper = $(div)); // return wrapper so result can be appended
+      this.$iframe  = $(i);
+      this.$wrapper = $(div)
+      return this;
     };
     return Iframe;
   })();
@@ -100,7 +101,9 @@ if (typeof Object.create === 'undefined') {
       this.log('new Banner()');
     }
 
-    Banner.prototype.log = function(msg) { if (console) {console.log(this.name+":"+msg);} };
+    Banner.prototype.log = function(msg) { 
+      if (console) {console.log(this.name+":"+msg);} 
+    };
 
     Banner.prototype.config = function(key, value) {
       return (this[key] = value);
@@ -227,7 +230,13 @@ if (typeof Object.create === 'undefined') {
         this.fail('Missing valid container on webad '+this.name, true);
         return this;
       }
-      $container.addClass('webads-processed').append(this.iframe.makeIframe());  
+      this.log('insert before make iframe')
+      this.iframe.makeIframe();
+      this.log('iframe made')
+      $container.addClass('webads-processed');
+      this.log('appending...')
+      this.iframe.$wrapper.appendTo($container);
+      this.log('after insert')
       return this;
     };
     return Banner;

@@ -10,23 +10,23 @@ body.has-dominant-campaign {
   padding: 10px 0 0 0;
 }
 body.has-dominant-campaign .wrapper,
-body.has-dominant-campaign aside.webads {
+body.has-dominant-campaign #banners {
     margin: 0 auto;
 }
 
-aside.webads {
+#banners {
     position: relative;
     z-index: 1;
     min-height: 150px;
     width: 980px;
     padding-bottom: 12px;
 }
-.has-no-top-placement aside.webads {
+.has-no-top-placement #banners {
     height: 0;
     min-height: 0;
     padding-bottom: 0;
 }
-aside.webads .webad {
+#banners .webad {
     z-index: 2;
 }
 .webad-top .inner {
