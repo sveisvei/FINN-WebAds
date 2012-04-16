@@ -71,7 +71,7 @@ function collectTestCases(cb){
               });
             }
             if (typeof test.isHidden !== 'undefined' && test.isHidden === true){
-              assert(banner.iframe.$wrapper.is(':hidden'))
+              assert(banner.iframe.$wrapper.is(':hidden'), 'wrapper div for ' + test.name+' should be hidden');
             }
             
             if (typeof test.setWidth !== 'undefined'){

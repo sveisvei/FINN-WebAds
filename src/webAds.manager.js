@@ -31,7 +31,6 @@ var FINN = FINN||{};
     TODO:
     callback when all is done
     events:
-      webAds.ready
       webAds.done
       webAds.done.all
       webAds.done.Top
@@ -41,9 +40,13 @@ var FINN = FINN||{};
   
   w.on = on; //TODO
   function on(key, callback){
-    // TODO
+    // TODO, hooks into resolve and resolveAll
   } 
   
+  function triggerEvent(name){
+    
+  }
+    
   function refreshFromServer(){}// TODO
   function refreshAllFromServer(){}//TODO
   
@@ -54,7 +57,9 @@ var FINN = FINN||{};
     inDapIf   : true,
     inFIF     : undefined,
     webAds    : w,
-    plugins   : w.plugins
+    plugins   : w.plugins,
+    helios_parameters : "" //TODO: remove this
+     // TODO, add tf_recordClickToUrl?
   };
   
   var bannerMap = {};
@@ -218,15 +223,30 @@ var FINN = FINN||{};
     }
   }
   
-  function refresh(name){
-    return bannerMap[name] && bannerMap[name].refresh();    
+  function refresh(name, cb){
+    bannerMap[name].refresh();
+    // .refresh command resets banner.resolved
+    if (cb && typeof cb === 'function'){    
+      insertCallback(name, cb);      
+    }   
   }
   
-  function refreshAll(){
-    var banner;
-    for(var key in bannerMap){
-      bannerMap[key].refresh();         
+  function refreshAll(commaList, callback){
+    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
+    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
+    var priorityList  = commaList.split(',');
+    
+    function loop(){
+      if (priorityList.length <= 0){
+        for(var key in bannerMap){
+          bannerMap[key].refresh();
+        }
+      } else {
+        render(priorityList.shift(), loop);
+      }
     }
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
+    loop();
   }
   
   function remove(name){

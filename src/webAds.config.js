@@ -69,7 +69,7 @@ var FINN = FINN || {};
     "Middle": {
       width: 580,
       height: 400,
-      container: "banners-middle"
+      container: "banners_middle"
     },
     "Wallpaper": {
       hidden: true,

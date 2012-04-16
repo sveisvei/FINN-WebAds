@@ -1,96 +1,106 @@
 var FINN = FINN||{};
 
+if (typeof Object.create === 'undefined') {
+    Object.create = function (o) { 
+        function F() {} 
+        F.prototype = o; 
+        return new F(); 
+    };
+}
+
 (function(F, $) {
   "use strict";
 
-  var Banner, Iframe, webAds;
-  if (FINN.webAds == null) FINN.webAds = {};
-  webAds = FINN.webAds;
+  var Banner, Iframe;
+  
+  FINN.webAds = FINN.webAds||{};
+  var webAds  = FINN.webAds;
 
   Iframe = (function() {
     function Iframe(name, options, id) {
-      this.name = name;
-      this.options = options != null ? options : {};
-      this.id = id != null ? id : 'webad-' + this.name;
+      this.name     = name;
+      this.options  = options != null ? options : {};
+      this.id       = id != null ? id : 'webad-' + this.name;
     }
 
     Iframe.prototype.remove = function() {
-      return this.$wrapper.remove();
+      this.$wrapper.remove();
+      return this;
     };
 
     Iframe.prototype.refresh = function() {
-      var currSrc, iframeUrl, url;
-      iframeUrl = webAds.iframeUrl || "/finn/webads";
-      currSrc = this.$iframe.attr('src');
-      url = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
-      return this.$iframe.attr('src', url);
+      var iframeUrl = webAds.iframeUrl || "/finn/webads";
+      var currSrc   = this.$iframe.attr('src');
+      var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
+      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#" + this.name) : (iframeUrl + sep + "refreshWebAd#" + this.name);
+      this.$iframe.attr('src', url);
+      return this;
     };
 
     Iframe.prototype.makeIframe = function() {
-      var div, iframe, iframeUrl, innerDiv;
-      iframeUrl = webAds.iframeUrl || "/finn/webads";
-      div = document.createElement('div');
-      innerDiv = document.createElement('div');
-      iframe = document.createElement('iframe');
-      innerDiv.className = 'inner';
-      div.id = this.id;
-      div.className = "advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '');
-      if (this.options.hidden ){
-        div.style.display = "none";
-      }
-      iframe.src = "" + iframeUrl + "#" + this.name;
-      iframe.scrolling = 'no';
-      iframe.className = 'webad-iframe';
+      var iframeUrl = webAds.iframeUrl || "/finn/webads";
+      var div       = document.createElement('div');
+      var innerDiv  = document.createElement('div');
+      var i         = document.createElement('iframe');
+      
+      innerDiv.className  = 'inner';
+      
+      div.id              = this.id;
+      div.className = ("advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
+      if (this.options.hidden ){ div.style.display = "none"; }
+      
+      i.src        = iframeUrl + "#" + this.name;
+      i.scrolling  = 'no';
+      i.className  = 'webad-iframe';
       // IE 7-8      
-      iframe.marginWidth = 0;
-      iframe.marginHeight = 0;
-      iframe.frameBorder = '0';
-      iframe.allowTransparency = 'true';
+      i.marginWidth  = 0;
+      i.marginHeight = 0;
+      i.frameBorder  = '0';
+      i.allowTransparency = 'true';
       //Safari will will not show iframe until scroll with width/height == 0px      
-      iframe.width = this.options.width || 100;
-      iframe.height = this.options.height || 100;
-      iframe.style.border = '0px';
-      iframe.style.width = (this.options.width || 100) + 'px';
-      iframe.style.height = (this.options.height || 100) + 'px';
+      i.width         = this.options.width || 100;
+      i.height        = this.options.height || 100;
+      i.style.width   = (this.options.width || 100) + 'px';
+      i.style.height  = (this.options.height || 100) + 'px';
+      i.style.border  = '0px';      
       // Wrap iframe inside 2 divs      
-      innerDiv.appendChild(iframe);
+      innerDiv.appendChild(i);
       div.appendChild(innerDiv);
       // Add reference for selecting injected iframe      
-      this.$iframe = $(iframe);
-      return (this.$wrapper = $(div));
+      this.$iframe = $(i);
+      return (this.$wrapper = $(div)); // return wrapper so result can be appended
     };
     return Iframe;
   })();
-
+  
+  var DEFAULTS = {
+    RETRIES: 5,
+    TIMEOUT: 50,
+    MINSIZE: 31,
+    ADCONTAINER: 'webAd'
+  };
+  
   Banner = (function() {
-    function Banner(params, exposeObj) {
-      this.params = params;
-      this.exposeObj = exposeObj != null ? exposeObj : {};
-      this.name = this.params.name;
-      this.url = this.params.url;
-      this.container = this.params.container;
-      this.width = 0;
-      this.height = 0;
-      this.iframe = new Iframe(this.name, this.params);
-      this.active = false;
-      this.retries = 5;
-      this.timer = 50;
-      this.resolved = false;
-      this.failed = false;
+    function Banner(params, expose) {
+      this.params         = params;
+      this.exposeObj      = expose !== null ? expose : {};
+      this.name           = this.params.name;
+      this.url            = this.params.url;
+      this.container      = this.params.container;
+      this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;      
+      this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
+      this.width          = 0;
+      this.height         = 0;
+      this.iframe         = new Iframe(this.name, this.params);
+      this.active         = false;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = DEFAULTS.TIMEOUT;
+      this.resolved       = false;
+      this.failed         = false;
       this.log('new Banner()');
     }
 
-    Banner.prototype.log = function(msg) {
-      console.log(this.name+":"+msg);
-      /*if(!this.now){
-        this.now = Date.now();        
-      }
-      if (window.console && window.console.log) {
-        return console.log(this.name + "->", Date.now() - this.now, msg);
-      } else {
-        //return alert(msg);
-      }*/
-    };
+    Banner.prototype.log = function(msg) { if (console) {console.log(this.name+":"+msg);} };
 
     Banner.prototype.config = function(key, value) {
       return (this[key] = value);
@@ -98,10 +108,11 @@ var FINN = FINN||{};
 
     Banner.prototype.onload = function() {
       this.log('onload');
-      if (this.params.hidden) {
+      if (this.params.hidden || this.params.skipSizeCheck) {
         this.log('hidden ignoreSizeCheck');
         this.resolve();
       } else {
+        this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
         this.processSize();
       }
       return this;
@@ -109,20 +120,21 @@ var FINN = FINN||{};
 
     Banner.prototype.processSize = function() {
       this.log('processSize');
-      var $webAd    = this.iframe.$iframe.contents().find('#webAd');
-      var width       = $webAd.width();
-      var height      = $webAd.height();
-      var invalidSize = width === null || width <= 31 || height === null || height <= 31;
+      var w           = this.$webAd.width();
+      var height      = this.$webAd.height();
+      var invalidSize = w === null || w <= this.minSize || w === null || w <= this.minSize;
       
-      if (invalidSize) return this.pollForNewSize(width, height);
+      if (invalidSize) return this.pollForNewSize(w, height);
       
-      this.resize(width, height);
+      this.resize(w, height);
       this.resolve();
       return this;
     };
 
     Banner.prototype.resolve = function() {
-      if (this.params.bodyClass && !this.failed) $("body").addClass(this.params.bodyClass);
+      if (this.params.bodyClass && !this.failed) {
+        $("body").addClass(this.params.bodyClass);
+      }
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
@@ -130,14 +142,17 @@ var FINN = FINN||{};
         this.resolved = true;      
         webAds.resolve(this.name);
       }
+      this.refreshCalled = false;
       return this;
     };
 
     Banner.prototype.fail = function(reason) {
       this.log('Failed ' + reason);
-      if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
+      if (this.params.bodyFailClass) {
+        $("body").addClass(this.params.bodyFailClass);
+      }
       this.failed = true;
-      this.iframe.$wrapper.addClass('webads-failed');
+      this.iframe.$wrapper.addClass('webad-failed');
       return this.resolve();
     };
 
@@ -164,13 +179,8 @@ var FINN = FINN||{};
     Banner.prototype.resize = function(width, height) {
       this.width = width;
       this.height = height;
-      //autoset on bannerclass
-      //todo, init width/height shouldnt be the same properties because of tests....
       this.log('resize banner=> height:' + height + 'width' + width);
-      this.iframe.$iframe.css({
-        height: height,
-        width: width
-      }).attr('height', height).attr('width', width);
+      this.iframe.$iframe.css({ height: height, width: width}).attr('height', height).attr('width', width);
       return this;
     };
 
@@ -186,10 +196,11 @@ var FINN = FINN||{};
 
     Banner.prototype.refresh = function() {
       this.log('refresh');
-      this.resolved = false;
-      this.failed = false;
-      this.retries = 5;
-      this.timer = 50;
+      this.refreshCalled  = true;
+      this.resolved       = false;
+      this.failed         = false;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = DEFAULTS.TIMEOUT;
       return this.iframe.refresh();
     };
 
@@ -205,7 +216,7 @@ var FINN = FINN||{};
       this.log('insert');
       this.active = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
-      $container.addClass('webads-processed').append(this.iframe.makeIframe());
+      $container.addClass('webads-processed').append(this.iframe.makeIframe());  
       return this;
     };
     return Banner;
@@ -285,7 +296,7 @@ var FINN = FINN || {};
     "Middle": {
       width: 580,
       height: 400,
-      container: "banners-middle"
+      container: "banners_middle"
     },
     "Wallpaper": {
       hidden: true,
@@ -305,22 +316,9 @@ var FINN = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
-    "Test01": {
-      width: 500,
-      height: 120,
-      container: 'banners'
-    },
-    "Test02": {
-      container: 'banner-tab'
-    },
-    "Test04": {
-      container: 'banner-tab'
-    },
-    "Test05": {
-      container: 'banner-tab'
-    },
     "all": {
-      container: 'banners'
+      container : 'banners',
+      backend   : 'helios'
     }
   });
 
@@ -342,15 +340,17 @@ var FINN = FINN||{};
   plugins.context = context;
   plugins.getAdContent = getAdContent;
   
+  /* overlay with iframe content, or wrap ad iframe*/
   function overlay(banner){
-    console.log('PLUGIN -> Overlay ', banner.name);
-    //alert("huzzlaas");
+    banner.log('PLUGIN -> Overlay ', banner.name);
   }
   
+  /* window.open? */
   function popup(){
     
   }
   
+  /* confirm dialog ? */
   function dialog(){
     
   }
@@ -365,6 +365,7 @@ var FINN = FINN||{};
       
   }
   
+  /* */ 
   function getAdContent(areaid, callback){
     var url     = "/finn/realestate/homes/rotationdemo.json";    
     var res     = {};
@@ -403,6 +404,7 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
+  
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
@@ -410,7 +412,6 @@ var FINN = FINN||{};
     TODO:
     callback when all is done
     events:
-      webAds.ready
       webAds.done
       webAds.done.all
       webAds.done.Top
@@ -420,9 +421,13 @@ var FINN = FINN||{};
   
   w.on = on; //TODO
   function on(key, callback){
-    // TODO
+    // TODO, hooks into resolve and resolveAll
   } 
   
+  function triggerEvent(name){
+    
+  }
+    
   function refreshFromServer(){}// TODO
   function refreshAllFromServer(){}//TODO
   
@@ -433,7 +438,9 @@ var FINN = FINN||{};
     inDapIf   : true,
     inFIF     : undefined,
     webAds    : w,
-    plugins   : w.plugins
+    plugins   : w.plugins,
+    helios_parameters : "" //TODO: remove this
+     // TODO, add tf_recordClickToUrl?
   };
   
   var bannerMap = {};
@@ -456,26 +463,30 @@ var FINN = FINN||{};
     }
   }
   
-  function getFromServer(callback, dontQueue){
-    $.getJSON('/heliosAds', function(data){
-      if(typeof dontQueue === 'undefined') {
-        queue(data.webAds);
-      }
-      
+  function getFromServer(url, callback, dontQueue){
+    var firstArgIsUsed = (typeof url === 'function');
+    dontQueue   = firstArgIsUsed ? callback     : dontQueue;
+    callback    = firstArgIsUsed ? url          : callback;
+    url         = firstArgIsUsed ? '/heliosAds' : url ||'/heliosAds';
+    
+    $.getJSON(url, function(data){
+      if (typeof dontQueue === 'undefined') { queue(data.webAds); }
       if (callback && typeof callback === 'function') callback(null, data.webAds);
     }, function(err){
       if (callback && typeof callback === 'function') callback(err, null);
     });
   }
+  
+  function createConfig(obj){
+    return $.extend({}, 
+      defaultConfig ['all'], 
+      defaultConfig [obj.name], 
+      configMap     [obj.name],
+      obj);
+  }
       
   function addToMap(){
-    var objWithDefaults = $.extend(
-      {}, 
-      defaultConfig.all, 
-      defaultConfig[this.name], 
-      configMap[this.name],
-      this);
-    var banner = new F.Banner(objWithDefaults, globalExpose);
+    var banner = new F.Banner(createConfig(this), globalExpose);
     return (bannerMap[this.name] = banner);
   }
       
@@ -492,13 +503,13 @@ var FINN = FINN||{};
   function render(name, callback){
     var banner = bannerMap[name];
     if (!banner){
-      //hæ
+      callback(new Error('Banner '+name+' not queued'), null);
     } else if (banner.active){
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
           banner.log('is resolved, calling callback direct');
-          callback(banner);          
+          callback(null, banner);          
         } else {
           banner.log('deferring callback')
           insertCallback(name, callback)          
@@ -524,7 +535,7 @@ var FINN = FINN||{};
   function resolve(name){
     if (callbacks[name] && callbacks[name].length > 0){
       $.each(callbacks[name], function(){
-        if (typeof this === 'function') this(bannerMap[name]);
+        if (typeof this === 'function') this(null, bannerMap[name]);
       });
       callbacks[name] = null;
       $(document).trigger('bannerReady.'+name, bannerMap[name]);
@@ -545,7 +556,7 @@ var FINN = FINN||{};
     if (allResolved){
       if (callbacks['all'] && callbacks['all'].length > 0){
         $.each(callbacks['all'], function(){
-          if (typeof this === 'function') this(bannerMap);
+          if (typeof this === 'function') this(null, bannerMap);
         });
       }
       return true;
@@ -568,7 +579,6 @@ var FINN = FINN||{};
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
-    var next          = priorityList.shift();
     
     function loop(){
       if (priorityList.length <= 0){
@@ -578,7 +588,7 @@ var FINN = FINN||{};
       }
     }
     if (callback && typeof callback === 'function') insertCallback('all', callback);
-    render(next, loop);    
+    loop();
   }
   
   function renderLazy(parent){
@@ -594,15 +604,30 @@ var FINN = FINN||{};
     }
   }
   
-  function refresh(name){
-    return bannerMap[name] && bannerMap[name].refresh();    
+  function refresh(name, cb){
+    bannerMap[name].refresh();
+    // .refresh command resets banner.resolved
+    if (cb && typeof cb === 'function'){    
+      insertCallback(name, cb);      
+    }   
   }
   
-  function refreshAll(){
-    var banner;
-    for(var key in bannerMap){
-      bannerMap[key].refresh();         
+  function refreshAll(commaList, callback){
+    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
+    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
+    var priorityList  = commaList.split(',');
+    
+    function loop(){
+      if (priorityList.length <= 0){
+        for(var key in bannerMap){
+          bannerMap[key].refresh();
+        }
+      } else {
+        render(priorityList.shift(), loop);
+      }
     }
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
+    loop();
   }
   
   function remove(name){

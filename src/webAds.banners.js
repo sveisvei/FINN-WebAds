@@ -31,7 +31,8 @@ if (typeof Object.create === 'undefined') {
     Iframe.prototype.refresh = function() {
       var iframeUrl = webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
-      var url       = currSrc === ("" + iframeUrl + "?refresh#" + this.name) ? "" + iframeUrl + "#" + this.name : "" + iframeUrl + "?refresh#" + this.name;
+      var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
+      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#" + this.name) : (iframeUrl + sep + "refreshWebAd#" + this.name);
       this.$iframe.attr('src', url);
       return this;
     };
@@ -45,7 +46,7 @@ if (typeof Object.create === 'undefined') {
       innerDiv.className  = 'inner';
       
       div.id              = this.id;
-      div.className = "advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '');
+      div.className = ("advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
       if (this.options.hidden ){ div.style.display = "none"; }
       
       i.src        = iframeUrl + "#" + this.name;
@@ -71,7 +72,14 @@ if (typeof Object.create === 'undefined') {
     };
     return Iframe;
   })();
-
+  
+  var DEFAULTS = {
+    RETRIES: 5,
+    TIMEOUT: 50,
+    MINSIZE: 31,
+    ADCONTAINER: 'webAd'
+  };
+  
   Banner = (function() {
     function Banner(params, expose) {
       this.params         = params;
@@ -79,14 +87,14 @@ if (typeof Object.create === 'undefined') {
       this.name           = this.params.name;
       this.url            = this.params.url;
       this.container      = this.params.container;
-      this.adContainer    = this.params.adContainer||'webAd';      
-      this.minSize        = this.params.minSize||31;
+      this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;      
+      this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
       this.height         = 0;
       this.iframe         = new Iframe(this.name, this.params);
       this.active         = false;
-      this.retries        = 5;
-      this.timer          = 50;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = DEFAULTS.TIMEOUT;
       this.resolved       = false;
       this.failed         = false;
       this.log('new Banner()');
@@ -124,7 +132,9 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.resolve = function() {
-      if (this.params.bodyClass && !this.failed) $("body").addClass(this.params.bodyClass);
+      if (this.params.bodyClass && !this.failed) {
+        $("body").addClass(this.params.bodyClass);
+      }
       if (this.params.done && typeof this.params.done === 'function') {
         this.params.done(this);
       }
@@ -132,14 +142,17 @@ if (typeof Object.create === 'undefined') {
         this.resolved = true;      
         webAds.resolve(this.name);
       }
+      this.refreshCalled = false;
       return this;
     };
 
     Banner.prototype.fail = function(reason) {
       this.log('Failed ' + reason);
-      if (this.params.bodyFailClass) $("body").addClass(this.params.bodyFailClass);
+      if (this.params.bodyFailClass) {
+        $("body").addClass(this.params.bodyFailClass);
+      }
       this.failed = true;
-      this.iframe.$wrapper.addClass('webads-failed');
+      this.iframe.$wrapper.addClass('webad-failed');
       return this.resolve();
     };
 
@@ -183,10 +196,11 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.refresh = function() {
       this.log('refresh');
-      this.resolved = false;
-      this.failed = false;
-      this.retries = 5;
-      this.timer = 50;
+      this.refreshCalled  = true;
+      this.resolved       = false;
+      this.failed         = false;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = DEFAULTS.TIMEOUT;
       return this.iframe.refresh();
     };
 
