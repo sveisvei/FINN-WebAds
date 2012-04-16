@@ -23,6 +23,7 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
+  
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
@@ -89,15 +90,17 @@ var FINN = FINN||{};
       if (callback && typeof callback === 'function') callback(err, null);
     });
   }
+  
+  function createConfig(obj){
+    return $.extend({}, 
+      defaultConfig ['all'], 
+      defaultConfig [obj.name], 
+      configMap     [obj.name],
+      obj);
+  }
       
   function addToMap(){
-    var objWithDefaults = $.extend(
-      {}, 
-      defaultConfig.all, 
-      defaultConfig[this.name], 
-      configMap[this.name],
-      this);
-    var banner = new F.Banner(objWithDefaults, globalExpose);
+    var banner = new F.Banner(createConfig(this), globalExpose);
     return (bannerMap[this.name] = banner);
   }
       

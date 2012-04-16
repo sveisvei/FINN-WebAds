@@ -6,18 +6,19 @@ var webAds = FINN.webAds;
 function collectTestCases(cb){
   var testCases = {};
   
-  testCases["setUp"] = function() {
+  testCases["should render"]   = {};
+    
+  testCases["should render"]["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
     webAds.base      = buster.env.path + "Cases/render/";    
     webAds.iframeUrl = buster.env.path + "iframe.html";
   };
   
-  testCases["tearDown"] = function(){
+  testCases["should render"]["tearDown"] = function(){
     webAds.cleanUp();
     $("#banners").remove();
   };
-  
-  testCases["should render"]   = {};
+
   
   function createTest(){
     var testCase = this;

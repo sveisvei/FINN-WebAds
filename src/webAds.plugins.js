@@ -15,15 +15,17 @@ var FINN = FINN||{};
   plugins.context = context;
   plugins.getAdContent = getAdContent;
   
+  /* overlay with iframe content, or wrap ad iframe*/
   function overlay(banner){
-    console.log('PLUGIN -> Overlay ', banner.name);
-    //alert("huzzlaas");
+    banner.log('PLUGIN -> Overlay ', banner.name);
   }
   
+  /* window.open? */
   function popup(){
     
   }
   
+  /* confirm dialog ? */
   function dialog(){
     
   }
@@ -38,6 +40,7 @@ var FINN = FINN||{};
       
   }
   
+  /* */ 
   function getAdContent(areaid, callback){
     var url     = "/finn/realestate/homes/rotationdemo.json";    
     var res     = {};

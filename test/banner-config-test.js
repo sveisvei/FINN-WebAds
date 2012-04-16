@@ -8,7 +8,9 @@ var webAds = FINN.webAds;
 function collectTestCases(cb){
   var testCases = {};
   
-  testCases["setUp"] = function() {
+  testCases["config"]   = {};  
+  
+  testCases["config"]["setUp"] = function() {
     // css injection here might not work because of timing issues.
     $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
     $("body").append('<div id="banners"></div>');
@@ -16,14 +18,12 @@ function collectTestCases(cb){
     webAds.iframeUrl = buster.env.path + "iframe.html";
   };
   
-  testCases["tearDown"] = function(){
+  testCases["config"]["tearDown"] = function(){
     webAds.cleanUp();
     $("#banners").remove();
     $("body").removeAttr('class').attr('class', '');
   };
-  
-  testCases["config"]   = {};
-  
+    
   function createTest(){
     var testCase = this;
     testCases["config"][testCase.name] = function(done){
