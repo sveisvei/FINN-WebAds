@@ -21,7 +21,7 @@ function collectTestCases(cb){
   testCases["config"]["tearDown"] = function(){
     webAds.cleanUp();
     $("#banners").remove();
-    $("body").removeAttr('class').attr('class', '');
+    $("body").removeAttr('class').removeAttr('style').attr('class', '');
   };
     
   function createTest(){
@@ -71,7 +71,7 @@ function collectTestCases(cb){
               });
             }
             if (typeof test.isHidden !== 'undefined' && test.isHidden === true){
-              assert(banner.iframe.$wrapper.is(':hidden'), 'wrapper div for ' + test.name+' should be hidden');
+              assert(banner.iframe.$wrapper.is(':hidden'), 'wrapper div for ' + test.name+' should be :hidden');
             }
             
             if (typeof test.setWidth !== 'undefined'){

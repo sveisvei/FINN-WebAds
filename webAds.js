@@ -139,6 +139,7 @@ if (typeof Object.create === 'undefined') {
         this.params.done(this);
       }
       if (!this.resolved) {
+        this.log('resolving...'+ this.name)        
         this.resolved = true;      
         webAds.resolve(this.name);
       }
@@ -236,7 +237,7 @@ var FINN = FINN || {};
   FINN.data = FINN.data || {};
 
   function fixTopPosition(banner) {
-    banner.log('cb fixTopPosition failed? ', banner.failed);
+    banner.log('cb fixTopPosition failed? '+ banner.failed);
     if (banner.failed) {
       return;
     }
@@ -252,14 +253,14 @@ var FINN = FINN || {};
   }
 
   function fixLeftPosition(banner) {
-    banner.log('cb fixLeftBanner. failed? '+ banner.failed);
+    banner.log('cb fixLeftBanner - failed '+ banner.failed);
     if (!banner.failed && banner.width > 50) {
       banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
     }
   }
 
   function fixWallpaper(banner) {
-    banner.log('cb fixWallpaper failed', banner.failed);
+    banner.log('cb fixWallpaper failed? '+ banner.failed);
     var bgImage = banner.iframe.$iframe.contents().find("img");
     if (bgImage.size() > 0 && bgImage.width() !== 1) {
       var src = bgImage.attr('src');
@@ -424,11 +425,12 @@ var FINN = FINN||{};
   
   w.on = on; //TODO
   function on(key, callback){
+    $(document).on(key, callback);
     // TODO, hooks into resolve and resolveAll
   } 
   
-  function triggerEvent(name){
-    
+  function triggerEvent(name, arg1){
+    $(document).trigger(name.toLowerCase(), arg1);      
   }
     
   function refreshFromServer(){}// TODO
@@ -541,8 +543,9 @@ var FINN = FINN||{};
         if (typeof this === 'function') this(null, bannerMap[name]);
       });
       callbacks[name] = null;
-      $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
+    triggerEvent('webad-resolved-'+name, bannerMap[name]);
+    triggerEvent('webad-resolved', bannerMap[name]);    
     resolveAll();
   }
   
@@ -562,6 +565,7 @@ var FINN = FINN||{};
           if (typeof this === 'function') this(null, bannerMap);
         });
       }
+      triggerEvent('all-webads-resolved', bannerMap);
       return true;
     } else {
       return false;

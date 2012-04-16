@@ -21,13 +21,17 @@ jQuery(document).ready(function(){
   
   
   // TODO, not working??
-  $(document).on('bannerReady', function(e, banner){
-    console.warn('EVENT ---> BANNER READY:', banner.name);
+  FINN.webAds.on('all-webads-resolved', function(e, banners){
+    console.warn('Resolved all:', e, banners);
+  });
+  
+  FINN.webAds.on('webad-resolved', function(e, banners){
+    console.warn('Resolved *:', e, banners);
   });
   
   
-  $(document).on('bannerReady.Top', function(e, banner){
-    console.warn('EVENT ---> bannerReady.Top', e, banner);
+  FINN.webAds.on('webad-resolved-top', function(e, banner){
+    console.warn('Resolved top', e, banner);
   });
   
 

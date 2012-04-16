@@ -139,6 +139,7 @@ if (typeof Object.create === 'undefined') {
         this.params.done(this);
       }
       if (!this.resolved) {
+        this.log('resolving...'+ this.name)        
         this.resolved = true;      
         webAds.resolve(this.name);
       }
@@ -148,11 +149,11 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.fail = function(reason) {
       this.log('Failed ' + reason);
+      this.iframe.$wrapper.addClass('webad-failed');      
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
       }
       this.failed = true;
-      this.iframe.$wrapper.addClass('webad-failed');
       return this.resolve();
     };
 

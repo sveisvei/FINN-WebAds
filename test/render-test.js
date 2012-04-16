@@ -17,6 +17,7 @@ function collectTestCases(cb){
   testCases["should render"]["tearDown"] = function(){
     webAds.cleanUp();
     $("#banners").remove();
+    $("body").removeAttr('style').removeAttr('class');
   };
 
   

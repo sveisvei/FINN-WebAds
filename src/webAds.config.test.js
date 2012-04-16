@@ -21,5 +21,5 @@ var FINN = FINN || {};
       container: 'banner-tab'
     }
   });
-
+  
 })(FINN, jQuery);

@@ -14,7 +14,8 @@
 - events når ferdig rendret
 - unit-tester av internals
 
-
+- 12 eller 10px gutter?
+- sticky
 
 - non-helios-content === refreshFromServer osv må ignoreres.
 

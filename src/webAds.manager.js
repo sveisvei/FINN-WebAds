@@ -40,11 +40,12 @@ var FINN = FINN||{};
   
   w.on = on; //TODO
   function on(key, callback){
+    $(document).on(key, callback);
     // TODO, hooks into resolve and resolveAll
   } 
   
-  function triggerEvent(name){
-    
+  function triggerEvent(name, arg1){
+    $(document).trigger(name.toLowerCase(), arg1);      
   }
     
   function refreshFromServer(){}// TODO
@@ -157,8 +158,9 @@ var FINN = FINN||{};
         if (typeof this === 'function') this(null, bannerMap[name]);
       });
       callbacks[name] = null;
-      $(document).trigger('bannerReady.'+name, bannerMap[name]);
     }
+    triggerEvent('webad-resolved-'+name, bannerMap[name]);
+    triggerEvent('webad-resolved', bannerMap[name]);    
     resolveAll();
   }
   
@@ -178,6 +180,7 @@ var FINN = FINN||{};
           if (typeof this === 'function') this(null, bannerMap);
         });
       }
+      triggerEvent('all-webads-resolved', bannerMap);
       return true;
     } else {
       return false;
