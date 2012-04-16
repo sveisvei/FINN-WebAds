@@ -1,99 +1,39 @@
-/*
-.banners
-  overflow hidden
-  @992
-    overflow: visible
-  iframe
-    display inline-block
-    vertical-align: bottom;
-  display none
-  @480
-    display block
-    .skyscraper
-      display none
-  @992
-    .skyscraper, .middleBanner
-      display block
+.webad-hidden .inner,
+.webad-failed .inner,
+body.has-no-top-placement .webad-top .inner{
+    display: none;
+}
+body.has-no-top-placement aside.banners {
+    height: 0;
+    padding-bottom: 0;
+}
 
-aside.banners
-  max-width: containerWidth + 20px
-  $unresponsive
-    width: containerWidth + 20px    
-  height: 150px
-  padding-bottom: 12px
-  clearfix()
-  .banner
-    height 0px
-    overflow: visible
-  &.handheld
-    height: 0
-    padding-bottom: 0
-  &.tablet
-    .webad_Top
-      width: containerWidth + 20px
-    
-.webad_Top
-  .inner
-    width 992px
-    text-align: right
-    overflow: visible
-  
-.webad_Right2, .webad_Left1
-  display none
-  @992
-    display block
-  position: relative
-  z-index 1
-  width: 100%
-  .inner
-    position: absolute
-    z-index: 2
-    top: 0px
+body.has-dominant-campaign {
+  padding: 10px 0 0 0;
+}
+body.has-dominant-campaign .wrapper,
+body.has-dominant-campaign aside.banners {
+    margin: 0 auto;
+}
 
-.webad_Right2
-  .inner
-    left: 992px
-  &.sticky
-    iframe
-      display block
-      position: fixed
-      z-index 3
-      top: 10px
-      left: 1000px
-
-.webad_Left1
-  .inner
-    left: -252px
-
-body.has-dominant-campaign
-  padding: 10px 0 0 0  //body
-  .wrapper, aside.banners, footer.copyright
-    margin: 0 auto
-    
-.has-no-top-position
-  aside.banners
-    height 0
-    padding-bottom 0px    
-  .webad_Top
-    &, .inner
-      display none
-
-.webad_Survey, .webad_Wallpaper
-  position absolute
-  z-index: 1
-  bottom: 0px
-  display: none
-  
-.middleBanner
-  display none
-  background white
-  border-radius 2px
-  text-align center
-  padding: 10px 0;
-  @992
-    display block
-
-*/
-.webad-hidden, body.has-no-top-placement .webad-top {
-  display: none;
+aside.banners {
+    position: relative;
+    z-index: 1;
+    height: 150px;
+}
+aside.banners .webad .inner{
+    z-index: 2;
+}
+.webad-top .inner {
+    text-align: right;
+}
+.webad-right2 .inner {
+    position: absolute;
+    top: 0;
+    left: 992px;
+}
+.webad-left1 .inner {
+    position: absolute;
+    top: 0;
+    left: -240px;
 }

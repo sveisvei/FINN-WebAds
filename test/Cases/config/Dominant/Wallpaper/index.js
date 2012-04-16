@@ -1,1 +1,1 @@
-document.write('<div style="width:'+banner.params.setWidth+'px;height:'+banner.params.setHeight+'px;">'+banner.name+'</div>')
+document.write('<div><img src="'+webAds.base+'dominant/Wallpaper/utvikling.png"></div>');

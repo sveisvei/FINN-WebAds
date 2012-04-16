@@ -46,7 +46,7 @@ if (typeof Object.create === 'undefined') {
       innerDiv.className  = 'inner';
       
       div.id              = this.id;
-      div.className = ("advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
+      div.className = ("advertising webad " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
       if (this.options.hidden ){ div.style.display = "none"; }
       
       i.src        = iframeUrl + "#" + this.name;
@@ -198,6 +198,9 @@ if (typeof Object.create === 'undefined') {
       this.log('refresh');
       this.refreshCalled  = true;
       this.resolved       = false;
+      if (this.failed){
+        this.iframe.$wrapper.removeClass('webad-failed');
+      }
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;

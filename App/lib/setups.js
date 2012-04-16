@@ -1,7 +1,8 @@
-var collectRenderTestCases  = require('./lib/collectTestCases.js');
-var cases             = fs.realpathSync(__dirname + '/../../test/Cases');
+var fs                      = require('fs');
+var collectRenderTestCases  = require('./collectTestCases.js');
 
-var 
+var cases                   = fs.realpathSync(__dirname + '/../../test/Cases');
+
 function getConfigAds(key, callback){
   
   
@@ -20,7 +21,7 @@ module.exports = function(app){
         ads: ads
       });
       
-    }):
+    });
   });
   
 

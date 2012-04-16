@@ -46,7 +46,7 @@ if (typeof Object.create === 'undefined') {
       innerDiv.className  = 'inner';
       
       div.id              = this.id;
-      div.className = ("advertising webads " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
+      div.className = ("advertising webad " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
       if (this.options.hidden ){ div.style.display = "none"; }
       
       i.src        = iframeUrl + "#" + this.name;
@@ -198,6 +198,9 @@ if (typeof Object.create === 'undefined') {
       this.log('refresh');
       this.refreshCalled  = true;
       this.resolved       = false;
+      if (this.failed){
+        this.iframe.$wrapper.removeClass('webad-failed');
+      }
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
@@ -233,7 +236,7 @@ var FINN = FINN || {};
   FINN.data = FINN.data || {};
 
   function fixTopPosition(banner) {
-    banner.log('cb fixTopPosition');
+    banner.log('cb fixTopPosition failed? ', banner.failed);
     if (banner.failed) {
       return;
     }
@@ -249,14 +252,14 @@ var FINN = FINN || {};
   }
 
   function fixLeftPosition(banner) {
-    banner.log('cb fixLeftBanner'+ banner.failed);
+    banner.log('cb fixLeftBanner. failed? '+ banner.failed);
     if (!banner.failed && banner.width > 50) {
       banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
     }
   }
 
   function fixWallpaper(banner) {
-    banner.log('cb fixWallpaper');
+    banner.log('cb fixWallpaper failed', banner.failed);
     var bgImage = banner.iframe.$iframe.contents().find("img");
     if (bgImage.size() > 0 && bgImage.width() !== 1) {
       var src = bgImage.attr('src');
@@ -265,7 +268,7 @@ var FINN = FINN || {};
           'background': ' transparent url(\"' + src + '\") 50% 0% no-repeat',
           'background-attachment': 'fixed'
         };
-        $("body").css(css);
+        $("body").css(css).addClass('has-dominant-wallpaper');
       }
     }
   }

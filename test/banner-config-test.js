@@ -40,13 +40,13 @@ function collectTestCases(cb){
           //bodyClass
           if (testCase.expectations.bodyClass){
             $.each(testCase.expectations.bodyClass, function(i){
-              assert($("body").hasClass(this), 'body has class '+ this);
+              assert($("body").hasClass(this), 'body should have class: '+ this);
             });              
           }
           //notBodyClass
           if (testCase.expectations.notBodyClass){
             $.each(testCase.expectations.notBodyClass, function(i){
-              refute($("body").hasClass(this), 'body should not have class '+ this);
+              refute($("body").hasClass(this), 'body should not have class: '+ this);
             });              
           }
         }

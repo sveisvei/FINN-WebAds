@@ -1,7 +1,7 @@
 {
   "forceDelay": 500,
   "description": "The app setTimeouts/delays serving of both the image/add and the .js file.",
-  "timeout": 2500,
+  "timeout": 3000,
   "expectations": {
     "width": 980,
     "height": 150,
