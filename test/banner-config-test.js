@@ -13,7 +13,7 @@ function collectTestCases(cb){
   testCases["config"]["setUp"] = function() {
     // css injection here might not work because of timing issues.
     $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
-    $("body").append('<div id="banners"></div>');
+    $("body").append('<div id="banners"></div><div id="banners-middle"></div>');
     webAds.base      = buster.env.path + "Cases/config/";    
     webAds.iframeUrl = buster.env.path + "iframe.html";
   };
@@ -54,16 +54,19 @@ function collectTestCases(cb){
       
       function checkBannerExpectations(){
         var len = testCase.tests.length;
+        
         function doDone(){
-          len--
+          len = len - 1;
           if(len <= 0){
             done();
           }
         }
-        $.each(testCase.tests, function(){
+
+        $.each(testCase.tests, function(i){
+
           var test = this;
           webAds.render(test.name, function(err, banner){
-            refute(err)
+            refute(err);
             
             if (test['expectations']){
               $.each(test['expectations'], function(key, val){
@@ -95,8 +98,11 @@ function collectTestCases(cb){
       
       webAds.renderAll('Top,Left1', function(err, banners){
         assert.equals(Object.keys(banners).length, testCase.tests.length);
+        
         generalExpectations();
-        checkBannerExpectations()
+
+        checkBannerExpectations();
+      
       });
     }
   }

@@ -177,7 +177,9 @@ var FINN = FINN||{};
     if (allResolved){
       if (callbacks['all'] && callbacks['all'].length > 0){
         $.each(callbacks['all'], function(){
-          if (typeof this === 'function') this(null, bannerMap);
+          if (typeof this === 'function') {
+            this(null, bannerMap);
+          }
         });
       }
       triggerEvent('all-webads-resolved', bannerMap);
@@ -227,7 +229,6 @@ var FINN = FINN||{};
   }
   
   function refresh(name, cb){
-    console.log('refresh', name)    
     bannerMap[name].refresh();
     // .refresh command resets banner.resolved
     if (cb && typeof cb === 'function'){    
@@ -236,7 +237,6 @@ var FINN = FINN||{};
   }
   
   function refreshAll(commaList, callback){
-    console.log('REFRESH ALL', commaList);
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
@@ -253,7 +253,6 @@ var FINN = FINN||{};
     function loop(){
       if (priorityList.length <= 0){
         for(var key in bannerMap){
-          console.log('key:', key, 'bool', shouldRefresh(key));          
           if (shouldRefresh(key)){
             refresh(key);
           }

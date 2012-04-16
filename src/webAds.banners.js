@@ -109,7 +109,7 @@ if (typeof Object.create === 'undefined') {
     Banner.prototype.onload = function() {
       this.log('onload');
       if (this.params.hidden || this.params.skipSizeCheck) {
-        this.log('hidden ignoreSizeCheck');
+        this.log('HIDDEN ignoreSizeCheck');
         this.resolve();
       } else {
         this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
@@ -132,6 +132,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.resolve = function() {
+      this.log('! Resolving...' + this.name);
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -139,17 +140,19 @@ if (typeof Object.create === 'undefined') {
         this.params.done(this);
       }
       if (!this.resolved) {
-        this.log('resolving...'+ this.name)        
+        this.log('!! inner resolving...'+ this.name)        
         this.resolved = true;      
+        this.log('calling global resolve');
         webAds.resolve(this.name);
       }
+      // reset
       this.refreshCalled = false;
       return this;
     };
 
-    Banner.prototype.fail = function(reason) {
+    Banner.prototype.fail = function(reason, dontSetClass) {
       this.log('Failed ' + reason);
-      this.iframe.$wrapper.addClass('webad-failed');      
+      if (!dontSetClass && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');      
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
       }
@@ -170,7 +173,7 @@ if (typeof Object.create === 'undefined') {
         };
         setTimeout(cb, this.timer);
       } else {
-        this.width = width;
+        this.width  = width;
         this.height = height;
         this.fail("timeout");
       }
@@ -220,6 +223,10 @@ if (typeof Object.create === 'undefined') {
       this.log('insert');
       this.active = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
+      if ($container.size() <= 0) {
+        this.fail('Missing valid container on webad '+this.name, true);
+        return this;
+      }
       $container.addClass('webads-processed').append(this.iframe.makeIframe());  
       return this;
     };
