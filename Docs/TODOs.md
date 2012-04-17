@@ -5,13 +5,8 @@
   - Strapon
   - Reise
 
-- Unifisere CSS
-- Dominant + Companion logikk - Wallpaper + Survey
+- Should renderAll trigger next banner on onload and not on done?
 
-- IE7-IE8 support
-  - IE7 spacing i bunn
-
-- events når ferdig rendret
 - unit-tester av internals
 
 - 12 eller 10px gutter?

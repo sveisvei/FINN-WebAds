@@ -205,7 +205,7 @@ if (typeof Object.create === 'undefined') {
       this.log('refresh');
       this.refreshCalled  = true;
       this.resolved       = false;
-      if (this.failed){
+      if (this.failed && this.iframe && this.iframe.$wrapper){
         this.iframe.$wrapper.removeClass('webad-failed');
       }
       this.failed         = false;

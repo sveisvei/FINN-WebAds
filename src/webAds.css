@@ -3,7 +3,10 @@
 .has-no-top-placement .webad-top .inner{
     display: none;
 }
-
+.webad iframe {
+  display: inline-block;
+  vertical-align: bottom;
+}
 
 
 body.has-dominant-campaign {
