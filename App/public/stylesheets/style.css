@@ -35,7 +35,11 @@ div.tabs {
   border: 1px solid #ccc;
   padding: 5px;
   border-radius: 5px;
+  display: inline;
   display: inline-block;
+}
+*+html .advertising .inner{
+  display: inline;
 }
 .advertising iframe {
   background-color: #fff;
