@@ -20,15 +20,12 @@ buster.testCase("Banner", {
     assert.equals(banner.width, 0)
     assert.equals(banner.height, 0)
   },
-  "should throw when missing container option hash parameter": function(){
-    var thrown = false;
-    try {
-      var banner = new FINN.Banner({name: 'missingContainer'}, {});      
-    } catch(e){
-      thrown = true;
-    } finally {
-      assert(thrown, 'should throw');
-    }
+  "should not render when missing container option hash parameter": function(){
+     var banner = new FINN.Banner({name: 'missingContainer'}, {});      
+		 banner.insert();
+		 assert(typeof this.container === 'undefined')
+		 refute(banner.active)
+		 //todo	
   },
   "should insert banner into container and call onload": function(done){
     var banner;
