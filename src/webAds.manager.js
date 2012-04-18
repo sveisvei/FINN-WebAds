@@ -165,7 +165,6 @@ var FINN = FINN||{};
     }
     triggerEvent('webad-resolved-'+name, bannerMap[name]);
     triggerEvent('webad-resolved', bannerMap[name]);    
-    console.log('calling resolve all');
     resolveAll();
   }
   
@@ -187,11 +186,9 @@ var FINN = FINN||{};
           }
         });
       }
-      console.log('resolve all trigger');      
       triggerEvent('all-webads-resolved', bannerMap);
       return true;
     } else {
-      console.log('failed to resolve all');      
       return false;
     }
   }
