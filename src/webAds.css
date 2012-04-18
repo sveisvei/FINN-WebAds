@@ -4,13 +4,13 @@
     display: none;
 }
 .webad iframe {
-  display: inline-block;
-  vertical-align: bottom;
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 
 body.has-dominant-campaign {
-  padding: 10px 0 0 0;
+    padding: 10px 0 0 0;
 }
 body.has-dominant-campaign .wrapper,
 body.has-dominant-campaign #banners {
@@ -23,6 +23,7 @@ body.has-dominant-campaign #banners {
     min-height: 150px;
     width: 980px;
     padding-bottom: 12px;
+    overflow: visible;
 }
 .has-no-top-placement #banners {
     height: 0;
@@ -32,15 +33,15 @@ body.has-dominant-campaign #banners {
 #banners .webad {
     z-index: 2;
 }
-.webad-top .inner {
+#banners .webad-top .inner {
     text-align: right;
 }
-.webad-right2 {
+#banners .webad-right2 {
     position: absolute;
     top: 0;
     left: 992px;
 }
-.webad-left1 {
+#banners .webad-left1 {
     position: absolute;
     top: 0;
     left: -240px;

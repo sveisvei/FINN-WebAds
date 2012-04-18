@@ -85,9 +85,6 @@ if (typeof Object.create === 'undefined') {
       this.name           = this.params.name;
       this.url            = this.params.url;
       this.container      = this.params.container;
-      if (!this.container){
-        throw new Error('Missing container parameter on banner '+this.name);
-      }
       this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;      
       this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
@@ -224,6 +221,10 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.insert = function() {
       this.log('insert');
+	  	if(!this.container){
+		    this.log('missing container '+this.container);
+				return this;
+	  	}
       this.active = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
@@ -292,37 +293,45 @@ var FINN = FINN || {};
 
   FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
     "Top": {
+			extends: 'normal',
       width: 992,
       height: 150,
       bodyFailClass: 'has-no-top-placement',
       done: fixTopPosition
     },
     "Left1": {
+			extends: 'normal',
       width: 240,
       height: 500,
       bodyClass: 'has-dominant-campaign',
       done: fixLeftPosition
     },
     "Right1": {
-      width: 240
+      extends: 'normal',
+			width: 240
     },
     "Right2": {
+			extends: 'normal',
       width: 240,
       height: 500
     },
     "Right3": {
+			extends: 'normal',
       width: 240
     },
     "Middle": {
       width: 580,
       height: 400,
-      container: "banners-middle"
+      extends: 'normal',
+			container: "banners-middle"
     },
     "Wallpaper": {
-      hidden: true,
+      extends: 'normal',
+			hidden: true,
       done: fixWallpaper
     },
     "Survey": {
+			extends: 'normal',
       hidden: true,      
       done: $.noop
     },
@@ -336,8 +345,10 @@ var FINN = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
+    "normal": {
+			container : 'banners'
+		},
     "all": {
-      container : 'banners',
       backend   : 'helios'
     }
   });
@@ -504,8 +515,11 @@ var FINN = FINN||{};
   }
   
   function createConfig(obj){
+	  var extending = defaultConfig[obj.name] && defaultConfig[obj.name].extends;
+	  var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({}, 
-      defaultConfig ['all'], 
+      defaults, 
+      defaultConfig.all,
       defaultConfig [obj.name], 
       configMap     [obj.name],
       obj);
@@ -551,9 +565,9 @@ var FINN = FINN||{};
   
   function collectDataPositions(selector){
     selector = selector||"body";
-    $(selector).find("div.webads[data-banner-position]").each(function(){
+    $(selector).find("div.webads[data-webad-position]").each(function(){
       var $this = $(this);
-      var position = $this.data('banner-position');
+      var position = $this.data('webad-position');
       config(position, 'container', $this);
     });
   }
@@ -691,7 +705,7 @@ var FINN = FINN||{};
     }).each(function(){
       var $this = $(this);
       $this.addClass('webads-processed');
-      var position = $this.data('banner-position');
+      var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){
         render(position);
@@ -704,7 +718,7 @@ var FINN = FINN||{};
   function renderAdsWithContainer(container){
     for(var key in bannerMap){
       if (container === bannerMap[key].container){
-        bannerMap[key].insert();
+        render(key);
       }
     }
   }

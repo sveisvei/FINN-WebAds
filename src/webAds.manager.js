@@ -103,8 +103,11 @@ var FINN = FINN||{};
   }
   
   function createConfig(obj){
+	  var extending = defaultConfig[obj.name] && defaultConfig[obj.name].extends;
+	  var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({}, 
-      defaultConfig ['all'], 
+      defaults, 
+      defaultConfig.all,
       defaultConfig [obj.name], 
       configMap     [obj.name],
       obj);
@@ -150,9 +153,9 @@ var FINN = FINN||{};
   
   function collectDataPositions(selector){
     selector = selector||"body";
-    $(selector).find("div.webads[data-banner-position]").each(function(){
+    $(selector).find("div.webads[data-webad-position]").each(function(){
       var $this = $(this);
-      var position = $this.data('banner-position');
+      var position = $this.data('webad-position');
       config(position, 'container', $this);
     });
   }
@@ -290,7 +293,7 @@ var FINN = FINN||{};
     }).each(function(){
       var $this = $(this);
       $this.addClass('webads-processed');
-      var position = $this.data('banner-position');
+      var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){
         render(position);
@@ -303,7 +306,7 @@ var FINN = FINN||{};
   function renderAdsWithContainer(container){
     for(var key in bannerMap){
       if (container === bannerMap[key].container){
-        bannerMap[key].insert();
+        render(key);
       }
     }
   }

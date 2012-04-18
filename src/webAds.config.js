@@ -45,37 +45,45 @@ var FINN = FINN || {};
 
   FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
     "Top": {
+			extends: 'normal',
       width: 992,
       height: 150,
       bodyFailClass: 'has-no-top-placement',
       done: fixTopPosition
     },
     "Left1": {
+			extends: 'normal',
       width: 240,
       height: 500,
       bodyClass: 'has-dominant-campaign',
       done: fixLeftPosition
     },
     "Right1": {
-      width: 240
+      extends: 'normal',
+			width: 240
     },
     "Right2": {
+			extends: 'normal',
       width: 240,
       height: 500
     },
     "Right3": {
+			extends: 'normal',
       width: 240
     },
     "Middle": {
       width: 580,
       height: 400,
-      container: "banners-middle"
+      extends: 'normal',
+			container: "banners-middle"
     },
     "Wallpaper": {
-      hidden: true,
+      extends: 'normal',
+			hidden: true,
       done: fixWallpaper
     },
     "Survey": {
+			extends: 'normal',
       hidden: true,      
       done: $.noop
     },
@@ -89,8 +97,10 @@ var FINN = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
+    "normal": {
+			container : 'banners'
+		},
     "all": {
-      container : 'banners',
       backend   : 'helios'
     }
   });

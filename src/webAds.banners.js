@@ -85,9 +85,6 @@ if (typeof Object.create === 'undefined') {
       this.name           = this.params.name;
       this.url            = this.params.url;
       this.container      = this.params.container;
-      if (!this.container){
-        throw new Error('Missing container parameter on banner '+this.name);
-      }
       this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;      
       this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
@@ -224,6 +221,10 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.insert = function() {
       this.log('insert');
+	  	if(!this.container){
+		    this.log('missing container '+this.container);
+				return this;
+	  	}
       this.active = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
