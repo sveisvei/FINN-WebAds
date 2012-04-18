@@ -3,4 +3,5 @@
 #Run app/server, then run tests
 - npm install
 - node run.js
-- buster test
+- new tab: buster server
+- new tab: buster test

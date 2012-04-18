@@ -13,9 +13,6 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  FINN.webAds = FINN.webAds||{};
-  var webAds  = FINN.webAds;
-
   Iframe = (function() {
     function Iframe(name, options, id) {
       this.name     = name;
@@ -29,7 +26,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Iframe.prototype.refresh = function() {
-      var iframeUrl = webAds.iframeUrl || "/finn/webads";
+      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
       var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
       var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#" + this.name) : (iframeUrl + sep + "refreshWebAd#" + this.name);
@@ -38,7 +35,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Iframe.prototype.makeIframe = function() {
-      var iframeUrl = webAds.iframeUrl || "/finn/webads";
+      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
       var i         = document.createElement('iframe');
@@ -88,6 +85,9 @@ if (typeof Object.create === 'undefined') {
       this.name           = this.params.name;
       this.url            = this.params.url;
       this.container      = this.params.container;
+      if (!this.container){
+        throw new Error('Missing container parameter on banner '+this.name);
+      }
       this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;      
       this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
@@ -146,7 +146,7 @@ if (typeof Object.create === 'undefined') {
         this.log('!! inner resolving...'+ this.name)        
         this.resolved = true;      
         this.log('calling global resolve');
-        webAds.resolve(this.name);
+        FINN.webAds.resolve(this.name);
       }
       // reset
       this.refreshCalled = false;

@@ -23,6 +23,7 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
+  w._length               = bannerMapLength;
   
   w.plugins               = w.plugins||{};
   w.base                  = "/";
@@ -41,7 +42,6 @@ var FINN = FINN||{};
   w.on = on; //TODO
   function on(key, callback){
     $(document).on(key, callback);
-    // TODO, hooks into resolve and resolveAll
   } 
   
   function triggerEvent(name, arg1){
@@ -72,7 +72,12 @@ var FINN = FINN||{};
     callbacks = {};
     configMap = {};
   }
-  
+
+  function bannerMapLength(){
+    var i = 0;
+    for(var g in bannerMap){i++}
+    return i;
+  }
   
   function config(name, key, value){
     configMap[name]       = configMap[name]||{};
