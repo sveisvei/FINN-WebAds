@@ -12,6 +12,10 @@
 - 12 eller 10px gutter?
 - sticky
 
+- refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
+
+
+
 - non-helios-content === refreshFromServer osv må ignoreres.
 
 - Helios-parameters-refresh / søkeparametere === refreshFromServer

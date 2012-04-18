@@ -95,6 +95,7 @@ if (typeof Object.create === 'undefined') {
       this.timer          = DEFAULTS.TIMEOUT;
       this.resolved       = false;
       this.failed         = false;
+      this.incomplete     = false;
       this.log('new Banner()');
     }
 
@@ -140,7 +141,6 @@ if (typeof Object.create === 'undefined') {
         this.params.done(this);
       }
       if (!this.resolved) {
-        this.log('!! inner resolving...'+ this.name)        
         this.resolved = true;      
         this.log('calling global resolve');
         FINN.webAds.resolve(this.name);
@@ -221,11 +221,15 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.insert = function() {
       this.log('insert');
-	  	if(!this.container){
-		    this.log('missing container '+this.container);
-				return this;
-	  	}
-      this.active = true;
+      if(!this.container){
+        this.log('Missing container '+this.container);
+        this.incomplete = true;
+        this.failed     = true;
+        this.resolve();
+        return this;
+      }
+      this.incomplete = false;
+      this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
         this.fail('Missing valid container on webad '+this.name, true);

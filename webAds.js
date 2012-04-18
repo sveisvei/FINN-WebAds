@@ -95,6 +95,7 @@ if (typeof Object.create === 'undefined') {
       this.timer          = DEFAULTS.TIMEOUT;
       this.resolved       = false;
       this.failed         = false;
+      this.incomplete     = false;
       this.log('new Banner()');
     }
 
@@ -140,7 +141,6 @@ if (typeof Object.create === 'undefined') {
         this.params.done(this);
       }
       if (!this.resolved) {
-        this.log('!! inner resolving...'+ this.name)        
         this.resolved = true;      
         this.log('calling global resolve');
         FINN.webAds.resolve(this.name);
@@ -221,11 +221,15 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.insert = function() {
       this.log('insert');
-	  	if(!this.container){
-		    this.log('missing container '+this.container);
-				return this;
-	  	}
-      this.active = true;
+      if(!this.container){
+        this.log('Missing container '+this.container);
+        this.incomplete = true;
+        this.failed     = true;
+        this.resolve();
+        return this;
+      }
+      this.incomplete = false;
+      this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
         this.fail('Missing valid container on webad '+this.name, true);
@@ -435,19 +439,11 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
-  w._length               = bannerMapLength;
-  
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
-  /*
-    TODO:
-    callback when all is done
-    events:
-      webAds.done
-      webAds.done.all
-      webAds.done.Top
-  */
+  w._length               = bannerMapLength;  
+  w._getBanner            = getBanner;
   
   var eventMap = {};
   
@@ -471,8 +467,8 @@ var FINN = FINN||{};
     inFIF     : undefined,
     webAds    : w,
     plugins   : w.plugins,
-    helios_parameters : "" //TODO: remove this
-     // TODO, add tf_recordClickToUrl?
+    helios_parameters : "", //TODO: remove this
+    tf_recordClickToUrl: window.tf_recordClickToUrl
   };
   
   var bannerMap = {};
@@ -483,6 +479,10 @@ var FINN = FINN||{};
     bannerMap = {};
     callbacks = {};
     configMap = {};
+  }
+
+  function getBanner(name){
+    return bannerMap[name];
   }
 
   function bannerMapLength(){
@@ -581,6 +581,7 @@ var FINN = FINN||{};
     }
     triggerEvent('webad-resolved-'+name, bannerMap[name]);
     triggerEvent('webad-resolved', bannerMap[name]);    
+    console.log('calling resolve all');
     resolveAll();
   }
   
@@ -589,7 +590,7 @@ var FINN = FINN||{};
     var banner;
     for(var key in bannerMap){
       banner = bannerMap[key];      
-      if (banner.resolved !== true){
+      if (banner.resolved !== true && banner.incomplete !== true){
         allResolved = false;
         break;
       }
@@ -602,9 +603,11 @@ var FINN = FINN||{};
           }
         });
       }
+      console.log('resolve all trigger');      
       triggerEvent('all-webads-resolved', bannerMap);
       return true;
     } else {
+      console.log('failed to resolve all');      
       return false;
     }
   }
@@ -620,11 +623,12 @@ var FINN = FINN||{};
   }
   
   function renderAll(commaList, callback){ 
-    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
-    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
-    var priorityList  = commaList.split(',');
+    var swapArgs = commaList && typeof commaList === 'function';
+    callback          = swapArgs ? commaList : callback;    
+    commaList         = swapArgs ? "Top" : (commaList||"Top");
     
-    function loop(){
+    var priorityList  = commaList.split(',');
+    function loop(err){
       if (priorityList.length <= 0){
         renderUnactive();
       } else {

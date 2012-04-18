@@ -23,19 +23,11 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
-  w._length               = bannerMapLength;
-  
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
-  /*
-    TODO:
-    callback when all is done
-    events:
-      webAds.done
-      webAds.done.all
-      webAds.done.Top
-  */
+  w._length               = bannerMapLength;  
+  w._getBanner            = getBanner;
   
   var eventMap = {};
   
@@ -59,8 +51,8 @@ var FINN = FINN||{};
     inFIF     : undefined,
     webAds    : w,
     plugins   : w.plugins,
-    helios_parameters : "" //TODO: remove this
-     // TODO, add tf_recordClickToUrl?
+    helios_parameters : "", //TODO: remove this
+    tf_recordClickToUrl: window.tf_recordClickToUrl
   };
   
   var bannerMap = {};
@@ -71,6 +63,10 @@ var FINN = FINN||{};
     bannerMap = {};
     callbacks = {};
     configMap = {};
+  }
+
+  function getBanner(name){
+    return bannerMap[name];
   }
 
   function bannerMapLength(){
@@ -169,6 +165,7 @@ var FINN = FINN||{};
     }
     triggerEvent('webad-resolved-'+name, bannerMap[name]);
     triggerEvent('webad-resolved', bannerMap[name]);    
+    console.log('calling resolve all');
     resolveAll();
   }
   
@@ -177,7 +174,7 @@ var FINN = FINN||{};
     var banner;
     for(var key in bannerMap){
       banner = bannerMap[key];      
-      if (banner.resolved !== true){
+      if (banner.resolved !== true && banner.incomplete !== true){
         allResolved = false;
         break;
       }
@@ -190,9 +187,11 @@ var FINN = FINN||{};
           }
         });
       }
+      console.log('resolve all trigger');      
       triggerEvent('all-webads-resolved', bannerMap);
       return true;
     } else {
+      console.log('failed to resolve all');      
       return false;
     }
   }
@@ -208,11 +207,12 @@ var FINN = FINN||{};
   }
   
   function renderAll(commaList, callback){ 
-    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
-    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
-    var priorityList  = commaList.split(',');
+    var swapArgs = commaList && typeof commaList === 'function';
+    callback          = swapArgs ? commaList : callback;    
+    commaList         = swapArgs ? "Top" : (commaList||"Top");
     
-    function loop(){
+    var priorityList  = commaList.split(',');
+    function loop(err){
       if (priorityList.length <= 0){
         renderUnactive();
       } else {
