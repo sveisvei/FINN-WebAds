@@ -65,9 +65,11 @@ buster.testCase("Manager", {
         assert(lazyBanner.incomplete, 'should be incomplete');
         
         FINN.webAds.on('all-webads-resolved', function(e, banners){
+          assert(banners)
           assert(banners.Lazy.active);      
           assert(banners.Lazy.resolved);              
           refute(banners.Lazy.incomplete, 'should not be incomplete');
+          $(document).off('all-webads-resolved');
           done();
         });
         
