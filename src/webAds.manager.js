@@ -124,11 +124,15 @@ var FINN = FINN||{};
     }
   }    
       
-  function render(name, callback){
+  function render(name, callback, force){
+    var secondIsFn = typeof callback === 'function';
+    force     = secondIsFn ? force : callback;
+    callback  = secondIsFn ? callback : null;
+    
     var banner = bannerMap[name];
     if (!banner){
       callback(new Error('Banner '+name+' not queued'), null);
-    } else if (banner.active){
+    } else if (!force && banner.active){
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
@@ -282,28 +286,28 @@ var FINN = FINN||{};
     }
   }
   
-  function renderContext(selector){
+  function renderContext(selector, force){
     collectDataPositions(selector);
-    
+
     $(selector).find(".webads").filter(function(){
-      return !$(this).hasClass('webads-processed');
+      return (force === true ? true : !$(this).hasClass('webads-processed')); //TODO
     }).each(function(){
       var $this = $(this);
       $this.addClass('webads-processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){
-        render(position);
+        render(position, force);
       } else if (id) {
-        renderAdsWithContainer(id);
+        renderAdsWithContainer(id, force);
       }
     });
   }
   
-  function renderAdsWithContainer(container){
+  function renderAdsWithContainer(container, force){
     for(var key in bannerMap){
       if (container === bannerMap[key].container){
-        render(key);
+        render(key, force);
       }
     }
   }

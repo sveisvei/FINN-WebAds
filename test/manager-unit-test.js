@@ -19,7 +19,7 @@ buster.testCase("Manager", {
   
   "and lazy load banner": {
     "setUp": function(){
-      $("body").append('<div id="lazytest"></div>');     
+      $("body").append('<div class="webads" id="lazytest"></div>');     
       
       this.oldAll = FINN.data.defaultConfig.all;
       
@@ -34,7 +34,7 @@ buster.testCase("Manager", {
     },
     
     "tearDown": function(){
-      $("#lazytest").remove(); 
+      $("#lazytest,.webads-lazy,#lazy2").remove(); 
       FINN.data.defaultConfig.all = this.oldAll;    
     },
     
@@ -87,17 +87,18 @@ buster.testCase("Manager", {
       FINN.webAds.render('Lazy', function(){
         assert(lazyBanner.active);
         $("#lazytest").remove();
-        $("body").append('<div id="lazy2">dummy</div>')
+        $("body").append('<div class="webads" id="lazy2">dummy</div>')
         lazyBanner.config('container', 'lazy2');
         
         FINN.webAds.on('all-webads-resolved', function(){
            $(document).off('all-webads-resolved');
+           console.log('third.-..')
            refute.equals($("#lazy2").html(), 'dummy');
            done();
         });
         
-        
-        FINN.webAds.renderContext("body");
+        console.log('second...');
+        FINN.webAds.renderContext("body", true);
       });
 
     }
