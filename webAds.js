@@ -100,8 +100,8 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if(!this.now) this.now = Date.now()
-      if (console) {console.log(this.now - Date.now() + ":" + this.name+":"+msg);} 
+      if(Date.now && !this.now) this.now = Date.now()
+      if (console) {console.log((!Date.now ? new Date(): this.now - Date.now()) + ":" + this.name+":"+msg);} 
     };
 
     Banner.prototype.config = function(key, value) {
