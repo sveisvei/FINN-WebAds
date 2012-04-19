@@ -120,16 +120,33 @@ if (typeof Object.create === 'undefined') {
       FINN.webAds.resolveOnload(this.name);
       return this;
     };
-
+    
+    Banner.prototype.isValidSize = function(w, h){
+      return (w === null || w <= this.minSize || w === null || w <= this.minSize);
+    };
+    
+    Banner.prototype.isEmptyPixel = function(){
+      return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
+    }
+    
+    Banner.prototype.hasEmptyPixel = function(){
+      return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
+    }
+    
     Banner.prototype.processSize = function() {
       this.log('processSize');
-      var w           = this.$webAd.width();
-      var height      = this.$webAd.height();
-      var invalidSize = w === null || w <= this.minSize || w === null || w <= this.minSize;
+      var w = this.$webAd.width();
+      var h = this.$webAd.height();
       
-      if (invalidSize) return this.pollForNewSize(w, height);
-      
-      this.resize(w, height);
+      var invalidSize = this.isValidSize(w, h);
+      if (invalidSize) {
+        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
+          return this.fail('pixel');
+        }
+        return this.pollForNewSize(w, h);
+      }
+            
+      this.resize(w, h);
       this.resolve();
       return this;
     };

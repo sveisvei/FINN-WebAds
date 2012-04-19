@@ -63,6 +63,21 @@ buster.testCase("Banner", {
     }
 
     banner.insert();
+  },
+  "1x1,1x2 and 3x3 px images should trigger fail": function(){
+    var banner = new FINN.Banner({
+      name: 'test', 
+      container: 'test'
+    }, {});
+    banner.$webAd = $('<div id="webAd"><img src="dummy2x1" /><img src="empty" id="image"/><img src="dummy2x9" /></div>')
+    refute(banner.hasEmptyPixel());
+    var $img = banner.$webAd.find('#image');
+    $img.attr('src', 'asd1x1.gif');
+    assert(banner.hasEmptyPixel());
+    $img.attr('src', 'asd1x2.jpg');
+    assert(banner.hasEmptyPixel());
+    $img.attr('src', 'asd3x3.png');
+    assert(banner.hasEmptyPixel());
   }
   
 }); 

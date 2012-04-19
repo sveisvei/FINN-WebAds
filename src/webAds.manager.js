@@ -320,7 +320,7 @@ var FINN = FINN||{};
     collectDataPositions(selector);
 
     $(selector).find(".webads").filter(function(){
-      return (force === true ? true : !$(this).hasClass('webads-processed')); //TODO
+      return (force === true ? true : !$(this).hasClass('webads-processed'));
     }).each(function(){
       var $this = $(this);
       $this.addClass('webads-processed');
