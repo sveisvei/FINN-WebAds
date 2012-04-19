@@ -17,6 +17,7 @@
 - Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
   - Default skjult banner
   - default/fjerne banner. fjerne init
+  - bodyClass bodyFailClass navngivning.
 
 - non-helios-content === refreshFromServer osv må ignoreres.
 
