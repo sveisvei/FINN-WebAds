@@ -157,7 +157,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.resolve = function() {
-      this.log('! Resolving...' + this.name);
+      this.log('Banner.prototype.resolve("' + this.name + '")');
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -166,7 +166,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (!this.resolved) {
         this.resolved = true;      
-        this.log('calling global resolve');
+        this.log('Calling FINN.webAds.resolve()');
         FINN.webAds.resolve(this.name);
       }
       // reset
@@ -191,10 +191,7 @@ if (typeof Object.create === 'undefined') {
       this.retries -= 1;
       banner = this;
       if (this.retries > 0) {
-        cb = function() {
-          banner.log('pollForNewSize setTimeout');
-          return banner.processSize();
-        };
+        cb = function() { banner.processSize(); };
         setTimeout(cb, this.timer);
       } else {
         this.width  = width;
@@ -223,7 +220,9 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.refresh = function() {
-      this.log('refresh');
+      if (this.incomplete){
+        this.fail('Cant refresh banner bacuse of invalid config.');
+      }
       this.refreshCalled  = true;
       this.resolved       = false;
       if (this.failed && this.iframe && this.iframe.$wrapper){
@@ -232,11 +231,12 @@ if (typeof Object.create === 'undefined') {
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
-      return this.iframe.refresh();
+      this.iframe.refresh();
+      return this;
     };
 
     Banner.prototype.remove = function() {
-      this.active = false;
+      this.active   = false;
       this.resolved = false;
       this.iframe.remove();
       return this;
@@ -245,13 +245,14 @@ if (typeof Object.create === 'undefined') {
     Banner.prototype.insert = function() {
       this.log('Insert()');
       if(!this.container){
-        this.log('Missing container '+this.container);
         this.incomplete = true;
         this.failed     = true;
+        this.log('Missing container '+this.container);        
         this.resolve();
         return this;
       }
       this.incomplete = false;
+      this.resolved   = false;
       this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
@@ -259,7 +260,7 @@ if (typeof Object.create === 'undefined') {
         return this;
       }
       this.iframe.makeIframe();
-      $container.data('webads-processed', true);
+      $container.data('webads-processed', 'true');
       this.iframe.$wrapper.appendTo($container);
       this.log('After insert');
       return this;

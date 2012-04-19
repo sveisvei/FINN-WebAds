@@ -16,6 +16,7 @@ buster.testCase("Manager", {
     });
     assert.equals(FINN.webAds._length(), 1);
   },
+
   
   "and lazy load banner": {
     "setUp": function(){
@@ -34,7 +35,7 @@ buster.testCase("Manager", {
     },
     
     "tearDown": function(){
-      $("#lazytest,.webads-lazy,#lazy2").remove(); 
+      $("#lazytest,.webads-lazy,#lazy2,#wrap").remove(); 
       FINN.data.defaultConfig.all = this.oldAll;    
     },
     
@@ -58,32 +59,40 @@ buster.testCase("Manager", {
     },
     "should pickup position container from position": function(done){
       var lazyBanner = this.banner;
+      
+      console.log('callding renderAll');
       FINN.webAds.renderAll(function(){
+        $("body").append('<div id="wrap">\
+                            <div class="webads-lazy" data-webad-position="Lazy"></div>\
+                          </div>');
+
+        //refute.equals($(".webads-lazy").data('webads-processed'), 'true');        
+        assert(lazyBanner.incomplete, 'should be incomplete when rendered without container');
+        refute(lazyBanner.active,     'should not be active');      
         
-        $("body").append('<div class="webads-lazy" data-webad-position="Lazy"></div>');
+        //assert($("#lazytest").data('webads-processed'));
         
-        assert(lazyBanner.incomplete, 'should be incomplete');
+        lazyBanner.log('active     :'+ lazyBanner.active)
+        lazyBanner.log('incomplete :'+ lazyBanner.incomplete)
         
-        FINN.webAds.on('all-webads-resolved', function(e, banners){
-          assert(banners)
-          assert(banners.Lazy.active);      
-          assert(banners.Lazy.resolved);              
+        FINN.webAds.renderLazy("#wrap", function(err, banners){
+          assert(banners.Lazy.active, 'should be active');      
+          assert(banners.Lazy.resolved, 'should be resolved');              
           refute(banners.Lazy.incomplete, 'should not be incomplete');
-          $(document).off('all-webads-resolved');
+          //buster.log('val:'+$(".webads-lazy").data('webads-processed'));
+          //assert.equals($(".webads-lazy").data('webads-processed'), 'true');
           done();
         });
         
-        refute(lazyBanner.active);      
-        
-        FINN.webAds.renderLazy("body");
-        
-        assert(lazyBanner.active);
       });
+      
     }  ,
     "renderContext should reload banners in context and ignore banner.active": function(done) {
       var lazyBanner = this.banner;
+      
       lazyBanner.config('container', 'lazytest');
       refute(lazyBanner.active)
+      
       FINN.webAds.render('Lazy', function(){
         assert(lazyBanner.active);
         $("#lazytest").remove();

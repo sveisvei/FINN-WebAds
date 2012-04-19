@@ -1,5 +1,5 @@
+/*global document, window, console, jQuery, setTimeout */
 var FINN = FINN||{};
-
 if (typeof Object.create === 'undefined') {
     Object.create = function (o) { 
         function F() {} 
@@ -38,14 +38,16 @@ if (typeof Object.create === 'undefined') {
       var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
-      var i         = document.createElement('iframe');
-      
-      innerDiv.className  = 'inner';
-      
+      var i         = document.createElement('iframe');      
+      innerDiv.className  = 'inner';      
       div.id              = this.id;
-      div.className = ("advertising webad " + this.id + (this.options.hidden ? ' webad-hidden' : '')).toLowerCase();
-      if (this.options.hidden ){ div.style.display = "none"; }
-      
+      var divClasses = ['advertising', 'webad', this.id];
+      if (this.options.hidden) {
+        divClasses.push('webad-hidden');
+        div.style.display = "none";
+      }
+      if (this.options.sticky) { divClasses.push('webad-sticky'); }
+      div.className = (divClasses.join(' ')).toLowerCase();
       i.src        = iframeUrl + "#" + this.name;
       i.scrolling  = 'no';
       i.className  = 'webad-iframe';
@@ -65,7 +67,7 @@ if (typeof Object.create === 'undefined') {
       div.appendChild(innerDiv);
       // Add reference for selecting injected iframe      
       this.$iframe  = $(i);
-      this.$wrapper = $(div)
+      this.$wrapper = $(div);
       return this;
     };
     return Iframe;
@@ -100,8 +102,11 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if(Date.now && !this.now) this.now = Date.now()
-      if (console) {console.log((!Date.now ? new Date(): this.now - Date.now()) + ":" + this.name+":"+msg);} 
+      if(Date.now && !this.now) this.now = Date.now();
+      if (console) {
+        var prefix = (!Date.now ? new Date() : this.now - Date.now());
+        console.log(prefix + "-> " + this.name + ": " + msg);
+      } 
     };
 
     Banner.prototype.config = function(key, value) {
@@ -127,11 +132,11 @@ if (typeof Object.create === 'undefined') {
     
     Banner.prototype.isEmptyPixel = function(){
       return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
-    }
+    };
     
     Banner.prototype.hasEmptyPixel = function(){
       return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
-    }
+    };
     
     Banner.prototype.processSize = function() {
       this.log('processSize');
@@ -152,7 +157,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.resolve = function() {
-      this.log('! Resolving...' + this.name);
+      this.log('Banner.prototype.resolve("' + this.name + '")');
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -161,7 +166,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (!this.resolved) {
         this.resolved = true;      
-        this.log('calling global resolve');
+        this.log('Calling FINN.webAds.resolve()');
         FINN.webAds.resolve(this.name);
       }
       // reset
@@ -186,10 +191,7 @@ if (typeof Object.create === 'undefined') {
       this.retries -= 1;
       banner = this;
       if (this.retries > 0) {
-        cb = function() {
-          banner.log('pollForNewSize setTimeout');
-          return banner.processSize();
-        };
+        cb = function() { banner.processSize(); };
         setTimeout(cb, this.timer);
       } else {
         this.width  = width;
@@ -218,7 +220,9 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.refresh = function() {
-      this.log('refresh');
+      if (this.incomplete){
+        this.fail('Cant refresh banner bacuse of invalid config.');
+      }
       this.refreshCalled  = true;
       this.resolved       = false;
       if (this.failed && this.iframe && this.iframe.$wrapper){
@@ -227,40 +231,38 @@ if (typeof Object.create === 'undefined') {
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
-      return this.iframe.refresh();
+      this.iframe.refresh();
+      return this;
     };
 
     Banner.prototype.remove = function() {
-      this.log('remove');
-      this.active = false;
+      this.active   = false;
       this.resolved = false;
       this.iframe.remove();
       return this;
     };
 
     Banner.prototype.insert = function() {
-      this.log('insert');
+      this.log('Insert()');
       if(!this.container){
-        this.log('Missing container '+this.container);
         this.incomplete = true;
         this.failed     = true;
+        this.log('Missing container '+this.container);        
         this.resolve();
         return this;
       }
       this.incomplete = false;
+      this.resolved   = false;
       this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
         this.fail('Missing valid container on webad '+this.name, true);
         return this;
       }
-      this.log('insert before make iframe')
       this.iframe.makeIframe();
-      this.log('iframe made')
-      $container.addClass('webads-processed');
-      this.log('appending...')
+      $container.data('webads-processed', 'true');
       this.iframe.$wrapper.appendTo($container);
-      this.log('after insert')
+      this.log('After insert');
       return this;
     };
     return Banner;
@@ -285,6 +287,7 @@ var FINN = FINN || {};
     var isSmallBanner = width <= 768;
     var isNotCompanion = width >= 800 && width < 992;
     var isDominant = width > 992;
+    if (banner.bodyFailClass) $('body').removeClass(banner.bodyFailClass);
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css('width', '980px');
     } else if (isDominant) {
@@ -335,6 +338,7 @@ var FINN = FINN || {};
     },
     "Right2": {
 			extends: 'normal',
+			sticky: true,
       width: 240,
       height: 500
     },
@@ -451,8 +455,9 @@ var FINN = FINN||{};
   w.expose                = expose;
   w.refresh               = refresh;
   w.refreshAll            = refreshAll;
-  w.refreshFromServer     = refreshFromServer; //TODO
-  w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  //w.refreshFromServer     = refreshFromServer;    //TODO
+  //w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  //w.renderWhenVisible     = renderWhenVisible     //TODO
   w.resolve               = resolve;
   w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
@@ -638,15 +643,17 @@ var FINN = FINN||{};
     var allResolved = true;
     var banner;
     for(var key in bannerMap){
-      banner = bannerMap[key];      
+      banner = bannerMap[key];    
       if (banner.resolved !== true && banner.incomplete !== true){
         allResolved = false;
         break;
       }
     }
     if (allResolved){
-      if (callbacks['all'] && callbacks['all'].length > 0){
-        $.each(callbacks['all'], function(){
+      var callbacksToCall = callbacks['all']; // copy out the callbacks
+      callbacks['all'] = null; // reset map
+      if (callbacksToCall && callbacksToCall.length > 0){
+        $.each(callbacksToCall, function(){
           if (typeof this === 'function') {
             this(null, bannerMap);
           }
@@ -689,9 +696,10 @@ var FINN = FINN||{};
     loop();
   }
   
-  function renderLazy(parent){
+  function renderLazy(parent, callback){
     $(parent).find('.webads-lazy').removeClass('webads-lazy').addClass('webads');
-    renderContext(parent);
+    if (callback && typeof callback === 'function') insertCallback('all', callback);  
+    renderContext(parent);    
   }
   
   function queue(obj){    
@@ -752,13 +760,14 @@ var FINN = FINN||{};
   }
   
   function renderContext(selector, force){
+    console.log('RENDER CONTEXT', selector);
     collectDataPositions(selector);
-
+    
     $(selector).find(".webads").filter(function(){
-      return (force === true ? true : !$(this).hasClass('webads-processed'));
+      return (force === true ? true : $(this).data('webads-processed') !== 'true');
     }).each(function(){
       var $this = $(this);
-      $this.addClass('webads-processed');
+      $this.data('webads-processed', 'true');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){

@@ -16,8 +16,9 @@ var FINN = FINN||{};
   w.expose                = expose;
   w.refresh               = refresh;
   w.refreshAll            = refreshAll;
-  w.refreshFromServer     = refreshFromServer; //TODO
-  w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  //w.refreshFromServer     = refreshFromServer;    //TODO
+  //w.refreshAllFromServer  = refreshAllFromServer; //TODO
+  //w.renderWhenVisible     = renderWhenVisible     //TODO
   w.resolve               = resolve;
   w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
@@ -203,15 +204,17 @@ var FINN = FINN||{};
     var allResolved = true;
     var banner;
     for(var key in bannerMap){
-      banner = bannerMap[key];      
+      banner = bannerMap[key];    
       if (banner.resolved !== true && banner.incomplete !== true){
         allResolved = false;
         break;
       }
     }
     if (allResolved){
-      if (callbacks['all'] && callbacks['all'].length > 0){
-        $.each(callbacks['all'], function(){
+      var callbacksToCall = callbacks['all']; // copy out the callbacks
+      callbacks['all'] = null; // reset map
+      if (callbacksToCall && callbacksToCall.length > 0){
+        $.each(callbacksToCall, function(){
           if (typeof this === 'function') {
             this(null, bannerMap);
           }
@@ -254,9 +257,10 @@ var FINN = FINN||{};
     loop();
   }
   
-  function renderLazy(parent){
+  function renderLazy(parent, callback){
     $(parent).find('.webads-lazy').removeClass('webads-lazy').addClass('webads');
-    renderContext(parent);
+    if (callback && typeof callback === 'function') insertCallback('all', callback);  
+    renderContext(parent);    
   }
   
   function queue(obj){    
@@ -317,13 +321,14 @@ var FINN = FINN||{};
   }
   
   function renderContext(selector, force){
+    console.log('RENDER CONTEXT', selector);
     collectDataPositions(selector);
-
+    
     $(selector).find(".webads").filter(function(){
-      return (force === true ? true : !$(this).hasClass('webads-processed'));
+      return (force === true ? true : $(this).data('webads-processed') !== 'true');
     }).each(function(){
       var $this = $(this);
-      $this.addClass('webads-processed');
+      $this.data('webads-processed', 'true');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){
