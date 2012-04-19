@@ -9,11 +9,13 @@
 }
 
 
-body.has-dominant-campaign {
+.has-dominant-campaign {
     padding: 10px 0 0 0;
 }
-body.has-dominant-campaign .wrapper,
-body.has-dominant-campaign #banners {
+
+.has-dominant-campaign .wrapper,
+.has-dominant-campaign .page
+.has-dominant-campaign #banners {
     margin: 0 auto;
 }
 

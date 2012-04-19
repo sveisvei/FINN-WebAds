@@ -92,12 +92,10 @@ buster.testCase("Manager", {
         
         FINN.webAds.on('all-webads-resolved', function(){
            $(document).off('all-webads-resolved');
-           console.log('third.-..')
            refute.equals($("#lazy2").html(), 'dummy');
            done();
         });
         
-        console.log('second...');
         FINN.webAds.renderContext("body", true);
       });
 
