@@ -14,6 +14,7 @@ var FINN = FINN || {};
     var isSmallBanner = width <= 768;
     var isNotCompanion = width >= 800 && width < 992;
     var isDominant = width > 992;
+    if (banner.bodyFailClass) $('body').removeClass(banner.bodyFailClass);
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css('width', '980px');
     } else if (isDominant) {

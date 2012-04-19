@@ -14,7 +14,9 @@
 
 - refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
 
-
+- Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
+  - Default skjult banner
+  - default/fjerne banner. fjerne init
 
 - non-helios-content === refreshFromServer osv må ignoreres.
 
