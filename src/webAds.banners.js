@@ -74,7 +74,7 @@ if (typeof Object.create === 'undefined') {
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
-    MINSIZE: 31,
+    MINSIZE: 39,
     ADCONTAINER: 'webAd'
   };
   
@@ -100,7 +100,8 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if (console) {console.log(this.name+":"+msg);} 
+      if(!this.now) this.now = Date.now()
+      if (console) {console.log(this.now - Date.now() + ":" + this.name+":"+msg);} 
     };
 
     Banner.prototype.config = function(key, value) {
@@ -116,6 +117,7 @@ if (typeof Object.create === 'undefined') {
         this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
         this.processSize();
       }
+      FINN.webAds.resolveOnload(this.name);
       return this;
     };
 

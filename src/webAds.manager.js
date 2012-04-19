@@ -19,6 +19,7 @@ var FINN = FINN||{};
   w.refreshFromServer     = refreshFromServer; //TODO
   w.refreshAllFromServer  = refreshAllFromServer; //TODO
   w.resolve               = resolve;
+  w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
   w.config                = config;
   w.getFromServer         = getFromServer;
@@ -58,11 +59,13 @@ var FINN = FINN||{};
   var bannerMap = {};
   var callbacks = {};
   var configMap = {};
+  var onloadCallbacks = {};
   
   function cleanUp(){
     bannerMap = {};
     callbacks = {};
     configMap = {};
+    onloadCallbacks = {};
   }
 
   function getBanner(name){
@@ -114,12 +117,13 @@ var FINN = FINN||{};
     return (bannerMap[this.name] = banner);
   }
       
-  function insertCallback(name, callback){
+  function insertCallback(name, callback, list){
+    list = list||callbacks;
     if (typeof callback === 'function'){
-      if (callbacks[name] && $.isArray(callbacks[name])){
-        callbacks[name].push(callback);
+      if (list[name] && $.isArray(list[name])){
+        list[name].push(callback);
       } else {
-        callbacks[name] = [callback];
+        list[name] = [callback];
       }
     }
   }    
@@ -127,11 +131,16 @@ var FINN = FINN||{};
   function render(name, callback, force){
     var secondIsFn = typeof callback === 'function';
     force     = secondIsFn ? force : callback;
-    callback  = secondIsFn ? callback : null;
+    callback  = secondIsFn ? callback : force;
     
     var banner = bannerMap[name];
     if (!banner){
-      callback(new Error('Banner '+name+' not queued'), null);
+      var error = new Error('Banner '+name+' not queued');
+      if (callback && typeof callback === 'function') {
+        callback(error, null);        
+      } else {
+        resolveOnload(name, error);
+      }
     } else if (!force && banner.active){
       banner.log('banner is active');
       if (callback && typeof callback === 'function') {
@@ -160,7 +169,25 @@ var FINN = FINN||{};
     });
   }
   
+  function resolveOnload(name, error){
+    if (onloadCallbacks[name] && onloadCallbacks[name].length > 0){
+      $.each(onloadCallbacks[name], function(){
+        if (typeof this === 'function') {          
+          if (error){
+            this(error, null);
+          } else {
+            this(null, bannerMap[name]);
+          }
+        }
+      });
+      onloadCallbacks[name] = null;
+    }
+    //triggerEvent('webad-onload-'+name, bannerMap[name]);
+    //triggerEvent('webad-onload', bannerMap[name]);
+  }
+  
   function resolve(name){
+    resolveOnload(name);
     if (callbacks[name] && callbacks[name].length > 0){
       $.each(callbacks[name], function(){
         if (typeof this === 'function') this(null, bannerMap[name]);
@@ -214,10 +241,13 @@ var FINN = FINN||{};
     
     var priorityList  = commaList.split(',');
     function loop(err){
+      var name;
       if (priorityList.length <= 0){
         renderUnactive();
       } else {
-        render(priorityList.shift(), loop);
+        name = priorityList.shift();
+        insertCallback(name, loop, onloadCallbacks);
+        render(name);
       }
     }
     if (callback && typeof callback === 'function') insertCallback('all', callback);
