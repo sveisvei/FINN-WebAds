@@ -79,10 +79,28 @@ buster.testCase("Manager", {
         
         assert(lazyBanner.active);
       });
+    }  ,
+    "renderContext should reload banners in context and ignore banner.active": function(done) {
+      var lazyBanner = this.banner;
+      lazyBanner.config('container', 'lazytest');
+      refute(lazyBanner.active)
+      FINN.webAds.render('Lazy', function(){
+        assert(lazyBanner.active);
+        $("#lazytest").remove();
+        $("body").append('<div id="lazy2">dummy</div>')
+        lazyBanner.config('container', 'lazy2');
+        
+        FINN.webAds.on('all-webads-resolved', function(){
+           $(document).off('all-webads-resolved');
+           refute.equals($("#lazy2").html(), 'dummy');
+           done();
+        });
+        
+        
+        FINN.webAds.renderContext("body");
+      });
+
     }
-  },
-  "//renderContext should reload banners in context and ignore banner.active": function() {
-    
   }
 
 });

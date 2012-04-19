@@ -13,6 +13,7 @@
 - sticky
 
 - refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
+1x1, 3x3 px checks skips sizecheck
 
 
 
