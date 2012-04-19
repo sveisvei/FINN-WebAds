@@ -43,6 +43,12 @@
     top: 0;
     left: 992px;
 }
+
+#banners .webad-sticky .inner {
+  position: fixed;
+  top: 10px;
+}
+
 #banners .webad-left1 {
     position: absolute;
     top: 0;

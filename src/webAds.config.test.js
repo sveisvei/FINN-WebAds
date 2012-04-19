@@ -24,6 +24,12 @@ var FINN = FINN || {};
 			extends: 'Tests',
       container: 'banner-tab'
     },
+    "Right2": {
+      extends: 'normal',
+			sticky: false,
+      width: 240,
+      height: 500
+    },
     "all":{
 				container: 'banners',
 				backend: 'helios'

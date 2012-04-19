@@ -51,9 +51,10 @@ module.exports = function(app){
   
   app.get('/config/:key', function(req, res){
     var key = req.params.key;
-    res.render(key, { 
+    res.render('key', { 
         title: 'Webads setup' + key, 
-        layout: false  
+        layout: false,
+        key: key
     });
   });
   

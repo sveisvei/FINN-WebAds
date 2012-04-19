@@ -5,6 +5,10 @@ html
     link(rel='stylesheet', href='/webAds.css')
     include partials/scripts
     style
+      * {margin: 0; padding: 0;}
+      body {
+        padding: 10px
+      }
       .container {
         width: 960px;
         padding: 10px;
@@ -19,11 +23,11 @@ html
   
     div.webads#banners  
     div.wrapper.container
-      p Container
+      p= title
       include partials/menu      
       div#banners-middle
     
-    script
+    script(type='text/javascript')
       var FINN = FINN||{};
       jQuery(document).ready(function(){
         // adBlocker
@@ -33,7 +37,7 @@ html
         FINN.webAds.iframeUrl = "/iframe.html";
 
         //TODO URL
-        FINN.webAds.getFromServer('/config/missingtop/heliosAds', function(err, data){
+        FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){
             FINN.webAds.renderAll();
         });
 

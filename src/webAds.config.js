@@ -65,6 +65,7 @@ var FINN = FINN || {};
     },
     "Right2": {
 			extends: 'normal',
+			sticky: true,
       width: 240,
       height: 500
     },

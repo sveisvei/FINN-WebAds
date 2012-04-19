@@ -5,12 +5,8 @@
   - Strapon
   - Reise
 
-- Should renderAll trigger next banner on onload and not on done?
-
-- unit-tester av internals
-
 - 12 eller 10px gutter?
-- sticky
+- TODO: sticky?
 
 - refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
 
