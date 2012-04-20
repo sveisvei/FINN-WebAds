@@ -260,7 +260,7 @@ if (typeof Object.create === 'undefined') {
         return this;
       }
       this.iframe.makeIframe();
-      $container.data('webads-processed', 'true');
+      $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);
       this.log('After insert');
       return this;

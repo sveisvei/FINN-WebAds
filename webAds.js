@@ -260,7 +260,7 @@ if (typeof Object.create === 'undefined') {
         return this;
       }
       this.iframe.makeIframe();
-      $container.data('webads-processed', 'true');
+      $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);
       this.log('After insert');
       return this;
@@ -764,10 +764,10 @@ var FINN = FINN||{};
     collectDataPositions(selector);
     
     $(selector).find(".webads").filter(function(){
-      return (force === true ? true : $(this).data('webads-processed') !== 'true');
+      return (force === true ? true : $(this).data('webads-processed') !== 'processed');
     }).each(function(){
       var $this = $(this);
-      $this.data('webads-processed', 'true');
+      $this.data('webads-processed', 'processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
       if (position){

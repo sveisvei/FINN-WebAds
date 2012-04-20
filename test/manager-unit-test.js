@@ -60,27 +60,25 @@ buster.testCase("Manager", {
     "should pickup position container from position": function(done){
       var lazyBanner = this.banner;
       
-      console.log('callding renderAll');
-      FINN.webAds.renderAll(function(){
-        $("body").append('<div id="wrap">\
+      FINN.webAds.renderAll(function(err, banners){
+        $("body").html('<div id="wrap">\
                             <div class="webads-lazy" data-webad-position="Lazy"></div>\
                           </div>');
 
-        //refute.equals($(".webads-lazy").data('webads-processed'), 'true');        
+        assert.equals($("div[data-webad-position='Lazy']").data('webads-processed'), undefined);
         assert(lazyBanner.incomplete, 'should be incomplete when rendered without container');
         refute(lazyBanner.active,     'should not be active');      
-        
-        //assert($("#lazytest").data('webads-processed'));
+        refute(lazyBanner.container,  'caontainer should be missing');
         
         lazyBanner.log('active     :'+ lazyBanner.active)
         lazyBanner.log('incomplete :'+ lazyBanner.incomplete)
         
         FINN.webAds.renderLazy("#wrap", function(err, banners){
-          assert(banners.Lazy.active, 'should be active');      
-          assert(banners.Lazy.resolved, 'should be resolved');              
-          refute(banners.Lazy.incomplete, 'should not be incomplete');
-          //buster.log('val:'+$(".webads-lazy").data('webads-processed'));
-          //assert.equals($(".webads-lazy").data('webads-processed'), 'true');
+          assert(lazyBanner.active,       'should be active');      
+          assert(lazyBanner.resolved,     'should be resolved');              
+          refute(lazyBanner.incomplete,   'should not be incomplete');
+          assert.equals($(lazyBanner.container).data('webads-processed'), 'processed');
+          assert.equals($("div[data-webad-position='Lazy']").data('webads-processed'), 'processed');
           done();
         });
         

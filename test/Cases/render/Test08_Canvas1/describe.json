@@ -3,5 +3,6 @@
   "expectations": {
     "width" : 165,
     "height" : 145
-  }
+  },
+  "timeout": 600
 }

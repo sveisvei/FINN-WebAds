@@ -23,6 +23,7 @@
 - heliosbackend svarer med nye urler via ajax
 - Plugins (avklare med marius/rune hva produktet er)
 - HEADER: responseHeaders.setCacheControl("max-age=290304000, public");
+- tf_track osv må testes
 
 # Ikke viktig:
 - Reporte feil via cassandra/statistikk
