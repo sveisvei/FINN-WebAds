@@ -99,6 +99,10 @@ var FINN = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
+    'textads': {
+      width: 115,
+      height: 900
+    },
     "normal": {
 			container : 'banners'
 		},

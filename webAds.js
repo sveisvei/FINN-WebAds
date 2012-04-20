@@ -373,6 +373,10 @@ var FINN = FINN || {};
     "Txt_8": {},
     "Txt_9": {},
     "Txt_10": {},
+    'textads': {
+      width: 115,
+      height: 900
+    },
     "normal": {
 			container : 'banners'
 		},
@@ -456,6 +460,7 @@ var FINN = FINN||{};
   w.expose                = expose;
   w.refresh               = refresh;
   w.refreshAll            = refreshAll;
+  w.updateUrls            = updateUrls;
   //w.refreshFromServer     = refreshFromServer;    //TODO
   //w.refreshAllFromServer  = refreshAllFromServer; //TODO
   //w.renderWhenVisible     = renderWhenVisible     //TODO
@@ -525,6 +530,14 @@ var FINN = FINN||{};
     
     if(bannerMap[name]){
       bannerMap[name].config(key, value);
+    }
+  }
+  
+  function updateUrls(urlMap){
+    for(var key in urlMap){
+      if (bannerMap[key]){
+        bannerMap[key].url = urlMap[key];        
+      }
     }
   }
   

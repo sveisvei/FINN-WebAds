@@ -38,7 +38,7 @@
 #banners .webad-top .inner {
     text-align: right;
 }
-#banners .webad-right2 {
+#banners > .webad-right2 {
     position: absolute;
     top: 0;
     left: 992px;

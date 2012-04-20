@@ -4,6 +4,8 @@
   p     - Eiendom   (lazy load, + data-webad-position)
   p     - Strapon   ()
   todo  - Reise     (Bjørnar)
+    - cluster? Størrelse problematikk
+    - sticky underthefold script
     
   todo  - Torget    (Øyvind)
 
@@ -13,6 +15,7 @@
   - <div data-webads class="webads"></div>
   - <div data-webads data-webads-lazy class="webads"></div>
   
+
 
 - refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
 - refresh from backend middleware - throttling
@@ -36,3 +39,7 @@
 - Forenkle
   - fjerne jade
   - rydde opp unødvendig ting som gjøre det vanskelig for andre
+
+#teknisk gjeld
+  - Reise- non-spring
+  - Reise- reload url-er
