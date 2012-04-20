@@ -4,16 +4,16 @@
   p     - Eiendom   (lazy load, + data-webad-position)
   p     - Strapon   ()
   todo  - Reise     (Bjørnar)
-    - cluster? Størrelse problematikk
-    - sticky underthefold script
-    
+          - cluster? Størrelse problematikk
+          - sticky underthefold script - banners-right
+            - se på doc høyde og se hvor mange bannere som kan gjøres sticky
+            - samle fra bunnen, legg på 10px som margen i tillegg.    
   todo  - Torget    (Øyvind)
 
-- 12 eller 10px gutter?
 
 - data-attributter istedet for klasser
-  - <div data-webads class="webads"></div>
-  - <div data-webads data-webads-lazy class="webads"></div>
+  - <div data-webads="true" id="?"></div>
+  - <div data-webads="lazy" data-webad-position="lazy"></div>
   
 
 
@@ -42,4 +42,3 @@
 
 #teknisk gjeld
   - Reise- non-spring
-  - Reise- reload url-er

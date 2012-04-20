@@ -43,6 +43,7 @@ div.tabs {
 }
 .advertising iframe {
   background-color: #fff;
+  vertical-align: bottom;
 }
 
 

@@ -13,7 +13,7 @@ function getConfigAds(key, callback){
       }
       var stat = fs.statSync(path + "/" + file);
       if (stat.isDirectory()){
-        console.log(file, i);
+        
         result.push(_.extend({
           name: file,
           url: "/config/" + key + "/" + file + "/index.js"
@@ -22,6 +22,26 @@ function getConfigAds(key, callback){
       
     });
     callback({webAds: result});
+    
+  });
+}
+
+function getFolders(callback){
+  var path = cases + "/config/";
+  fs.readdir(path, function(err, files){
+    if (err) throw err;
+    var result = [];
+    files.forEach(function(file, i){
+      if (file.match(/^\./)){
+        return;
+      }
+      var stat = fs.statSync(path + "/" + file);
+      if (stat.isDirectory()){        
+        result.push(file);        
+      }
+      
+    });
+    callback({folders: result});
     
   });
 }
@@ -48,18 +68,27 @@ function collectTestCases(dir, callback){
 
 module.exports = function(app){
   
-  
-  app.get('/config/:key', function(req, res){
-    var key = req.params.key;
-    res.render('key', { 
-        title: 'Webads setup' + key, 
-        layout: false,
-        key: key
+  app.get('/', function(req, res){
+    getFolders(function(folders){
+      res.render('index', { title: 'Webads', layout: false, key: '', folders: folders });       
     });
   });
   
-  app.get('/config/:key/heliosAds', function(req, res){
+  
+  app.get('/config/:key', function(req, res){
+    var key = req.params.key;
+      getFolders(function(folders){
+        res.render('key', { 
+            title: 'Webads setup' + key, 
+            layout: false,
+            key: key,
+            folders: folders
+        });
+      });
 
+  });
+  
+  app.get('/config/:key/heliosAds', function(req, res){
       getConfigAds(req.params.key, function(result){
         res.send(result);
       });

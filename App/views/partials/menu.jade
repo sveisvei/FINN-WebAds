@@ -1,15 +1,11 @@
-div
-  a(href="/") Frontpage
-  | &nbsp;- 
-  a(href="/config/companion") companion
-  | &nbsp;- 
-  a(href="/config/dominant") dominant
-  | &nbsp;- 
-  a(href="/config/missingtop") missing top
-  | &nbsp;- 
-  a(href="/config/topright") top right
-  | &nbsp;- 
-  a(href="/config/sticky") sticky
-  | &nbsp;- 
-  a(href="/config/dominant_sticky") dominant_sticky
+nav.menu
+  ul.menu
+    - var frontPageClass = (key == '' ? 'active' : '');
+    li
+      a(href="/", class=frontPageClass) frontpage 
+    each folder in folders.folders
+      - var folderClass = (key && key === folder ? 'active' : '')
+      li
+        a(href="/config/#{folder}", class=folderClass)= folder
+    
 br

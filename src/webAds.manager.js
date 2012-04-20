@@ -344,9 +344,11 @@ var FINN = FINN||{};
       $this.data('webads-processed', 'processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
+      console.log(position, id);
       if (position){
         render(position, force);
       } else if (id) {
+        console.log('id');
         renderAdsWithContainer(id, force);
       }
     });

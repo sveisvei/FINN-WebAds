@@ -1,7 +1,8 @@
 !!!5
-html
+html(lang='no')
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/all.css')    
     link(rel='stylesheet', href='/webAds.css')
     include partials/scripts
     style
@@ -13,17 +14,20 @@ html
         width: 960px;
         padding: 10px;
         background: #ccc;
-        min-height: 900px;
+        min-height: 2900px;
       }
       p {
         margin: 0 0 10px 0;
       }
 
-  body
+  body(lang='no')
   
-    div(data-webads="true")#banners  
+    div(data-webads="true")#banners
+      div(data-webads="true")#banners-right
+      
     div.wrapper.container.page
-      p= title
+      h1= title
+      br
       include partials/menu      
       div(data-webads="true")#banners-middle
     
@@ -36,9 +40,8 @@ html
         FINN.webAds.base      = "/config/";    
         FINN.webAds.iframeUrl = "/iframe.html";
 
-        //TODO URL
         FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){
-            FINN.webAds.renderAll();
+            FINN.webAds.renderAll(); //todo, render same as defined.
         });
 
       });

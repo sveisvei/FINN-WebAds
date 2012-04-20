@@ -94,7 +94,7 @@ function collectTestCases(cb){
 
       webAds.queue(preparedWebAdsData);
       
-      webAds.renderAll('Top,Left1', function(err, banners){
+      webAds.renderAll(testCase.renderAll||'Top,Left1', function(err, banners){
         assert.equals(Object.keys(banners).length, testCase.tests.length);
         
         generalExpectations();

@@ -38,12 +38,15 @@
 #banners .webad-top .inner {
     text-align: right;
 }
+#banners-right,
 #banners > .webad-right2 {
     position: absolute;
     top: 0;
     left: 992px;
 }
-
+#banners-right .inner{
+  margin-bottom: 10px;
+}
 #banners .webad-sticky .inner {
   position: fixed;
   top: 10px;

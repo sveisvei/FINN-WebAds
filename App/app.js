@@ -26,8 +26,6 @@ app.configure(function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));  
 });
 
-app.get('/', function(req, res){ res.render('index', { title: 'Webads', layout: false }); });
-
 require('./lib/setups')(app);
 require('./lib/forceDelay')(app);
 require('./lib/plugins')(app);

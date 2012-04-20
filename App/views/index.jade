@@ -1,7 +1,8 @@
 !!!5
-html
+html(lang='no')
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/all.css')    
     link(rel='stylesheet', href='/stylesheets/style.css')
     include partials/scripts
     script(type='text/javascript', src='/javascripts/index.js')
@@ -9,6 +10,7 @@ html
     ul.actions
       li 
         a#refreshAll(href="#action=RefreshAll") Update all
+      
     
     include partials/menu
     
@@ -17,8 +19,11 @@ html
     h1= title
     p Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok. Lorem Ipsum har tålt tidens tann usedvanlig godt, og har i tillegg til å bestå gjennom fem århundrer også tålt spranget over til elektronisk typografi uten vesentlige endringer. Lorem Ipsum ble gjort allment kjent i 1960-årene ved lanseringen av Letraset-ark med avsnitt fra Lorem Ipsum, og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
 
-    div(data-webads="true")#banners2(data-banner-position="Top")
-
+    ul.actions
+      li 
+        a#lazyLoad(href="#action=lazyLoad") Lazy load
+    div(data-webads="lazy", data-webad-position="lazy")
+    
     ul.tabs
       li tab1
       li tab2
