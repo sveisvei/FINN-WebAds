@@ -4,9 +4,15 @@
   p     - Eiendom   (lazy load, + data-webad-position)
   p     - Strapon   ()
   todo  - Reise     (Bjørnar)
+    
   todo  - Torget    (Øyvind)
 
 - 12 eller 10px gutter?
+
+- data-attributter istedet for klasser
+  - <div data-webads class="webads"></div>
+  - <div data-webads data-webads-lazy class="webads"></div>
+  
 
 - refresh fra ny banner-url fra server? Hva skal gjøres her i koden?
 - refresh from backend middleware - throttling

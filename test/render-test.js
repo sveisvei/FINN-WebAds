@@ -10,8 +10,8 @@ function collectTestCases(cb){
     
   testCases["should render"]["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
-    webAds.base      = buster.env.path + "Cases/render/";    
-    webAds.iframeUrl = buster.env.path + "iframe.html";
+    webAds.base      = buster.env.contextPath + "/Cases/render/";    
+    webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
   };
   
   testCases["should render"]["tearDown"] = function(){
@@ -31,7 +31,7 @@ function collectTestCases(cb){
       
       var bannerInitObj = {
         name      : testCase.name,
-        url       : buster.env.path + testCase.url.substring(1),
+        url       : buster.env.contextPath + testCase.url,
         container : 'banners',
         done      : doneSpy
       };
@@ -73,8 +73,8 @@ function collectTestCases(cb){
   }
   
   // WARNING: getting tests from resouces.js
-  $.getJSON(buster.env.path + "testcases-render-test", createTests);
-  
+  var resourceURL = buster.env.contextPath + "/testcases-render-test";
+  $.getJSON(resourceURL, createTests);
 } 
 
 collectTestCases(function(cases){ 

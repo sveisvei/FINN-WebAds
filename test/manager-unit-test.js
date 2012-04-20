@@ -1,7 +1,7 @@
 buster.testCase("Manager", {
   "setUp": function() {
-    FINN.webAds.base      = buster.env.path + "Cases/render/";        
-    FINN.webAds.iframeUrl = buster.env.path + "iframe.html";    
+    FINN.webAds.base      = buster.env.contextPath + "/Cases/render/";        
+    FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
   },
   
   "tearDown": function() {
@@ -30,7 +30,7 @@ buster.testCase("Manager", {
       
       this.banner = FINN.webAds.queue({
         name: 'Lazy',
-        url: buster.env.path + 'Cases/render/Test01/index.js'
+        url: buster.env.contextPath + '/Cases/render/Test01/index.js'
       });
     },
     
@@ -62,7 +62,7 @@ buster.testCase("Manager", {
       
       FINN.webAds.renderAll(function(err, banners){
         $("body").html('<div id="wrap">\
-                            <div class="webads-lazy" data-webad-position="Lazy"></div>\
+                            <div data-webads="lazy" data-webad-position="Lazy"></div>\
                           </div>');
 
         assert.equals($("div[data-webad-position='Lazy']").data('webads-processed'), undefined);
@@ -74,6 +74,7 @@ buster.testCase("Manager", {
         lazyBanner.log('incomplete :'+ lazyBanner.incomplete)
         
         FINN.webAds.renderLazy("#wrap", function(err, banners){
+          console.log('HURRA');
           assert(lazyBanner.active,       'should be active');      
           assert(lazyBanner.resolved,     'should be resolved');              
           refute(lazyBanner.incomplete,   'should not be incomplete');
@@ -94,7 +95,7 @@ buster.testCase("Manager", {
       FINN.webAds.render('Lazy', function(){
         assert(lazyBanner.active);
         $("#lazytest").remove();
-        $("body").append('<div class="webads" id="lazy2">dummy</div>')
+        $("body").append('<div data-webads="true" id="lazy2">dummy</div>')
         lazyBanner.config('container', 'lazy2');
         
         FINN.webAds.on('all-webads-resolved', function(){

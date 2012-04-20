@@ -1,8 +1,8 @@
 
 buster.testCase("Banner", {
   "setUp": function(){
-    FINN.webAds.base      = buster.env.path + "/";    
-    FINN.webAds.iframeUrl = buster.env.path + "iframe.html";    
+    FINN.webAds.base      = buster.env.contextPath + "/";    
+    FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
     $("body").append('<div id="banners"></div>');
   },
   "tearDown" : function(){
@@ -69,14 +69,14 @@ buster.testCase("Banner", {
       name: 'test', 
       container: 'test'
     }, {});
-    banner.$webAd = $('<div id="webAd"><img src="dummy2x1" /><img src="empty" id="image"/><img src="dummy2x9" /></div>')
+    banner.$webAd = $('<div id="webAd"><img src="#dummy2x1" /><img src="#empty" id="image"/><img src="#dummy2x9" /></div>')
     refute(banner.hasEmptyPixel());
     var $img = banner.$webAd.find('#image');
-    $img.attr('src', 'asd1x1.gif');
+    $img.attr('src', '#asd1x1.gif');
     assert(banner.hasEmptyPixel());
-    $img.attr('src', 'asd1x2.jpg');
+    $img.attr('src', '#asd1x2.jpg');
     assert(banner.hasEmptyPixel());
-    $img.attr('src', 'asd3x3.png');
+    $img.attr('src', '#asd3x3.png');
     assert(banner.hasEmptyPixel());
   }
   

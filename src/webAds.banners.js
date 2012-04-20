@@ -110,6 +110,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.config = function(key, value) {
+      this.log(key+' updated');
       return (this[key] = value);
     };
 

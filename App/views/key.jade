@@ -21,11 +21,11 @@ html
 
   body
   
-    div.webads#banners  
-    div.wrapper.container
+    div(data-webads="true")#banners  
+    div.wrapper.container.page
       p= title
       include partials/menu      
-      div#banners-middle
+      div(data-webads="true")#banners-middle
     
     script(type='text/javascript')
       var FINN = FINN||{};

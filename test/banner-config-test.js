@@ -3,8 +3,6 @@ buster.testRunner.timeout = DEFAULT_TIMEOUT2;
 
 var webAds = FINN.webAds;
 
-
-
 function collectTestCases(cb){
   var testCases = {};
   
@@ -12,10 +10,10 @@ function collectTestCases(cb){
   
   testCases["config"]["setUp"] = function() {
     // css injection here might not work because of timing issues.
-    $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.path+'src/webAds.css" />');
+    $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/webAds.css" />');
     $("body").append('<div id="banners"></div><div id="banners-middle"></div>');
-    webAds.base      = buster.env.path + "Cases/config/";    
-    webAds.iframeUrl = buster.env.path + "iframe.html";
+    webAds.base      = buster.env.contextPath + "/Cases/config/";    
+    webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
   };
   
   testCases["config"]["tearDown"] = function(){
@@ -30,7 +28,7 @@ function collectTestCases(cb){
       buster.testRunner.timeout = testCase.timeout||DEFAULT_TIMEOUT2; 
       
       var preparedWebAdsData = $.map(testCase.tests, function(test){
-        test.url = buster.env.path + test.url.substring(1);
+        test.url = buster.env.contextPath + test.url;
         return test;
       });
       
@@ -113,10 +111,10 @@ function collectTestCases(cb){
   }
   
   // WARNING: getting tests from resouces.js
-  $.getJSON(buster.env.path + "testcases-config", createTests);
+  var resourceURL = buster.env.contextPath + "/testcases-config";
+  $.getJSON(resourceURL, createTests);
   
 } 
-
 collectTestCases(function(cases){ 
   buster.testCase("WebAds", cases); 
 });

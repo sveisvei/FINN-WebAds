@@ -18,6 +18,10 @@ config["My tests"] = {
     ],
     tests: [
         "test/*-test.js"
+        //"test/banner-config-test.js"
+        //"test/banner-unit-test.js"
+        //"test/manager-unit-test.js"
+        //"test/render-test.js"
     ]
     //, extensions: [require("buster-lint")]    
 };
