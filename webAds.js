@@ -110,6 +110,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.config = function(key, value) {
+      this.log(key+' updated');
       return (this[key] = value);
     };
 
@@ -602,7 +603,7 @@ var FINN = FINN||{};
   
   function collectDataPositions(selector){
     selector = selector||"body";
-    $(selector).find("div.webads[data-webad-position]").each(function(){
+    $(selector).find("div[data-webad-position]").each(function(){
       var $this = $(this);
       var position = $this.data('webad-position');
       config(position, 'container', $this);
@@ -697,7 +698,7 @@ var FINN = FINN||{};
   }
   
   function renderLazy(parent, callback){
-    $(parent).find('.webads-lazy').removeClass('webads-lazy').addClass('webads');
+    $(parent).find('div[data-webads="lazy"]').attr('data-webads', 'true').data('webads', 'true');
     if (callback && typeof callback === 'function') insertCallback('all', callback);  
     renderContext(parent);    
   }
@@ -760,10 +761,9 @@ var FINN = FINN||{};
   }
   
   function renderContext(selector, force){
-    console.log('RENDER CONTEXT', selector);
     collectDataPositions(selector);
     
-    $(selector).find(".webads").filter(function(){
+    $(selector).find("div[data-webads='true']").filter(function(){
       return (force === true ? true : $(this).data('webads-processed') !== 'processed');
     }).each(function(){
       var $this = $(this);
