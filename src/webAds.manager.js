@@ -93,6 +93,8 @@ var FINN = FINN||{};
     for(var key in urlMap){
       if (bannerMap[key]){
         bannerMap[key].url = urlMap[key];        
+      } else {
+        queue({name: key, url: urlMap[key]});
       }
     }
   }
@@ -311,6 +313,9 @@ var FINN = FINN||{};
         }
       } else {
         var name = priorityList.shift();
+        if(!bannerMap[name]){
+          return loop();
+        }
         alreadyRendered.push(name)
         refresh(name, loop);
       }
