@@ -47,6 +47,7 @@ var FINN=FINN||{};
     if(isSticky) return true;
     isSticky = true;
     $.each(list, function(){
+      this.log('activating sticky');
       this.iframe.$wrapper.css({
         position: 'fixed',
         top: this.stickyPos + "px"
@@ -58,6 +59,7 @@ var FINN=FINN||{};
     if(!isSticky) return true;    
     isSticky = false;
     $.each(list, function(){
+      this.log('de-activating sticky');      
       this.iframe.$wrapper.css({
         position: 'static',
         top: ''

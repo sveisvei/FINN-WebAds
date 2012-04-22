@@ -28,7 +28,7 @@ if (typeof Object.create === 'undefined') {
       var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
       var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
-      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#" + this.name) : (iframeUrl + sep + "refreshWebAd#" + this.name);
+      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#_" + this.name) : (iframeUrl + sep + "refreshWebAd#_" + this.name);
       this.$iframe.attr('src', url);
       return this;
     };
@@ -47,7 +47,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (this.options.sticky) { divClasses.push('webad-sticky'); }
       div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = iframeUrl + "#" + this.name;
+      i.src        = iframeUrl + "#_" + this.name;
       i.scrolling  = 'no';
       i.className  = 'webad-iframe';
       // IE 7-8      
@@ -115,11 +115,15 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.onload = function() {
       this.log('onload');
+      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);      
       if (this.params.hidden || this.params.skipSizeCheck) {
         this.log('HIDDEN ignoreSizeCheck');
-        this.resolve();
+        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
+          return this.fail('pixel');
+        } else {
+          this.resolve();
+        }      
       } else {
-        this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
         this.processSize();
       }
       FINN.webAds.resolveOnload(this.name);
@@ -792,11 +796,11 @@ var FINN = FINN||{};
       $this.data('webads-processed', 'processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
-      console.log(position, id);
+      //console.log(position, id);
       if (position){
         render(position, force);
       } else if (id) {
-        console.log('id');
+        //console.log('id');
         renderAdsWithContainer(id, force);
       }
     });
@@ -861,6 +865,7 @@ var FINN = FINN||{};
     if(isSticky) return true;
     isSticky = true;
     $.each(list, function(){
+      this.log('activating sticky');
       this.iframe.$wrapper.css({
         position: 'fixed',
         top: this.stickyPos + "px"
@@ -872,6 +877,7 @@ var FINN = FINN||{};
     if(!isSticky) return true;    
     isSticky = false;
     $.each(list, function(){
+      this.log('de-activating sticky');      
       this.iframe.$wrapper.css({
         position: 'static',
         top: ''

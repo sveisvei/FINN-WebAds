@@ -14,7 +14,7 @@ html(lang='no')
         width: 960px;
         padding: 10px;
         background: #ccc;
-        min-height: 2900px;
+        height: 2900px;
       }
       p {
         margin: 0 0 10px 0;
@@ -33,12 +33,16 @@ html(lang='no')
     
     script(type='text/javascript')
       var FINN = FINN||{};
+        
       jQuery(document).ready(function(){
         // adBlocker
         if(!FINN.webAds) return;
 
         FINN.webAds.base      = "/config/";    
         FINN.webAds.iframeUrl = "/iframe.html";
+        
+
+
         
         FINN.webAds.one('all-webads-resolved', function(){  
           FINN.webAds.sticky('banners-right'); 

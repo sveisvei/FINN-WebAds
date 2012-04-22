@@ -28,7 +28,7 @@ if (typeof Object.create === 'undefined') {
       var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
       var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
-      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#" + this.name) : (iframeUrl + sep + "refreshWebAd#" + this.name);
+      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#_" + this.name) : (iframeUrl + sep + "refreshWebAd#_" + this.name);
       this.$iframe.attr('src', url);
       return this;
     };
@@ -47,7 +47,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (this.options.sticky) { divClasses.push('webad-sticky'); }
       div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = iframeUrl + "#" + this.name;
+      i.src        = iframeUrl + "#_" + this.name;
       i.scrolling  = 'no';
       i.className  = 'webad-iframe';
       // IE 7-8      
