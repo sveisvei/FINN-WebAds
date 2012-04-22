@@ -1,0 +1,6 @@
+{
+  "expectations": {
+    "retries": 5,
+    "failed": true
+  }
+}

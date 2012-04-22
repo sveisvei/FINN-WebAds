@@ -6,7 +6,7 @@ buster.testCase("Sticky", {
     
     FINN.webAds.base      = buster.env.contextPath + "/";    
     FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
-    $("head").append('<link rel="stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/webAds.css" />');
+    $("head").append('<link id="rel="stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/webAds.css" />');
     $("body").append('\
     <div id="banners" data-webads="true">\
       <div id="banners-right" data-webads="true"></div>\
@@ -27,6 +27,7 @@ buster.testCase("Sticky", {
   "tearDown" : function(){
     $("#banners").remove();
     FINN.webAds.cleanUp();
+    $(window).scrollTop(0);    
   },
   "is rendering when 3 banners": function(done){
     FINN.webAds._getBanner('Right1').params.setHeight = 50;

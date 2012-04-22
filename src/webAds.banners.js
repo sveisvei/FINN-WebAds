@@ -115,11 +115,15 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.onload = function() {
       this.log('onload');
+      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);      
       if (this.params.hidden || this.params.skipSizeCheck) {
         this.log('HIDDEN ignoreSizeCheck');
-        this.resolve();
+        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
+          return this.fail('pixel');
+        } else {
+          this.resolve();
+        }      
       } else {
-        this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
         this.processSize();
       }
       FINN.webAds.resolveOnload(this.name);
