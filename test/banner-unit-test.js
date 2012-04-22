@@ -3,7 +3,7 @@ buster.testCase("Banner", {
   "setUp": function(){
     FINN.webAds.base      = buster.env.contextPath + "/";    
     FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
-    $("body").append('<div id="banners"></div>');
+    $("body").append('<div id="banners" data-webads="true"></div>');
   },
   "tearDown" : function(){
     $("#banners").remove();

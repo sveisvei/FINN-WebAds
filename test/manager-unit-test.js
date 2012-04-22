@@ -20,7 +20,7 @@ buster.testCase("Manager", {
   
   "and lazy load banner": {
     "setUp": function(){
-      $("body").append('<div class="webads" id="lazytest"></div>');     
+      $("body").append('<div data-webads="lazy" id="lazytest"></div>');     
       
       this.oldAll = FINN.data.defaultConfig.all;
       
