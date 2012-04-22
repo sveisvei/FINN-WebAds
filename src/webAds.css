@@ -1,6 +1,6 @@
 .webad-hidden,
 .webad-failed,
-.has-no-top-placement .webad-top .inner{
+.has-no-top-placement .webad-top .webad-inner{
     display: none;
 }
 .webad iframe {
@@ -35,7 +35,7 @@
 #banners .webad {
     z-index: 2;
 }
-#banners .webad-top .inner {
+#banners .webad-top .webad-inner {
     text-align: right;
 }
 #banners-right,
@@ -44,10 +44,10 @@
     top: 0;
     left: 992px;
 }
-#banners-right .inner{
+#banners-right .webad-inner{
   margin-bottom: 10px;
 }
-#banners .webad-sticky .inner {
+#banners .webad-sticky .webad-inner {
   position: fixed;
   top: 10px;
 }

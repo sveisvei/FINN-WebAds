@@ -34,10 +34,15 @@ var FINN = FINN||{};
   
   var eventMap = {};
   
-  w.on = on; //TODO
+  w.on = on;
+  w.one = one;
   function on(key, callback){
-    $(document).on(key, callback);
+    return $(document).on(key, callback);
   } 
+  
+  function one(key, callback){
+    return $(document).one(key, callback);    
+  }
   
   function triggerEvent(name, arg1){
     $(document).trigger(name.toLowerCase(), arg1);      

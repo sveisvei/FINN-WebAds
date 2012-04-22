@@ -13,11 +13,10 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  Iframe = (function() {
-    function Iframe(name, options, id) {
+  Iframe = (function(document) {
+    function Iframe(name, options) {
       this.name     = name;
       this.options  = options != null ? options : {};
-      this.id       = id != null ? id : 'webad-' + this.name;
     }
 
     Iframe.prototype.remove = function() {
@@ -33,15 +32,15 @@ if (typeof Object.create === 'undefined') {
       this.$iframe.attr('src', url);
       return this;
     };
-
+    
     Iframe.prototype.makeIframe = function() {
       var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
       var i         = document.createElement('iframe');      
-      innerDiv.className  = 'inner';      
-      div.id              = this.id;
-      var divClasses = ['advertising', 'webad', this.id];
+      innerDiv.className  = 'webad-inner';      
+      //div.id              = this.id;
+      var divClasses = ['webad', 'webad-'+this.name];
       if (this.options.hidden) {
         divClasses.push('webad-hidden');
         div.style.display = "none";
@@ -67,11 +66,11 @@ if (typeof Object.create === 'undefined') {
       div.appendChild(innerDiv);
       // Add reference for selecting injected iframe      
       this.$iframe  = $(i);
-      this.$wrapper = $(div);
+      this.$wrapper = $(div).data('webad', this.name);
       return this;
     };
     return Iframe;
-  })();
+  })(document);
   
   var DEFAULTS = {
     RETRIES: 5,

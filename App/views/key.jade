@@ -39,9 +39,15 @@ html(lang='no')
 
         FINN.webAds.base      = "/config/";    
         FINN.webAds.iframeUrl = "/iframe.html";
-
+        
+        FINN.webAds.one('all-webads-resolved', function(){  
+          FINN.webAds.sticky('banners-right'); 
+        });
+        
         FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){
             FINN.webAds.renderAll(); //todo, render same as defined.
         });
+        
+        
 
       });
