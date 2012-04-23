@@ -119,7 +119,7 @@ var FINN = FINN||{};
   }
   
   function createConfig(obj){
-	  var extending = defaultConfig[obj.name] && defaultConfig[obj.name].extends;
+	  var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
 	  var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({}, 
       defaults, 

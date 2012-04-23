@@ -50,6 +50,9 @@ function collectTestCases(cb){
         }
       }
       
+      
+      
+      
       function checkBannerExpectations(){
         var len = testCase.tests.length;
         
@@ -95,7 +98,7 @@ function collectTestCases(cb){
       webAds.queue(preparedWebAdsData);
       
       webAds.renderAll(testCase.renderAll||'Top,Left1', function(err, banners){
-        assert.equals(Object.keys(banners).length, testCase.tests.length);
+        assert.equals(getObjectLength(banners), testCase.tests.length);
         
         generalExpectations();
 
@@ -103,6 +106,12 @@ function collectTestCases(cb){
       
       });
     }
+  }
+  
+  function getObjectLength(obj){
+    var i = 0;
+    for(var k in obj){i++}
+    return i;
   }
   
   function createTests(d){

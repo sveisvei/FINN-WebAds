@@ -104,7 +104,7 @@ if (typeof Object.create === 'undefined') {
       if(Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
-        console.log(prefix + "-> " + this.name + ": " + msg);
+        //console.log(prefix + "-> " + this.name + ": " + msg);
       } 
     };
 

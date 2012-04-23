@@ -5,7 +5,8 @@ buster.testCase("Sticky", {
   "setUp": function(done){
     
     FINN.webAds.base      = buster.env.contextPath + "/";    
-    FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
+    FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";  
+      
     $("head").append('<link id="rel="stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/webAds.css" />');
     $("body").append('\
     <div id="banners" data-webads="true">\

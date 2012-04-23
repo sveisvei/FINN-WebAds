@@ -1,22 +1,11 @@
 .webad-hidden,
 .webad-failed,
-.has-no-top-placement .webad-top .webad-inner{
+.has-no-top-placement .webad-top {
     display: none;
 }
-.webad iframe {
+.webad-iframe {
     display: inline-block;
     vertical-align: bottom;
-}
-
-
-.has-dominant-campaign {
-    padding: 10px 0 0 0;
-}
-
-.has-dominant-campaign .wrapper,
-.has-dominant-campaign .page,
-.has-dominant-campaign #banners {
-    margin: 0 auto;
 }
 
 #banners {
@@ -27,33 +16,53 @@
     padding-bottom: 12px;
     overflow: visible;
 }
+
 .has-no-top-placement #banners {
     height: 0;
     min-height: 0;
     padding-bottom: 0;
 }
+
 #banners .webad {
     z-index: 2;
 }
+
 #banners .webad-top .webad-inner {
     text-align: right;
 }
+
 #banners-right,
 #banners > .webad-right2 {
     position: absolute;
     top: 0;
     left: 992px;
+    z-index: 2;    
 }
+
 #banners-right .webad-inner{
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 #banners .webad-sticky .webad-inner {
-  position: fixed;
-  top: 10px;
+    position: fixed;
+    top: 10px;
+    z-index: 2;
 }
 
 #banners .webad-left1 {
     position: absolute;
     top: 0;
     left: -240px;
+    z-index: 2;    
+}
+
+/* dominant campaign */
+.has-dominant-campaign {
+    padding: 10px 0 0 0;
+}
+
+.has-dominant-campaign .wrapper,
+.has-dominant-campaign .page,
+.has-dominant-campaign #banners {
+    margin: 0 auto;
 }

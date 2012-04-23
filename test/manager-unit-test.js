@@ -74,7 +74,6 @@ buster.testCase("Manager", {
         lazyBanner.log('incomplete :'+ lazyBanner.incomplete)
         
         FINN.webAds.renderLazy("#wrap", function(err, banners){
-          console.log('HURRA');
           assert(lazyBanner.active,       'should be active');      
           assert(lazyBanner.resolved,     'should be resolved');              
           refute(lazyBanner.incomplete,   'should not be incomplete');

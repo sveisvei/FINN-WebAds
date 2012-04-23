@@ -1,4 +1,7 @@
-document.write('<canvas style="padding:0;margin:0;display:block;" id="canvasId" width="165px" height="145px"><div style="width:165px;height:145px;">canvas fallback</div></canvas>')
+document.write('\
+<canvas style="padding:0;margin:0;display:block;" id="canvasId" width="165px" height="145px">\
+  <div style="width:165px;height:145px;">canvas fallback</div>\
+</canvas>');
 
 function render(canvas){
   var context = canvas.getContext("2d");
