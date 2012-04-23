@@ -7,6 +7,9 @@
           - cluster? Størrelse problematikk          
   todo - Torget    (Øyvind)
 
+#browsersupport
+  - "extends" rename
+
 #Api
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
