@@ -1,26 +1,21 @@
 #TODO
 - Implementering
-  p     - Forsiden  (sveinung)
-  p     - Eiendom   (lazy load, + data-webad-position)
-  p     - Strapon   ()
-  todo  - Reise     (Bjørnar)
+  - Forsiden  (sveinung)
+  - Eiendom   (lazy load, + data-webad-position)
+  - Strapon   (bruker data-webad-position)
+  todo - Reise     (Bjørnar)
           - cluster? Størrelse problematikk          
-  todo  - Torget    (Øyvind)
+  todo - Torget    (Øyvind)
 
-
-#api
-
+#Api
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 
-
 #config
-
 - data-attributter istedet for klasser
   - <div data-webads="true" id="?"></div>
   - <div data-webads="lazy" data-webad-position="lazy"></div>
   
-
 - config.backend. 
   non-helios-content === refreshFromServer osv må ignoreres.
 
