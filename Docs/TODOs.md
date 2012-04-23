@@ -16,7 +16,7 @@
 
 #config
 - data-attributter istedet for klasser
-  - <div data-webads="true" id="?"></div>
+  - <div data-webads="true" id="needed-id"></div>
   - <div data-webads="lazy" data-webad-position="lazy"></div>
   
 - config.backend. 

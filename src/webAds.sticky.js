@@ -5,18 +5,20 @@ var FINN=FINN||{};
   F.webAds = F.webAds||{};
   
   var MARGIN  = 10;
-  var TIMER   = 75;
+  var TIMER   = 15;
   
-  function getAvailFnOnList(list, height, index){
+  function getBannersForHeight(list, height, index){
     var currPos       = MARGIN;
     var toBeRendered  = [];
     var stilSearch    = true;
-    var fold = 0;
+    var fold          = 0;
     var b;
+    var maxWidth = 0;
 
     // Search for position from bottom and up, and collect fold
     for(var i = list.length, g = i -1; i > 0; i--, g--){
       b = list[g];
+      if (b.width > maxWidth) maxWidth = b.width;
       // check if height will outgrow avail window height
       if (stilSearch && (b.height + currPos + (MARGIN*toBeRendered.length)) <= height){
         toBeRendered.push(b);
@@ -38,7 +40,8 @@ var FINN=FINN||{};
     return {
       alwaysSticky  : toBeRendered.length > 0 && toBeRendered.length === list.length,
       fold          : fold,
-      toBeRendered  : toBeRendered
+      sticky  : toBeRendered,
+      maxWidth      : maxWidth
     };
   }
   
@@ -67,34 +70,34 @@ var FINN=FINN||{};
     });
   }
   
-  F.webAds.sticky = function(elemId){
+  F.webAds.sticky = function(elemId, pageSelector){
     var $elem =  $('#'+elemId);
     if ($elem.size() === 0) return false;
     var $webAds = $elem.find('.webad');
     if ($webAds.size() === 0) return false;
 
-    var list =  $webAds.map(function(i){
-      return F.webAds._getBanner($(this).data('webad'));    
-    });
-    
+    var list    =  $webAds.map(function(i){ return F.webAds._getBanner($(this).data('webad')); });    
     var $win    = $(window);
-    var height  = $win.height();
-    var result  = getAvailFnOnList(list, height);    
-    var sticky  = result.toBeRendered;
-    var fold    = result.fold;
+    var result  = getBannersForHeight(list, $win.height());    
     
     function checker(){
       var current = $win.scrollTop();
-      if (current >= fold){
-        setSticky(sticky);
+      if (current >= result.fold){
+        setSticky(result.sticky);
       } else {
-        unsetSticky(sticky);        
+        unsetSticky(result.sticky);        
       }      
+    }
+    
+    if (pageSelector){
+      var contentAndBanners = $(pageSelector).outerWidth() + 12 + 10 + result.maxWidth;
+      var isNoRoom = $win.width() <= contentAndBanners;
+      if (isNoRoom){ return false; }
     }
     
     if (result.alwaysSticky) {
       checker();
-    } else if (sticky.length > 0){
+    } else if (result.sticky.length > 0){
       var scrollTimer;
       // check if currently scrolled past fold;
       checker();

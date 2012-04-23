@@ -45,7 +45,7 @@ html(lang='no')
 
         
         FINN.webAds.one('all-webads-resolved', function(){  
-          FINN.webAds.sticky('banners-right'); 
+          FINN.webAds.sticky('banners-right', '.page'); 
         });
         
         FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){

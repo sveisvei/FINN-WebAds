@@ -367,6 +367,9 @@ var FINN = FINN||{};
     }
   }
   
-  function expose(name){return bannerMap[name].expose();}
+  function expose(name){
+    name = name.replace(/^_/, ''); // Temp hack
+    return bannerMap[name].expose();
+  }
   
 })(FINN, jQuery);
