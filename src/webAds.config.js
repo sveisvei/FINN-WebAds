@@ -73,9 +73,9 @@ var FINN = FINN || {};
       width: 240
     },
     "Middle": {
+      "extends": "normal",
       width: 580,
       height: 400,
-      "extends": "normal",
       container: "banners-middle"
     },
     "Wallpaper": {
@@ -88,19 +88,61 @@ var FINN = FINN || {};
       hidden: true,      
       done: $.noop
     },
-    "Txt_1": {},
-    "Txt_2": {},
-    "Txt_3": {},
-    "Txt_4": {},
-    "Txt_5": {},
-    "Txt_6": {},
-    "Txt_7": {},
-    "Txt_8": {},
-    "Txt_9": {},
-    "Txt_10": {},
-    "textads": {
-      width: 115,
-      height: 900
+    "Txt_1"   : {
+      "extends": "textads"
+    },
+    "Txt_2"   : {
+      "extends": "textads"
+    },
+    "Txt_3"   : {
+      "extends": "textads"
+    },
+    "Txt_4"   : {
+      "extends": "textads"
+    },
+    "Txt_5"   : {
+      "extends": "textads"
+    },
+    "Txt_6"   : {
+      "extends": "textads"
+    },
+    "Txt_7"   : {
+      "extends": "textads"
+    },
+    "Txt_8"   : {
+      "extends": "textads"
+    },
+    "Txt_9"   : {
+      "extends": "textads"
+    },
+    "Txt_10"  : {
+      "extends": "textads"
+    },
+    "BottomLeft": { 
+      "extends": "bottomads"       
+    },
+    "BottomMiddle": { 
+      "extends": "bottomads" 
+    },
+    "BottomRight": { 
+      "extends": "bottomads" 
+    },
+    "BottomRight2": {
+      "extends": "bottomads"       
+    },
+    "bottomads": {
+      container: "banners-bottom"
+    },
+    "textads" : {
+      container: "textbanners",
+      done: function(banner){
+      /*
+        banner.$webAd.on('click', 'a.tf-track-helios', function(){
+          var fromSite = banner.params.site || $(this).data("tf-site") || document.domain;
+          var href = convertToAbsoluteUri($(this).data("tf-url") || this.href || this.action);        
+          FINN.trackingHub.publish(FINN.trackingHub.tfBanner, {site: fromSite, url: href});                    
+        });*/
+      }
     },
     "normal": {
       container : "banners"

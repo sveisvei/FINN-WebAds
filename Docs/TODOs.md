@@ -7,6 +7,9 @@
           - cluster? Størrelse problematikk          
   todo - Torget    (Øyvind)
 
+Move webads.css into global/head.!!!
+Always check for FINN.webAds.
+
 #browsersupport
   - "extends" rename
 

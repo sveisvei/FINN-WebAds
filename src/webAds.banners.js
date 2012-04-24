@@ -101,11 +101,11 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if(Date.now && !this.now) this.now = Date.now();
+      /*if(Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
-        //console.log(prefix + "-> " + this.name + ": " + msg);
-      } 
+        console.log(prefix + "-> " + this.name + ": " + msg);
+      }*/ 
     };
 
     Banner.prototype.config = function(key, value) {

@@ -40,7 +40,7 @@ var FINN=FINN||{};
     return {
       alwaysSticky  : toBeRendered.length > 0 && toBeRendered.length === list.length,
       fold          : fold,
-      sticky  : toBeRendered,
+      sticky        : toBeRendered,
       maxWidth      : maxWidth
     };
   }
@@ -52,8 +52,8 @@ var FINN=FINN||{};
     $.each(list, function(){
       this.log('activating sticky');
       this.iframe.$wrapper.css({
-        position: 'fixed',
-        top: this.stickyPos + "px"
+        position  : 'fixed',
+        top       : this.stickyPos + "px"
       });
     });
   }
@@ -64,8 +64,8 @@ var FINN=FINN||{};
     $.each(list, function(){
       this.log('de-activating sticky');      
       this.iframe.$wrapper.css({
-        position: 'static',
-        top: ''
+        position  : 'static',
+        top       : ''
       });
     });
   }
@@ -76,7 +76,7 @@ var FINN=FINN||{};
     var $webAds = $elem.find('.webad');
     if ($webAds.size() === 0) return false;
 
-    var list    =  $webAds.map(function(i){ return F.webAds._getBanner($(this).data('webad')); });    
+    var list    = $webAds.map(function(i){ return F.webAds._getBanner($(this).data('webad')); });    
     var $win    = $(window);
     var result  = getBannersForHeight(list, $win.height());    
     
