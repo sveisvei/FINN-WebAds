@@ -7,8 +7,8 @@
           - cluster? Størrelse problematikk          
   todo - Torget    (Øyvind)
 
-Move webads.css into global/head.!!!
-Always check for FINN.webAds.
+
+inline-block på body i iframe på noen banner i IE7
 
 #browsersupport
   - "extends" rename

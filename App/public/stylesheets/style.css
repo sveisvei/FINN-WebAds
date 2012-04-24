@@ -29,7 +29,7 @@ div.tabs {
   clear: both;
 }
 
-.advertising .inner{
+.webad-inner {
   background-color: #f1f1f1;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -38,10 +38,10 @@ div.tabs {
   display: inline;
   display: inline-block;
 }
-*+html .advertising .inner{
+*+html .webad-inner{
   display: inline;
 }
-.advertising iframe {
+.webad-iframe {
   background-color: #fff;
   vertical-align: bottom;
 }
