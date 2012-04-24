@@ -29,6 +29,15 @@ function collectTestCases(cb){
       
       var preparedWebAdsData = $.map(testCase.tests, function(test){
         test.url = buster.env.contextPath + test.url;
+        if (test.spyClick){
+          test.clickSpy = sinon.spy();
+          test.done = function(banner){
+            banner.$webAd.on('click', 'a', function(){
+              test.clickSpy();
+              return false;
+            });
+          };
+        }
         return test;
       });
       
@@ -64,8 +73,8 @@ function collectTestCases(cb){
         }
 
         $.each(testCase.tests, function(i){
-
           var test = this;
+          
           webAds.render(test.name, function(err, banner){
             refute(err);
             
@@ -78,6 +87,8 @@ function collectTestCases(cb){
               assert(banner.iframe.$wrapper.is(':hidden'), 'wrapper div for ' + test.name+' should be :hidden');
             }
             
+
+            
             if (typeof test.setWidth !== 'undefined'){
               assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);              
             }
@@ -89,7 +100,16 @@ function collectTestCases(cb){
             if (!(test.expectations && test.expectations.failed)){
               refute(banner.failed, testCase.name + " " + banner.name + ' failed rendring.');              
             }
-            doDone();
+            
+            if (test.spyClick){
+              banner.$webAd.find('a').trigger('click');
+              setTimeout(function(){
+                assert(banner.params.clickSpy.called);                
+                doDone();                
+              }, 0);
+            } else {
+              doDone();              
+            }            
           });
         });
         

@@ -1,5 +1,5 @@
-{
-  
+{ 
+  "spyClick": true,    
   "expectations": {
     "failed": false
   }
