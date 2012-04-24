@@ -48,7 +48,7 @@ var FINN = FINN || {};
       "extends": "normal",
       width: 992,
       height: 150,
-      bodyFailClass: "has-no-top-placement",
+      bodyFailClass: "top-position-collapsed",
       done: fixTopPosition
     },
     "Left1": {

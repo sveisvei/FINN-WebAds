@@ -26,7 +26,9 @@ function collectTestCases(cb){
     var testCase = this;
     testCases["config"][testCase.name] = function(done){
       buster.testRunner.timeout = testCase.timeout||DEFAULT_TIMEOUT2; 
-      
+      if (testCase.setBodyClass) {
+        $("body").addClass(testCase.setBodyClass);
+      }
       var preparedWebAdsData = $.map(testCase.tests, function(test){
         test.url = buster.env.contextPath + test.url;
         if (test.spyClick){
@@ -55,6 +57,10 @@ function collectTestCases(cb){
             $.each(testCase.expectations.notBodyClass, function(i){
               refute($("body").hasClass(this), 'body should not have class: '+ this);
             });              
+          }
+          
+          if (typeof testCase.expectations.bannersHeight !== 'undefined'){
+            assert.equals($("#banners").height(), 0);
           }
         }
       }
@@ -114,7 +120,7 @@ function collectTestCases(cb){
         });
         
       }
-
+      
       webAds.queue(preparedWebAdsData);
       
       webAds.renderAll(testCase.renderAll||'Top,Left1', function(err, banners){

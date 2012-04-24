@@ -10,6 +10,10 @@
 
 inline-block på body i iframe på noen banner i IE7
 
+#Cleanup
+OAS, HELIOS
+old banner tiles
+
 #browsersupport
   - "extends" rename
 
@@ -18,9 +22,6 @@ inline-block på body i iframe på noen banner i IE7
 - refresh from backend middleware - throttling
 
 #config
-- data-attributter istedet for klasser
-  - <div data-webads="true" id="needed-id"></div>
-  - <div data-webads="lazy" data-webad-position="lazy"></div>
   
 - config.backend. 
   non-helios-content === refreshFromServer osv må ignoreres.

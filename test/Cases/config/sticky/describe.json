@@ -1,6 +1,6 @@
 {
   "expectations": {
-    "noBodyClass": ["has-no-top-placement", "has-dominant-campaign", "has-dominant-wallpaper"]    
+    "noBodyClass": ["top-position-collapsed", "has-dominant-campaign", "has-dominant-wallpaper"]    
   },
   "timeout": 500
 }
