@@ -23,18 +23,21 @@ if (typeof Object.create === 'undefined') {
       this.$wrapper.remove();
       return this;
     };
+    
+    Iframe.prototype.getUrl = function(src){
+      var url = FINN.webAds.iframeUrl || "/finn/webads";
+      var sep = url.indexOf('?') !== -1 ? '&' : '?';
+      var res = src && src.indexOf('refreshWebAd') === -1 ? url + sep + "refreshWebAd" : url;
+      return res + "#_" + this.name;
+    };
 
     Iframe.prototype.refresh = function() {
-      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
-      var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
-      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#_" + this.name) : (iframeUrl + sep + "refreshWebAd#_" + this.name);
-      this.$iframe.attr('src', url);
+      this.$iframe.attr('src', this.getUrl(currSrc));
       return this;
     };
     
     Iframe.prototype.makeIframe = function() {
-      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
       var i         = document.createElement('iframe');      
@@ -47,7 +50,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (this.options.sticky) { divClasses.push('webad-sticky'); }
       div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = iframeUrl + "#_" + this.name;
+      i.src        = this.getUrl();
       i.scrolling  = 'no';
       i.setAttribute('data-automation-id', this.name);
       i.className  = 'webad-iframe';

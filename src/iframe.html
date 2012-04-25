@@ -23,7 +23,7 @@
   <span id="webAd">
       <script type="text/javascript">banner.injectScript(this.document, this.window);</script>
   </span>
-  <script type="text/javascript">jQuery(window).on("load", function(){ setTimeout(function(){ banner.onload(); }, 0); });</script>
+  <script type="text/javascript">jQuery(window).on("load", function(){ setTimeout(function(){ banner.onload(document, window); }, 0); });</script>
 </body>
 
 </html>
