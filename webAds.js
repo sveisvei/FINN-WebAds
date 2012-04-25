@@ -247,8 +247,21 @@ if (typeof Object.create === 'undefined') {
       return this;
     };
 
+    Banner.prototype.isValid = function(){
+      if (typeof this.params.threshold !== 'undefined' && this.params.threshold >= this.params.windowWidth){
+        return false;
+      }
+      return true;
+    };
+    
     Banner.prototype.insert = function() {
       this.log('Insert()');
+      if(!this.isValid()){
+        this.notValid = true;
+        this.fail('notValid');
+        return this;
+      }
+      
       if(!this.container){
         this.incomplete = true;
         this.failed     = true;
@@ -725,10 +738,13 @@ var FINN = FINN||{};
     });
   }
   
+  var windowWidth = $(window).width();
   function createConfig(obj){
 	  var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
 	  var defaults =  extending ? defaultConfig[extending] : null;
-    return $.extend({}, 
+    return $.extend({
+        windowWidth: windowWidth
+      }, 
       defaults, 
       defaultConfig.all,
       defaultConfig [obj.name], 
@@ -736,20 +752,9 @@ var FINN = FINN||{};
       obj);
   }
   
-  var windowWidth = $(window).width();
-  function valid(config){
-    if (typeof config.threshold !== 'undefined' && windowWidth < config.threshold ){
-      return false;
-    }
-    return true;
-  }
-  
   function addToMap(){
-    var config = createConfig(this);
-    if (valid(config)){
-      var banner = new F.Banner(config, globalExpose);
-      return (bannerMap[this.name] = banner);
-    }
+    var banner = new F.Banner(createConfig(this), globalExpose);
+    return (bannerMap[this.name] = banner);
   }
       
   function insertCallback(name, callback, list){
