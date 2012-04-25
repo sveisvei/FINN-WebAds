@@ -247,8 +247,21 @@ if (typeof Object.create === 'undefined') {
       return this;
     };
 
+    Banner.prototype.isValid = function(){
+      if (typeof this.params.threshold !== 'undefined' && this.params.threshold >= this.params.windowWidth){
+        return false;
+      }
+      return true;
+    };
+    
     Banner.prototype.insert = function() {
       this.log('Insert()');
+      if(!this.isValid()){
+        this.notValid = true;
+        this.fail('notValid');
+        return this;
+      }
+      
       if(!this.container){
         this.incomplete = true;
         this.failed     = true;

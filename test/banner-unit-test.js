@@ -6,7 +6,7 @@ buster.testCase("Banner", {
     $("body").append('<div id="banners" data-webads="true"></div>');
   },
   "tearDown" : function(){
-    $("#banners").remove();
+    $("#banners,#test3").remove();
     if (FINN._webAds){
       FINN.webAds   = FINN._webAds;
       FINN._webAds  = null;
@@ -47,7 +47,8 @@ buster.testCase("Banner", {
       },
       resolve: function(name){
         assert.equals(name, NAME);
-        assert(doneSpy.called)      
+        assert(doneSpy.called);
+        refute(banner.failed);
         done();
       }
     };;
@@ -78,6 +79,45 @@ buster.testCase("Banner", {
     assert(banner.hasEmptyPixel());
     $img.attr('src', '#asd3x3.png');
     assert(banner.hasEmptyPixel());
-  }
+  },
+  "should fail if windowWidth is less than threshold": function(done){
+    var banner = new FINN.Banner({
+      name: 'test2', 
+      container: 'test2',
+      threshold: 100,
+      windowWidth: 50
+    }, {});
+    var shouldNotBeCalled = sinon.spy();
+    banner.iframe.makeIframe = shouldNotBeCalled
+    banner.resolve = function(){
+      refute(shouldNotBeCalled.called);
+      assert(banner.failed);
+      assert(banner.notValid);
+      done();
+    }
+    banner.insert();
+  }  ,
+    "should pass if windowWidth is greater than threshold": function(done){
+      var banner = new FINN.Banner({
+        name: 'test', 
+        container: 'test3',
+        threshold: 100,
+        windowWidth: 750
+      }, {});
+      $("body").append('<div id="test3"></div>');
+      var spy = sinon.spy();
+      var spy2 = sinon.spy();
+      banner.iframe.makeIframe = spy
+      banner.iframe.$wrapper = {
+        appendTo: function(){
+          assert(spy.called);
+          refute(banner.failed);
+          refute(banner.notValid);
+          done();
+        }
+      }
+
+      banner.insert();
+    }
   
 }); 

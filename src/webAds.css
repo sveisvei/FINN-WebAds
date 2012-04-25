@@ -47,7 +47,7 @@
     margin-bottom: 10px;
 }
 
-#banners .webad-sticky .webad-inner {
+#banners > .webad-sticky .webad-inner {
     position: fixed;
     top: 10px;
     z-index: 2;

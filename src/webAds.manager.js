@@ -118,17 +118,20 @@ var FINN = FINN||{};
     });
   }
   
+  var windowWidth = $(window).width();
   function createConfig(obj){
 	  var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
 	  var defaults =  extending ? defaultConfig[extending] : null;
-    return $.extend({}, 
+    return $.extend({
+        windowWidth: windowWidth
+      }, 
       defaults, 
       defaultConfig.all,
       defaultConfig [obj.name], 
       configMap     [obj.name],
       obj);
   }
-      
+  
   function addToMap(){
     var banner = new F.Banner(createConfig(this), globalExpose);
     return (bannerMap[this.name] = banner);
