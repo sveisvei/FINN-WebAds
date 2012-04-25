@@ -49,6 +49,7 @@ if (typeof Object.create === 'undefined') {
       div.className = (divClasses.join(' ')).toLowerCase();
       i.src        = iframeUrl + "#_" + this.name;
       i.scrolling  = 'no';
+      i.setAttribute('data-automation-id', this.name);
       i.className  = 'webad-iframe';
       // IE 7-8      
       i.marginWidth  = 0;
