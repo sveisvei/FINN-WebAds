@@ -251,7 +251,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.isValid = function(){
-      if (typeof this.params.threshold !== 'undefined' && this.params.threshold >= this.params.windowWidth){
+      if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
         return false;
       }
       return true;
