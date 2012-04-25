@@ -5,11 +5,15 @@
   - Strapon   (bruker data-webad-position)
   - Reise     (Bjørnar)
   - Torget    common-old-tiles
+  - Oppdrag   (Endre)
 
 #bugs
 inline-block på body i iframe på noen banner i IE7
 -possible to revisisjon iframe.
 -dont resize iframe if same size as injected.
+-sticky width check not working
+  -stickyskycraper flag.
+-threshold support and tests¯
 
 #browsersupport
   - "extends" rename
@@ -23,9 +27,7 @@ inline-block på body i iframe på noen banner i IE7
 - Responsive support?
 
 #config
-- config.backend. 
-  non-helios-content === refreshFromServer osv må ignoreres.
-- bottombanners?
+- bottombanners? Søk i controllere
 - Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
     - default/fjerne banner. fjerne init
 
@@ -36,13 +38,15 @@ inline-block på body i iframe på noen banner i IE7
 - Plugins (avklare med marius/rune hva produktet er)
 
 #Backend
-  - useragent check inn i controllere.
-  - heliosbackend svarer med nye urler via ajax
+  - fjerne useragent sjekk
+  [haster ikke] - heliosbackend svarer med nye urler via ajax
   - serve iframe 
     - HEADER: responseHeaders.setCacheControl("max-age=290304000, public");
   
 # Ikke viktig:
 - Reporte feil via cassandra/statistikk
+- config.backend. 
+  non-helios-content === refreshFromServer osv må ignoreres.
 
 #Cleanup finn-codebase
   OAS, HELIOS

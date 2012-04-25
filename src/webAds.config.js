@@ -47,6 +47,7 @@ var FINN = FINN || {};
     "Top": {
       "extends": "normal",
       width: 992,
+      threshold: 451,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition
@@ -54,21 +55,25 @@ var FINN = FINN || {};
     "Left1": {
       "extends": "normal",
       width: 240,
+      threshold: 1050,
       height: 500,
       bodyClass: "has-dominant-campaign",
       done: fixLeftPosition
     },
     "Right1": {
       "extends": "normal",
-      width: 240
+      width: 240,
+      threshold: 1000      
     },
     "Right2": {
       "extends": "normal",
+      threshold: 1000,            
       sticky: true,
       width: 240,
       height: 500
     },
     "Right3": {
+      threshold: 1000,                  
       "extends": "normal",
       width: 240
     },
@@ -76,11 +81,13 @@ var FINN = FINN || {};
       "extends": "normal",
       width: 580,
       height: 400,
+      threshold: 291,                  
       container: "banners-middle"
     },
     "Wallpaper": {
       "extends": "normal",
       hidden: true,
+      threshold: 1050,      
       done: fixWallpaper
     },
     "Survey": {
