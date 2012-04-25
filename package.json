@@ -1,12 +1,11 @@
 {
-    "name": "webAds-tester"
-  , "version": "0.0.2"
-  , "private": true
+    "name": "FINN-webAds"
+  , "version": "0.1.0"
   , "dependencies": {
-      "express" : "2.5.8"
-    , "jade"    : ">= 0.0.1"
-    , "underscore" : "*"
-    , "uglify-js" : "*"
-    , "colors": "*"
+      "express"     : "2.5.8"
+    , "jade"        : ">= 0.0.1"
+    , "underscore"  : "*"
+    , "uglify-js"   : "*"
+    , "colors"      : "*"
   }
 }

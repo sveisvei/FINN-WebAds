@@ -8,7 +8,8 @@
 
 #bugs
 inline-block på body i iframe på noen banner i IE7
-
+-possible to revisisjon iframe.
+-dont resize iframe if same size as injected.
 
 #browsersupport
   - "extends" rename
@@ -20,12 +21,11 @@ inline-block på body i iframe på noen banner i IE7
 
 #CSS
 - Responsive support?
-- useragent check inn i controllere....
 
 #config
 - config.backend. 
   non-helios-content === refreshFromServer osv må ignoreres.
-
+- bottombanners?
 - Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
     - default/fjerne banner. fjerne init
 
@@ -35,19 +35,16 @@ inline-block på body i iframe på noen banner i IE7
   - Reise hooker seg inn på done callback.
 - Plugins (avklare med marius/rune hva produktet er)
 
-
 #Backend
+  - useragent check inn i controllere.
   - heliosbackend svarer med nye urler via ajax
   - serve iframe 
     - HEADER: responseHeaders.setCacheControl("max-age=290304000, public");
   
 # Ikke viktig:
 - Reporte feil via cassandra/statistikk
-- Forenkle
-  - fjerne jade
-  - rydde opp unødvendig ting som gjøre det vanskelig for andre
 
-#Cleanup
+#Cleanup finn-codebase
   OAS, HELIOS
   old banner tiles
 

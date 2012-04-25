@@ -17,6 +17,10 @@
     overflow: visible;
 }
 
+.so-v1 #banners {
+    margin: 10px 0 0 10px;
+}
+
 .top-position-collapsed #banners {
     height: 0;
     min-height: 0;
