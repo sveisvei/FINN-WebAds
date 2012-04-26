@@ -128,6 +128,24 @@ buster.testCase("Banner", {
       
       assert.equals(value, stored, 'set key should be same as result');
       
+    },
+    "should not resize if default size is same as calculated size": function(){
+      var banner = new FINN.Banner({
+        name        : 'test', 
+        container   : 'test3',
+        width       : 100,
+        height      : 150,
+        threshold   : 100,
+        windowWidth : 750
+      }, {});
+      var spy = sinon.spy();
+      banner.resize = spy
+      refute(banner.resized);
+      banner.resizeIfNotDefault(100, 150);
+      refute(spy.called, 'should not resize')
+      banner.resizeIfNotDefault(101, 149);
+      assert(spy.calledOnce, 'should be resize')
+      
     }
   
 }); 

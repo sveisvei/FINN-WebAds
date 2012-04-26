@@ -9,14 +9,12 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
-- dont resize iframe if same size as injected.
 - stickyskycraper flag.
 
 #browsersupport
   - "extends" rename
 
 #Api
-- setBannerFlag(key, valueString)
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 

@@ -104,6 +104,8 @@ if (typeof Object.create === 'undefined') {
       this.resolved       = false;
       this.failed         = false;
       this.incomplete     = false;
+      this.resized        = false;
+      this.notValid       = false;
       this.log('new Banner()');
     }
 
@@ -162,7 +164,7 @@ if (typeof Object.create === 'undefined') {
         return this.pollForNewSize(w, h);
       }
             
-      this.resize(w, h);
+      this.resizeIfNotDefault(w, h);
       this.resolve();
       return this;
     };
@@ -212,11 +214,24 @@ if (typeof Object.create === 'undefined') {
       return this;
     };
 
-    Banner.prototype.resize = function(width, height) {
-      this.width = width;
-      this.height = height;
-      this.log('resize banner=> height:' + height + 'width' + width);
-      this.iframe.$iframe.css({ height: height, width: width}).attr('height', height).attr('width', width);
+    Banner.prototype.isDefaultSize = function(width, height){
+      if (this.resized){ return false; }
+      if (this.params.width > 0 && this.params.width === width && this.params.height === height ){
+        return true;
+      }
+    };
+    
+    Banner.prototype.resizeIfNotDefault = function(w, h){
+      this.width  = w;
+      this.height = h;
+      if ( !this.isDefaultSize(w, h) ){ this.resize(); } 
+      return this;
+    };
+
+    Banner.prototype.resize = function() {
+      this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
+      this.resized = true;
+      this.log('resize banner=> height:' + this.height + ' x width:' + this.width);
       return this;
     };
 
@@ -292,7 +307,8 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.getBannerFlag = function(key){
       return FINN.webAds.getBannerFlag(key);
-    },
+    };
+    
     Banner.prototype.setBannerFlag = function(key, value){
       return FINN.webAds.setBannerFlag(key, value);  
     };
