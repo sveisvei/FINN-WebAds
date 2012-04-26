@@ -9,13 +9,8 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
-- possible to revisisjon iframe.
 - dont resize iframe if same size as injected.
-- sticky width check not working 
 - stickyskycraper flag.
-- adform hacks
-  - Finne hvor flag for sync ads settes.
-
 
 #browsersupport
   - "extends" rename

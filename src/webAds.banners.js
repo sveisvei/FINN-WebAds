@@ -13,6 +13,14 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
+  var IFRAME_VERSION = 1;
+  var DEFAULTS = {
+    RETRIES: 5,
+    TIMEOUT: 50,
+    MINSIZE: 39,
+    ADCONTAINER: 'webAd'
+  };
+  
   Iframe = (function(document) {
     function Iframe(name, options) {
       this.name     = name;
@@ -25,10 +33,10 @@ if (typeof Object.create === 'undefined') {
     };
     
     Iframe.prototype.getUrl = function(src){
-      var url = FINN.webAds.iframeUrl || "/finn/webads";
-      var sep = url.indexOf('?') !== -1 ? '&' : '?';
-      var res = src && src.indexOf('refreshWebAd') === -1 ? url + sep + "refreshWebAd" : url;
-      return res + "#_" + this.name;
+      var url     = FINN.webAds.iframeUrl || '/finn/webads';
+      var sep     = url.indexOf('?') !== -1 ? '&' : '?';
+      var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
+      return url +  (sep + 'IFRAME_VERSION=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
     };
 
     Iframe.prototype.refresh = function() {
@@ -76,12 +84,7 @@ if (typeof Object.create === 'undefined') {
     return Iframe;
   })(document);
   
-  var DEFAULTS = {
-    RETRIES: 5,
-    TIMEOUT: 50,
-    MINSIZE: 39,
-    ADCONTAINER: 'webAd'
-  };
+
   
   Banner = (function() {
     function Banner(params, expose) {
