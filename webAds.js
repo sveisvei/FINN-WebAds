@@ -23,18 +23,21 @@ if (typeof Object.create === 'undefined') {
       this.$wrapper.remove();
       return this;
     };
+    
+    Iframe.prototype.getUrl = function(src){
+      var url = FINN.webAds.iframeUrl || "/finn/webads";
+      var sep = url.indexOf('?') !== -1 ? '&' : '?';
+      var res = src && src.indexOf('refreshWebAd') === -1 ? url + sep + "refreshWebAd" : url;
+      return res + "#_" + this.name;
+    };
 
     Iframe.prototype.refresh = function() {
-      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var currSrc   = this.$iframe.attr('src');
-      var sep       = iframeUrl.indexOf('?') !== -1 ? '&' : '?';
-      var url       = currSrc.indexOf('refreshWebAd') !== -1 ? (iframeUrl + "#_" + this.name) : (iframeUrl + sep + "refreshWebAd#_" + this.name);
-      this.$iframe.attr('src', url);
+      this.$iframe.attr('src', this.getUrl(currSrc));
       return this;
     };
     
     Iframe.prototype.makeIframe = function() {
-      var iframeUrl = FINN.webAds.iframeUrl || "/finn/webads";
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
       var i         = document.createElement('iframe');      
@@ -47,7 +50,7 @@ if (typeof Object.create === 'undefined') {
       }
       if (this.options.sticky) { divClasses.push('webad-sticky'); }
       div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = iframeUrl + "#_" + this.name;
+      i.src        = this.getUrl();
       i.scrolling  = 'no';
       i.setAttribute('data-automation-id', this.name);
       i.className  = 'webad-iframe';
@@ -248,7 +251,7 @@ if (typeof Object.create === 'undefined') {
     };
 
     Banner.prototype.isValid = function(){
-      if (typeof this.params.threshold !== 'undefined' && this.params.threshold >= this.params.windowWidth){
+      if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
         return false;
       }
       return true;
@@ -283,6 +286,14 @@ if (typeof Object.create === 'undefined') {
       this.log('After insert');
       return this;
     };
+
+    Banner.prototype.getBannerFlag = function(key){
+      return FINN.webAds.getBannerFlag(key);
+    },
+    Banner.prototype.setBannerFlag = function(key, value){
+      return FINN.webAds.setBannerFlag(key, value);  
+    };
+    
     return Banner;
   })();
 
@@ -649,6 +660,8 @@ var FINN = FINN||{};
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
+  w.getBannerFlag         = getBannerFlag;
+  w.setBannerFlag         = setBannerFlag;
   w._length               = bannerMapLength;  
   w._getBanner            = getBanner;
   
@@ -683,25 +696,36 @@ var FINN = FINN||{};
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
   
-  var bannerMap = {};
-  var callbacks = {};
-  var configMap = {};
+  var bannerMap   = {};
+  var bannerFlags = {};
+  var callbacks   = {};
+  var configMap   = {};
   var onloadCallbacks = {};
-  
+
   function cleanUp(){
-    bannerMap = {};
-    callbacks = {};
-    configMap = {};
+    bannerMap   = {};
+    bannerFlags = {};    
+    callbacks   = {};
+    configMap   = {};
     onloadCallbacks = {};
   }
 
   function getBanner(name){
     return bannerMap[name];
   }
+  
+  function getBannerFlag(key){
+    return (bannerFlags[key]||null);
+  }
+  
+  function setBannerFlag(key, value){
+    if(!key) return null;
+    return (bannerFlags[key] = value);
+  }
 
   function bannerMapLength(){
     var i = 0;
-    for(var g in bannerMap){i++}
+    for(var g in bannerMap){i++;}
     return i;
   }
   
@@ -753,7 +777,8 @@ var FINN = FINN||{};
   }
   
   function addToMap(){
-    var banner = new F.Banner(createConfig(this), globalExpose);
+    var config = createConfig(this);
+    var banner = new F.Banner(config, globalExpose);
     return (bannerMap[this.name] = banner);
   }
       
@@ -788,14 +813,14 @@ var FINN = FINN||{};
           banner.log('is resolved, calling callback direct');
           callback(null, banner);          
         } else {
-          banner.log('deferring callback')
-          insertCallback(name, callback)          
+          banner.log('deferring callback');
+          insertCallback(name, callback);
         }
       }
       return banner;
     } else {
       banner.insert();
-      insertCallback(name, callback)
+      insertCallback(name, callback);
       return banner;
     }
   }
@@ -850,8 +875,8 @@ var FINN = FINN||{};
       }
     }
     if (allResolved){
-      var callbacksToCall = callbacks['all']; // copy out the callbacks
-      callbacks['all'] = null; // reset map
+      var callbacksToCall = callbacks.all; // copy out the callbacks
+      callbacks.all = null; // reset map
       if (callbacksToCall && callbacksToCall.length > 0){
         $.each(callbacksToCall, function(){
           if (typeof this === 'function') {
@@ -944,7 +969,7 @@ var FINN = FINN||{};
         if(!bannerMap[name]){
           return loop();
         }
-        alreadyRendered.push(name)
+        alreadyRendered.push(name);
         refresh(name, loop);
       }
     }
@@ -958,7 +983,7 @@ var FINN = FINN||{};
   
   function removeAll(){
     for(var key in bannerMap){
-      bannerMap[key] && bannerMap[key].remove();         
+      if (bannerMap[key]) bannerMap[key].remove();
     }
   }
   

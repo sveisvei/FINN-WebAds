@@ -286,6 +286,14 @@ if (typeof Object.create === 'undefined') {
       this.log('After insert');
       return this;
     };
+
+    Banner.prototype.getBannerFlag = function(key){
+      return FINN.webAds.getBannerFlag(key);
+    },
+    Banner.prototype.setBannerFlag = function(key, value){
+      return FINN.webAds.setBannerFlag(key, value);  
+    };
+    
     return Banner;
   })();
 

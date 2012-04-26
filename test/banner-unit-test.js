@@ -118,6 +118,16 @@ buster.testCase("Banner", {
       }
 
       banner.insert();
+    },
+    "getBannerflag and setBannerFlag should pass to the manager": function(){
+      var banner = new FINN.Banner({name: 'test', 
+        container: 'test3'}, {});
+      
+      var value = banner.setBannerFlag('testKey', 'testValue');
+      var stored = banner.getBannerFlag('testKey');
+      
+      assert.equals(value, stored, 'set key should be same as result');
+      
     }
   
 }); 

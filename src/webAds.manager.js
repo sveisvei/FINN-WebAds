@@ -29,6 +29,8 @@ var FINN = FINN||{};
   w.plugins               = w.plugins||{};
   w.base                  = "/";
   
+  w.getBannerFlag         = getBannerFlag;
+  w.setBannerFlag         = setBannerFlag;
   w._length               = bannerMapLength;  
   w._getBanner            = getBanner;
   
@@ -63,25 +65,36 @@ var FINN = FINN||{};
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
   
-  var bannerMap = {};
-  var callbacks = {};
-  var configMap = {};
+  var bannerMap   = {};
+  var bannerFlags = {};
+  var callbacks   = {};
+  var configMap   = {};
   var onloadCallbacks = {};
-  
+
   function cleanUp(){
-    bannerMap = {};
-    callbacks = {};
-    configMap = {};
+    bannerMap   = {};
+    bannerFlags = {};    
+    callbacks   = {};
+    configMap   = {};
     onloadCallbacks = {};
   }
 
   function getBanner(name){
     return bannerMap[name];
   }
+  
+  function getBannerFlag(key){
+    return (bannerFlags[key]||null);
+  }
+  
+  function setBannerFlag(key, value){
+    if(!key) return null;
+    return (bannerFlags[key] = value);
+  }
 
   function bannerMapLength(){
     var i = 0;
-    for(var g in bannerMap){i++}
+    for(var g in bannerMap){i++;}
     return i;
   }
   
@@ -133,7 +146,8 @@ var FINN = FINN||{};
   }
   
   function addToMap(){
-    var banner = new F.Banner(createConfig(this), globalExpose);
+    var config = createConfig(this);
+    var banner = new F.Banner(config, globalExpose);
     return (bannerMap[this.name] = banner);
   }
       
@@ -168,14 +182,14 @@ var FINN = FINN||{};
           banner.log('is resolved, calling callback direct');
           callback(null, banner);          
         } else {
-          banner.log('deferring callback')
-          insertCallback(name, callback)          
+          banner.log('deferring callback');
+          insertCallback(name, callback);
         }
       }
       return banner;
     } else {
       banner.insert();
-      insertCallback(name, callback)
+      insertCallback(name, callback);
       return banner;
     }
   }
@@ -230,8 +244,8 @@ var FINN = FINN||{};
       }
     }
     if (allResolved){
-      var callbacksToCall = callbacks['all']; // copy out the callbacks
-      callbacks['all'] = null; // reset map
+      var callbacksToCall = callbacks.all; // copy out the callbacks
+      callbacks.all = null; // reset map
       if (callbacksToCall && callbacksToCall.length > 0){
         $.each(callbacksToCall, function(){
           if (typeof this === 'function') {
@@ -324,7 +338,7 @@ var FINN = FINN||{};
         if(!bannerMap[name]){
           return loop();
         }
-        alreadyRendered.push(name)
+        alreadyRendered.push(name);
         refresh(name, loop);
       }
     }
@@ -338,7 +352,7 @@ var FINN = FINN||{};
   
   function removeAll(){
     for(var key in bannerMap){
-      bannerMap[key] && bannerMap[key].remove();         
+      if (bannerMap[key]) bannerMap[key].remove();
     }
   }
   
