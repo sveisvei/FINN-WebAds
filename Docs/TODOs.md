@@ -9,6 +9,7 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
+- strap-on bg
 
 #browsersupport
   - "extends" rename
@@ -17,12 +18,10 @@
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 
-
 #config
 - bottombanners? Søk i controllere
 - Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
     - default/fjerne banner. fjerne init
-
 
 #Plugins
 - tf_track osv må testes 

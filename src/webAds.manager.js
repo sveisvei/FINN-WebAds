@@ -385,7 +385,6 @@ var FINN = FINN||{};
   }
   
   function expose(name){
-    name = name.replace(/^_/, ''); // Temp hack
     return bannerMap[name].expose();
   }
   
