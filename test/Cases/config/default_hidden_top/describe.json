@@ -4,5 +4,5 @@
     "bodyClass": ["has-dominant-campaign", "has-dominant-wallpaper"],
     "bannersHeight": 0
   },
-  "timeout": 600  
+  "timeout": 1800  
 }

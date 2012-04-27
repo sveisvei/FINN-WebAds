@@ -41,7 +41,7 @@ buster.testCase("Manager", {
     
     "should fail with incomplete": function(done){
       var banner = this.banner;
-      assert(typeof banner.container === 'undefined', 'banner.container should be undefined');
+      refute.defined(banner.container, 'banner.container should be undefined');
       FINN.webAds.renderAll(function(){
         assert(banner.incomplete, banner.name + ' incomplete should be on');
         refute(banner.active, banner.name + ' should not be active after calling render');
@@ -65,7 +65,7 @@ buster.testCase("Manager", {
                             <div data-webads="lazy" data-webad-position="Lazy"></div>\
                           </div>');
 
-        assert.equals($("div[data-webad-position='Lazy']").data('webads-processed'), undefined);
+        refute.defined($("div[data-webad-position='Lazy']").data('webads-processed'));
         assert(lazyBanner.incomplete, 'should be incomplete when rendered without container');
         refute(lazyBanner.active,     'should not be active');      
         refute(lazyBanner.container,  'caontainer should be missing');

@@ -9,7 +9,6 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
-- stickyskycraper flag.
 
 #browsersupport
   - "extends" rename
@@ -18,8 +17,6 @@
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 
-#CSS
-- Responsive support?
 
 #config
 - bottombanners? Søk i controllere

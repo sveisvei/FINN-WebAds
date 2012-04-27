@@ -80,3 +80,10 @@ body {
 .menu li a.active:hover {
   background: #ccc;
 }
+#banners-middle{
+  background: #eee;
+  margin: 10px 0;
+}
+#banners-middle .webad-inner{
+  padding: 10px 0;
+}
