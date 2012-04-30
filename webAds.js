@@ -13,7 +13,7 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  var IFRAME_VERSION = 1;
+  var IFRAME_VERSION = 5;
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
@@ -106,15 +106,16 @@ if (typeof Object.create === 'undefined') {
       this.incomplete     = false;
       this.resized        = false;
       this.notValid       = false;
+      this.ignoreOnload   = false;
       this.log('new Banner()');
     }
 
     Banner.prototype.log = function(msg) { 
-      /*if(Date.now && !this.now) this.now = Date.now();
+      if(Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
         console.log(prefix + "-> " + this.name + ": " + msg);
-      }*/ 
+      }
     };
 
     Banner.prototype.config = function(key, value) {
@@ -124,7 +125,10 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.onload = function() {
       this.log('onload');
-      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);      
+      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
+      if(this.ignoreOnload === true){
+        return this.resolve();
+      }
       if (this.params.hidden || this.params.skipSizeCheck) {
         this.log('HIDDEN ignoreSizeCheck');
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -301,7 +305,6 @@ if (typeof Object.create === 'undefined') {
       this.iframe.makeIframe();
       $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);
-      this.log('After insert');
       return this;
     };
 
@@ -312,6 +315,11 @@ if (typeof Object.create === 'undefined') {
     Banner.prototype.setBannerFlag = function(key, value){
       return FINN.webAds.setBannerFlag(key, value);  
     };
+    
+    Banner.prototype.plugin = function(name){
+      var args = Array.prototype.slice.call(arguments, 1);
+      return FINN.webAds.getPlugin(name).apply(this, args);
+    }
     
     return Banner;
   })();
@@ -343,8 +351,8 @@ var FINN = FINN || {};
     var isSmallBanner   = width <= 768;
     var isNotCompanion  = width >= 800 && width < 992;
     var isDominant      = width > 992;
-    if (banner.bodyFailClass) {
-     $("body").removeClass(banner.bodyFailClass); 
+    if (banner.params.bodyFailClass) {
+     $("body").removeClass(banner.params.bodyFailClass); 
     }
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css("width", "980px");
@@ -495,80 +503,7 @@ var FINN = FINN || {};
   });
 
 })(FINN, jQuery);
-var FINN = FINN||{};
-
-(function(F, $){
-  "use strict";
-  FINN.webAds = FINN.webAds||{};
-  var plugins = FINN.webAds.plugins = FINN.webAds.plugins||{};
-  
-  plugins.register = function(name, value){
-    plugins[name] = value;
-  };
-  plugins.overlay = overlay;
-  plugins.popup   = popup;
-  plugins.dialog  = dialog;
-  plugins.search  = search;
-  plugins.context = context;
-  plugins.getAdContent = getAdContent;
-  
-  /* overlay with iframe content, or wrap ad iframe*/
-  function overlay(banner){
-    banner.log('PLUGIN -> Overlay ', banner.name);
-  }
-  
-  /* window.open? */
-  function popup(){
-    
-  }
-  
-  /* confirm dialog ? */
-  function dialog(){
-    
-    return {
-      close: function(){}
-    }
-  }
-  
-  /* Search FINN */
-  function search(query, callback){
-    
-    return {
-      params: {},
-      result: []
-    }
-  }
-  
-  /* Get current context - finnobj? */
-  function context(){
-      
-      
-      return {
-        currentUrl: document.location.toString(),
-        selectedObject: [],
-        objects: []
-      }
-  }
-  
-  /* 
-  
-  async must be true.
-  
-  */ 
-  function getAdContent(areaid, callback){
-    var url     = "/finn/realestate/homes/rotationdemo.json";    
-    var res     = {};
-    var params  = {"areaId":areaid};
-    // SYNC
-    $.ajax(url,{data:params, async:false, "success": function(data){
-        res = data;
-    }});
-    
-    return res;
-  }
-  
-  
-})(FINN, jQuery);var FINN=FINN||{};
+var FINN=FINN||{};
 
 (function(F, $){
   
@@ -707,7 +642,6 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
-  w.plugins               = w.plugins||{};
   w.base                  = "/";
   
   w.getBannerFlag         = getBannerFlag;
@@ -734,17 +668,15 @@ var FINN = FINN||{};
   function refreshFromServer(){}// TODO
   function refreshAllFromServer(){}//TODO
   
-  var jsub = $.sub();
   var globalExpose = {
-    jQuery    : jsub,
-    $         : jsub,
+    _jQuery   : jQuery,
     inDapIf   : true,
     inFIF     : undefined,
     webAds    : w,
-    plugins   : w.plugins,
     helios_parameters : "", //TODO: remove this
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
+  
   
   var bannerMap   = {};
   var bannerFlags = {};
@@ -1063,8 +995,10 @@ var FINN = FINN||{};
     }
   }
   
-  function expose(name){
-    return bannerMap[name].expose();
+  function expose(idocument, iwindow){
+    var name = idocument.location.hash.substring(2);
+    var list = bannerMap[name].expose();
+    $.each(list, function(k){ iwindow[k] = this; });
   }
   
 })(FINN, jQuery);
