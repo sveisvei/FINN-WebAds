@@ -9,7 +9,11 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
-- strap-on bg
+- feedbanner
+- mobil-testing.
+  - toppbanner loader ikke på iphone, why?
+    - collapser ikke grunnet klasse ikke legges til/fjrenes
+- eksempel plugin, + tests
 
 #browsersupport
   - "extends" rename
@@ -24,15 +28,17 @@
     - default/fjerne banner. fjerne init
 
 #Plugins
-- tf_track osv må testes 
-  - Reise hooker seg inn på done callback.
 - Plugins (avklare med marius/rune hva produktet er)
+- tf_track osv må testes   - Reise hooker seg inn på done callback.
+
 
 #Backend
-  - fjerne useragent sjekk
-  [haster ikke] - heliosbackend svarer med nye urler via ajax
   - serve iframe 
     - HEADER: responseHeaders.setCacheControl("max-age=290304000, public");
+  
+  [haster ikke] 
+  - heliosbackend svarer med nye urler via ajax
+    - avklare api, f.eks. server(currentUrl, cb)
   
 # Ikke viktig:
 - Reporte feil via cassandra/statistikk

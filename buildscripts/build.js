@@ -4,7 +4,6 @@ require('colors');
 var files = [
   'webAds.banners.js',
   'webAds.config.js',
-  'webAds.plugins.js',
   'webAds.sticky.js',
   'webAds.manager.js'
 ];

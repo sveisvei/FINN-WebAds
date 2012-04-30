@@ -2,7 +2,8 @@
   "setBodyClass": "top-position-collapsed",
   "expectations": {
     "bodyClass": ["has-dominant-campaign", "has-dominant-wallpaper"],
-    "bannersHeight": 0
+    "notBodyClass": ["top-position-collapsed"],
+    "bannersHeight": 200
   },
   "timeout": 1800  
 }

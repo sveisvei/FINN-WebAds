@@ -42,20 +42,15 @@ buster.testCase("Banner", {
     // mock
     FINN.webAds = {
       iframeUrl: FINN.webAds.iframeUrl,
-      expose: function(name) {
-        assert.equals(name, NAME);
-        return {
+      expose: function(idocument, iwindow) {
+        var name = idocument.location.hash.substring(2);
+        assert.equals(name, NAME);                
+        var list = {
           banner: banner,
           webAds: FINN.webAds,
-          //"fake one"
-          jQuery: function(selector) {
-            return {
-              on: function(event, cb) {
-                cb();
-              }
-            }
-          }
+          _jQuery: function(selector) { return { on: function(event, cb) { cb(); } } }
         }
+        $.each(list, function(k){ iwindow[k] = this; });
       },
       resolve: function(name) {
         assert.equals(name, NAME);

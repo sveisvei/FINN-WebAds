@@ -3,9 +3,7 @@ var FINN = FINN || {};
 (function(F, $) {
   "use strict";
 
-  FINN.data = FINN.data || {};
-
-  FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
+  FINN.webAds.extend({
     "Test01": {
       "extends": "Tests",
       width: 500,
@@ -24,7 +22,7 @@ var FINN = FINN || {};
       "extends": "Tests",
       container: "banner-tab"
     },
-
+    "Tests": {},
     "all":{
         container: "banners",
         backend: "helios"

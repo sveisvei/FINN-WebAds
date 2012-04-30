@@ -774,4 +774,9 @@ var exposeSwfObject = function(document, window) {
 	};
 };
 var swfobject = exposeSwfObject(document, window);
-FINN.webAds.plugins.register('swfobject', exposeSwfObject);
+FINN.webAds.registerPlugin('swfobject', {
+  init: function(plugin, b){
+    plugin.run = exposeSwfObject
+    return plugin;
+  }
+});

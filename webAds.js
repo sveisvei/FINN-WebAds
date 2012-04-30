@@ -324,16 +324,28 @@ var FINN = FINN || {};
 (function(F, $) {
   "use strict";
 
-  FINN.data = FINN.data || {};
+  FINN.webAds = FINN.webAds || {};  
+  FINN.data   = FINN.data   || {};
+  FINN.webAds.extend = function(obj){
+    if (typeof FINN.data.defaultConfig === 'undefined') {
+      FINN.data.defaultConfig = obj;      
+    } else {
+      $.each(obj, function(k,v){ FINN.data.defaultConfig[k] = $.extend(FINN.data.defaultConfig[k]||{}, v); });      
+    }
+  };
 
   function fixTopPosition(banner) {
     banner.log("cb fixTopPosition");
-    if (banner.failed === true){ return;}
-    var width = banner.width;
-    var isSmallBanner = width <= 768;
-    var isNotCompanion = width >= 800 && width < 992;
-    var isDominant = width > 992;
-    if (banner.bodyFailClass) $("body").removeClass(banner.bodyFailClass);
+    if (banner.failed === true){ 
+      return;
+    }
+    var width           = banner.width;
+    var isSmallBanner   = width <= 768;
+    var isNotCompanion  = width >= 800 && width < 992;
+    var isDominant      = width > 992;
+    if (banner.bodyFailClass) {
+     $("body").removeClass(banner.bodyFailClass); 
+    }
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css("width", "980px");
     } else if (isDominant) {
@@ -363,8 +375,8 @@ var FINN = FINN || {};
       }
     }
   }
-
-  FINN.data.defaultConfig = $.extend(FINN.data.defaultConfig, {
+  
+  FINN.webAds.extend({
     "Top": {
       "extends": "normal",
       width: 992,
@@ -462,6 +474,8 @@ var FINN = FINN || {};
       container: "banners-bottom"
     },
     "textads" : {
+      width: 100,
+      height: 46,
       container: "textbanners",
       done: function(banner){
       /*
@@ -511,19 +525,36 @@ var FINN = FINN||{};
   /* confirm dialog ? */
   function dialog(){
     
+    return {
+      close: function(){}
+    }
   }
   
   /* Search FINN */
   function search(query, callback){
     
+    return {
+      params: {},
+      result: []
+    }
   }
   
   /* Get current context - finnobj? */
   function context(){
       
+      
+      return {
+        currentUrl: document.location.toString(),
+        selectedObject: [],
+        objects: []
+      }
   }
   
-  /* */ 
+  /* 
+  
+  async must be true.
+  
+  */ 
   function getAdContent(areaid, callback){
     var url     = "/finn/realestate/homes/rotationdemo.json";    
     var res     = {};
@@ -1016,11 +1047,9 @@ var FINN = FINN||{};
       $this.data('webads-processed', 'processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
-      //console.log(position, id);
       if (position){
         render(position, force);
       } else if (id) {
-        //console.log('id');
         renderAdsWithContainer(id, force);
       }
     });
@@ -1035,7 +1064,6 @@ var FINN = FINN||{};
   }
   
   function expose(name){
-    name = name.replace(/^_/, ''); // Temp hack
     return bannerMap[name].expose();
   }
   

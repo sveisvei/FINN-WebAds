@@ -26,7 +26,6 @@ var FINN = FINN||{};
   w.config                = config;
   w.getFromServer         = getFromServer;
   w.cleanUp               = cleanUp;
-  w.plugins               = w.plugins||{};
   w.base                  = "/";
   
   w.getBannerFlag         = getBannerFlag;
@@ -53,17 +52,15 @@ var FINN = FINN||{};
   function refreshFromServer(){}// TODO
   function refreshAllFromServer(){}//TODO
   
-  var jsub = $.sub();
   var globalExpose = {
-    jQuery    : jsub,
-    $         : jsub,
+    _jQuery   : jQuery,
     inDapIf   : true,
     inFIF     : undefined,
     webAds    : w,
-    plugins   : w.plugins,
     helios_parameters : "", //TODO: remove this
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
+  
   
   var bannerMap   = {};
   var bannerFlags = {};
@@ -366,11 +363,9 @@ var FINN = FINN||{};
       $this.data('webads-processed', 'processed');
       var position = $this.data('webad-position');
       var id       = $this.attr('id');
-      //console.log(position, id);
       if (position){
         render(position, force);
       } else if (id) {
-        //console.log('id');
         renderAdsWithContainer(id, force);
       }
     });
@@ -384,8 +379,10 @@ var FINN = FINN||{};
     }
   }
   
-  function expose(name){
-    return bannerMap[name].expose();
+  function expose(idocument, iwindow){
+    var name = idocument.location.hash.substring(2);
+    var list = bannerMap[name].expose();
+    $.each(list, function(k){ iwindow[k] = this; });
   }
   
 })(FINN, jQuery);

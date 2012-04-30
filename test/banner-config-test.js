@@ -60,7 +60,7 @@ function collectTestCases(cb){
           }
           
           if (typeof testCase.expectations.bannersHeight !== 'undefined'){
-            assert.equals($("#banners").height(), 0);
+            assert.equals($("#banners").height(), testCase.expectations.bannersHeight);
           }
         }
       }

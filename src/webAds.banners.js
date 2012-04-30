@@ -13,7 +13,7 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  var IFRAME_VERSION = 1;
+  var IFRAME_VERSION = 5;
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
@@ -106,15 +106,16 @@ if (typeof Object.create === 'undefined') {
       this.incomplete     = false;
       this.resized        = false;
       this.notValid       = false;
+      this.ignoreOnload   = false;
       this.log('new Banner()');
     }
 
     Banner.prototype.log = function(msg) { 
-      /*if(Date.now && !this.now) this.now = Date.now();
+      if(Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
         console.log(prefix + "-> " + this.name + ": " + msg);
-      }*/ 
+      }
     };
 
     Banner.prototype.config = function(key, value) {
@@ -124,7 +125,10 @@ if (typeof Object.create === 'undefined') {
 
     Banner.prototype.onload = function() {
       this.log('onload');
-      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);      
+      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
+      if(this.ignoreOnload === true){
+        return this.resolve();
+      }
       if (this.params.hidden || this.params.skipSizeCheck) {
         this.log('HIDDEN ignoreSizeCheck');
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -301,7 +305,6 @@ if (typeof Object.create === 'undefined') {
       this.iframe.makeIframe();
       $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);
-      this.log('After insert');
       return this;
     };
 
@@ -312,6 +315,11 @@ if (typeof Object.create === 'undefined') {
     Banner.prototype.setBannerFlag = function(key, value){
       return FINN.webAds.setBannerFlag(key, value);  
     };
+    
+    Banner.prototype.plugin = function(name){
+      var args = Array.prototype.slice.call(arguments, 1);
+      return FINN.webAds.getPlugin(name).apply(this, args);
+    }
     
     return Banner;
   })();
