@@ -1,1 +1,7 @@
-{}
+{
+  "expectations":{
+    "width": 200,
+    "height": 300,
+    "failed":false
+  }
+}

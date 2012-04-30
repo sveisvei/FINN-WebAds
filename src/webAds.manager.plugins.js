@@ -22,11 +22,11 @@ var FINN = FINN||{};
   FINN.webAds.registerPlugin('overlay', {
     init: function(plugin){},
     run: function(title, content, callback){
-      this.ignoreOnload = true;
-      this.width = 550;
-      this.height = 50;
-      $("body").append('<div style="position:fixed;width:50%;height:50%;left:10%;top:10%;background:red;">asd</div>')
-      this.resize();
+      var overlay = $('<div></div>', {
+        "class" : "asd",
+        "style" : 'z-index:999999;position:fixed;width:50%;height:50%;left:10%;top:10%;background:red;'
+      });
+      $("body").append(overlay);
     }
   });
   

@@ -111,11 +111,11 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if(Date.now && !this.now) this.now = Date.now();
+      /*if(Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
         console.log(prefix + "-> " + this.name + ": " + msg);
-      }
+      }*/
     };
 
     Banner.prototype.config = function(key, value) {
@@ -232,7 +232,9 @@ if (typeof Object.create === 'undefined') {
       return this;
     };
 
-    Banner.prototype.resize = function() {
+    Banner.prototype.resize = function(w, h) {
+      if (typeof w !== 'undefined') this.width = w;
+      if (typeof h !== 'undefined') this.height = h;
       this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
       this.resized = true;
       this.log('resize banner=> height:' + this.height + ' x width:' + this.width);
