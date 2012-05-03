@@ -10,26 +10,18 @@
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
 - feedbanner
+  - Vil disse fungere Benjamin?
 - mobil-testing.
   - toppbanner loader ikke på iphone, why?
-    - collapser ikke grunnet klasse ikke legges til/fjrenes
+  - skyskraper loader på ipad
 - eksempel plugin, + tests
-
-#browsersupport
-  - "extends" rename
 
 #Api
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 
-#config
-- bottombanners? Søk i controllere
-- Strap-on, kjetil jørgensen-dahl jobb-objekt side standard skjult banner.
-    - default/fjerne banner. fjerne init
-
 #Plugins
-- Plugins (avklare med marius/rune hva produktet er)
-- tf_track osv må testes   - Reise hooker seg inn på done callback.
+- tf_track osv må testes - Reise hooker seg inn på done callback.
 
 
 #Backend
@@ -43,10 +35,9 @@
 # Ikke viktig:
 - Reporte feil via cassandra/statistikk
 - config.backend. 
-  non-helios-content === refreshFromServer osv må ignoreres.
+  "helios", "finn", "aftenposten"
 
 #Cleanup finn-codebase
-  OAS, HELIOS
   old banner tiles
 
 #teknisk gjeld

@@ -195,8 +195,9 @@ var FINN = FINN||{};
     selector = selector||"body";
     $(selector).find("div[data-webad-position]").each(function(){
       var $this = $(this);
-      var position = $this.data('webad-position');
-      config(position, 'container', $this);
+      if ($this.data('webads') === 'true') {
+        config($this.data('webad-position'), 'container', $this);        
+      }
     });
   }
   

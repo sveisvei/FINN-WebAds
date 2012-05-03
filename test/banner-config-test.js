@@ -46,6 +46,11 @@ function collectTestCases(cb){
       
       function generalExpectations(){
         if (testCase.expectations){
+          
+          if (typeof testCase.expectations.bannersHeight !== 'undefined'){
+            assert.equals($("#banners").height(), testCase.expectations.bannersHeight);
+          }
+          
           //bodyClass
           if (testCase.expectations.bodyClass){
             $.each(testCase.expectations.bodyClass, function(i){
@@ -58,10 +63,7 @@ function collectTestCases(cb){
               refute($("body").hasClass(this), 'body should not have class: '+ this);
             });              
           }
-          
-          if (typeof testCase.expectations.bannersHeight !== 'undefined'){
-            assert.equals($("#banners").height(), testCase.expectations.bannersHeight);
-          }
+
         }
       }
       

@@ -1,6 +1,5 @@
 .webad-hidden,
-.webad-failed,
-.top-position-collapsed .webad-top {
+.webad-failed {
     display: none;
 }
 .webad-iframe {
@@ -25,6 +24,7 @@
     height: 0;
     min-height: 0;
     padding-bottom: 0;
+    overflow: visible;
 }
 
 #banners .webad {

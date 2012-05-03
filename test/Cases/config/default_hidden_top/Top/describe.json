@@ -1,4 +1,7 @@
 {
   "setWidth": 1004,
-  "setHeight": 200
+  "setHeight": 200,
+  "expectations":{
+    "failed": false
+  }
 }

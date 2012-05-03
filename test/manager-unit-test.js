@@ -8,6 +8,11 @@ buster.testCase("Manager", {
     FINN.webAds.cleanUp();
   },
   
+  "should be possible to run tests": function(){
+    // setup requires window to be wider than 999px to run render tests
+    assert($(window).width() > 999);
+  },
+  
   "should start with zero banners": function() {
     assert.equals(FINN.webAds._length(), 0);
     FINN.webAds.queue({

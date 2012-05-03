@@ -13,7 +13,7 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  var IFRAME_VERSION = 5;
+  var IFRAME_VERSION = 6;
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
@@ -156,10 +156,10 @@ if (typeof Object.create === 'undefined') {
     };
     
     Banner.prototype.processSize = function() {
-      this.log('processSize');
+      
       var w = this.$webAd.width();
       var h = this.$webAd.height();
-      
+      this.log('processSize '+w+'x'+h);
       var invalidSize = this.isValidSize(w, h);
       if (invalidSize) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -294,6 +294,10 @@ if (typeof Object.create === 'undefined') {
         this.failed     = true;
         this.log('Missing container '+this.container);        
         this.resolve();
+        return this;
+      }
+      if (this.active && this.$webAd && this.$webAd.is(':visible')) { // TODO, might need to fix selection on visible
+        this.log('iframe present in page');
         return this;
       }
       this.incomplete = false;

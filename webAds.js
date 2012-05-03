@@ -13,7 +13,7 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  var IFRAME_VERSION = 5;
+  var IFRAME_VERSION = 6;
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
@@ -156,10 +156,10 @@ if (typeof Object.create === 'undefined') {
     };
     
     Banner.prototype.processSize = function() {
-      this.log('processSize');
+      
       var w = this.$webAd.width();
       var h = this.$webAd.height();
-      
+      this.log('processSize '+w+'x'+h);
       var invalidSize = this.isValidSize(w, h);
       if (invalidSize) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -296,6 +296,10 @@ if (typeof Object.create === 'undefined') {
         this.resolve();
         return this;
       }
+      if (this.active && this.$webAd && this.$webAd.is(':visible')) { // TODO, might need to fix selection on visible
+        this.log('iframe present in page');
+        return this;
+      }
       this.incomplete = false;
       this.resolved   = false;
       this.active     = true;
@@ -336,6 +340,7 @@ var FINN = FINN || {};
 
   FINN.webAds = FINN.webAds || {};  
   FINN.data   = FINN.data   || {};
+  
   FINN.webAds.extend = function(obj){
     if (typeof FINN.data.defaultConfig === 'undefined') {
       FINN.data.defaultConfig = obj;      
@@ -406,17 +411,17 @@ var FINN = FINN || {};
     "Right1": {
       "extends": "normal",
       width: 240,
-      threshold: 1000      
+      threshold: 1025      
     },
     "Right2": {
       "extends": "normal",
-      threshold: 1000,            
+      threshold: 1025,            
       sticky: true,
       width: 240,
       height: 500
     },
     "Right3": {
-      threshold: 1000,                  
+      threshold: 1025,                  
       "extends": "normal",
       width: 240
     },
@@ -488,12 +493,13 @@ var FINN = FINN || {};
       height: 46,
       container: "textbanners",
       done: function(banner){
-      /*
         banner.$webAd.on('click', 'a.tf-track-helios', function(){
-          var fromSite = banner.params.site || $(this).data("tf-site") || document.domain;
-          var href = convertToAbsoluteUri($(this).data("tf-url") || this.href || this.action);        
-          FINN.trackingHub.publish(FINN.trackingHub.tfBanner, {site: fromSite, url: href});                    
-        });*/
+          throw new Error('TODO');
+          //var $t = $(this);
+          //var fromSite = banner.params.site || $t.data("tf-site") || document.domain;
+          //var href = convertToAbsoluteUri($t.data("tf-url") || this.href || this.action);        
+          //FINN.trackingHub.publish(FINN.trackingHub.tfBanner, {site: fromSite, url: href});                    
+        });
       }
     },
     "normal": {
@@ -813,8 +819,9 @@ var FINN=FINN||{};
     selector = selector||"body";
     $(selector).find("div[data-webad-position]").each(function(){
       var $this = $(this);
-      var position = $this.data('webad-position');
-      config(position, 'container', $this);
+      if ($this.data('webads') === 'true') {
+        config($this.data('webad-position'), 'container', $this);        
+      }
     });
   }
   
