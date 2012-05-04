@@ -1,13 +1,4 @@
 /*global document, window, console, jQuery, setTimeout */
-var FINN = FINN||{};
-if (typeof Object.create === 'undefined') {
-    Object.create = function (o) { 
-        function F() {} 
-        F.prototype = o; 
-        return new F(); 
-    };
-}
-
 (function(F, $) {
   "use strict";
 
@@ -293,6 +284,10 @@ if (typeof Object.create === 'undefined') {
       return true;
     };
     
+    Banner.prototype.getClassName = function(){
+      return ".webad-" + this.name.toLowerCase();
+    };
+    
     Banner.prototype.insert = function() {
       this.log('Insert()');
       if(!this.isValid()){
@@ -308,7 +303,7 @@ if (typeof Object.create === 'undefined') {
         this.resolve();
         return this;
       }
-      if (this.active && this.$webAd && $(".webad-"+this.name.toLowerCase()).length > 0) {
+      if (this.active && this.$webAd && $("."+this.getClassName()).length > 0) {
         this.log('iframe present in page');
         return this;
       }

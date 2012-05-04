@@ -9,7 +9,6 @@
 
 #bugs
 ? inline-block på body i iframe på noen banner i IE7
-- feedbanner - Vil disse fungere Benjamin?
 - mobil-testing.
   - toppbanner loader ikke på iphone, why?
 - hidden bannere i FF har ikke høyde eller bredde === se etter object,embed osv?

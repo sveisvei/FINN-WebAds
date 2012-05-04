@@ -156,16 +156,7 @@ var FINN = FINN || {};
     "textads" : {
       width: 100,
       height: 46,
-      container: "textbanners",
-      done: function(banner){
-        banner.$webAd.on('click', 'a.tf-track-helios', function(){
-          throw new Error('TODO');
-          //var $t = $(this);
-          //var fromSite = banner.params.site || $t.data("tf-site") || document.domain;
-          //var href = convertToAbsoluteUri($t.data("tf-url") || this.href || this.action);        
-          //FINN.trackingHub.publish(FINN.trackingHub.tfBanner, {site: fromSite, url: href});                    
-        });
-      }
+      container: "textbanners"
     },
     "normal": {
       container : "banners"
