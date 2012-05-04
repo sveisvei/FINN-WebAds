@@ -13,7 +13,7 @@ if (typeof Object.create === 'undefined') {
 
   var Banner, Iframe;
   
-  var IFRAME_VERSION = 6;
+  var IFRAME_VERSION = 7;
   var DEFAULTS = {
     RETRIES: 5,
     TIMEOUT: 50,
@@ -36,7 +36,7 @@ if (typeof Object.create === 'undefined') {
       var url     = FINN.webAds.iframeUrl || '/finn/webads';
       var sep     = url.indexOf('?') !== -1 ? '&' : '?';
       var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
-      return url +  (sep + 'IFRAME_VERSION=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
+      return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
     };
 
     Iframe.prototype.refresh = function() {
@@ -50,7 +50,6 @@ if (typeof Object.create === 'undefined') {
       var innerDiv  = document.createElement('div');
       var i         = document.createElement('iframe');      
       innerDiv.className  = 'webad-inner';      
-      //div.id              = this.id;
       var divClasses = ['webad', 'webad-'+this.name];
       if (this.options.hidden) {
         divClasses.push('webad-hidden');
@@ -111,11 +110,11 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      if (Date.now && !this.now) this.now = Date.now();
+      /*if (Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
         console.log(prefix + "-> " + this.name + ": " + msg);
-      }
+      }*/
     };
 
     Banner.prototype.config = function(key, value) {
@@ -309,7 +308,7 @@ if (typeof Object.create === 'undefined') {
         this.resolve();
         return this;
       }
-      if (this.active && this.$webAd && this.$webAd.is(':visible')) { // TODO, might need to fix selection on visible
+      if (this.active && this.$webAd && $(".webad-"+this.name.toLowerCase()).length > 0) {
         this.log('iframe present in page');
         return this;
       }
@@ -337,8 +336,10 @@ if (typeof Object.create === 'undefined') {
     };
     
     Banner.prototype.plugin = function(name){
+      var plugin = FINN.webAds.getPlugin(name);
+      if (!plugin){ return plugin; }
       var args = Array.prototype.slice.call(arguments, 1);
-      return FINN.webAds.getPlugin(name).apply(this, args);
+      return plugin.apply(this, args);
     };
     
     return Banner;

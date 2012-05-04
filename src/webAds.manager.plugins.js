@@ -5,7 +5,7 @@ var FINN = FINN||{};
   FINN.webAds = FINN.webAds||{};
 
   var plugins = {};  
-  FINN.webAds.registerPlugin = function(name, plug){
+  F.webAds.registerPlugin = function(name, plug){
     var plugin = {};
     plugin.run = plug.run||$.noop;
     if (typeof plug.init === 'function'){
@@ -14,19 +14,23 @@ var FINN = FINN||{};
     plugins[name] = plugin;
   };
   
-  FINN.webAds.getPlugin = function(name){
-    return plugins[name].run;
+  F.webAds.getPlugin = function(name){
+    return (plugins[name].run||null);
   };
 
   /* overlay with iframe content, or wrap ad iframe*/
-  FINN.webAds.registerPlugin('overlay', {
+  F.webAds.registerPlugin('overlay', {
     init: function(plugin){},
-    run: function(title, content, callback){
+    run: function(options, callback){
+      var w = options.width;
+      var h = options.height;
       var overlay = $('<div></div>', {
         "class" : "asd",
         "style" : 'z-index:999999;position:fixed;width:50%;height:50%;left:10%;top:10%;background:red;'
-      });
-      $("body").append(overlay);
+      }).html('<h1>'+options.title+'</h1>');
+      $("body").append(overlay).on('click', function(){
+        console.log('click');
+      })
     }
   });
   

@@ -12,18 +12,17 @@
 - feedbanner - Vil disse fungere Benjamin?
 - mobil-testing.
   - toppbanner loader ikke på iphone, why?
-- eksempel plugin, + tests
 - hidden bannere i FF har ikke høyde eller bredde === se etter object,embed osv?
   - kan fikses med hack
 - IAD -  cache tag
+- tf_track osv må testes - Reise hooker seg inn på done callback.
 
 #Api
 - refresh from backend - banner-url fra server? 
 - refresh from backend middleware - throttling
 
 #Plugins
-- tf_track osv må testes - Reise hooker seg inn på done callback.
-
+- Overlay eksempel plugin, + tests
 
 #Backend
   - serve iframe 

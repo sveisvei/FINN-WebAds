@@ -38,6 +38,9 @@ div.tabs {
   display: inline;
   display: inline-block;
 }
+.webad-failed .webad-inner {
+  background: pink;
+}
 *+html .webad-inner{
   display: inline;
 }

@@ -90,24 +90,31 @@ buster.testCase("Manager", {
       });
       
     }  ,
-    "renderContext should reload banners in context and ignore banner.active": function(done) {
+    "renderContext when FORCED should reload banners in context and ignore banner.active": function(done) {
       var lazyBanner = this.banner;
-      
-      lazyBanner.config('container', 'lazytest');
-      refute(lazyBanner.active)
+      refute(lazyBanner.active)      
+      lazyBanner.config('container', 'lazytest');      
       
       FINN.webAds.render('Lazy', function(){
         assert(lazyBanner.active);
+        
         $("#lazytest").remove();
-        $("body").append('<div data-webads="true" id="lazy2">dummy</div>')
-        lazyBanner.config('container', 'lazy2');
+        assert.equals($("#lazytest").length, 0);
+        assert(lazyBanner.iframe.$wrapper.is(':hidden'), 'iframe should not be in page');
+        $("body").append('<div data-webads="true" id="injected">dummy</div>');
+        
+        lazyBanner.config('container', 'injected');
         
         FINN.webAds.on('all-webads-resolved', function(){
            $(document).off('all-webads-resolved');
-           refute.equals($("#lazy2").html(), 'dummy');
-           done();
+           setTimeout(function(){
+             refute.equals($("#injected").html(), 'dummy');
+             $("#injected").remove();
+             done();
+           }, 0)
+
         });
-        
+        // force
         FINN.webAds.renderContext("body", true);
       });
 
