@@ -24,64 +24,34 @@ var FINN = FINN||{};
     run: function(options, callback){
       var w = options.width;
       var h = options.height;
-      var overlay = $('<div></div>', {
-        "class" : "asd",
-        "style" : 'z-index:999999;position:fixed;width:50%;height:50%;left:10%;top:10%;background:red;'
+
+      var overlay = $('<iframe />', {
+        "class" : "iframe",
+        "src": options.url,
+        "style" : 'z-index:999999;position:fixed;width:50%;height:50%;left:30%;top:20%;background:red;'
       }).html('<h1>'+options.title+'</h1>');
-      $("body").append(overlay).on('click', function(){
-        console.log('click');
-      })
+      
+      $("body").append(overlay);
+      
+      overlay.on('click', function(e){
+        e.stopPropagation();                
+      });
+      
+      $(window).on('keydown.overlay', function(e){
+        if (e.which === 27){ 
+          overlay.remove();
+          $(window).off('keydown.overlay');
+        }
+      });
+      
+      $("body").one('click', function(){
+        overlay.remove();
+      });
+      
+      overlay.focus();
+      
     }
   });
-  
-  
-  /* window.open? */
-  //plugins.popup   = function popup(){}
-  
-  /* confirm dialog ? */
-  /*plugins.dialog  = function dialog(){
-    
-    return {
-      close: function(){}
-    };
-  }*/
-  
-  /* Search FINN */
-  /*plugins.search = function search(query, callback){
-    
-    return {
-      params: {},
-      result: []
-    }
-  }*/
-  
-  /* Get current context - finnobj? */
-  /*plugins.context = function context(){
-      
-      
-      return {
-        currentUrl: document.location.toString(),
-        selectedObject: [],
-        objects: []
-      };
-  }*/
-  
-  /* 
-  
-  async must be true.
-  
-  */ 
-  /*plugins.getAdContent = function getAdContent(areaid, callback){
-    var url     = "/finn/realestate/homes/rotationdemo.json";    
-    var res     = {};
-    var params  = {"areaId":areaid};
-    // SYNC
-    $.ajax(url,{data:params, async:false, "success": function(data){
-        res = data;
-    }});
-    
-    return res;
-  }*/
   
   
 })(FINN, jQuery);

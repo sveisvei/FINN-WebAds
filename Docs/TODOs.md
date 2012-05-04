@@ -8,12 +8,8 @@
   - Oppdrag   (Endre)
 
 #bugs
-? inline-block på body i iframe på noen banner i IE7
-- mobil-testing.
-  - toppbanner loader ikke på iphone, why?
-- hidden bannere i FF har ikke høyde eller bredde === se etter object,embed osv?
-  - kan fikses med hack
-- IAD -  cache tag
+? inline-block på body i iframe på noen banner i IE7. 
+- hidden elementer i FF har ikke høyde eller bredde -> kan fikses med med visibility: hidden, display block
 - tf_track osv må testes - Reise hooker seg inn på done callback.
 
 #Api
