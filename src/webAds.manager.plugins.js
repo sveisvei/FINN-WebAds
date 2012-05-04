@@ -16,7 +16,7 @@ var FINN = FINN||{};
   
   FINN.webAds.getPlugin = function(name){
     return plugins[name].run;
-  }
+  };
 
   /* overlay with iframe content, or wrap ad iframe*/
   FINN.webAds.registerPlugin('overlay', {

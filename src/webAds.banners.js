@@ -111,11 +111,11 @@ if (typeof Object.create === 'undefined') {
     }
 
     Banner.prototype.log = function(msg) { 
-      /*if(Date.now && !this.now) this.now = Date.now();
+      if (Date.now && !this.now) this.now = Date.now();
       if (console) {
         var prefix = (!Date.now ? new Date() : this.now - Date.now());
         console.log(prefix + "-> " + this.name + ": " + msg);
-      }*/
+      }
     };
 
     Banner.prototype.config = function(key, value) {
@@ -147,6 +147,11 @@ if (typeof Object.create === 'undefined') {
       return (w === null || w <= this.minSize || w === null || w <= this.minSize);
     };
     
+    /*Banner.prototype.isHidden = function(w, h){
+      this.log('checking if hidden ' +  w + 'x'+ h +   '  ' + this.$webAd.is('hidden'));
+      return (w === 0 && h === 0 && this.$webAd.is(':hidden'));
+    };*/
+    
     Banner.prototype.isEmptyPixel = function(){
       return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
     };
@@ -155,19 +160,27 @@ if (typeof Object.create === 'undefined') {
       return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
     };
     
-    Banner.prototype.processSize = function() {
-      
+    /*Banner.prototype.swapHiddenContainer = function(){
+      this.log('SHOULD swap hidden container');
+      console.error('should', this.iframe.$wrapper.is(':hidden'));
+      this.iframe.$wrapper.parent().css({ position: "absolute", visibility: "hidden", display:"block" });
+      console.error('should', this.$webAd.width(), this.$webAd.height());
+      console.log(this.iframe.$wrapper.closest(':visible'));
+      this.iframe.$wrapper.parent().css({ position: "static", visibility: "visible", display:"none" });      
+    };*/
+    
+    Banner.prototype.processSize = function() {      
       var w = this.$webAd.width();
       var h = this.$webAd.height();
       this.log('processSize '+w+'x'+h);
-      var invalidSize = this.isValidSize(w, h);
-      if (invalidSize) {
+      if (this.isValidSize(w, h)) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
           return this.fail('pixel');
-        }
+        }/* else if (this.isHidden(w, h)){
+          this.swapHiddenContainer(w, h);
+        }*/
         return this.pollForNewSize(w, h);
-      }
-            
+      }            
       this.resizeIfNotDefault(w, h);
       this.resolve();
       return this;
@@ -300,6 +313,7 @@ if (typeof Object.create === 'undefined') {
         this.log('iframe present in page');
         return this;
       }
+      
       this.incomplete = false;
       this.resolved   = false;
       this.active     = true;
@@ -325,7 +339,7 @@ if (typeof Object.create === 'undefined') {
     Banner.prototype.plugin = function(name){
       var args = Array.prototype.slice.call(arguments, 1);
       return FINN.webAds.getPlugin(name).apply(this, args);
-    }
+    };
     
     return Banner;
   })();

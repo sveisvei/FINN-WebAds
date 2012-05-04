@@ -2,6 +2,7 @@
   "setWidth": 1,
   "setHeight": 1,
   "expectations":{
-    "failed":true
+    "failed":true,
+    "retries":0
   } 
 }
