@@ -88,7 +88,7 @@ function collectTestCases(cb){
             
             if (test['expectations']){
               $.each(test['expectations'], function(key, val){
-                assert.equals(banner[key], val, key);
+                assert.equals(banner[key], val, key + ' on ' + test.name);
               });
             }
             if (typeof test.isHidden !== 'undefined' && test.isHidden === true){

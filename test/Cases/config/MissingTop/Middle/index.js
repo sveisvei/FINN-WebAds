@@ -6,8 +6,5 @@ _jQuery("#clickme", document)
   .css({display: 'block'})
   .animate({width: 200, height: 100}, 1000)
   .on('click', function(){
-  banner.plugin('overlay', {
-    title: 'superoverlay',
-    url: 'http://www.vg.no'
-  });
+    banner.plugin('overlay', { title: 'superoverlay',  url: 'http://www.vg.no' });
 });
