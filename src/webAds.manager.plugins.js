@@ -2,7 +2,7 @@ var FINN = FINN||{};
 
 (function(F, $){
   "use strict";
-  FINN.webAds = FINN.webAds||{};
+  F.webAds = F.webAds||{};
 
   var plugins = {};  
   F.webAds.registerPlugin = function(name, plug){

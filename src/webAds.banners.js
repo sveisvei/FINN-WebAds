@@ -285,7 +285,7 @@
     };
     
     Banner.prototype.getClassName = function(){
-      return ".webad-" + this.name.toLowerCase();
+      return "webad-" + this.name.toLowerCase();
     };
     
     Banner.prototype.insert = function() {

@@ -285,7 +285,7 @@
     };
     
     Banner.prototype.getClassName = function(){
-      return ".webad-" + this.name.toLowerCase();
+      return "webad-" + this.name.toLowerCase();
     };
     
     Banner.prototype.insert = function() {
@@ -820,7 +820,7 @@ var FINN=FINN||{};
     selector = selector||"body";
     $(selector).find("div[data-webad-position]").each(function(){
       var $this = $(this);
-      if ($this.data('webads') === 'true') {
+      if ($this.data('webads') && $this.data('webads') !== 'lazy') {
         config($this.data('webad-position'), 'container', $this);        
       }
     });
