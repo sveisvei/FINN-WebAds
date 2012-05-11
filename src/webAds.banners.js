@@ -30,12 +30,7 @@
       return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
     };
 
-    Iframe.prototype.refresh = function() {
-      var currSrc   = this.$iframe.attr('src');
-      this.$iframe.attr('src', this.getUrl(currSrc));
-      return this;
-    };
-    
+  
     Iframe.prototype.makeIframe = function() {
       var div       = document.createElement('div');
       var innerDiv  = document.createElement('div');
@@ -250,6 +245,7 @@
 
     Banner.prototype.injectScript = function(idoc, iwin) {
       this.log('injectScript');
+      this.doc = idoc;
       idoc.write('<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>');
       return this;
     };
@@ -266,7 +262,11 @@
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
-      this.iframe.refresh();
+
+      if (this.doc) {
+        var url = this.iframe.getUrl(this.doc.location.href);
+        this.doc.location.replace(url);
+      }
       return this;
     };
 

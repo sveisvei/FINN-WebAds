@@ -150,6 +150,24 @@ buster.testCase("Banner", {
     banner.resizeIfNotDefault(101, 149);
     assert(spy.calledOnce, 'should be resize')
 
+  },
+  "refreshing banner should not add history entry": function(done){
+    //check history.length after refreshed banner
+    var historyLen = history.length*1;
+    var banner = FINN.webAds.queue({name:'iframeTest', url: 'dummy'});
+    
+    banner.injectScript = function(idoc, iwin){
+      this.doc = idoc;      
+      idoc.write('<div style="width:200px;height:200px;>iframeHistoryTest</div>"');
+    }
+
+    FINN.webAds.render('iframeTest', function(){
+      refute(banner.failed);
+      refute(banner.incomplete);
+      assert.equals(history.length, historyLen);      
+      done();
+    });
+
   }
 
 });
