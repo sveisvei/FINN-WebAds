@@ -60,7 +60,7 @@ var FINN = FINN || {};
     "Top": {
       "extends": "normal",
       width: 992,
-      threshold: 451,
+      threshold: 780,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition

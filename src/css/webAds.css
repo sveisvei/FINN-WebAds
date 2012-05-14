@@ -16,7 +16,7 @@
     overflow: visible;
 }
 
-.so-v1 #banners {
+.so-v1 aside.banners {
     margin: 10px 0 0 10px;
 }
 
@@ -34,21 +34,6 @@
     text-align: right;
 }
 
-@media screen and (max-width: 1000px) {
-  #banners {
-    width: 980px !important;
-    max-width: 100%;
-    overflow: hidden;
-  }
-  #banners .webad-top .webad-inner {
-      text-align: left;
-  }
-  .webad-middle {
-    overflow: hidden;
-    clear: both;
-  }
-  
-}
 
 
 

@@ -10,7 +10,7 @@ function collectTestCases(cb){
   
   testCases["config"]["setUp"] = function() {
     // css injection here might not work because of timing issues.
-    $("head").append('<link rel="stylesheet" id="webads-stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/webAds.css" />');
+    $("head").append('<link rel="stylesheet" id="webads-stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/css/webAds.css" />');
     $("body").append('<div id="banners" data-webads="true"><div id="banners-right" data-webads="true"></div></div><div id="banners-middle"></div>');
     webAds.base      = buster.env.contextPath + "/Cases/config/";    
     webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
