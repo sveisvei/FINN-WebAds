@@ -5,7 +5,8 @@ var files = [
   'webAds.banners.js',
   'webAds.config.js',
   'webAds.sticky.js',
-  'webAds.manager.js'
+  'webAds.manager.js',
+  'webAds.manager.plugins.js'
 ];
 
 function mini(orig_code){

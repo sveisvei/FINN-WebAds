@@ -17,7 +17,11 @@ var FINN = FINN||{};
   F.webAds.getPlugin = function(name){
     return (plugins[name].run||null);
   };
-
+  /* parameters made available for third party networks */
+  F.webAds.registerPlugin('contextData', {
+	init: function(){},
+	run: function(){ return FINN.data.banner;}
+  });
   /* overlay with iframe content, or wrap ad iframe*/
   F.webAds.registerPlugin('overlay', {
     init: function(plugin){},

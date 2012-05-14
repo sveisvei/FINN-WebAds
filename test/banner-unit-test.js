@@ -151,7 +151,7 @@ buster.testCase("Banner", {
     assert(spy.calledOnce, 'should be resize')
 
   },
-  "refreshing banner should not add history entry": function(done){
+  "//refreshing banner should not add history entry": function(done){
     //check history.length after refreshed banner
     var historyLen = history.length*1;
     var banner = FINN.webAds.queue({name:'iframeTest', url: 'dummy'});
@@ -164,7 +164,9 @@ buster.testCase("Banner", {
     FINN.webAds.render('iframeTest', function(){
       refute(banner.failed);
       refute(banner.incomplete);
-      assert.equals(history.length, historyLen);      
+      assert.equals(history.length, historyLen);
+      banner.refresh();
+	  assert.equals(history.length, historyLen)
       done();
     });
 

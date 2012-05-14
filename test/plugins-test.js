@@ -12,6 +12,16 @@ buster.testCase("Banner", {
     }
     FINN.webAds.cleanUp();
   },
+  "plugin context data": {
+  "should return FINN.data.banner": function(){
+	FINN.data = FINN.data||{};
+	FINN.data.banner = {parameters: "testparam=testvalue"};
+    var banner = new FINN.Banner({name: "test"});
+    var result = banner.plugin('contextData');
+    assert.equals(FINN.data.banner, result);
+}
+},
+
   "plugins should be in place": function(){
     
     assert(true);

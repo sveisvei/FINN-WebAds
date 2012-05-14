@@ -134,7 +134,7 @@ var FINN = FINN||{};
 	  var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({
         windowWidth: windowWidth
-      }, 
+      },
       defaults, 
       defaultConfig.all,
       defaultConfig [obj.name], 
