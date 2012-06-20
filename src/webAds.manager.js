@@ -61,6 +61,9 @@ var FINN = FINN||{};
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
   
+  var logLevel = window.location.toString().match(/loglevel=(\d+)/mi);
+  logLevel = (logLevel  && logLevel[1] ? logLevel[1] : 0)*1;
+  globalExpose.logLevel = logLevel;
   
   var bannerMap   = {};
   var bannerFlags = {};
@@ -173,13 +176,13 @@ var FINN = FINN||{};
         resolveOnload(name, error);
       }
     } else if (!force && banner.active){
-      banner.log('banner is active');
+      banner.log(1, 'banner is active');
       if (callback && typeof callback === 'function') {
         if (banner.resolved) {
-          banner.log('is resolved, calling callback direct');
+          banner.log(2, 'is resolved, calling callback direct');
           callback(null, banner);          
         } else {
-          banner.log('deferring callback');
+          banner.log(2, 'deferring callback');
           insertCallback(name, callback);
         }
       }

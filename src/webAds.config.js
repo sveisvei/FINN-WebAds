@@ -15,7 +15,7 @@ var FINN = FINN || {};
   };
 
   function fixTopPosition(banner) {
-    banner.log("cb fixTopPosition");
+    banner.log(2, "cb fixTopPosition");
     if (banner.failed === true){ 
       return;
     }
@@ -34,14 +34,14 @@ var FINN = FINN || {};
   }
 
   function fixLeftPosition(banner) {
-    banner.log("cb fixLeftBanner");
+    banner.log(2, "cb fixLeftBanner");
     if (!banner.failed && banner.width > 50) {
       banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
     }
   }
 
   function fixWallpaper(banner) {
-    banner.log("cb fixWallpaper");
+    banner.log(2, "cb fixWallpaper");
     if (banner.failed === true){ return;}    
     var bgImage = banner.iframe.$iframe.contents().find("img");
     if (bgImage.size() > 0 && bgImage.width() !== 1) {

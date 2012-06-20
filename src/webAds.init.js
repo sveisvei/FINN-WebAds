@@ -1,3 +1,4 @@
+//Example
 jQuery(document).ready(function(){
   "use strict";  
   var FINN = FINN||{};

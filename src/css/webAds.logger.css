@@ -1,0 +1,74 @@
+#webadsLogger {
+  position: fixed;
+  width: 400px;
+  z-index: 999999;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: black;
+  background-color: rgba(0,0,0,0.8);
+  padding: 20px;
+  color: white;
+  font-size: 11px;
+}
+#webadsLogger h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+#webadsLogger h1 a {
+  color: white;
+  display: inline-block;
+  padding: 2px;
+  text-decoration: none;
+  border: 1px solid white;
+  border-radius: 12px;
+  width: 12px;
+  font-size: 12px;
+  height: 12px;
+  text-align:center;
+  margin-left:5px;
+}
+#webadsLogger .inner {
+  width: 400px;
+  position: absolute;
+  top: 60px;
+  bottom: 20px;
+  overflow-y: auto;
+}
+
+#webadsLogger .top .label-banner{
+  background: red;
+}
+#webadsLogger .right2 .label-banner{
+  background: green;
+}
+#webadsLogger .fail {
+  color: red;
+}
+#webadsLogger .fail .label{
+  color: white;
+  border: 1px solid white;
+}
+#webadsLogger .unactive {
+  color: grey;
+}
+#webadsLogger .unactive .label {
+  color: white;
+}
+
+#webadsLogger .label {
+  background: grey;
+  padding: 2px 3px;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+}
+#webadsLogger .label-time {
+  background: blue;
+}
+#webadsLogger .level1 {
+  font-weight: bold;
+}
+#webadsLogger .level2 {
+  font-weight: normal;
+}

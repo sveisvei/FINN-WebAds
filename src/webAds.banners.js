@@ -74,6 +74,7 @@
   Banner = (function() {
     function Banner(params, expose) {
       this.params         = params;
+      this.logLevel       = expose.logLevel||0;
       this.exposeObj      = expose !== null ? expose : {};
       this.name           = this.params.name;
       this.url            = this.params.url;
@@ -92,30 +93,46 @@
       this.resized        = false;
       this.notValid       = false;
       this.ignoreOnload   = false;
-      this.log('new Banner()');
+      this.log(1, 'Banner init. (new Banner({}))');
     }
 
-    Banner.prototype.log = function(msg) { 
-      /*if (Date.now && !this.now) this.now = Date.now();
-      if (console) {
-        var prefix = (!Date.now ? new Date() : this.now - Date.now());
-        console.log(prefix + "-> " + this.name + ": " + msg);
-      }*/
+    Banner.prototype.log = function(level, msg) { 
+      if (!msg){
+        msg   = level;
+        level = 1;
+      }
+      var prefix;
+      if (this.logLevel > 0 && level <= this.logLevel){
+        if (!this.$logTarget){
+          this.$logTarget = $('#webadsLogger .inner');
+          if (this.$logTarget.length === 0) {
+            var logLevelUp = window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)+1));
+            var logLevelDown =  window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)-1));
+            this.$logTarget = $('<div id="webadsLogger"><h1>Logger ('+this.logLevel+')<a href="'+logLevelUp+'">+</a><a href="'+logLevelDown+'">-</a></h1><div class="inner"></div></div>').prependTo("body").find('.inner');
+          }
+        }
+        if (Date.now && !this.now) this.now = Date.now();
+          prefix = (!Date.now ? new Date() : Date.now() - this.now);
+          var outputClass = [this.name.toLowerCase(), 'level'+level, this.failed ? 'fail' : '', this.active ? '' : 'unactive'];
+          var count = 0;
+          this.$logTarget.append('<p class="'+outputClass.join(' ')+'"><span class="label label-time">' + prefix + ' ms</span><span class="label label-banner">' + this.name + '</span> ' + msg + '</p>');
+          this.$logTarget.scrollTop(this.$logTarget.height());
+      }
     };
 
     Banner.prototype.config = function(key, value) {
-      this.log(key+' updated');
+      this.log(3, key+' updated');
       return (this[key] = value);
     };
 
     Banner.prototype.onload = function() {
-      this.log('onload');
+      this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
       if(this.ignoreOnload === true){
         return this.resolve();
       }
       if (this.params.hidden || this.params.skipSizeCheck) {
-        this.log('HIDDEN ignoreSizeCheck');
+        this.log(2, 'HIDDEN ignoreSizeCheck');
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
           return this.fail('pixel');
         } else {
@@ -157,7 +174,7 @@
     Banner.prototype.processSize = function() {      
       var w = this.$webAd.width();
       var h = this.$webAd.height();
-      this.log('processSize '+w+'x'+h);
+      this.log(2, 'Checking if valid size: '+w+'x'+h);
       if (this.isValidSize(w, h)) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
           return this.fail('pixel');
@@ -172,7 +189,7 @@
     };
 
     Banner.prototype.resolve = function() {
-      this.log('Banner.prototype.resolve("' + this.name + '")');
+      this.log(1, 'Banner is resolved internally.');
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -181,7 +198,7 @@
       }
       if (!this.resolved) {
         this.resolved = true;      
-        this.log('Calling FINN.webAds.resolve()');
+        this.log(2, 'Calling FINN.webAds.resolve()');
         FINN.webAds.resolve(this.name);
       }
       // reset
@@ -190,7 +207,7 @@
     };
 
     Banner.prototype.fail = function(reason, dontSetClass) {
-      this.log('Failed ' + reason);
+      this.log(1, 'Failed ' + reason);
       if (!dontSetClass && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');      
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
@@ -201,7 +218,7 @@
 
     Banner.prototype.pollForNewSize = function(width, height) {
       var banner, cb;
-      this.log('pollForNewSize ' + this.timer + ' retries: ' + this.retries);
+      this.log(2, 'pollForNewSize ' + this.timer + ' retries: ' + this.retries);
       this.timer += this.timer;
       this.retries -= 1;
       banner = this;
@@ -235,7 +252,7 @@
       if (typeof h !== 'undefined') this.height = h;
       this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
       this.resized = true;
-      this.log('resize banner=> height:' + this.height + ' x width:' + this.width);
+      this.log(1, 'resized banner to height:' + this.height + ' and width:' + this.width);
       return this;
     };
 
@@ -244,7 +261,7 @@
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
-      this.log('injectScript');
+      this.log(3, 'injectScript');
       this.doc = idoc;
       idoc.write('<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>');
       return this;
@@ -278,6 +295,7 @@
     };
 
     Banner.prototype.isValid = function(){
+      this.log(2, 'Not valid if '+this.params.threshold+' is less than '+this.params.windowWidth);
       if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
         return false;
       }
@@ -289,7 +307,7 @@
     };
     
     Banner.prototype.insert = function() {
-      this.log('Insert()');
+      this.log(3, 'Insert()');
       if(!this.isValid()){
         this.notValid = true;
         this.fail('notValid');
@@ -299,12 +317,12 @@
       if(!this.container){
         this.incomplete = true;
         this.failed     = true;
-        this.log('Missing container '+this.container);        
+        this.log(1, 'Missing container '+this.container);        
         this.resolve();
         return this;
       }
       if (this.active && this.$webAd && $("."+this.getClassName()).length > 0) {
-        this.log('iframe present in page');
+        this.log(1, 'iframe present in page');
         return this;
       }
       
@@ -316,6 +334,7 @@
         this.fail('Missing valid container on webad '+this.name, true);
         return this;
       }
+      this.log(3, 'Inserting iframe/banner');      
       this.iframe.makeIframe();
       $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);
