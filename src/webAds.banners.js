@@ -1,4 +1,4 @@
-/*global document, window, console, jQuery, setTimeout */
+/*global document, window, console, jQuery, setTimeout, FINN */
 (function(F, $) {
   "use strict";
 
@@ -106,8 +106,9 @@
         if (!this.$logTarget){
           this.$logTarget = $('#webadsLogger .inner');
           if (this.$logTarget.length === 0) {
-            var logLevelUp = window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)+1));
+            var logLevelUp   = window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)+1));
             var logLevelDown =  window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)-1));
+            $('<link type="text/css" media="screen" href="/styles/advertising/webads.logger.css?rev=2" rel="stylesheet" />').appendTo('head');
             this.$logTarget = $('<div id="webadsLogger"><h1>Logger ('+this.logLevel+')<a href="'+logLevelUp+'">+</a><a href="'+logLevelDown+'">-</a></h1><div class="inner"></div></div>').prependTo("body").find('.inner');
           }
         }
