@@ -55,12 +55,19 @@ var FINN = FINN || {};
       }
     }
   }
+
+  function addCloseButton(banner){
+    banner.iframe.$wrapper.append('<button class=dismiss-sticky>X</button>');
+    banner.iframe.$wrapper.on("click", '.dismiss-sticky', function(){
+        banner.iframe.$wrapper.remove();
+    });
+  }
   
   FINN.webAds.extend({
     "Top": {
       "extends": "normal",
       width: 992,
-      threshold: 780,
+      threshold: 600,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition
@@ -158,6 +165,11 @@ var FINN = FINN || {};
       height: 46,
       container: "textbanners"
     },
+	  "mobilebottom" : {
+	    width: 320,
+	    "extends": "normal",
+	    done: addCloseButton
+	  },
     "normal": {
       container : "banners"
     },

@@ -17,6 +17,13 @@ var FINN = FINN||{};
   F.webAds.getPlugin = function(name){
     return (plugins[name].run||null);
   };
+
+  F.webAds.registerPlugin('survey', {
+	run: function(){
+		this.plugin('overlay', {url:'http://www.finn.no',title:'Survey'});
+	}
+})
+
   /* parameters made available for third party networks */
   F.webAds.registerPlugin('contextData', {
 	init: function(){},

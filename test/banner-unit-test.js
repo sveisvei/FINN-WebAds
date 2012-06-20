@@ -2,10 +2,10 @@ buster.testCase("Banner", {
   "setUp": function() {
     FINN.webAds.base = buster.env.contextPath + "/";
     FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
-    $("body").append('<div id="banners" data-webads="true"></div>');
+    $("body").append('<div id="banners" data-webads="true"></div><style id="removeStyle">* {padding:0;margin:0;}</style>');
   },
   "tearDown": function() {
-    $("#banners,#test3").remove();
+    $("#banners,#test3,#removeStyle").remove();
     if (FINN._webAds) {
       FINN.webAds = FINN._webAds;
       FINN._webAds = null;
@@ -170,6 +170,27 @@ buster.testCase("Banner", {
       done();
     });
 
-  }
+  },
+  "mobile bottom bannercontainer should fill whole screen": function(done) {
+    
+    var banner = FINN.webAds.queue({
+      name      : 'mobilebottom',
+      container : 'banners',
+      url       : 'asd',
+      done      : function(){
+        buster.log('asd3')
+        assert.equals(banner.iframe.$wrapper.width(), $(window).width())
+        done();
+      },
+    });
+    
 
+    banner.injectScript = function(idoc, iwin) {
+      buster.log('asd');
+      idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
+    }
+    FINN.webAds.render('mobilebottom');
+    
+  }
+  
 });

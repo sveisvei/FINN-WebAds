@@ -1,0 +1,8 @@
+{
+  "expectations":{
+    "width": 320,
+    "height": 100,
+    "failed":false
+  },
+  "container": "banners-middle"
+}

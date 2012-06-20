@@ -1,5 +1,6 @@
 .webad-hidden,
-.webad-failed {
+.webad-failed,
+.top-position-collapsed .webad-top {
     display: none;
 }
 .webad-iframe {
@@ -17,7 +18,7 @@
 }
 
 .so-v1 aside.banners {
-    margin: 10px 0 0 10px;
+    margin: 10px 0 0 0px;
 }
 
 .top-position-collapsed #banners {
@@ -77,3 +78,38 @@
 .has-dominant-campaign #banners {
     margin: 0 auto;
 }
+
+.webad-mobilebottom {
+    background-color: #fff;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:999;
+    position:fixed;
+    _position:absolute;
+    _top:expression(eval(document.documentElement.scrollTop+(document.documentElement.clientHeight-this.offsetHeight)));
+    text-align: center;
+    width: 100%;
+    -webkit-box-shadow: 0 -3px 7px #ccc;
+    box-shadow: 0 -3px 7px #ccc;
+}
+
+.webad-mobilebottom .dismiss-sticky {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    z-index:1000;
+    background-color: transparent;
+    color: #fff;
+    font-size:20px;
+    padding: 0;
+    width: 28px;
+    background: #000;
+    border: 2px solid #fff;
+    -webkit-border-radius:2em;
+    border-radius: 2em;
+    -webkit-appearance: none;
+    box-shadow: 0 0 4px #000000;
+}
+
+
