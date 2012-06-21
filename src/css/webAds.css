@@ -10,7 +10,7 @@
 
 #banners {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     min-height: 150px;
     width: 980px;
     padding-bottom: 10px;

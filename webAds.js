@@ -24,7 +24,7 @@
     };
     
     Iframe.prototype.getUrl = function(src){
-      var url     = FINN.webAds.iframeUrl || '/finn/webads';
+      var url     = FINN.webAds.iframeUrl || '/html/banner/webad.html';
       var sep     = url.indexOf('?') !== -1 ? '&' : '?';
       var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
       return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
@@ -642,7 +642,11 @@ var FINN=FINN||{};
 (function(F, $){
   var data          = F.data = F.data||{};
   var defaultConfig = data.defaultConfig = data.defaultConfig||{};
-  var loggerConfig  = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger();
+  var logger;
+  var loggerConfig  = function(){
+    if (logger) return logger;
+    logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger();
+  }
   
   // exports
   F.webAds = F.webAds||{};
@@ -671,6 +675,7 @@ var FINN=FINN||{};
   w.setBannerFlag         = setBannerFlag;
   w._length               = bannerMapLength;  
   w._getBanner            = getBanner;
+  w.defaultReady          = defaultReady;
   
   var eventMap = {};
   
@@ -682,6 +687,14 @@ var FINN=FINN||{};
   
   function one(key, callback){
     return $(document).one(key, callback);    
+  }
+  
+  function defaultReady(){
+    // Load banners
+    FINN.webAds.queue(FINN.data.banners);
+    // collect data
+    FINN.webAds.collectDataPositions();
+    FINN.webAds.renderAll('Top,Left1,Right2');
   }
   
   function triggerEvent(name, arg1){
@@ -699,7 +712,7 @@ var FINN=FINN||{};
     helios_parameters : "", //TODO: remove this
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
-
+  
   var bannerMap   = {};
   var bannerFlags = {};
   var callbacks   = {};
@@ -773,7 +786,7 @@ var FINN=FINN||{};
     return $.extend({
         windowWidth: windowWidth
       },
-      loggerConfig,
+      loggerConfig(),
       defaults, 
       defaultConfig.all,
       defaultConfig [obj.name], 

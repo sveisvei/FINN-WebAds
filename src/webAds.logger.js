@@ -14,11 +14,11 @@ var FINN=FINN||{};
       <a href="' + noLogLevel   + '">x</a>\
     ';
     
-    return '\
-      <div id="webadsLogger">\
+    var templ = '<div id="webadsLogger">\
         <h1>'+(title||'Logger')+' (' + logLevel + ')'+menu+'</h1>\
         <div class="inner"></div>\
     </div>';
+    return templ;
   }
 
   function logger(loggerName, logLevel, ready) {
@@ -42,13 +42,13 @@ var FINN=FINN||{};
           }
         }
       }
-    }
+    };
 
     if (logLevel > 0) {
       $(document).ready(function(){
         $log        = $("#banners").prepend(logViewTemplate(logLevel, loggerName, logLevelLocked)).find('.inner');        
         readyLoaded = true;        
-        $.each(buffer, resolve)
+        $.each(buffer, resolve);
         buffer      = null;
         if (ready) ready(result);
       });
@@ -61,13 +61,13 @@ var FINN=FINN||{};
     
     var now;
     var logTimer = function(){
-      if (Date.now && !now) now = Date.now();
-      // TODO, move to 
-      return (!Date.now ? new Date() : Date.now() - now);
-    }
+      var getTime = (new Date()).getTime();
+      if (!now) now = getTime;
+      return (getTime - now);
+    };
     
     function log(level, msg){
-      if (level >= logLevel) return;
+      if (level > logLevel) return;
       var outputClass = [this.name && this.name.toLowerCase(), 'level'+level, this.failed ? 'fail' : '', this.active ? '' : 'unactive'].join(' ');
       $log.append('<p class="'+outputClass+'"><span class="label label-time">' + logTimer() + ' ms</span><span class="label label-banner">' + this.name + '</span> ' + msg + '</p>');
       
@@ -75,13 +75,5 @@ var FINN=FINN||{};
     
     return result;
   }
-  return FINN.webAds.logger = logger;
-  
-  
-
-  /*if (this.params.logLevel > 0 && level <= this.params.logLevel && this.params.$logTarget){
-    var outputClass = [this.name.toLowerCase(), 'level'+level, this.failed ? 'fail' : '', this.active ? '' : 'unactive'].join(' ');
-    this.params.$logTarget.append('<p class="'+outputClass+'"><span class="label label-time">' + this.logTimer() + ' ms</span><span class="label label-banner">' + this.name + '</span> ' + msg + '</p>');
-    this.params.$logTarget.scrollTop(this.params.$logTarget.height());
-  }*/
+  return (FINN.webAds.logger = logger);
 })(FINN, jQuery);

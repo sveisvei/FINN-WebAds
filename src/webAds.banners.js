@@ -24,7 +24,7 @@
     };
     
     Iframe.prototype.getUrl = function(src){
-      var url     = FINN.webAds.iframeUrl || '/finn/webads';
+      var url     = FINN.webAds.iframeUrl || '/html/banner/webad.html';
       var sep     = url.indexOf('?') !== -1 ? '&' : '?';
       var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
       return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
