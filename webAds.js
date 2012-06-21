@@ -172,7 +172,7 @@
     };
 
     Banner.prototype.resolve = function() {
-      this.log(1, ' is resolved internally.');
+      this.log(1, ' resolved as '+ (this.failed ? 'failed' : 'rendered'));
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -645,8 +645,8 @@ var FINN=FINN||{};
   var logger;
   var loggerConfig  = function(){
     if (logger) return logger;
-    logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger();
-  }
+    return (logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger('FINN WebAds'));
+  };
   
   // exports
   F.webAds = F.webAds||{};
@@ -904,6 +904,7 @@ var FINN=FINN||{};
         });
       }
       triggerEvent('all-webads-resolved', bannerMap);
+      loggerConfig().log({name: 'WEBADS'}, 1, 'All webAds processed.');
       return true;
     } else {
       return false;

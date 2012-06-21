@@ -11,6 +11,7 @@
   color: white;
   font-size: 11px;
   border-right: 1px solid white;
+  max-width: 90%;
 }
 #webadsLogger h1 {
   font-size: 18px;

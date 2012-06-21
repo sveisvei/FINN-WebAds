@@ -172,7 +172,7 @@
     };
 
     Banner.prototype.resolve = function() {
-      this.log(1, ' is resolved internally.');
+      this.log(1, ' resolved as '+ (this.failed ? 'failed' : 'rendered'));
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }

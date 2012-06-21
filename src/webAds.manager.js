@@ -6,8 +6,8 @@ var FINN = FINN||{};
   var logger;
   var loggerConfig  = function(){
     if (logger) return logger;
-    logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger();
-  }
+    return (logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger('FINN WebAds'));
+  };
   
   // exports
   F.webAds = F.webAds||{};
@@ -265,6 +265,7 @@ var FINN = FINN||{};
         });
       }
       triggerEvent('all-webads-resolved', bannerMap);
+      loggerConfig().log({name: 'WEBADS'}, 1, 'All webAds processed.');
       return true;
     } else {
       return false;
