@@ -92,6 +92,7 @@
       this.resized        = false;
       this.notValid       = false;
       this.ignoreOnload   = false;
+      this.insertCalled   = false;
       this.log(1, 'Banner init. (new Banner({}))');
     }
     
@@ -290,6 +291,7 @@
     };
     
     Banner.prototype.insert = function() {
+      this.insertCalled = true;
       this.log(3, 'Insert()');
       if(!this.isValid()){
         this.notValid = true;

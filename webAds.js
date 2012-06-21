@@ -92,6 +92,7 @@
       this.resized        = false;
       this.notValid       = false;
       this.ignoreOnload   = false;
+      this.insertCalled   = false;
       this.log(1, 'Banner init. (new Banner({}))');
     }
     
@@ -290,6 +291,7 @@
     };
     
     Banner.prototype.insert = function() {
+      this.insertCalled = true;
       this.log(3, 'Insert()');
       if(!this.isValid()){
         this.notValid = true;
@@ -645,7 +647,9 @@ var FINN=FINN||{};
   var logger;
   var loggerConfig  = function(){
     if (logger) return logger;
-    return (logger = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger('FINN WebAds'));
+    if (!FINN.webAds||!FINN.webAds.logger) return {log:function(){}};
+    logger = FINN.webAds.logger('FINN WebAds');
+    return logger;
   };
   
   // exports
@@ -911,11 +915,11 @@ var FINN=FINN||{};
     }
   }
 
-  function renderUnactive(){
+  function renderUntouched(){
     var banner;
     for(var key in bannerMap){
       banner = bannerMap[key];      
-      if (banner.active === false){
+      if (banner.insertCalled === false){
         banner.insert();
       }
     }
@@ -930,7 +934,7 @@ var FINN=FINN||{};
     function loop(err){
       var name;
       if (priorityList.length <= 0){
-        renderUnactive();
+        renderUntouched();
       } else {
         name = priorityList.shift();
         insertCallback(name, loop, onloadCallbacks);
@@ -949,8 +953,10 @@ var FINN=FINN||{};
   
   function queue(obj){    
     if ($.isArray(obj)){
+      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.length+' positions');            
       $.each(obj, addToMap);
     } else {
+      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.name+'.');      
       return addToMap.call(obj);      
     }
   }

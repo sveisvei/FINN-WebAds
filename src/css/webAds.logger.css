@@ -43,12 +43,6 @@
   overflow-y: auto;
 }
 
-#webadsLogger .top .label-banner{
-  background: red;
-}
-#webadsLogger .right2 .label-banner{
-  background: green;
-}
 #webadsLogger .fail {
   color: red;
 }
@@ -78,4 +72,15 @@
 }
 #webadsLogger .level2 {
   font-weight: normal;
+}
+
+#webadsLogger .top .label-banner{
+  background: red;
+}
+#webadsLogger .right2 .label-banner{
+  background: green;
+}
+#webadsLogger .webads .label-banner{
+  background: yellow;
+  color: black;
 }
