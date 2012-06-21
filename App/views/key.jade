@@ -7,6 +7,13 @@ html(lang='no')
     link(rel='stylesheet', href='/css/webAds.responsive.css')
     link(rel='stylesheet', href='/css/webAds.logger.css')
     include partials/scripts
+    script
+      var logger = FINN.webAds.logger('debug', 1, function(logger){
+        console.log(logger);
+        logger.log({name: 'custom'}, 0, 'asd')
+      });
+      logger.log({name: 'custom'}, 0, 'asd2')
+      
     style
       * {margin: 0; padding: 0;}
       body {

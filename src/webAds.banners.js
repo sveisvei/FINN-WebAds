@@ -74,7 +74,6 @@
   Banner = (function() {
     function Banner(params, expose) {
       this.params         = params;
-      this.logLevel       = expose.logLevel||0;
       this.exposeObj      = expose !== null ? expose : {};
       this.name           = this.params.name;
       this.url            = this.params.url;
@@ -95,30 +94,13 @@
       this.ignoreOnload   = false;
       this.log(1, 'Banner init. (new Banner({}))');
     }
-
+    
     Banner.prototype.log = function(level, msg) { 
       if (!msg){
         msg   = level;
         level = 1;
       }
-      var prefix;
-      if (this.logLevel > 0 && level <= this.logLevel){
-        if (!this.$logTarget){
-          this.$logTarget = $('#webadsLogger .inner');
-          if (this.$logTarget.length === 0) {
-            var logLevelUp   = window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)+1));
-            var logLevelDown =  window.location.toString().replace(/loglevel=(\d+)/gmi, 'loglevel='+((this.logLevel*1)-1));
-            $('<link type="text/css" media="screen" href="/styles/advertising/webads.logger.css?rev=2" rel="stylesheet" />').appendTo('head');
-            this.$logTarget = $('<div id="webadsLogger"><h1>Logger ('+this.logLevel+')<a href="'+logLevelUp+'">+</a><a href="'+logLevelDown+'">-</a></h1><div class="inner"></div></div>').prependTo("body").find('.inner');
-          }
-        }
-        if (Date.now && !this.now) this.now = Date.now();
-          prefix = (!Date.now ? new Date() : Date.now() - this.now);
-          var outputClass = [this.name.toLowerCase(), 'level'+level, this.failed ? 'fail' : '', this.active ? '' : 'unactive'];
-          var count = 0;
-          this.$logTarget.append('<p class="'+outputClass.join(' ')+'"><span class="label label-time">' + prefix + ' ms</span><span class="label label-banner">' + this.name + '</span> ' + msg + '</p>');
-          this.$logTarget.scrollTop(this.$logTarget.height());
-      }
+      if (this.params.log) this.params.log(this, level, msg);
     };
 
     Banner.prototype.config = function(key, value) {
@@ -150,11 +132,6 @@
       return (w === null || w <= this.minSize || w === null || w <= this.minSize);
     };
     
-    /*Banner.prototype.isHidden = function(w, h){
-      this.log('checking if hidden ' +  w + 'x'+ h +   '  ' + this.$webAd.is('hidden'));
-      return (w === 0 && h === 0 && this.$webAd.is(':hidden'));
-    };*/
-    
     Banner.prototype.isEmptyPixel = function(){
       return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
     };
@@ -162,6 +139,11 @@
     Banner.prototype.hasEmptyPixel = function(){
       return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
     };
+
+    /*Banner.prototype.isHidden = function(w, h){
+      this.log('checking if hidden ' +  w + 'x'+ h +   '  ' + this.$webAd.is('hidden'));
+      return (w === 0 && h === 0 && this.$webAd.is(':hidden'));
+    };*/
     
     /*Banner.prototype.swapHiddenContainer = function(){
       this.log('SHOULD swap hidden container');
@@ -190,7 +172,7 @@
     };
 
     Banner.prototype.resolve = function() {
-      this.log(1, 'Banner is resolved internally.');
+      this.log(1, ' is resolved internally.');
       if (this.params.bodyClass && !this.failed) {
         $("body").addClass(this.params.bodyClass);
       }
@@ -208,7 +190,7 @@
     };
 
     Banner.prototype.fail = function(reason, dontSetClass) {
-      this.log(1, 'Failed ' + reason);
+      this.log(1, 'Failed:' + reason);
       if (!dontSetClass && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');      
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
@@ -253,7 +235,7 @@
       if (typeof h !== 'undefined') this.height = h;
       this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
       this.resized = true;
-      this.log(1, 'resized banner to height:' + this.height + ' and width:' + this.width);
+      this.log(1, 'resized to height:' + this.height + ' and width:' + this.width);
       return this;
     };
 
@@ -270,7 +252,7 @@
 
     Banner.prototype.refresh = function() {
       if (this.incomplete){
-        this.fail('Cant refresh banner bacuse of invalid config.');
+        this.fail('Cant refresh bacause of not valid config.');
       }
       this.refreshCalled  = true;
       this.resolved       = false;
@@ -332,7 +314,7 @@
       this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
       if ($container.size() <= 0) {
-        this.fail('Missing valid container on webad '+this.name, true);
+        this.fail('Missing valid container on '+this.name, true);
         return this;
       }
       this.log(3, 'Inserting iframe/banner');      

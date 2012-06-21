@@ -1,9 +1,9 @@
 var FINN = FINN||{};
 
 (function(F, $){
-  "use strict";
   var data          = F.data = F.data||{};
   var defaultConfig = data.defaultConfig = data.defaultConfig||{};
+  var loggerConfig  = FINN.webAds && FINN.webAds.logger && FINN.webAds.logger();
   
   // exports
   F.webAds = F.webAds||{};
@@ -60,11 +60,7 @@ var FINN = FINN||{};
     helios_parameters : "", //TODO: remove this
     tf_recordClickToUrl: window.tf_recordClickToUrl
   };
-  
-  var logLevel = window.location.toString().match(/loglevel=(\d+)/mi);
-  logLevel = (logLevel  && logLevel[1] ? logLevel[1] : 0)*1;
-  globalExpose.logLevel = logLevel;
-  
+
   var bannerMap   = {};
   var bannerFlags = {};
   var callbacks   = {};
@@ -138,6 +134,7 @@ var FINN = FINN||{};
     return $.extend({
         windowWidth: windowWidth
       },
+      loggerConfig,
       defaults, 
       defaultConfig.all,
       defaultConfig [obj.name], 

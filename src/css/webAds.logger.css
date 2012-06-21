@@ -10,6 +10,7 @@
   padding: 20px;
   color: white;
   font-size: 11px;
+  border-right: 1px solid white;
 }
 #webadsLogger h1 {
   font-size: 18px;
@@ -20,6 +21,7 @@
 }
 #webadsLogger h1 a {
   color: white;
+  float: right;
   display: inline-block;
   padding: 2px;
   text-decoration: none;
