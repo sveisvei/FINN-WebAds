@@ -109,9 +109,26 @@
       return (this[key] = value);
     };
 
+    Banner.prototype.track = function(){
+      var banner = this;  
+      if(!banner.params.trackingScriptUrl || !banner.doc ) return false;    
+      setTimeout(function(){      
+        var head = banner.doc.getElementsByTagName('head')[0];
+        banner.log(2, 'Tracking banner with '+banner.params.trackingScriptUrl);
+        if (head){
+          var track = banner.doc.createElement('script'); 
+          track.type = 'text/javascript'; 
+          track.async = true;
+          track.src = ('https:' == banner.doc.location.protocol ? 'https://' : 'http://') + banner.params.trackingScriptUrl;
+          head.appendChild(track);
+        }
+      }, 0);
+    }
+
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
+      this.track();
       if(this.ignoreOnload === true){
         return this.resolve();
       }
@@ -140,20 +157,6 @@
     Banner.prototype.hasEmptyPixel = function(){
       return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
     };
-
-    /*Banner.prototype.isHidden = function(w, h){
-      this.log('checking if hidden ' +  w + 'x'+ h +   '  ' + this.$webAd.is('hidden'));
-      return (w === 0 && h === 0 && this.$webAd.is(':hidden'));
-    };*/
-    
-    /*Banner.prototype.swapHiddenContainer = function(){
-      this.log('SHOULD swap hidden container');
-      console.error('should', this.iframe.$wrapper.is(':hidden'));
-      this.iframe.$wrapper.parent().css({ position: "absolute", visibility: "hidden", display:"block" });
-      console.error('should', this.$webAd.width(), this.$webAd.height());
-      console.log(this.iframe.$wrapper.closest(':visible'));
-      this.iframe.$wrapper.parent().css({ position: "static", visibility: "visible", display:"none" });      
-    };*/
     
     Banner.prototype.processSize = function() {      
       var w = this.$webAd.width();
@@ -162,9 +165,7 @@
       if (this.isValidSize(w, h)) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
           return this.fail('pixel');
-        }/* else if (this.isHidden(w, h)){
-          this.swapHiddenContainer(w, h);
-        }*/
+        }
         return this.pollForNewSize(w, h);
       }            
       this.resizeIfNotDefault(w, h);

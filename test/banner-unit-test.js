@@ -171,14 +171,13 @@ buster.testCase("Banner", {
     });
 
   },
-  "mobile bottom bannercontainer should fill whole screen": function(done) {
+  "mobile bottom bannercontainer should fill whole screen": function(done) { // TODO test leaks
     
     var banner = FINN.webAds.queue({
       name      : 'mobilebottom',
       container : 'banners',
-      url       : 'asd',
+      url       : 'dummy',
       done      : function(){
-        buster.log('asd3')
         assert.equals(banner.iframe.$wrapper.width(), $(window).width())
         done();
       },
@@ -186,11 +185,33 @@ buster.testCase("Banner", {
     
 
     banner.injectScript = function(idoc, iwin) {
-      buster.log('asd');
       idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
     }
     FINN.webAds.render('mobilebottom');
     
+  },
+  
+  "tracking should be async": function(done){
+    var banner = FINN.webAds.queue({
+      name      : 'testTracking',
+      container : 'banners',
+      url       : 'dummy',
+      trackingScriptUrl: 'localhost:3000/webAds.tracking.js',
+      done      : function(){
+        assert.equals(banner.trackingCalled , undefined);
+        setTimeout(function(){
+          assert.equals(banner.trackingCalled , true);
+          done();
+        }, 100);
+      },
+    });
+    
+    banner.injectScript = function(idoc, iwin) {
+      this.doc = idoc;
+      idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
+    }
+    
+    FINN.webAds.render('testTracking');    
   }
   
 });
