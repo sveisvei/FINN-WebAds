@@ -41,7 +41,12 @@
         divClasses.push('webad-hidden');
         div.style.display = "none";
       }
-      if (this.options.sticky) { divClasses.push('webad-sticky'); }
+      if (this.options.sticky) { 
+        var topBanner = F.webAds._getBanner('Top');
+        if ( !(topBanner && topBanner.isDominant) ) {
+          divClasses.push('webad-sticky');          
+        } 
+      }
       div.className = (divClasses.join(' ')).toLowerCase();
       i.src        = this.getUrl();
       i.scrolling  = 'no';
@@ -109,7 +114,7 @@
       return (this[key] = value);
     };
 
-    Banner.prototype.track = function(){
+/*    Banner.prototype.track = function(){
       var banner = this;  
       if(!banner.params.trackingScriptUrl || !banner.doc ) return false;    
       setTimeout(function(){      
@@ -123,12 +128,12 @@
           head.appendChild(track);
         }
       }, 0);
-    }
+    }*/
 
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      this.track();
+      //this.track();
       if(this.ignoreOnload === true){
         return this.resolve();
       }
@@ -248,7 +253,14 @@
     Banner.prototype.injectScript = function(idoc, iwin) {
       this.log(3, 'injectScript');
       this.doc = idoc;
-      idoc.write('<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>');
+      var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
+
+      // Only run the tag through 3rd party Burt Tracking if it has been loaded
+      if (window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
+        ad = burt_api.site.trackFinnAd(this, ad);
+      }
+      
+      idoc.write(ad);      
       return this;
     };
 

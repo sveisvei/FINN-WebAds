@@ -61,13 +61,28 @@ var FINN = FINN||{};
             }
 
         }
-    })
-
+    });
+    
     /* parameters made available for third party networks */
     F.webAds.registerPlugin('contextData', {
         init: function(){},
         run: function(){ return FINN.data.banner;}
     });
+    
+    F.webAds.registerPlugin('getBannerAdData', {
+        init: function(plugin){},
+        run: function(options, callback) {
+          var customer = options.customer||'1';
+          var area = options.area||'1';
+          if (typeof callback === 'function'){
+            callback(FINN.banners.advertising.getBannerAdData(options.customer,options.area));
+          } else {
+            return FINN.banners.advertising.getBannerAdData(options.customer,options.area);
+            
+          }
+        }
+    });  
+    
     /* overlay with iframe content, or wrap ad iframe*/
     F.webAds.registerPlugin('overlay', {
         init: function(plugin){},

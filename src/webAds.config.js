@@ -22,13 +22,14 @@ var FINN = FINN || {};
     var width           = banner.width;
     var isSmallBanner   = width <= 768;
     var isNotCompanion  = width >= 800 && width < 992;
-    var isDominant      = width > 992;
+    banner.isDominant      = width > 992;
+    
     if (banner.params.bodyFailClass) {
      $("body").removeClass(banner.params.bodyFailClass); 
     }
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css("width", "980px");
-    } else if (isDominant) {
+    } else if (banner.isDominant) {
       banner.iframe.$wrapper.css("margin-left", "-12px");
     }
   }
@@ -98,7 +99,7 @@ var FINN = FINN || {};
       width: 240
     },
     "Middle": {
-      "extends": "normal",
+      "extends": "tracking",
       width: 580,
       height: 400,
       threshold: 291,                  
@@ -172,6 +173,10 @@ var FINN = FINN || {};
 	  },
     "normal": {
       container : "banners"
+    },
+    "tracking": {
+      "extends": "normal",
+      trackingScriptUrl: "http://measure.richmetrics.com/rfm/finn-eval/rich-finn-eval.js"
     },
     "all": {
       backend   : "helios"

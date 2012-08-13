@@ -1,6 +1,5 @@
 .webad-hidden,
-.webad-failed,
-.top-position-collapsed .webad-top {
+.webad-failed {
     display: none;
 }
 .webad-iframe {
@@ -74,16 +73,17 @@
 }
 
 .has-dominant-campaign .wrapper,
-.has-dominant-campaign .page,
-.has-dominant-campaign #banners {
+.has-dominant-campaign .page {
     margin: 0 auto;
 }
+.has-dominant-campaign .page {
+  padding: 0 2px 0 12px;
+}
+
 
 .webad-mobilebottom {
     background-color: #fff;
     bottom:0;
-    left:0;
-    right:0;
     z-index:999;
     position:fixed;
     _position:absolute;
@@ -108,8 +108,6 @@
     border: 2px solid #fff;
     -webkit-border-radius:2em;
     border-radius: 2em;
-    -webkit-appearance: none;
     box-shadow: 0 0 4px #000000;
 }
-
 

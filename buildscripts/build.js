@@ -2,6 +2,7 @@ var fs      = require('fs');
 require('colors');
 
 var files = [
+  'lib/rich-finn-eval.js',
   'webAds.banners.js',
   'webAds.config.js',
   'webAds.sticky.js',
@@ -30,7 +31,7 @@ files.forEach(function(file, i){
   content.push(fs.readFileSync(dir + file, 'utf8'));
 });
 
-content = content.join("");
+content = content.join(";");
 fs.writeFileSync(target + 'webAds.js', content, 'utf8');
 console.log('File output:'.green, ' webAds.js');
 

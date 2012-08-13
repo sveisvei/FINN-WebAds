@@ -12,26 +12,29 @@ html(lang='no')
       body {
         padding: 10px
       }
-      .container {
-        max-width: 960px;
-        padding: 10px;
-        background: #ccc;
+      .page {
+        max-width: 980px;
+        padding: 0 0 0 10px;
+        background: #fff;
         height: 2900px;
+      }
+      .body {
+        background: #ccc;
       }
       p {
         margin: 0 0 10px 0;
       }
 
   body(lang='no')
-  
-    div(data-webads="true")#banners
-      div(data-webads="true")#banners-right
-      
-    div.wrapper.container.page
-      h1= title
-      br
-      include partials/menu      
-      div(data-webads="true")#banners-middle
+
+    div.page
+      div(data-webads="true")#banners
+        div(data-webads="true")#banners-right
+      div.body
+        h1= title
+        br
+        include partials/menu      
+        div(data-webads="true")#banners-middle
     
     script(type='text/javascript')
       var FINN = FINN||{};
