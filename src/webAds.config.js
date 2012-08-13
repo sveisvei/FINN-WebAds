@@ -22,14 +22,15 @@ var FINN = FINN || {};
     var width           = banner.width;
     var isSmallBanner   = width <= 768;
     var isNotCompanion  = width >= 800 && width < 992;
-    banner.isDominant      = width > 992;
+    var isDominant      = width > 992;
     
     if (banner.params.bodyFailClass) {
      $("body").removeClass(banner.params.bodyFailClass); 
     }
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css("width", "980px");
-    } else if (banner.isDominant) {
+    } else if (isDominant) {
+      banner.setBannerFlag('disableSticky', true);
       banner.iframe.$wrapper.css("margin-left", "-12px");
     }
   }

@@ -41,11 +41,8 @@
         divClasses.push('webad-hidden');
         div.style.display = "none";
       }
-      if (this.options.sticky) { 
-        var topBanner = F.webAds._getBanner('Top');
-        if ( !(topBanner && topBanner.isDominant) ) {
-          divClasses.push('webad-sticky');          
-        } 
+      if (this.options.sticky && FINN.webAds.getBannerFlag('disableSticky') !== true) { 
+        divClasses.push('webad-sticky');          
       }
       div.className = (divClasses.join(' ')).toLowerCase();
       i.src        = this.getUrl();

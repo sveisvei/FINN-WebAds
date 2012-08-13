@@ -42,11 +42,8 @@
         divClasses.push('webad-hidden');
         div.style.display = "none";
       }
-      if (this.options.sticky) { 
-        var topBanner = F.webAds._getBanner('Top');
-        if ( !(topBanner && topBanner.isDominant) ) {
-          divClasses.push('webad-sticky');          
-        } 
+      if (this.options.sticky && FINN.webAds.getBannerFlag('disableSticky') !== true) { 
+        divClasses.push('webad-sticky');          
       }
       div.className = (divClasses.join(' ')).toLowerCase();
       i.src        = this.getUrl();
@@ -385,14 +382,15 @@
     var width           = banner.width;
     var isSmallBanner   = width <= 768;
     var isNotCompanion  = width >= 800 && width < 992;
-    banner.isDominant      = width > 992;
+    var isDominant      = width > 992;
     
     if (banner.params.bodyFailClass) {
      $("body").removeClass(banner.params.bodyFailClass); 
     }
     if (isSmallBanner || isNotCompanion) {
       banner.iframe.$wrapper.css("width", "980px");
-    } else if (banner.isDominant) {
+    } else if (isDominant) {
+      banner.setBannerFlag('disableSticky', true);
       banner.iframe.$wrapper.css("margin-left", "-12px");
     }
   }
