@@ -83,21 +83,22 @@ var FINN = FINN||{};
           try {
             options = $.parseJSON(options);
           } catch(e){
-            return handleResult('{"error":true,"message":"first plugin argument/options hash is not valid JSON"}');
+            return handleResult({"error":true,"message":"first plugin argument/options hash is not valid JSON"});
           }
           var params = { areaId : options.customer, orgid : options.area };
-          var req = $.get(url, params);
-          req.success(handleResult);         
+          var req = $.getJSON(url, params);
+          req.success(function(list){ handleResult({'list': list}); });         
           req.error(function(){
-            handleResult('{"error":true, "message": "request to server failed"}');
+            handleResult({"error":true, "message": "request to server failed"});
           });
           
           function handleResult(obj){
+            //console.log('Passing to flash=>', obj, typeof obj);
             if (typeof callback === 'string'){
               var flash = banner.$webAd.find( "object,embed").first().get()[0];
               if (flash){ flash[callback](obj); }       
             } else if (typeof callback === 'function'){
-              callback(data);
+              callback(obj);
             }
           }
         }
