@@ -1,0 +1,60 @@
+[{
+  "ownershipType": {
+    "value": "Aksje",
+    "label": "Eieform"
+  },
+  "collectiveDebt": {
+    "value": "",
+    "label": ""
+  },
+  "postalName": "Oslo",
+  "constructionYear": {
+    "value": "1949",
+    "label": "ByggeÃ¥r"
+  },
+  "postCode": "1162",
+  "priceSuggestion": {
+    "value": "5250000",
+    "label": "Prisantydning"
+  },
+  "primaryRoomArea": {
+    "value": "80",
+    "label": "PrimÃ¦rrom"
+  },
+  "mainImage": "http://dev.finncdn.no/mmo/2012/6/vertical-2/26/2/351/086/02_1950648665.jpg",
+  "propertyType": {
+    "value": "Leilighet",
+    "label": "Boligtype"
+  },
+  "address": "Solveien 110 A",
+  "adId": 35108602,
+  "pris": "5250000",
+  "viewings": [],
+  "brokers": [{
+    "phone": {
+      "value": "23 16 52 05",
+      "label": "Telefon"
+    },
+    "title": {
+      "value": "Daglig leder / Fagansvarlig / Eiendomsmegler MNEF",
+      "label": "Tittel"
+    },
+    "email": {
+      "value": "h.hisdal@krogsveen.no",
+      "label": "E-post"
+    },
+    "name": {
+      "value": "Henrik Hisdal",
+      "label": "Navn"
+    },
+    "mobile": {
+      "value": "901 51 385",
+      "label": "Mobil"
+    }
+  }],
+  "heading": "Nordstrand/Solveien -  <br/>Nyoppusset og lekker leilighet med fjordutsikt - 3 soverom - Balkong - Garasje",
+  "noOfBedrooms": {
+    "value": "3",
+    "label": "Soverom"
+  }
+}]

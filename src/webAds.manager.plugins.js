@@ -69,17 +69,33 @@ var FINN = FINN||{};
         run: function(){ return FINN.data.banner;}
     });
     
+    var url = "/finn/advertising/banner/api/adinbannerdemo.json";
     F.webAds.registerPlugin('flash_getBannerAdData', {
         init: function(plugin){},
         run: function(options, callback) {
           var banner = this;
-          setTimeout(function(){
-            try {
-                banner.$webAd.find( "#flash_data_collector" ).get()[0][callback]('test 123 fra '+banner.name);
-            } catch(e){
-                console.log('ERROR', e);
+          var params = {
+              "areaId"    : '1',
+              "orgid"     : '1'
+          };
+          var req = $.get(url, params);
+
+          req.success(handleResult);
+          
+          req.error(function(){ //todo, pass errorcode?
+            handleResult('{error:true}');
+          });
+          
+          function handleResult(obj){
+            if (typeof callback === 'string'){
+              var flash = banner.$webAd.find( "object,embed").first().get()[0];
+              if (flash){
+                flash[callback](obj);
+              }       
+            } else if (typeof callback === 'function'){
+              callback(data);
             }
-          }, 1000);
+          }
         }
     }); 
 

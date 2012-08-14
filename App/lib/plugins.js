@@ -1,3 +1,4 @@
+var fs = require('fs');
 module.exports = function(app){
   // plugin
   app.get("/finn/realestate/homes/rotationdemo.json", function(req, res){
@@ -8,4 +9,13 @@ module.exports = function(app){
       res.end();
     }, 1000);
   });
+  
+  
+  app.get("/finn/advertising/banner/api/adinbannerdemo.json", function(req, res){
+    console.log('SERVED: /finn/advertising/banner/api/adinbannerdemo.json');
+    var file = fs.readFileSync(__dirname + '/../../test/Cases/config/plugins/datacollector/serverResult.json');
+    res.send(file.toString());
+  });
 };
+
+

@@ -20,6 +20,10 @@ var resources = [{
   {
     path: "iframe.html",
     backend: "localhost:3000/iframe.html"
+  },
+  {
+    path: "/finn/advertising/banner/api/adinbannerdemo.json",
+    backend: "/serverResult.json" //TODO
   }  
 ];
 
