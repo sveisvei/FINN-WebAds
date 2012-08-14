@@ -1,1 +1,1 @@
-banner.plugin('survey');
+//banner.plugin('survey');

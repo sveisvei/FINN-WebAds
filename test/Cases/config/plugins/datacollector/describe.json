@@ -1,0 +1,8 @@
+{
+  "name": "Datacollector",
+  "expectations": {
+    "width" : 980,
+    "height" : 150
+  }, 
+  "timeout": 1200
+}

@@ -69,6 +69,21 @@ var FINN = FINN||{};
         run: function(){ return FINN.data.banner;}
     });
     
+    F.webAds.registerPlugin('flash_getBannerAdData', {
+        init: function(plugin){},
+        run: function(options, callback) {
+          var banner = this;
+          setTimeout(function(){
+            try {
+                banner.$webAd.find( "#flash_data_collector" ).get()[0][callback]('test 123 fra '+banner.name);
+            } catch(e){
+                console.log('ERROR', e);
+            }
+          }, 1000);
+        }
+    }); 
+
+
     F.webAds.registerPlugin('getBannerAdData', {
         init: function(plugin){},
         run: function(options, callback) {
