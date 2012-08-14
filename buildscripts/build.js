@@ -1,8 +1,11 @@
 var fs      = require('fs');
 require('colors');
 
+var prependFiles = [
+  'lib/rich-finn-no.min.js'
+];
+
 var files = [
-  'lib/rich-finn-eval.js',
   'webAds.banners.js',
   'webAds.config.js',
   'webAds.sticky.js',
@@ -22,19 +25,30 @@ function mini(orig_code){
 
 
 var content = [];
+var prepend = [];
 
 var dir = __dirname + "/../src/";
 var target = __dirname + "/../";
+
+
+prependFiles.forEach(function(file, i){
+  console.log((i+1+"").red, 'Prepending:'.blue, file);
+  prepend.push(fs.readFileSync(dir + file, 'utf8'));
+});
 
 files.forEach(function(file, i){
   console.log((i+1+"").red, 'Packing:'.yellow, file);
   content.push(fs.readFileSync(dir + file, 'utf8'));
 });
 
+
+prepend = prepend.join(';') + ';';
 content = content.join(";");
-fs.writeFileSync(target + 'webAds.js', content, 'utf8');
+
+fs.writeFileSync(target + 'webAds.js', prepend + content, 'utf8');
 console.log('File output:'.green, ' webAds.js');
 
-fs.writeFileSync(target + 'webAds.min.js', mini(content), 'utf8');
+
+fs.writeFileSync(target + 'webAds.min.js', prepend + mini(content), 'utf8');
 console.log('File output:'.green, ' webAds.min.js');
 
