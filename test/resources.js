@@ -23,7 +23,7 @@ var resources = [{
   },
   {
     path: "/finn/advertising/banner/api/adinbannerdemo.json",
-    backend: "/serverResult.json" //TODO
+    backend: "localhost:3000/finn/advertising/banner/api/adinbannerdemo.json"
   }  
 ];
 
