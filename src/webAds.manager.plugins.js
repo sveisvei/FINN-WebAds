@@ -111,7 +111,7 @@ var FINN = FINN||{};
             var h = options.height||'400px';
 
             FINN.user.dialog.box({ 
-                content: (options.url ? '<iframe style="width:'+w+';height:'+h+'" src="'+options.url+'"/>' : options.content);
+                content: (options.url ? '<iframe style="width:'+w+';height:'+h+'" src="'+options.url+'"/>' : options.content)
             });
         }
     });
