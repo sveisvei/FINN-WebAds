@@ -95,7 +95,7 @@ var FINN = FINN||{};
           function handleResult(obj){
             //console.log('Passing to flash=>', obj, typeof obj);
             if (typeof callback === 'string'){
-              var flash = banner.$webAd.find( "object,embed").first().get()[0];
+              var flash = banner.$webAd.find( "embed").first().get()[0];
               if (flash){ flash[callback](obj); }       
             } else if (typeof callback === 'function'){
               callback(obj);
