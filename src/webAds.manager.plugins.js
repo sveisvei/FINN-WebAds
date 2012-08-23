@@ -86,17 +86,17 @@ var FINN = FINN||{};
             return handleResult({"error":true,"message":"first plugin argument/options hash is not valid JSON"});
           }
           var params = { areaId : options.customer, orgid : options.area };
-          var req = $.getJSON(url, params);
+          var req    = $.getJSON(url, params);
           req.success(function(list){ handleResult({'list': list}); });         
-          req.error(function(){
-            handleResult({"error":true, "message": "request to server failed"});
-          });
+          req.error(  function(){     handleResult({"error":true, "message": "request to server failed"}); });
           
           function handleResult(obj){
             //console.log('Passing to flash=>', obj, typeof obj);
             if (typeof callback === 'string'){
-              var flash = banner.$webAd.find( "embed").first().get()[0];
-              if (flash){ flash[callback](obj); }       
+              // TODO, not production ready? Do not know what element is correct in which browser.
+              var flash         = banner.$webAd.find("embed").first().get()[0];
+              if (!flash) flash = banner.$webAd.find("object").first().get()[0];
+              if (flash){ flash[callback](obj); }
             } else if (typeof callback === 'function'){
               callback(obj);
             }
