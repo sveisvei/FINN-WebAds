@@ -147,6 +147,14 @@ var FINN = FINN || {};
     "Txt_10"  : {
       "extends": "textads"
     },
+	"Inline1": {
+		width: 320,
+		container: "banners-inline1"
+	},
+	"Inline2": {
+		width: 320,
+		container: "banners-inline2"
+	},
     "BottomLeft": { 
       "extends": "bottomads"       
     },
