@@ -279,8 +279,10 @@
 				this.doc.location.replace(url);
 			}
 			catch (err) {
-				FINN.webAds.remove(this.name);
-				FINN.webAds.render(this.name);
+				if (this.active) {
+					FINN.webAds.remove(this.name);
+					FINN.webAds.render(this.name);
+				}
 			}
       return this;
     };
