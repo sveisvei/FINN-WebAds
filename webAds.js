@@ -275,10 +275,14 @@
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
 
-      if (this.doc) {
-        var url = this.iframe.getUrl(this.doc.location.href);
-        this.doc.location.replace(url);
-      }
+	  try {
+		  var url = this.iframe.getUrl(this.doc.location.href);
+		  this.doc.location.replace(url);
+	  }
+	  catch (err) {
+		  FINN.webAds.remove(this.name);
+		  FINN.webAds.render(this.name);
+	  }
       return this;
     };
 
@@ -477,36 +481,14 @@
       hidden: true,      
       done: $.noop
     },
-    "Txt_1"   : {
-      "extends": "textads"
-    },
-    "Txt_2"   : {
-      "extends": "textads"
-    },
-    "Txt_3"   : {
-      "extends": "textads"
-    },
-    "Txt_4"   : {
-      "extends": "textads"
-    },
-    "Txt_5"   : {
-      "extends": "textads"
-    },
-    "Txt_6"   : {
-      "extends": "textads"
-    },
-    "Txt_7"   : {
-      "extends": "textads"
-    },
-    "Txt_8"   : {
-      "extends": "textads"
-    },
-    "Txt_9"   : {
-      "extends": "textads"
-    },
-    "Txt_10"  : {
-      "extends": "textads"
-    },
+		"Inline1": {
+			width: 320,
+			container: "banners-inline1"
+		},
+		"Inline2": {
+			width: 320,
+			container: "banners-inline2"
+		},
     "BottomLeft": { 
       "extends": "bottomads"       
     },
@@ -522,16 +504,11 @@
     "bottomads": {
       container: "banners-bottom"
     },
-    "textads" : {
-      width: 100,
-      height: 46,
-      container: "textbanners"
-    },
-	  "mobilebottom" : {
-	    width: 320,
-	    "extends": "normal",
-	    done: addCloseButton
-	  },
+		"mobilebottom" : {
+			width: 320,
+			"extends": "normal",
+			done: addCloseButton
+		},
     "normal": {
       container : "banners"
     },
@@ -684,6 +661,7 @@
   //w.refreshFromServer     = refreshFromServer;    //TODO
   //w.refreshAllFromServer  = refreshAllFromServer; //TODO
   //w.renderWhenVisible     = renderWhenVisible     //TODO
+	w.remove                = remove;
   w.resolve               = resolve;
   w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
@@ -1130,22 +1108,43 @@
     /* parameters made available for third party networks */
     F.webAds.registerPlugin('contextData', {
         init: function(){},
-        run: function(){ return FINN.data.banner;}
+        run: function(callback){ 
+            if (typeof callback === 'function'){
+                callback(FINN.data.banner);
+            } else {
+                return FINN.data.banner;
+            }            
+        }
     });
     
-    F.webAds.registerPlugin('getBannerAdData', {
+    var url = "/finn/advertising/banner/api/adinbannerdemo.json";
+    F.webAds.registerPlugin('getAdData', {
         init: function(plugin){},
         run: function(options, callback) {
-          var customer = options.customer||'1';
-          var area = options.area||'1';
-          if (typeof callback === 'function'){
-            callback(FINN.banners.advertising.getBannerAdData(options.customer,options.area));
-          } else {
-            return FINN.banners.advertising.getBannerAdData(options.customer,options.area);
-            
+          var banner = this;
+          try {
+            options = $.parseJSON(options);
+          } catch(e){
+            return handleResult({"error":true,"message":"first plugin argument/options hash is not valid JSON"});
+          }
+          var params = { areaId : options.customer, orgid : options.area };
+          var req    = $.getJSON(url, params);
+          req.success(function(list){ handleResult({'list': list}); });         
+          req.error(  function(){     handleResult({"error":true, "message": "request to server failed"}); });
+          
+          function handleResult(obj){
+            //console.log('Passing to flash=>', obj, typeof obj);
+            if (typeof callback === 'string'){
+              // TODO, not production ready? Do not know what element is correct in which browser.
+              var flash         = banner.$webAd.find("embed").first().get()[0];
+              if (!flash) flash = banner.$webAd.find("object").first().get()[0];
+              if (flash){ flash[callback](obj); }
+            } else if (typeof callback === 'function'){
+              callback(obj);
+            }
           }
         }
-    });  
+    }); 
     
     /* overlay with iframe content, or wrap ad iframe*/
     F.webAds.registerPlugin('overlay', {
@@ -1153,16 +1152,10 @@
         run: function(options, callback){
             var w = options.width||'80%';
             var h = options.height||'400px';
-            var content;
 
-
-            if (options.url){
-                content = '<iframe style="width:'+w+';height:'+h+'" src="'+options.url+'"/>';
-            } else if (options.content){
-                content = options.content;
-            }
-            FINN.user.dialog.box({ content: content });
-
+            FINN.user.dialog.box({ 
+                content: (options.url ? '<iframe style="width:'+w+';height:'+h+'" src="'+options.url+'"/>' : options.content)
+            });
         }
     });
 

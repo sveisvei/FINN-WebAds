@@ -274,14 +274,14 @@
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
 
-	  try {
-		  var url = this.iframe.getUrl(this.doc.location.href);
-		  this.doc.location.replace(url);
-	  }
-	  catch (err) {
-		  FINN.webAds.remove(this.name);
-		  FINN.webAds.render(this.name);
-	  }
+			try {
+				var url = this.iframe.getUrl(this.doc.location.href);
+				this.doc.location.replace(url);
+			}
+			catch (err) {
+				FINN.webAds.remove(this.name);
+				FINN.webAds.render(this.name);
+			}
       return this;
     };
 
