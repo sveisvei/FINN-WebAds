@@ -26,6 +26,7 @@ var FINN = FINN||{};
   //w.refreshFromServer     = refreshFromServer;    //TODO
   //w.refreshAllFromServer  = refreshAllFromServer; //TODO
   //w.renderWhenVisible     = renderWhenVisible     //TODO
+	w.remove                = remove;
   w.resolve               = resolve;
   w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
