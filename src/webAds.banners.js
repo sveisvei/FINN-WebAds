@@ -7,7 +7,7 @@
   var IFRAME_VERSION = 7;
   var DEFAULTS = {
     RETRIES: 5,
-    TIMEOUT: 50,
+    TIMEOUT: 200,
     MINSIZE: 39,
     ADCONTAINER: 'webAd'
   };
