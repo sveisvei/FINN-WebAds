@@ -330,15 +330,16 @@ var FINN = FINN||{};
   }
   
   function refreshAll(commaList, callback){
+    console.log('commaList in', commaList);
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
-    
+
     var alreadyRendered = [];
     function shouldRefresh(key){
       var res = true;
-      $.each(alreadyRendered, function(){
-        if (this === key){ return (res = false); }
+      $.each(alreadyRendered, function(i,val){
+        if (val == key){ return (res = false); }
       });
       return res;
     }
