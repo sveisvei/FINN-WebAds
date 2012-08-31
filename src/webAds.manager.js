@@ -330,7 +330,6 @@ var FINN = FINN||{};
   }
   
   function refreshAll(commaList, callback){
-    console.log('commaList in', commaList);
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
