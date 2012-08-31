@@ -140,7 +140,7 @@ var FINN = FINN || {};
     "bottomads": {
       container: "banners-bottom"
     },
-		"mobilebottom" : {
+		"MobileBottom" : {
 			width: 320,
 			"extends": "normal",
 			done: addCloseButton
