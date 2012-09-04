@@ -26,6 +26,7 @@ var FINN = FINN||{};
   //w.refreshFromServer     = refreshFromServer;    //TODO
   //w.refreshAllFromServer  = refreshAllFromServer; //TODO
   //w.renderWhenVisible     = renderWhenVisible     //TODO
+	w.remove                = remove;
   w.resolve               = resolve;
   w.resolveOnload         = resolveOnload;
   w.collectDataPositions  = collectDataPositions;
@@ -332,12 +333,12 @@ var FINN = FINN||{};
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
-    
+
     var alreadyRendered = [];
     function shouldRefresh(key){
       var res = true;
-      $.each(alreadyRendered, function(){
-        if (this === key){ return (res = false); }
+      $.each(alreadyRendered, function(i,val){
+        if (val == key){ return (res = false); }
       });
       return res;
     }

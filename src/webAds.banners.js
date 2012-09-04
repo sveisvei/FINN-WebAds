@@ -274,10 +274,16 @@
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = DEFAULTS.TIMEOUT;
 
-      if (this.doc) {
-        var url = this.iframe.getUrl(this.doc.location.href);
-        this.doc.location.replace(url);
-      }
+			try {
+				var url = this.iframe.getUrl(this.doc.location.href);
+				this.doc.location.replace(url);
+			}
+			catch (err) {
+				if (this.active) {
+					FINN.webAds.remove(this.name);
+					FINN.webAds.render(this.name);
+				}
+			}
       return this;
     };
 

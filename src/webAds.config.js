@@ -117,36 +117,14 @@ var FINN = FINN || {};
       hidden: true,      
       done: $.noop
     },
-    "Txt_1"   : {
-      "extends": "textads"
-    },
-    "Txt_2"   : {
-      "extends": "textads"
-    },
-    "Txt_3"   : {
-      "extends": "textads"
-    },
-    "Txt_4"   : {
-      "extends": "textads"
-    },
-    "Txt_5"   : {
-      "extends": "textads"
-    },
-    "Txt_6"   : {
-      "extends": "textads"
-    },
-    "Txt_7"   : {
-      "extends": "textads"
-    },
-    "Txt_8"   : {
-      "extends": "textads"
-    },
-    "Txt_9"   : {
-      "extends": "textads"
-    },
-    "Txt_10"  : {
-      "extends": "textads"
-    },
+		"Inline1": {
+			width: 320,
+			container: "banners-inline1"
+		},
+		"Inline2": {
+			width: 320,
+			container: "banners-inline2"
+		},
     "BottomLeft": { 
       "extends": "bottomads"       
     },
@@ -162,16 +140,11 @@ var FINN = FINN || {};
     "bottomads": {
       container: "banners-bottom"
     },
-    "textads" : {
-      width: 100,
-      height: 46,
-      container: "textbanners"
-    },
-	  "mobilebottom" : {
-	    width: 320,
-	    "extends": "normal",
-	    done: addCloseButton
-	  },
+		"MobileBottom" : {
+			width: 320,
+			"extends": "normal",
+			done: addCloseButton
+		},
     "normal": {
       container : "banners"
     },
