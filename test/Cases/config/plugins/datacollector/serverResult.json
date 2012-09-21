@@ -1,60 +1,39 @@
 [{
-  "ownershipType": {
-    "value": "Aksje",
-    "label": "Eieform"
-  },
-  "collectiveDebt": {
-    "value": "",
-    "label": ""
-  },
+  "ownershipType": "Eier (Selveier)",
+  "collectiveDebt": "",
   "postalName": "Oslo",
-  "constructionYear": {
-    "value": "1949",
-    "label": "ByggeÃ¥r"
-  },
-  "postCode": "1162",
-  "priceSuggestion": {
-    "value": "5250000",
-    "label": "Prisantydning"
-  },
-  "primaryRoomArea": {
-    "value": "80",
-    "label": "PrimÃ¦rrom"
-  },
-  "mainImage": "http://dev.finncdn.no/mmo/2012/6/vertical-2/26/2/351/086/02_1950648665.jpg",
-  "propertyType": {
-    "value": "Leilighet",
-    "label": "Boligtype"
-  },
-  "address": "Solveien 110 A",
-  "adId": 35108602,
-  "pris": "5250000",
-  "viewings": [],
-  "brokers": [{
-    "phone": {
-      "value": "23 16 52 05",
-      "label": "Telefon"
-    },
-    "title": {
-      "value": "Daglig leder / Fagansvarlig / Eiendomsmegler MNEF",
-      "label": "Tittel"
-    },
-    "email": {
-      "value": "h.hisdal@krogsveen.no",
-      "label": "E-post"
-    },
-    "name": {
-      "value": "Henrik Hisdal",
-      "label": "Navn"
-    },
-    "mobile": {
-      "value": "901 51 385",
-      "label": "Mobil"
-    }
+  "constructionYear": "1977",
+  "postCode": "1165",
+  "primaryRoomArea": "265",
+  "mainImage": "2012/8/vertical-2/10/9/364/977/89_277310033.jpg",
+  "price": "12500000",
+  "propertyType": "Enebolig",
+  "address": "Munkerudveien 63",
+  "adId": "36497789",
+  "viewings": [{
+    "to": "1500",
+    "from": "1400",
+    "date": "16.09.2012",
+    "note": ""
+  }, {
+    "to": "",
+    "from": "",
+    "date": " ",
+    "note": "Visning etter avtale med ansvarlig megler på tlf: 41 02 55 55"
   }],
-  "heading": "Nordstrand/Solveien -  <br/>Nyoppusset og lekker leilighet med fjordutsikt - 3 soverom - Balkong - Garasje",
-  "noOfBedrooms": {
-    "value": "3",
-    "label": "Soverom"
-  }
+  "brokers": [{
+    "phone": "67 20 47 50",
+    "title": "Ansvarlig megler MNEF",
+    "email": "gaute.eriksen@privatmegleren.no",
+    "name": "Gaute Haug Eriksen",
+    "mobile": "41 02 55 55"
+  }, {
+    "phone": "67 20 47 52",
+    "title": " Daglig leder / Megler MNEF",
+    "email": "stig@privatmegleren.no",
+    "name": "Stig Reklev",
+    "mobile": "95 06 41 40"
+  }],
+  "heading": "NORDSTRAND: Tiltalende familiebolig med mulighet for utskilling av tomt - Dobbeltgarasje - Solrike uteplasser",
+  "noOfBedrooms": "4"
 }]
