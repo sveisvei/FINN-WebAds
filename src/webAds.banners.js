@@ -24,7 +24,7 @@
     };
     
     Iframe.prototype.getUrl = function(src){
-      var url     = FINN.webAds.iframeUrl || '/html/banner/webad.html';
+      var url     = F.webAds.iframeUrl || '/html/banner/webad.html';
       var sep     = url.indexOf('?') !== -1 ? '&' : '?';
       var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
       return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
@@ -41,11 +41,11 @@
         divClasses.push('webad-hidden');
         div.style.display = "none";
       }
-      if (this.options.sticky && FINN.webAds.getBannerFlag('disableSticky') !== true) { 
+      if (this.options.sticky && F.webAds.getBannerFlag('disableSticky') !== true) { 
         divClasses.push('webad-sticky');          
       }
       div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = this.getUrl();
+      i.src        = this.options.remoteUrl||this.getUrl();
       i.scrolling  = 'no';
       i.setAttribute('data-automation-id', this.name);
       i.className  = 'webad-iframe';
@@ -111,26 +111,9 @@
       return (this[key] = value);
     };
 
-/*    Banner.prototype.track = function(){
-      var banner = this;  
-      if(!banner.params.trackingScriptUrl || !banner.doc ) return false;    
-      setTimeout(function(){      
-        var head = banner.doc.getElementsByTagName('head')[0];
-        banner.log(2, 'Tracking banner with '+banner.params.trackingScriptUrl);
-        if (head){
-          var track = banner.doc.createElement('script'); 
-          track.type = 'text/javascript'; 
-          track.async = true;
-          track.src = ('https:' == banner.doc.location.protocol ? 'https://' : 'http://') + banner.params.trackingScriptUrl;
-          head.appendChild(track);
-        }
-      }, 0);
-    }*/
-
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      //this.track();
       if(this.ignoreOnload === true){
         return this.resolve();
       }
@@ -144,7 +127,7 @@
       } else {
         this.processSize();
       }
-      FINN.webAds.resolveOnload(this.name);
+      F.webAds.resolveOnload(this.name);
       return this;
     };
     
@@ -161,7 +144,7 @@
     };
     
     Banner.prototype.processSize = function() {      
-      var w = this.$webAd.width();
+      var w = this.params.staticWidth||this.$webAd.width();
       var h = this.$webAd.height();
       this.log(2, 'Checking if valid size: '+w+'x'+h);
       if (this.isValidSize(w, h)) {
@@ -186,7 +169,7 @@
       if (!this.resolved) {
         this.resolved = true;      
         this.log(2, 'Calling FINN.webAds.resolve()');
-        FINN.webAds.resolve(this.name);
+        F.webAds.resolve(this.name);
       }
       // reset
       this.refreshCalled = false;
@@ -248,6 +231,9 @@
     };
 
     Banner.prototype.injectScript = function(idoc, iwin) {
+      if (typeof this.params.before === 'function'){
+        this.params.before(this);
+      }
       this.log(3, 'injectScript');
       this.doc = idoc;
       var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
@@ -280,8 +266,8 @@
 			}
 			catch (err) {
 				if (this.active) {
-					FINN.webAds.remove(this.name);
-					FINN.webAds.render(this.name);
+					F.webAds.remove(this.name);
+					F.webAds.render(this.name);
 				}
 			}
       return this;
@@ -343,15 +329,15 @@
     };
 
     Banner.prototype.getBannerFlag = function(key){
-      return FINN.webAds.getBannerFlag(key);
+      return F.webAds.getBannerFlag(key);
     };
     
     Banner.prototype.setBannerFlag = function(key, value){
-      return FINN.webAds.setBannerFlag(key, value);  
+      return F.webAds.setBannerFlag(key, value);  
     };
     
     Banner.prototype.plugin = function(name){
-      var plugin = FINN.webAds.getPlugin(name);
+      var plugin = F.webAds.getPlugin(name);
       if (!plugin){ return plugin; }
       var args = Array.prototype.slice.call(arguments, 1);
       return plugin.apply(this, args);
@@ -359,7 +345,8 @@
     
     return Banner;
   })();
-
-  FINN.Banner = Banner;
+  
+  F.webAds.Banner = Banner;
+  F.webAds.Iframe = Iframe;
 
 }).call(this, FINN, jQuery);

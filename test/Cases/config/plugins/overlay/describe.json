@@ -1,0 +1,8 @@
+{
+  "name": "Right2",
+  "expectations": {
+    "width" : 100,
+    "height" : 100
+  }, 
+  "timeout": 1200
+}

@@ -65,11 +65,19 @@ var FINN = FINN || {};
     });
   }
   
+  function setMaxWidth(banner){
+    if (banner.params.width){
+      var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;  
+      var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
+      banner.params.staticWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;;
+    }
+  }
+  
   FINN.webAds.extend({
     "Top": {
       "extends": "normal",
       width: 992,
-      threshold: 600,
+      threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition
@@ -92,7 +100,8 @@ var FINN = FINN || {};
       threshold: 1025,            
       sticky: true,
       width: 240,
-      height: 500
+      height: 500,
+      before: setMaxWidth
     },
     "Right3": {
       threshold: 1025,                  

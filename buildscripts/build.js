@@ -2,7 +2,7 @@ var fs      = require('fs');
 require('colors');
 
 var prependFiles = [
-  'lib/rich-finn-no-2.0.6.min.js'
+  'lib/rich-finn-no-2.1.min.js'
 ];
 
 var files = [

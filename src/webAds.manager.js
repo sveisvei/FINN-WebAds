@@ -143,12 +143,12 @@ var FINN = FINN||{};
     });
   }
   
-  var windowWidth = $(window).width();
+  var windowWidth;
   function createConfig(obj){
 	  var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
 	  var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({
-        windowWidth: windowWidth
+        windowWidth: windowWidth ? windowWidth : windowWidth = $(window).width()
       },
       loggerConfig(),
       defaults, 
@@ -160,7 +160,7 @@ var FINN = FINN||{};
   
   function addToMap(){
     var config = createConfig(this);
-    var banner = new F.Banner(config, globalExpose);
+    var banner = new F.webAds.Banner(config, globalExpose);
     return (bannerMap[this.name] = banner);
   }
       

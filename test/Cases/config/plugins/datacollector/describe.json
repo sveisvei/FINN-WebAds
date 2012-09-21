@@ -4,5 +4,6 @@
     "width" : 980,
     "height" : 150
   }, 
+  "threshold": 769,
   "timeout": 1200
 }
