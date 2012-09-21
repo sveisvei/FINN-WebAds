@@ -96,7 +96,13 @@ var FINN = FINN||{};
               // TODO, not production ready? Do not know what element is correct in which browser.
               var flash         = banner.$webAd.find("embed").first().get()[0];
               if (!flash) flash = banner.$webAd.find("object").first().get()[0];
-              if (flash){ flash[callback](obj); }
+              if (flash){ 
+                try {
+                  flash[callback](obj); 
+                } catch(e){
+                  if (console && console.log) console.log(e, callback, obj);
+                }
+              }
             } else if (typeof callback === 'function'){
               callback(obj);
             }
