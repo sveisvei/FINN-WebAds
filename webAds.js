@@ -2,7 +2,7 @@
 ;/*global document, window, console, jQuery, setTimeout, FINN */
 (function(F, $) {
   "use strict";
-
+  F.webAds = F.webAds || {};  
   var Banner, Iframe;
   
   var IFRAME_VERSION = 7;
@@ -1125,7 +1125,8 @@
           } catch(e){
             return handleResult({"error":true,"message":"first plugin argument/options hash is not valid JSON"});
           }
-          var params = { areaId : options.customer, orgid : options.area };
+          //var params = { areaId : options.customer, orgid : options.area };
+          var params = { 'BANNER_ORGGROUPREF' : "kjede_privatmegleren", 'BANNER_AREAID' : "20045" };
           var req    = $.getJSON(url, params);
           req.success(function(list){ handleResult({'list': list}); });         
           req.error(  function(){     handleResult({"error":true, "message": "request to server failed"}); });
@@ -1136,7 +1137,13 @@
               // TODO, not production ready? Do not know what element is correct in which browser.
               var flash         = banner.$webAd.find("embed").first().get()[0];
               if (!flash) flash = banner.$webAd.find("object").first().get()[0];
-              if (flash){ flash[callback](obj); }
+              if (flash){ 
+                try {
+                  flash[callback](obj); 
+                } catch(e){
+                  if (console && console.log) console.log(e, callback, obj);
+                }
+              }
             } else if (typeof callback === 'function'){
               callback(obj);
             }

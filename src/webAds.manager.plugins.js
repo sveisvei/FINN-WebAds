@@ -85,7 +85,8 @@ var FINN = FINN||{};
           } catch(e){
             return handleResult({"error":true,"message":"first plugin argument/options hash is not valid JSON"});
           }
-          var params = { areaId : options.customer, orgid : options.area };
+          //var params = { areaId : options.customer, orgid : options.area };
+          var params = { 'BANNER_ORGGROUPREF' : "kjede_privatmegleren", 'BANNER_AREAID' : "20045" };
           var req    = $.getJSON(url, params);
           req.success(function(list){ handleResult({'list': list}); });         
           req.error(  function(){     handleResult({"error":true, "message": "request to server failed"}); });

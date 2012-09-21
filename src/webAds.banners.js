@@ -1,7 +1,7 @@
 /*global document, window, console, jQuery, setTimeout, FINN */
 (function(F, $) {
   "use strict";
-
+  F.webAds = F.webAds || {};  
   var Banner, Iframe;
   
   var IFRAME_VERSION = 7;
