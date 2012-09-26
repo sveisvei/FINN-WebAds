@@ -240,7 +240,8 @@
       var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
 
       // Only run the tag through 3rd party Burt Tracking if it has been loaded
-      if (window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
+      var untrackedPlacements = ['Survey', 'Bottom', 'Left', 'Wallpaper', 'Right', 'Bildekarusell', 'Meglerfane'];
+      if (untrackedPlacements.indexOf(this.name) !== -1 && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
         ad = burt_api.site.trackFinnAd(this, ad);
       }
       
