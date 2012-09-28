@@ -80,7 +80,8 @@ var FINN = FINN || {};
       threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
-      done: fixTopPosition
+      done: fixTopPosition,
+      trackBurt: true
     },
     "Left1": {
       "extends": "normal",
