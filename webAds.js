@@ -133,7 +133,7 @@
     };
     
     Banner.prototype.isValidSize = function(w, h){
-      return (w === null || w <= this.minSize || w === null || w <= this.minSize);
+      return (w === null || w <= this.minSize || h === null || h <= this.minSize);
     };
     
     Banner.prototype.isEmptyPixel = function(){
