@@ -53,7 +53,7 @@ buster.testCase("Sticky", {
         assert.equals($('.webad-right3').css('position'), 'fixed', 'right3');        
         
         done();
-      }, 100);
+      }, 200);
     });
   },
   

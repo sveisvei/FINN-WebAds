@@ -13,17 +13,22 @@ buster.testCase("Banner", {
     FINN.webAds.cleanUp();
   },
   "plugin context data": {
-  "should return FINN.data.banner": function(){
-	FINN.data = FINN.data||{};
-	FINN.data.banner = {parameters: "testparam=testvalue"};
-    var banner = new FINN.Banner({name: "test"});
-    var result = banner.plugin('contextData');
-    assert.equals(FINN.data.banner, result);
-}
-},
+    "should return FINN.data.banner": function(done){
+      FINN.data = FINN.data||{};
+      FINN.data.banner = {parameters: "testparam=testvalue"};
+      assert(FINN.webAds.Banner);
+      var banner = new FINN.webAds.Banner({name: "Top", container: "banners"});
+      var result = banner.plugin('contextData');
+      assert.equals(FINN.data.banner, result);
+      banner.plugin('contextData', function(result2){
+        assert.equals(FINN.data.banner, result2);
+        done();
+      });
+    }
+  },
 
   "plugins should be in place": function(){
-    
+
     assert(true);
   }
 });

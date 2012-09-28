@@ -69,7 +69,7 @@ var FINN = FINN || {};
     if (banner.params.width){
       var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;  
       var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
-      banner.params.staticWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;;
+      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;;
     }
   }
   

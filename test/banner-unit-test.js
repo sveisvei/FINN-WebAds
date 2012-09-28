@@ -13,29 +13,30 @@ buster.testCase("Banner", {
     FINN.webAds.cleanUp();
   },
   "correct startup values": function() {
-    var banner = new FINN.Banner({
+    var banner = new FINN.webAds.Banner({
       name: 'test',
-      container: 'test'
+      container: 'test',
+      timer: 200
     });
     assert.equals(banner.retries, 5);
-    assert.equals(banner.timer, 50);
+    assert.equals(banner.timer, 200);
     assert.equals(banner.width, 0);
     assert.equals(banner.height, 0);
   },
   "should not render when missing container option hash parameter": function() {
-    var banner = new FINN.Banner({ name: 'missingContainer'}, {});
+    var banner = new FINN.webAds.Banner({ name: 'missingContainer'}, {});
     banner.insert();
     refute.defined(banner.container);
     refute(banner.active);
     assert(banner.failed);
     //todo	
-    
-    
+
+
   },
   "should insert banner into container and call onload": function(done) {
     var banner;
     var doneSpy = sinon.spy();
-    var NAME = 'webad';
+    var NAME = 'custom-webad';
 
     // copy
     FINN._webAds = FINN.webAds;
@@ -44,7 +45,7 @@ buster.testCase("Banner", {
       iframeUrl: FINN.webAds.iframeUrl,
       expose: function(idocument, iwindow) {
         var name = idocument.location.hash.substring(2);
-        assert.equals(name, NAME);                
+        assert.equals(name, NAME);
         var list = {
           banner: banner,
           webAds: FINN.webAds,
@@ -60,10 +61,10 @@ buster.testCase("Banner", {
       }
     };;
 
-    banner = new FINN.Banner({
+    banner = new FINN._webAds.Banner({
       name      : NAME,
       container : 'banners',
-      done      : doneSpy,
+      done      : doneSpy
     });
 
     banner.injectScript = function(idoc, iwin) {
@@ -73,7 +74,7 @@ buster.testCase("Banner", {
     banner.insert();
   },
   "1x1,1x2 and 3x3 px images should trigger fail": function() {
-    var banner = new FINN.Banner({      name: 'test',      container: 'test'});
+    var banner = new FINN.webAds.Banner({      name: 'test',      container: 'test'});
     banner.$webAd = $('<div id="webAd"><img src="#dummy2x1" /><img src="#empty" id="image"/><img src="#dummy2x9" /></div>')
     refute(banner.hasEmptyPixel());
     var $img = banner.$webAd.find('#image');
@@ -85,7 +86,7 @@ buster.testCase("Banner", {
     assert(banner.hasEmptyPixel());
   },
   "should fail if windowWidth is less than threshold": function(done) {
-    var banner = new FINN.Banner({
+    var banner = new FINN.webAds.Banner({
       name        : 'test2',
       container   : 'test2',
       threshold   : 100,
@@ -102,7 +103,7 @@ buster.testCase("Banner", {
     banner.insert();
   },
   "should pass if windowWidth is greater than threshold": function(done) {
-    var banner = new FINN.Banner({
+    var banner = new FINN.webAds.Banner({
       name        : 'test',
       container   : 'test3',
       threshold   : 100,
@@ -124,7 +125,7 @@ buster.testCase("Banner", {
     banner.insert();
   },
   "getBannerflag and setBannerFlag should pass to the manager": function() {
-    var banner = new FINN.Banner({
+    var banner = new FINN.webAds.Banner({
       name      : 'test',
       container : 'test3'
     });
@@ -134,7 +135,7 @@ buster.testCase("Banner", {
     assert.equals(value, 'testValue', 'set key should be same as result');
   },
   "should resize if default size is same as calculated size, or not resize if same": function() {
-    var banner = new FINN.Banner({
+    var banner = new FINN.webAds.Banner({
       name: 'test',
       container: 'test3',
       width: 100,
@@ -151,13 +152,13 @@ buster.testCase("Banner", {
     assert(spy.calledOnce, 'should be resize')
 
   },
-  "//refreshing banner should not add history entry": function(done){
+  "refreshing banner should not add history entry": function(done){
     //check history.length after refreshed banner
     var historyLen = history.length*1;
     var banner = FINN.webAds.queue({name:'iframeTest', url: 'dummy'});
-    
+
     banner.injectScript = function(idoc, iwin){
-      this.doc = idoc;      
+      this.doc = idoc;
       idoc.write('<div style="width:200px;height:200px;>iframeHistoryTest</div>"');
     }
 
@@ -166,13 +167,16 @@ buster.testCase("Banner", {
       refute(banner.incomplete);
       assert.equals(history.length, historyLen);
       banner.refresh();
-	  assert.equals(history.length, historyLen)
+      assert.equals(history.length, historyLen);
+      banner.refresh();
+      assert.equals(history.length, historyLen);
+      assert.equals(banner.refreshedTimes, 2);
       done();
     });
 
   },
   "mobile bottom bannercontainer should fill whole screen": function(done) { // TODO test leaks
-    
+
     var banner = FINN.webAds.queue({
       name      : 'mobilebottom',
       container : 'banners',
@@ -182,36 +186,36 @@ buster.testCase("Banner", {
         done();
       },
     });
-    
+
 
     banner.injectScript = function(idoc, iwin) {
       idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
     }
     FINN.webAds.render('mobilebottom');
-    
+
   }/*,
-  
-  "tracking should be async": function(done){
-    var banner = FINN.webAds.queue({
-      name      : 'testTracking',
-      container : 'banners',
-      url       : 'dummy',
-      trackingScriptUrl: 'localhost:3000/webAds.tracking.js',
-      done      : function(){
-        assert.equals(banner.trackingCalled , undefined);
-        setTimeout(function(){
-          assert.equals(banner.trackingCalled , true);
-          done();
-        }, 100);
-      },
-    });
-    
-    banner.injectScript = function(idoc, iwin) {
-      this.doc = idoc;
-      idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
-    }
-    
-    FINN.webAds.render('testTracking');    
-  }*/
-  
+
+   "tracking should be async": function(done){
+   var banner = FINN.webAds.queue({
+   name      : 'testTracking',
+   container : 'banners',
+   url       : 'dummy',
+   trackingScriptUrl: 'localhost:3000/webAds.tracking.js',
+   done      : function(){
+   assert.equals(banner.trackingCalled , undefined);
+   setTimeout(function(){
+   assert.equals(banner.trackingCalled , true);
+   done();
+   }, 100);
+   },
+   });
+
+   banner.injectScript = function(idoc, iwin) {
+   this.doc = idoc;
+   idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
+   }
+
+   FINN.webAds.render('testTracking');
+   }*/
+
 });

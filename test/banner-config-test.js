@@ -67,7 +67,16 @@ function collectTestCases(cb){
         }
       }
       
-      
+
+      function getDynValue(str, banner){
+        var list = str.split('.').splice(1);
+        var current = banner;
+        for(var i = 0; i < list.length; i++ ){
+          current = current[list[i]];
+        }
+        return current;
+      }
+
       
       
       function checkBannerExpectations(){
@@ -88,7 +97,13 @@ function collectTestCases(cb){
             
             if (test['expectations']){
               $.each(test['expectations'], function(key, val){
-                assert.equals(banner[key], val, key + ' on ' + test.name);
+                if (typeof val == 'string' && val.indexOf('banner.') != -1){
+                  var dynValue = getDynValue(val, banner);
+                  assert.equals(banner[key], dynValue, key + ' on ' + test.name);
+
+                } else {
+                  assert.equals(banner[key], val, key + ' on ' + test.name);
+                }
               });
             }
             if (typeof test.isHidden !== 'undefined' && test.isHidden === true){
@@ -98,8 +113,8 @@ function collectTestCases(cb){
 
             
             if (typeof test.setWidth !== 'undefined'){
-              //console.log(banner)
-              assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);
+              var checkAgainst = banner.params.staticAvailableWidth ? banner.$webAd.width() : banner.width;
+              assert.equals(checkAgainst, test.setWidth, 'width via test.setWidth on '+test.name);
 
             }
             if (typeof test.setHeight !== 'undefined'){

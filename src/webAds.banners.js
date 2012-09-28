@@ -84,6 +84,7 @@
       this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
       this.height         = 0;
+      this.refreshedTimes = 0;
       this.iframe         = new Iframe(this.name, this.params);
       this.active         = false;
       this.retries        = DEFAULTS.RETRIES;
@@ -144,7 +145,7 @@
     };
     
     Banner.prototype.processSize = function() {      
-      var w = this.params.staticWidth||this.$webAd.width();
+      var w = this.params.staticAvailableWidth||this.$webAd.width();
       var h = this.$webAd.height();
       //console.log('extracting size',this.name, w, h);
       this.log(2, 'Checking if valid size: '+w+'x'+h);
@@ -275,6 +276,7 @@
 					F.webAds.render(this.name);
 				}
 			}
+      this.refreshedTimes =  this.refreshedTimes + 1;
       return this;
     };
 

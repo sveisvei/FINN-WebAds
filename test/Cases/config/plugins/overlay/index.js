@@ -1,6 +1,6 @@
 document.write('<div id="hurra" style="background:blue;color: white; text-decoration: underline;cursor:pointer;width:'
-  +banner.params.staticWidth+'px;height:100px;">Rendered width:'
-  +banner.params.staticWidth+'px</div><style>body{background:yellow;}</style>');
+  +banner.params.staticAvailableWidth+'px;height:100px;">Rendered width:'
+  +banner.params.staticAvailableWidth+'px</div><style>body{background:yellow;}</style>');
 var elem  = document.getElementById('hurra');
 
 var active = false;

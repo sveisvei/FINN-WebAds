@@ -1,7 +1,7 @@
 {
   "name": "Right2",
   "expectations": {
-    "width" : 100,
+    "width" : "banner.params.staticAvailableWidth",
     "height" : 100
   }, 
   "timeout": 1200
