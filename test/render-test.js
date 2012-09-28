@@ -72,6 +72,10 @@ function collectTestCases(cb){
   
   function createTests(d){
     $.each(d.testcases, createTest);
+    testCases.debugInfo = function(){
+      console.log('Generating ', d.testcases.length, ' render tests from folders in $ROOT/test/Cases/render/*');
+      assert(true);
+    }
     cb(testCases)
   }
   

@@ -85,10 +85,11 @@
       this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
       this.width          = 0;
       this.height         = 0;
+      this.refreshedTimes = 0;
       this.iframe         = new Iframe(this.name, this.params);
       this.active         = false;
       this.retries        = DEFAULTS.RETRIES;
-      this.timer          = DEFAULTS.TIMEOUT;
+      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
       this.resolved       = false;
       this.failed         = false;
       this.incomplete     = false;
@@ -145,8 +146,9 @@
     };
     
     Banner.prototype.processSize = function() {      
-      var w = this.params.staticWidth||this.$webAd.width();
+      var w = this.params.staticAvailableWidth||this.$webAd.width();
       var h = this.$webAd.height();
+      //console.log('extracting size',this.name, w, h);
       this.log(2, 'Checking if valid size: '+w+'x'+h);
       if (this.isValidSize(w, h)) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -196,6 +198,7 @@
       if (this.retries > 0) {
         cb = function() { banner.processSize(); };
         setTimeout(cb, this.timer);
+        //console.log(this.name, this.timer);
       } else {
         this.width  = width;
         this.height = height;
@@ -223,6 +226,8 @@
       if (typeof h !== 'undefined') this.height = h;
       this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
       this.resized = true;
+      //console.log(this.name, 'resize', w, h, this.width, this.height);
+
       this.log(1, 'resized to height:' + this.height + ' and width:' + this.width);
       return this;
     };
@@ -240,7 +245,7 @@
       var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
 
       // Only run the tag through 3rd party Burt Tracking if it has been loaded
-      if (window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
+      if (this.trackBurt && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
         ad = burt_api.site.trackFinnAd(this, ad);
       }
       
@@ -259,8 +264,9 @@
       }
       this.failed         = false;
       this.retries        = DEFAULTS.RETRIES;
-      this.timer          = DEFAULTS.TIMEOUT;
+      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
 
+      // if iframe is removed, this will throw
 			try {
 				var url = this.iframe.getUrl(this.doc.location.href);
 				this.doc.location.replace(url);
@@ -271,6 +277,7 @@
 					F.webAds.render(this.name);
 				}
 			}
+      this.refreshedTimes =  this.refreshedTimes + 1;
       return this;
     };
 
@@ -422,7 +429,7 @@
     if (banner.params.width){
       var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;  
       var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
-      banner.params.staticWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;;
+      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;;
     }
   }
   
@@ -433,7 +440,8 @@
       threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
-      done: fixTopPosition
+      done: fixTopPosition,
+      trackBurt: true
     },
     "Left1": {
       "extends": "normal",
