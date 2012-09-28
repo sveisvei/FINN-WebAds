@@ -98,7 +98,9 @@ function collectTestCases(cb){
 
             
             if (typeof test.setWidth !== 'undefined'){
-              assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);              
+              //console.log(banner)
+              assert.equals(banner.width, test.setWidth, 'width via test.setWidth on '+test.name);
+
             }
             if (typeof test.setHeight !== 'undefined'){
               assert.equals(banner.height, test.setHeight, 'width via test.setHeight on'+test.name);              

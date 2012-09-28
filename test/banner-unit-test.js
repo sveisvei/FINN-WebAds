@@ -189,7 +189,7 @@ buster.testCase("Banner", {
     }
     FINN.webAds.render('mobilebottom');
     
-  },
+  }/*,
   
   "tracking should be async": function(done){
     var banner = FINN.webAds.queue({
@@ -212,6 +212,6 @@ buster.testCase("Banner", {
     }
     
     FINN.webAds.render('testTracking');    
-  }
+  }*/
   
 });

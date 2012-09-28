@@ -38,6 +38,9 @@ function collectTestCases(cb){
       if (testCase.forceDelay) {
         bannerInitObj.url += '?forceDelay=' + testCase.forceDelay        
       }
+      if (testCase.timer){
+        bannerInitObj.timer = testCase.timer;
+      }
       var banner  = webAds.queue(bannerInitObj);
 
       refute(banner.active);

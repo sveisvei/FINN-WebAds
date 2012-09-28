@@ -4,5 +4,6 @@
   "isHidden": true,
   "expectations":{
     "failed":true
-  }
+  },
+  "timer": 20
 }

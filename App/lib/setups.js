@@ -13,11 +13,12 @@ function getConfigAds(key, callback){
       }
       var stat = fs.statSync(path + "/" + file);
       if (stat.isDirectory()){
-        
+        var config = require(path + "/" + file + "/describe.json");
+        //console.log('DEBUG', config);
         result.push(_.extend({
           name: file,
           url: "/config/" + key + "/" + file + "/index.js"
-        }, require(path + "/" + file + "/describe.json")));        
+        }, config));
       }
       
     });
@@ -56,10 +57,10 @@ function collectTestCases(dir, callback){
       }
       var testdir = dir + '/' + file;      
       var describe = require(testdir + "/describe.json");
-      result.push({
+      result.push(_.extend({
         name: describe.name||file,
         url: "/render/" + file + "/index.js"
-      });
+      }, describe));
     });
     callback({webAds: result});    
   });

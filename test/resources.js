@@ -18,7 +18,7 @@ var resources = [{
     backend: "localhost:3000/css/webAds.css"
   },
   {
-    path: "iframe.html",
+    path: "/iframe.html",
     backend: "localhost:3000/iframe.html"
   },
   {

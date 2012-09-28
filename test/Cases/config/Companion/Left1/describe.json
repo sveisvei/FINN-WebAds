@@ -5,5 +5,6 @@
     "failed":true,
     "retries":0
   },
-  "trackingScriptUrl": "localhost:3000/webAds.tracking.js"
+  "timer":10
+
 }

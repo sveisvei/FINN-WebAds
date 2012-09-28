@@ -4,5 +4,6 @@
     "retries": 0,
     "failed": true
   },
-  "timeout": 4000
+  "timeout": 4000,
+  "timer": 20
 }
