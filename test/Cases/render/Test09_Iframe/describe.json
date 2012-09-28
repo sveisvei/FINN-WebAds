@@ -3,5 +3,7 @@
   "expectations": {
     "width" : 300,
     "height" : 150
-  }
+  },
+  "timer":10
+
 }

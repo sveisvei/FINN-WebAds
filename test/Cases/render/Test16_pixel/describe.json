@@ -3,5 +3,6 @@
     "retries": 5,
     "failed": true
   },
-  "timeout": 500
+  "timeout": 1000,
+  "timer":10
 }

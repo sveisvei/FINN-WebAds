@@ -40,7 +40,7 @@ buster.testCase("Banner", {
 
     // copy
     FINN._webAds = FINN.webAds;
-    // mock
+    // mock, TODO: need to isolate this mocking
     FINN.webAds = {
       iframeUrl: FINN.webAds.iframeUrl,
       expose: function(idocument, iwindow) {
