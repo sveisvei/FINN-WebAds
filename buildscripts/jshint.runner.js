@@ -39,7 +39,7 @@ var globals = {
 };
 
 module.exports = function (caseName){
-  console.log('init '.red, caseName);
+  console.log('JSHINT active '.red, caseName);
 
   var errors = [];
 

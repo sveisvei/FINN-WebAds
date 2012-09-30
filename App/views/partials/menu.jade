@@ -1,11 +1,11 @@
-nav.menu
-  ul.menu
-    - var frontPageClass = (key == '' ? 'active' : '');
-    li
-      a(href="/", class=frontPageClass) frontpage 
-    each folder in folders.folders
-      - var folderClass = (key && key === folder ? 'active' : '')
-      li
-        a(href="/config/#{folder}", class=folderClass)= folder
-    
-br
+nav.mod
+  div.inner.bd
+    ul.mal.tabs
+      - var frontPageClass = (key == '' ? 'active' : '');
+      li(class=frontPageClass)
+        a(href="/", class=frontPageClass) Forsiden
+      each folder in folders.folders
+        - var folderClass = (key && key === folder ? 'active' : '')
+        li(class=folderClass)
+          a(href="/config/#{folder}", class=folderClass)= folder
+

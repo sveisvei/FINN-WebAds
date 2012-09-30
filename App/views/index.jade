@@ -5,38 +5,75 @@ html(lang='no')
     meta(name="HandheldFriendly", content="True")
     meta(name="MobileOptimized", content="320")
     meta(name="viewport", content="width=device-width,minimum-scale=1,maximum-scale=1")
-    link(rel='stylesheet', href='/stylesheets/all.css')    
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/all.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/dependent-style.css')
     link(rel='stylesheet', href='/css/webAds.logger.css')
+    link(rel='stylesheet', href='/css/webAds.css')
+
     include partials/scripts
     script(type='text/javascript', src='/javascripts/index.js')
   body
-    ul.actions
-      li 
-        a#refreshAll(href="#action=RefreshAll") Update all
-      
-    
-    include partials/menu
-    
-    div(data-webads="true")#banners
-    h1= title
-    p Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok. Lorem Ipsum har tålt tidens tann usedvanlig godt, og har i tillegg til å bestå gjennom fem århundrer også tålt spranget over til elektronisk typografi uten vesentlige endringer. Lorem Ipsum ble gjort allment kjent i 1960-årene ved lanseringen av Letraset-ark med avsnitt fra Lorem Ipsum, og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
 
-    ul.actions
-      li 
-        a#lazyLoad(href="#action=lazyLoad") Lazy load
-    div(data-webads="lazy", data-webad-position="lazy")
-    
-    ul.tabs
-      li tab1
-      li tab2
-      li tab3
-      li tab4
-      li tab5
+    div.page
+      aside.banners
+        div(data-webads="true")#banners
 
-    div.tabs
-      h1 Tab1
-      div(data-webads="true")#banner-tab
+      header.head
+        h1= title
+      div.body
+        div.main
+          div.mod
+            div.inner.bd
+              h2 Forsiden
+              p Det er mulig å kjøre refresh på alle bannere
+              p
+                a.button#refreshAll(href="#action=RefreshAll") Oppdater alle banner
+
+
+          include partials/menu
+
+          div.mod
+            div.inner.bd
+              h2 Dummy Lorem Ipsum
+              p Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok. Lorem Ipsum har tålt tidens tann usedvanlig godt, og har i tillegg til å bestå gjennom fem århundrer også tålt spranget over til elektronisk typografi uten vesentlige endringer. Lorem Ipsum ble gjort allment kjent i 1960-årene ved lanseringen av Letraset-ark med avsnitt fra Lorem Ipsum, og senere med sideombrekkingsprogrammet Aldus PageMaker som tok i bruk nettopp Lorem Ipsum for dummytekst.
+
+
+          div.mod
+            div.inner.bd
+              h1 Lazy loading
+              ul
+                li
+                  a.button#lazyLoad(href="#action=lazyLoad") Lazy load
+
+              div.banners.mal
+                div(data-webads="lazy", data-webad-position="lazy")
+                  p Lazy Loading container
+
+          div.mod
+            div.inner.bd
+              ul.tabs.mal#tabs
+                li.active
+                  a(href="#") tab1
+                li
+                  a(href="#") tab2
+                li
+                  a(href="#") tab3
+                li
+                  a(href="#") tab4
+                li
+                  a(href="#") tab5
+
+              div.tabs-content.mal
+                h1 Tab1
+                p Default tab
+                div(data-webads="true")#banner-tab
+      footer.foot
+        div.mod.solidbg.bg-contrast.contrast.mbn
+          div.bd
+            h2.mal= title
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet vulputate velit. Maecenas pretium porta scelerisque. Sed eget augue ac elit rutrum vestibulum vel nec ipsum. Donec non neque diam, sed scelerisque felis. In lacus turpis, feugiat id pretium sed, malesuada a odio. Donec sapien ipsum, elementum ac cursus id, gravida quis nunc. Nullam felis nibh, pharetra sit amet malesuada nec, elementum eu lorem. Vestibulum sit amet quam id lectus pulvinar dignissim in id nibh. Fusce et odio dolor, sit amet cursus eros. In justo lectus, iaculis ut lobortis sed, gravida quis urna. Fusce eleifend dui a augue gravida ultrices nec non dolor. Nulla tincidunt fermentum fringilla. Suspendisse potenti. In eu dui nisl. Donec interdum, nunc sed ornare vulputate, dolor nisl laoreet nisi, dignissim molestie velit diam at nisi. Nunc sed dapibus tellus.
+
 
 
 

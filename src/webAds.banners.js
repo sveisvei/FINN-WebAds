@@ -343,11 +343,10 @@
       return F.webAds.setBannerFlag(key, value);  
     };
     
-    Banner.prototype.plugin = function(name){
+    Banner.prototype.plugin = function(name, a, b, c){
       var plugin = F.webAds.getPlugin(name);
       if (!plugin){ return plugin; }
-      var args = Array.prototype.slice.call(arguments, 1);
-      return plugin.apply(this, args);
+      return plugin.run.apply(plugin, [this, a, b, c]);
     };
     
     return Banner;

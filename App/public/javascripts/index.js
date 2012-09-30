@@ -11,26 +11,32 @@ jQuery(document).ready(function(){
       FINN.webAds.renderAll('Top,Left1');
   });
   
-  
-  // TODO, not working??
+
   FINN.webAds.on('all-webads-resolved', function(e, banners){
-    console.warn('Resolved all:', e, banners);
+    //console.warn('Resolved all:', e, banners);
   });
   
   FINN.webAds.on('webad-resolved', function(e, banners){
-    console.warn('Resolved *:', e, banners);
+    //console.warn('Resolved *:', e, banners);
   });
   
   
   FINN.webAds.on('webad-resolved-top', function(e, banner){
-    console.warn('Resolved top', e, banner);
+    //console.warn('Resolved top', e, banner);
   });
   
 
   
-  $("ul.tabs").on('click', 'li', function(){
-    $("div.tabs").html('<h1>'+$(this).text()+'</h1><p>Oh lalala</p><div data-webads="true" id="banner-tab"></div>');
-    FINN.webAds.renderContext('div.tabs', true);
+  $("#tabs").on('click', 'a', function(){
+    $(this).closest('ul').find('li').removeClass('active');
+    $(this).parent('li').addClass('active');
+    $("div.tabs-content").html(
+      '<h1>'+$(this).text()+'</h1>' +
+      '<p>Tab banner er rendret på nytt:</p>' +
+      '<div class="mal"  data-webads="true" id="banner-tab"></div>'
+    );
+    FINN.webAds.renderContext('div.tabs-content', true);
+    return false;
   });
   
   $("#refreshAll").on('click', function(){

@@ -775,8 +775,7 @@ var exposeSwfObject = function(document, window) {
 };
 var swfobject = exposeSwfObject(document, window);
 FINN.webAds.registerPlugin('swfobject', {
-  init: function(plugin, b){
-    plugin.run = exposeSwfObject
-    return plugin;
+  run: function(banner, idoc, iwin){
+    return exposeSwfObject(idoc, iwin);;
   }
 });

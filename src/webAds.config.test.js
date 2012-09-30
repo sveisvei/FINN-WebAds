@@ -5,21 +5,29 @@ var FINN = FINN || {};
 
   FINN.webAds.extend({
     "Test01": {
-      "extends": "Tests",
       width: 500,
       height: 120,
-      container: "banners"
+      "extends": "Tests",
+      container: "banner-tab"
     },
     "Test02": {
       "extends": "Tests",
       container: "banner-tab"
     },
-    "Test04": {
-      "extends": "Tests",  
+    "Test08": {
+      "extends": "Tests",
       container: "banner-tab"
     },
-    "Test05": {
+    "Test10": {
       "extends": "Tests",
+      container: "banner-tab"
+    },
+    "Test09": {
+      "extends": "Tests",
+      container: "banner-tab"
+    },
+    "Test12": {
+      "extends": "Tests",  
       container: "banner-tab"
     },
     "Tests": {},
