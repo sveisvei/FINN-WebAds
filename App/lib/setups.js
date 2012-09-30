@@ -7,6 +7,7 @@ function getConfigAds(key, callback){
   fs.readdir(path, function(err, files){
     if (err) throw err;
     var result = [];
+    var config = require(path + '/describe.json');
     files.forEach(function(file, i){
       if (file.match(/^\./)){
         return;
@@ -22,7 +23,7 @@ function getConfigAds(key, callback){
       }
       
     });
-    callback({webAds: result});
+    callback({webAds: result, config: config});
     
   });
 }

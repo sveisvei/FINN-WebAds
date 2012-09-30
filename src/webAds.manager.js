@@ -132,9 +132,9 @@ var FINN = FINN||{};
     
     $.getJSON(url, function(data){
       if (typeof dontQueue === 'undefined') { queue(data.webAds); }
-      if (callback && typeof callback === 'function') callback(null, data.webAds);
+      if (typeof callback == 'function') callback(null, data);
     }, function(err){
-      if (callback && typeof callback === 'function') callback(err, null);
+      if (typeof callback == 'function') callback(err, null);
     });
   }
   

@@ -3,15 +3,15 @@ var _ = require("underscore");
 
 var APP_JSON    = {'Content-Type' : 'application/json; charset=utf-8'};
 /*var TEXT_PLAIN  = {'Content-Type' : 'text/plain; charset=utf-8'};
-var HTML        = {'Content-Type' : 'text/html; charset=utf-8'};*/
+ var HTML        = {'Content-Type' : 'text/html; charset=utf-8'};*/
 
 var resources = [{
-    path    : '/finn/webads',
-    backend : 'localhost:3000/finn/webads'
-  },
+  path    : '/finn/webads',
+  backend : 'localhost:3000/finn/webads'
+},
   {
-    path: "/Cases/",        
-    backend: "localhost:3000/" 
+    path: "/Cases/",
+    backend: "localhost:3000/"
   },
   {
     path: "src/css/webAds.css",
@@ -24,12 +24,12 @@ var resources = [{
   {
     path: "/finn/advertising/banner/api/adinbannerdemo.json",
     backend: "localhost:3000/finn/advertising/banner/api/adinbannerdemo.json"
-  }  
+  }
 ];
 
 /*
-  Collect testcases for render-test.js
-*/
+ Collect testcases for render-test.js
+ */
 var testCases   = [];
 var testFoldersPath  = __dirname + "/Cases/render";
 var testFolders = fs.readdirSync(testFoldersPath);
@@ -37,10 +37,10 @@ testFolders.forEach(function(folderName, i){
   if (folderName.match(/^\./)){return;}
   var testDir = testFoldersPath + "/" + folderName;
   var testDirFiles = fs.readdirSync(testDir);
-  
+
   var describe = require(testDir + "/describe.json");
   var resultObj = {
-    url: "/Cases/render/" + folderName + "/index.js", 
+    url: "/Cases/render/" + folderName + "/index.js",
     name: describe.name||folderName
   };
   testCases.push(_.extend(describe, resultObj));
@@ -52,9 +52,11 @@ resources.push({
   headers: APP_JSON
 });
 
+
+
 /*
-  Collect testcases for config tests
-*/
+ Collect testcases for config tests
+ */
 var configTests = [];
 var configFolder = __dirname + "/Cases/config";
 var configSetupFolders = fs.readdirSync(configFolder);
@@ -65,9 +67,9 @@ configSetupFolders.forEach(function(folderName, i){
   var stat = fs.statSync(setupDir);
   if (stat.isDirectory()){
     var testCase = {name: folderName, tests: []}
-    var describe = require(setupDir + "/describe.json");    
+    var describe = require(setupDir + "/describe.json");
     _.extend(testCase, describe);
-    
+
     var folderContent = fs.readdirSync(setupDir);
     folderContent.forEach(function(testName, g){
       if(testName.indexOf('.') !== -1){
@@ -77,11 +79,11 @@ configSetupFolders.forEach(function(folderName, i){
       testCase.tests.push(_.extend({
         name: testName,
         description: folderName + "-" + testName,
-        url: '/Cases/config/' + folderName + '/' + testName + '/index.js',        
-      }, require(setupDir + "/" + testName + "/describe.json")));    
+        url: '/Cases/config/' + folderName + '/' + testName + '/index.js',
+      }, require(setupDir + "/" + testName + "/describe.json")));
     });
-    configTests.push(testCase);    
-  }  
+    configTests.push(testCase);
+  }
 });
 
 resources.push({
@@ -89,6 +91,7 @@ resources.push({
   content: JSON.stringify({testcases: configTests}),
   headers: APP_JSON
 });
+
 
 
 module.exports = resources;

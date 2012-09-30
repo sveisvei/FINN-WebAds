@@ -1,3 +1,4 @@
 {
-  "renderAll": "Top,Right1,Right2,Right3"
+  "renderAll": "Top,Right1,Right2,Right3",
+  "runMultipleStickies" : true
 }

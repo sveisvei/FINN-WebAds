@@ -1,1 +1,1 @@
-document.write('<scr' + 'ipt type="text/javascript" src="'+webAds.base+'Test02/write3.js"></scr'+'ipt>');
+document.write('<scr' + 'ipt type="text/javascript" src="'+webAds.contextBase+'Test02/write3.js"></scr'+'ipt>');

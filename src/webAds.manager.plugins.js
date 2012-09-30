@@ -6,6 +6,10 @@ var FINN = FINN||{};
 
   var plugins = {};
   F.webAds.registerPlugin = function(name, plug){
+    if (typeof plug.init == 'function'){
+      plug.init.call(plug);
+    }
+    plug.called = {};
     plugins[name] = plug;
   };
 
@@ -60,7 +64,7 @@ var FINN = FINN||{};
 
   /* parameters made available for third party networks */
   F.webAds.registerPlugin('contextData', {
-    run: function(callback){
+    run: function(banner, callback){
       if (typeof callback === 'function'){
         callback(FINN.data.banner);
       } else {
@@ -70,7 +74,9 @@ var FINN = FINN||{};
   });
 
   F.webAds.registerPlugin('getAdData', {
-    dataUrl: "/finn/advertising/banner/api/adinbannerdemo.json",
+    init : function(){
+      this.dataUrl = "finn/advertising/banner/api/adinbannerdemo.json";
+    },
     run: function(banner, options, callback) {
       try {
         options = $.parseJSON(options);
@@ -85,8 +91,7 @@ var FINN = FINN||{};
         'BANNER_ORGGROUPREF' : "kjede_privatmegleren",
         'BANNER_AREAID' : "20045"
       };
-      console.log(this.dataUrl);
-      var req    = $.getJSON(this.dataUrl, params);
+      var req    = $.getJSON(FINN.webAds.base + this.dataUrl, params);
       req.success(function(list){
         handleResult({'list': list});
       });
@@ -126,6 +131,19 @@ var FINN = FINN||{};
   });
 
   F.webAds.registerPlugin('overlay', {
+    getOrginElement: function(banner, s){
+      var res;
+      if (typeof s === 'string'){
+        if (s === 'self'){
+          res = banner.iframe.$wrapper;
+        } else if (F.webAds._getBanner(s)) {
+          res = F.webAds._getBanner(s).iframe.$wrapper;
+        }
+      } else {
+        res = $(s);
+      }
+      return res;
+    },
     run: function(banner, options, callback){
       var defaults = {
         width: 100,
@@ -136,49 +154,29 @@ var FINN = FINN||{};
         url: 'http://www.finn.no/finn/'
       };
 
-      /*
-       ->
-       -> new iframe , name= overlayAd_(this.name)
-       remoteUrl= url
-       -> append to page
-       -> modal? append fullpagebackground
-       -> position
-       -> handle ESC && click outside container
-       -> double click, == only one
-
-       TODO: -> iframe must be able to close itself vis postMessage?
-       */
       var name = 'overlayad'+banner.name;
+      // Check if already loaded
       if ($(".webad-"+name.toLowerCase()).size() > 0){
         if (typeof callback === 'function') callback()
         return true;
       }
+
       options = $.extend({}, defaults, options);
+      var sep = options.url.indexOf('?') != -1 ? '&' : '?';
+      var remoteUrl = options.url + sep + 'width=' + options.width + '&height=' + options.height;
       var iframe = new F.webAds.Iframe(name, {
-        remoteUrl: options.url,
+        remoteUrl: remoteUrl,
         width: options.width,
         height: options.height
       });
       iframe.makeIframe();
       iframe.$wrapper.appendTo('body');
 
-      function getOrginElement(s){
-        var res;
-        if (typeof s === 'string'){
-          if (s === 'self'){
-            res = banner.iframe.$wrapper;
-          } else if (F.webAds._getBanner(s)) {
-            res = F.webAds._getBanner(s).iframe.$wrapper;
-          }
-        } else {
-          res = $(s);
-        }
-        return res;
-      }
 
+      // position
       iframe.$wrapper.css({position: 'absolute', 'z-index': '101'}).position({
         my: 'right top',
-        of: getOrginElement(options.positionAgainst),
+        of: this.getOrginElement(banner, options.positionAgainst),
         at: 'left top',
         collision: 'none'
       });

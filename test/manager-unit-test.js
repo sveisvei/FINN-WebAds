@@ -1,7 +1,8 @@
 buster.testCase("Manager", {
   "setUp": function() {
-    FINN.webAds.base      = buster.env.contextPath + "/Cases/render/";        
-    FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";    
+    FINN.webAds.base        = buster.env.contextPath + "/";
+    FINN.webAds.contextBase = buster.env.contextPath + "/Cases/render/";
+    FINN.webAds.iframeUrl   = buster.env.contextPath + "/iframe.html";
   },
   
   "tearDown": function() {

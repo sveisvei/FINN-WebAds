@@ -2,5 +2,6 @@
   "spyClick": true,    
   "expectations": {
     "failed": false
-  }
+  },
+  "container": "banners-middle"
 }

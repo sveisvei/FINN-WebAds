@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head><title>test</title>
-    <style>body{padding:0;margin:0;background: red;}</style>
+    <style>
+      body{
+        padding:10px;margin:0;
+      }
+      html {
+        background: rgb(246,230,180);
+        background: -moz-linear-gradient(top,  rgba(246,230,180,1) 0%, rgba(237,144,23,1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,230,180,1)), color-stop(100%,rgba(237,144,23,1)));
+        background: -webkit-linear-gradient(top,  rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
+        background: -o-linear-gradient(top,  rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
+        background: -ms-linear-gradient(top,  rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
+        background: linear-gradient(to bottom,  rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 );
+      }
+    </style>
     </head>
   <body>
-    <h1>HURRA MEG HEI</h1>
+    <div style="overflow: auto;height: 380px;">
+      <h1>Overlay</h1>
+      <div id="customElem"></div>
+      <script>
+        (function(){
+          var customElem = document.getElementById('customElem');
+          var loc = document.location.toString();
+          var search = loc.substring(loc.indexOf('?'));
+          customElem.innerHTML = '<p>'+search+'</p>';
+        })()
+      </script>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum, mauris at adipiscing faucibus, mi purus iaculis nunc, nec sollicitudin metus tellus in nunc. Vestibulum nec lectus leo, sed tempor augue. Mauris quis est luctus mi egestas bibendum. Proin porttitor ullamcorper justo, ut dapibus tortor sodales nec. Curabitur sed est non arcu mattis ultricies. In nec dolor diam, ut tincidunt sapien. Mauris ultricies lorem a velit mattis sed viverra justo lacinia. Praesent pulvinar velit eget eros pellentesque ac congue enim porttitor. Aenean vel odio eu sapien varius cursus eu vel urna. Sed dignissim quam sit amet lacus auctor ullamcorper. Sed consectetur sem pretium mauris feugiat laoreet. Nam vitae sem felis. Donec faucibus tincidunt enim eu congue. Mauris non pharetra quam. Curabitur pellentesque diam sed nibh mattis in tincidunt leo placerat.
+
+      Aenean porta nisi vel odio hendrerit condimentum. Phasellus id luctus metus. Nulla ligula velit, bibendum sit amet consectetur ac, iaculis vel lectus. Praesent metus odio, rhoncus sed pharetra adipiscing, viverra vehicula lacus. Pellentesque id mauris eget est luctus mollis. Etiam consectetur fringilla sapien in fermentum. Cras sed est sit amet ante pharetra faucibus a ac nunc. Nulla mi nisi, elementum at pharetra nec, dignissim sed quam. Curabitur eleifend metus ac lectus ultrices venenatis. Integer lobortis nisi in magna fringilla lacinia egestas massa mollis. Nam id mauris et nulla pellentesque tincidunt.
+
+      Quisque mi massa, euismod eget tincidunt eget, condimentum id sapien. Vestibulum metus risus, pulvinar ut varius et, mollis sed dui. Integer malesuada ornare auctor. Sed egestas sollicitudin risus quis bibendum. Cras posuere, augue lobortis tempor porttitor, quam libero luctus mauris, quis ultrices leo augue sit amet magna. Quisque at erat vitae tellus rhoncus faucibus. Mauris sit amet justo ligula, vel tempus nulla. Vestibulum at arcu ut quam interdum fringilla in non quam. Vivamus dolor magna, varius id vulputate et, iaculis eget tellus.
+
+      In hac habitasse platea dictumst. Duis non dui id ligula aliquam porttitor. Praesent pulvinar mollis ipsum, eget mollis arcu commodo eget. In eu lectus turpis, at dictum ligula. Mauris tincidunt metus in justo laoreet ac feugiat leo hendrerit. Aenean luctus risus a risus cursus at cursus velit aliquet. Morbi ante massa, sagittis vel consectetur ut, ullamcorper sit amet erat.
+
+      Sed quam arcu, venenatis lobortis pellentesque at, tincidunt et turpis. Cras nisl ligula, molestie nec accumsan vitae, sagittis id nisl. Pellentesque in dui tellus, at venenatis mi. Aenean ullamcorper lacinia nisi, quis vehicula mauris cursus non. Sed mauris ipsum, ultrices et pulvinar quis, luctus mattis odio. In id purus sed arcu pharetra consectetur. Nulla facilisi. Praesent sed dui eu enim condimentum tempus. Quisque eu pellentesque purus. Sed purus dui, semper eget posuere sit amet, interdum vitae velit. Praesent orci libero, pretium ac fringilla ac, semper id felis. Aliquam ut purus lectus. Duis id velit magna, id sollicitudin felis. Maecenas mollis fringilla eleifend. Fusce accumsan dolor eros, vitae mattis justo.
+
+      </p>
+    </div>
   </body>
 </html>

@@ -1,1 +1,1 @@
-document.write('<a href="#"><img src="'+webAds.base+'Test16_pixel/AT1013_1x2.gif" /></a>')
+document.write('<a href="#"><img src="'+webAds.contextBase+'Test16_pixel/AT1013_1x2.gif" /></a>')

@@ -4,7 +4,9 @@
 buster.testCase("Sticky", {
   "setUp": function(done){
     
-    FINN.webAds.base      = buster.env.contextPath + "/";    
+    FINN.webAds.base        = buster.env.contextPath + "/";
+    FINN.webAds.contextBase = buster.env.contextPath + "/";
+
     FINN.webAds.iframeUrl = buster.env.contextPath + "/iframe.html";  
       
     $("head").append('<link id="rel="stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/css/webAds.css" />');
@@ -15,7 +17,7 @@ buster.testCase("Sticky", {
     <div class="page container wrapper" style="height: 30000px;"></div>');
     var self = this;
     
-    $.getJSON(buster.env.contextPath + '/Cases/config/sticky_rightwrapper/heliosAds',function(data){
+    $.getJSON(buster.env.contextPath + '/Cases/config/stickies/heliosAds',function(data){
       var fixed = $.map(data.webAds, function (webAd){
         webAd.url = buster.env.contextPath + '/Cases' + webAd.url;
         return webAd;

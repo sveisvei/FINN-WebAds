@@ -12,8 +12,9 @@ function collectTestCases(cb){
     // css injection here might not work because of timing issues.
     $("head").append('<link rel="stylesheet" id="webads-stylesheet" type="text/css" media="screen" href="'+buster.env.contextPath+'/src/css/webAds.css" />');
     $("body").append('<div id="banners" data-webads="true"><div id="banners-right" data-webads="true"></div></div><div id="banners-middle"></div>');
-    webAds.base      = buster.env.contextPath + "/Cases/config/";    
-    webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
+    webAds.base        = buster.env.contextPath + "/";
+    webAds.contextBase = buster.env.contextPath + "/Cases/config/";
+    webAds.iframeUrl   = buster.env.contextPath + "/iframe.html";
   };
   
   testCases["config"]["tearDown"] = function(){

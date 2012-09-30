@@ -10,8 +10,9 @@ function collectTestCases(cb){
     
   testCases["should render"]["setUp"] = function() {
     $("body").append('<div id="banners"></div>');
-    webAds.base      = buster.env.contextPath + "/Cases/render/";    
-    webAds.iframeUrl = buster.env.contextPath + "/iframe.html";
+    webAds.base         = buster.env.contextPath + "/";
+    webAds.contextBase  = buster.env.contextPath + "/Cases/render/";
+    webAds.iframeUrl    = buster.env.contextPath + "/iframe.html";
   };
   
   testCases["should render"]["tearDown"] = function(){

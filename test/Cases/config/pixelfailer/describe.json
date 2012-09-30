@@ -1,4 +1,4 @@
 {
-  "timeout": 400,
-  "timer":10
+  "timeout": 600,
+  "timer":30
 }

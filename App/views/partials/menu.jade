@@ -1,9 +1,6 @@
 nav.mod
   div.inner.bd
-    ul.mal.tabs
-      - var frontPageClass = (key == '' ? 'active' : '');
-      li(class=frontPageClass)
-        a(href="/", class=frontPageClass) Forsiden
+    ul.mtl.tabs
       each folder in folders.folders
         - var folderClass = (key && key === folder ? 'active' : '')
         li(class=folderClass)

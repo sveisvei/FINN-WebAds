@@ -2,5 +2,5 @@
   "expectations": {
     "bodyClass": ["has-dominant-campaign", "has-dominant-wallpaper"]
   },
-  "timeout": 650  
+  "timeout": 850
 }

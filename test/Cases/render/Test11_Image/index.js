@@ -1,1 +1,1 @@
-document.write('<img src="'+webAds.base+'Test11_Image/980150.gif" />')
+document.write('<img src="'+webAds.contextBase+'Test11_Image/980150.gif" />')

@@ -13,14 +13,15 @@ html(lang='no')
     
     include partials/scripts
 
-  body(lang='no')
+  body(lang='no').so-v1
 
     div.page
       aside.banners
         div(data-webads="true")#banners
           div(data-webads="true")#banners-right
       header.head
-        h1= title
+        h1
+          a(href="/") FINN WebAds
       div.body
         include partials/menu
         div.mod
@@ -37,6 +38,17 @@ html(lang='no')
             p Nulla id ligula mi. Donec vulputate blandit mi, id rhoncus magna feugiat ut. Aenean eleifend urna semper urna facilisis ut viverra urna porta. Sed ut mi erat, et facilisis eros. Duis eget risus urna. Nullam quis mi commodo eros accumsan ultrices. Donec at eleifend tellus. Etiam sit amet lacus id mi condimentum sollicitudin. Suspendisse potenti.
 
             p Ut odio leo, elementum ac vulputate non, aliquet posuere felis. Fusce fringilla sodales commodo. Ut tincidunt tincidunt mattis. Mauris eleifend cursus arcu, ac eleifend risus euismod et. Nam tristique risus ac erat rhoncus eget varius velit fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pellentesque ipsum in turpis aliquet elementum. Nulla facilisi. Nulla iaculis sem id nunc commodo condimentum. Sed ut molestie odio. Proin pulvinar lorem sed odio rutrum cursus. Praesent aliquet pretium euismod. In ac turpis sed nunc ullamcorper fringilla vel non magna.
+        div.mod
+          div.inner.bd
+            h1 Lorem ipsum section
+            p Dette er litt innformasjon
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet vulputate velit. Maecenas pretium porta scelerisque. Sed eget augue ac elit rutrum vestibulum vel nec ipsum. Donec non neque diam, sed scelerisque felis. In lacus turpis, feugiat id pretium sed, malesuada a odio. Donec sapien ipsum, elementum ac cursus id, gravida quis nunc. Nullam felis nibh, pharetra sit amet malesuada nec, elementum eu lorem. Vestibulum sit amet quam id lectus pulvinar dignissim in id nibh. Fusce et odio dolor, sit amet cursus eros. In justo lectus, iaculis ut lobortis sed, gravida quis urna. Fusce eleifend dui a augue gravida ultrices nec non dolor. Nulla tincidunt fermentum fringilla. Suspendisse potenti. In eu dui nisl. Donec interdum, nunc sed ornare vulputate, dolor nisl laoreet nisi, dignissim molestie velit diam at nisi. Nunc sed dapibus tellus.
+            br
+            p In hac habitasse platea dictumst. Duis accumsan placerat nisl id lacinia. Fusce tincidunt nisi eu lacus bibendum posuere. Maecenas pharetra, turpis eget tempor facilisis, justo lorem dictum enim, eget consequat urna libero eget erat. Curabitur eget erat vel velit vestibulum dictum malesuada vel diam. Fusce volutpat dolor sit amet odio pellentesque lacinia. Nunc felis lectus, congue nec gravida ut, semper nec felis. Nunc vel tristique magna. In ultricies semper metus ac adipiscing. Ut vitae risus erat, nec sodales nunc. Maecenas dictum tellus libero. Nulla hendrerit consectetur erat eu convallis. Integer ut velit sit amet nisl dapibus placerat.
+            h2 Ipsom lorem
+            p Nulla id ligula mi. Donec vulputate blandit mi, id rhoncus magna feugiat ut. Aenean eleifend urna semper urna facilisis ut viverra urna porta. Sed ut mi erat, et facilisis eros. Duis eget risus urna. Nullam quis mi commodo eros accumsan ultrices. Donec at eleifend tellus. Etiam sit amet lacus id mi condimentum sollicitudin. Suspendisse potenti.
+            h3 Lorem
+            p Ut odio leo, elementum ac vulputate non, aliquet posuere felis. Fusce fringilla sodales commodo. Ut tincidunt tincidunt mattis. Mauris eleifend cursus arcu, ac eleifend risus euismod et. Nam tristique risus ac erat rhoncus eget varius velit fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pellentesque ipsum in turpis aliquet elementum. Nulla facilisi. Nulla iaculis sem id nunc commodo condimentum. Sed ut molestie odio. Proin pulvinar lorem sed odio rutrum cursus. Praesent aliquet pretium euismod. In ac turpis sed nunc ullamcorper fringilla vel non magna.
       footer.foot
         div.mod.solidbg.bg-contrast.contrast
           div.bd
@@ -51,15 +63,32 @@ html(lang='no')
         // adBlocker
         if(!FINN.webAds) return;
 
-        FINN.webAds.base      = "/config/";    
-        FINN.webAds.iframeUrl = "/iframe.html";
+        FINN.webAds.base        = "/"
+        FINN.webAds.contextBase = "/config/";
+        FINN.webAds.iframeUrl   = "/iframe.html";
 
         FINN.webAds.one('all-webads-resolved', function(){  
           FINN.webAds.sticky('banners-right', '.page'); 
         });
         
         FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){
-            FINN.webAds.renderAll(); //todo, render same as defined.
+            var renderAll = data.config.renderAll||"Top,Left1,Right2";
+            if(data.config && data.config.setBodyClass){
+              $("body").addClass(data.config.setBodyClass);
+              setTimeout(function(){
+                FINN.webAds.renderAll(renderAll);
+              }, 500)
+            } else {
+              FINN.webAds.renderAll(renderAll);
+            }
+
+            if (data.config.runMultipleStickies){
+              FINN.webAds.on('all-webads-resolved', function(){
+                FINN.webAds.sticky('banners-right');
+              });
+            }
+
+
         });
         
         

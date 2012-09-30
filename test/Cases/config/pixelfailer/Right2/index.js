@@ -1,1 +1,1 @@
-document.write('<a href="#"><img src="'+webAds.base+'pixelfailer/1x1_empty.gif" /></a>')
+document.write('<a href="#"><img src="'+webAds.contextBase+'pixelfailer/1x1_empty.gif" /></a>')

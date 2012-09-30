@@ -3,9 +3,10 @@ jQuery(document).ready(function(){
 
   // adBlocker
   if(!FINN.webAds) return;
-  
-  FINN.webAds.base      = "/render/";   
-  FINN.webAds.iframeUrl = "/iframe.html";
+
+  FINN.webAds.base        = "/";
+  FINN.webAds.contextBase = "/render/";
+  FINN.webAds.iframeUrl   = "/iframe.html";
      
   FINN.webAds.getFromServer(function(err, data){
       FINN.webAds.renderAll('Top,Left1');
