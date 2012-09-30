@@ -81,7 +81,7 @@ module.exports = function(app){
     var key = req.params.key;
       getFolders(function(folders){
         res.render('key', { 
-            title: 'Webads setup ' + key, 
+            title: key,
             layout: false,
             key: key,
             folders: folders
