@@ -7,7 +7,7 @@ var FINN=FINN||{};
   var MARGIN  = 10;
   var TIMER   = 15;
   
-  function getBannersForHeight(list, height, index){
+  function getBannersForHeight(list, height){
     var currPos       = MARGIN;
     var toBeRendered  = [];
     var stilSearch    = true;
@@ -76,7 +76,7 @@ var FINN=FINN||{};
     var $webAds = $elem.find('.webad');
     if ($webAds.size() === 0) return false;
 
-    var list    = $webAds.map(function(i){ return F.webAds._getBanner($(this).data('webad')); });    
+    var list    = $webAds.map(function(){ return F.webAds._getBanner($(this).data('webad')); });
     var $win    = $(window);
     var result  = getBannersForHeight(list, $win.height());    
     

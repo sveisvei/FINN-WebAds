@@ -1,8 +1,16 @@
-var fs      = require('fs');
 require('colors');
+var fs      = require('fs');
+var async   = require('async');
+var jshintrunner = require('./jshint.runner')('webAds');
+var dir     = __dirname + "/../src/";
+var target  = __dirname + "/../";
 
-var prependFiles = [
-  'lib/rich-finn-no-2.1.min.js'
+var webAdsStream    = fs.createWriteStream(target + 'webads.js');
+var webAdsMinified  = fs.createWriteStream(target + 'webads.min.js');
+
+var libs = [
+  'lib/rich-finn-no-2.1.min.js',
+  'lib/jqueryui.position.min.js'
 ];
 
 var files = [
@@ -24,31 +32,36 @@ function mini(orig_code){
 }
 
 
-var content = [];
-var prepend = [];
-
-var dir = __dirname + "/../src/";
-var target = __dirname + "/../";
-
-
-prependFiles.forEach(function(file, i){
-  console.log((i+1+"").red, 'Prepending:'.blue, file);
-  prepend.push(fs.readFileSync(dir + file, 'utf8'));
-});
-
-files.forEach(function(file, i){
-  console.log((i+1+"").red, 'Packing:'.yellow, file);
-  content.push(fs.readFileSync(dir + file, 'utf8'));
+libs.forEach(function(file, i){
+  console.log('Prepending:'.bold.blue, file);
+  var readStream = fs.createReadStream(dir + file);
+  readStream.pipe(webAdsStream,   { end: false });
+  readStream.pipe(webAdsMinified, { end: false });
 });
 
 
-prepend = prepend.join(';') + ';';
-content = content.join(";");
+async.map(files, function(file, callback){
+  var buffer = [];
+  var readStream = fs.createReadStream(dir + file);
+  readStream.pipe(webAdsStream, { end: false });
 
-fs.writeFileSync(target + 'webAds.js', prepend + content, 'utf8');
-console.log('File output:'.green, ' webAds.js');
+  readStream.on('data', function(data){
+    buffer.push(data.toString('utf8'));
+  });
 
+  readStream.on('end', function(){
+    console.log('Packed:'.yellow, file.italic);
+    var content = buffer.join('');
+    callback(null, content);
+    jshintrunner.add(file, content);
+  });
 
-fs.writeFileSync(target + 'webAds.min.js', prepend + mini(content), 'utf8');
-console.log('File output:'.green, ' webAds.min.js');
+}, function(err, result){
+  console.log('File output:'.green, ' ', 'webAds.js'.bold.cyan);
+  webAdsMinified.write(mini(result.join(';\n\r')));
+  console.log('File output:'.green, ' ', 'webAds.min.js'.bold.cyan);
+  webAdsMinified.end();
+  webAdsStream.end();
+  jshintrunner.summary();
+});
 

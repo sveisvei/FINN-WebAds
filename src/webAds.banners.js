@@ -1,4 +1,4 @@
-/*global document, window, console, jQuery, setTimeout, FINN */
+/*global document, window, jQuery, setTimeout, FINN */
 (function(F, $) {
   "use strict";
   F.webAds = F.webAds || {};  
@@ -15,7 +15,7 @@
   Iframe = (function(document) {
     function Iframe(name, options) {
       this.name     = name;
-      this.options  = options != null ? options : {};
+      this.options  = options !== null ? options : {};
     }
 
     Iframe.prototype.remove = function() {
@@ -235,7 +235,7 @@
       return $.extend({}, this.exposeObj, { banner: this });
     };
 
-    Banner.prototype.injectScript = function(idoc, iwin) {
+    Banner.prototype.injectScript = function(idoc) {
       if (typeof this.params.before === 'function'){
         this.params.before(this);
       }

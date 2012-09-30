@@ -40,9 +40,7 @@ var FINN = FINN||{};
   w._length               = bannerMapLength;  
   w._getBanner            = getBanner;
   w.defaultReady          = defaultReady;
-  
-  var eventMap = {};
-  
+
   w.on = on;
   w.one = one;
   function on(key, callback){
@@ -64,10 +62,7 @@ var FINN = FINN||{};
   function triggerEvent(name, arg1){
     $(document).trigger(name.toLowerCase(), arg1);      
   }
-    
-  function refreshFromServer(){}// TODO
-  function refreshAllFromServer(){}//TODO
-  
+
   var globalExpose = {
     _jQuery   : jQuery,
     inDapIf   : true,
@@ -145,8 +140,8 @@ var FINN = FINN||{};
   
   var windowWidth;
   function createConfig(obj){
-	  var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
-	  var defaults =  extending ? defaultConfig[extending] : null;
+    var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
+    var defaults =  extending ? defaultConfig[extending] : null;
     return $.extend({
         windowWidth: windowWidth ? windowWidth : windowWidth = $(window).width()
       },
@@ -291,7 +286,7 @@ var FINN = FINN||{};
     commaList         = swapArgs ? "Top" : (commaList||"Top");
     
     var priorityList  = commaList.split(',');
-    function loop(err){
+    function loop(){
       var name;
       if (priorityList.length <= 0){
         renderUntouched();
@@ -367,11 +362,11 @@ var FINN = FINN||{};
     return bannerMap[name] && bannerMap[name].remove();
   }
   
-  function removeAll(){
-    for(var key in bannerMap){
-      if (bannerMap[key]) bannerMap[key].remove();
-    }
-  }
+//  function removeAll(){
+//    for(var key in bannerMap){
+//      if (bannerMap[key]) bannerMap[key].remove();
+//    }
+//  }
   
   function renderContext(selector, force){
     collectDataPositions(selector);

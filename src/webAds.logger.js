@@ -46,7 +46,7 @@ var FINN=FINN||{};
 
     if (logLevel > 0) {
       $(document).ready(function(){
-        $("body").prepend(logViewTemplate(logLevel, loggerName, logLevelLocked))
+        $("body").prepend(logViewTemplate(logLevel, loggerName, logLevelLocked));
         $log = $('#webadsLogger .inner');        
         readyLoaded = true;        
         $.each(buffer, resolve);
