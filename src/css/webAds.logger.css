@@ -40,7 +40,7 @@
   position: absolute;
   top: 60px;
   bottom: 20px;
-  overflow-y: auto;
+  overflow: auto;
 }
 
 #webadsLogger .fail {

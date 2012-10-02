@@ -180,6 +180,11 @@
 
     Banner.prototype.fail = function(reason, dontSetClass) {
       this.log(1, 'Failed:' + reason);
+      if (reason == 'timeout'){
+        var html = this.iframe.$iframe.contents()
+          .find('#webAd').html().replace(/</gm, '&lt;').replace(/>/gmi, '&gt;');
+        this.log(2, 'html: '+html);
+      }
       if (!dontSetClass && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
