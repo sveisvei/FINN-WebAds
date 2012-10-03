@@ -15,5 +15,6 @@ The script will inspect the iframes content after load, and poll for sizing - an
 * browser isn`t using normal zoom mode when running buster test.
 * browser tab doesnt have focus
 
-# Branching
+# Branching - Stable master with 'feature branches'
+( https://confluence.finn.no/display/TEKK/Git )
 - Major changes should occur in a branch, but bugfixing and small changes occur in master.
