@@ -30,7 +30,11 @@ var options = {
   "sub": true,
   "strict": false,
   "white": false,
-  "unused": false
+  "unused": false,
+  maxcomplexity: 7,
+  maxparams:4,
+  maxdepth:3/*,
+  maxstatements:29*/
 };
 var globals = {
   jQuery: false,
