@@ -615,7 +615,9 @@ var FINN = FINN || {};
     var $webAds = $elem.find('.webad');
     if ($webAds.size() === 0) return false;
 
-    var list    = $webAds.map(function(){ return F.webAds._getBanner($(this).data('webad')); });
+    var list    = $webAds.map(function(){
+      return F.webAds._getBanner($(this).data('webad'));
+    });
     var $win    = $(window);
     var result  = getBannersForHeight(list, $win.height());    
     
