@@ -36,6 +36,7 @@ buster.testCase("Manager", {
       
       this.banner = FINN.webAds.queue({
         name: 'Lazy',
+        timer: 10,
         url: buster.env.contextPath + '/Cases/render/Test01/index.js'
       });
     },
@@ -54,6 +55,7 @@ buster.testCase("Manager", {
         done();
       });      
     },
+
     "should render after setting container": function(done){
       var banner = this.banner;
       banner.config('container', 'lazytest');
@@ -90,13 +92,13 @@ buster.testCase("Manager", {
         
       });
       
-    }  ,
+    },
     "renderContext when FORCED should reload banners in context and ignore banner.active": function(done) {
       var lazyBanner = this.banner;
       refute(lazyBanner.active)      
       lazyBanner.config('container', 'lazytest');      
       
-      FINN.webAds.render('Lazy', function(){
+      FINN.webAds.renderAll('Lazy', function(){
         assert(lazyBanner.active);
         
         $("#lazytest").remove();
@@ -112,11 +114,50 @@ buster.testCase("Manager", {
              refute.equals($("#injected").html(), 'dummy');
              $("#injected").remove();
              done();
-           }, 0)
+           }, 0);
 
         });
         // force
         FINN.webAds.renderContext("body", true);
+      });
+    },
+    "should not create iframe if container isnt present": function(done){
+      var lazyBanner = this.banner;
+      refute(lazyBanner.active);
+      refute(lazyBanner.failed);
+      refute(lazyBanner.iframe);
+      FINN.webAds.renderAll(function(){
+        refute(lazyBanner.active);
+        assert(lazyBanner.failed);
+        assert(lazyBanner.incomplete);
+        refute(lazyBanner.iframe);
+        lazyBanner.config('container', 'lazytest');
+        FINN.webAds.renderAll('Lazy', function(){
+          assert(lazyBanner.active);
+          assert(lazyBanner.iframe);
+          refute(lazyBanner.failed);
+          refute(lazyBanner.incomplete);
+          done();
+        });
+
+      });
+
+    },
+    "configuring width and height after banner init should work": function(done){
+      var lazyBanner = this.banner;
+      refute.defined(lazyBanner.params.width);
+      refute.defined(lazyBanner.params.height);
+      refute.defined(lazyBanner.iframe);
+      refute.defined(lazyBanner.container);
+      lazyBanner.config('params.width', 201);
+      FINN.webAds.config('Lazy', 'params.height', 301);
+      assert.equals(lazyBanner.params.width, 201);
+      assert.equals(lazyBanner.params.height, 301);
+      lazyBanner.config('container', 'lazytest');
+      assert(lazyBanner.container);
+      FINN.webAds.renderAll('Lazy', function(){
+        assert.defined(lazyBanner.iframe);
+        done();
       });
 
     }

@@ -85,7 +85,6 @@
       this.width          = 0;
       this.height         = 0;
       this.refreshedTimes = 0;
-      this.iframe         = new Iframe(this.name, this.params);
       this.active         = false;
       this.retries        = DEFAULTS.RETRIES;
       this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
@@ -109,7 +108,14 @@
 
     Banner.prototype.config = function(key, value) {
       this.log(3, key+' updated');
-      return (this[key] = value);
+      key = key.split('.');
+      if (key[1] && this[key[0]]){
+        this[key[0]][key[1]] = value;
+      } else {
+        this[key] = value;
+      }
+      return this;
+
     };
 
     Banner.prototype.onload = function() {
@@ -180,12 +186,12 @@
 
     Banner.prototype.fail = function(reason, dontSetClass) {
       this.log(1, 'Failed:' + reason);
-      if (reason == 'timeout'){
+      if (reason == 'timeout' && this.iframe && this.iframe.$iframe){
         var html = this.iframe.$iframe.contents()
           .find('#webAd').html().replace(/</gm, '&lt;').replace(/>/gmi, '&gt;');
-        this.log(2, 'html: '+html);
+        this.log(2, 'html: ' + html);
       }
-      if (!dontSetClass && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');
+      if (!dontSetClass && this.iframe && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');
       if (this.params.bodyFailClass) {
         $("body").addClass(this.params.bodyFailClass);
       }
@@ -274,8 +280,7 @@
       try {
         var url = this.iframe.getUrl(this.doc.location.href);
         this.doc.location.replace(url);
-      }
-      catch (err) {
+      } catch (err) {
         if (this.active) {
           F.webAds.remove(this.name);
           F.webAds.render(this.name);
@@ -326,6 +331,7 @@
       }
 
       this.incomplete = false;
+      this.failed     = false;
       this.resolved   = false;
       this.active     = true;
       var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
@@ -333,7 +339,10 @@
         this.fail('Missing valid container on '+this.name, true);
         return this;
       }
-      this.log(3, 'Inserting iframe/banner');
+      this.log(3, 'Creating and inserting iframe/banner');
+      if (!this.iframe){
+        this.iframe = new Iframe(this.name, this.params);
+      }
       this.iframe.makeIframe();
       $container.data('webads-processed', 'processed');
       this.iframe.$wrapper.appendTo($container);

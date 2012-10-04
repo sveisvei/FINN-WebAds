@@ -1,6 +1,3 @@
-
-
-
 buster.testCase("Sticky", {
   "setUp": function(done){
     
@@ -48,8 +45,9 @@ buster.testCase("Sticky", {
       $(window).scrollTop(2000);
       
       setTimeout(function(){
-        assert.equals($(window).scrollTop(), 2000);        
-        assert.equals($('.webad-right1').position().top, 2010, 'right1');        
+        assert.equals($(window).scrollTop(), 2000);
+        var pos = $('.webad-right1').position()||{};
+        assert.equals(pos.top, 2010, 'right1', 'Getting right1 position failed most likely');
         assert.equals($('.webad-right1').css('position'), 'fixed', 'right1');
         assert.equals($('.webad-right2').css('position'), 'fixed', 'right2');
         assert.equals($('.webad-right3').css('position'), 'fixed', 'right3');        
@@ -76,8 +74,9 @@ buster.testCase("Sticky", {
       $(window).scrollTop(2000);
       
       setTimeout(function(){
-        assert.equals($(window).scrollTop(), 2000);        
-        assert.equals($('.webad-right3').position().top, 2010, 'right3');        
+        assert.equals($(window).scrollTop(), 2000);
+        var pos = $('.webad-right3').position()||{};
+        assert.equals(pos.top, 2010, 'right3');
         assert.equals($('.webad-right1').css('position'), 'static', 'right1');
         assert.equals($('.webad-right2').css('position'), 'static', 'right2');
         assert.equals($('.webad-right3').css('position'), 'fixed', 'right3');        

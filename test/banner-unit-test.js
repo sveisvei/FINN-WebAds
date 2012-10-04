@@ -29,8 +29,6 @@ buster.testCase("Banner", {
     refute.defined(banner.container);
     refute(banner.active);
     assert(banner.failed);
-    //todo	
-
 
   },
   "should insert banner into container and call onload": function(done) {
@@ -50,7 +48,7 @@ buster.testCase("Banner", {
           banner: banner,
           webAds: FINN.webAds,
           _jQuery: function(selector) { return { on: function(event, cb) { cb(); } } }
-        }
+        };
         $.each(list, function(k){ iwindow[k] = this; });
       },
       resolve: function(name) {
@@ -59,7 +57,7 @@ buster.testCase("Banner", {
         refute(banner.failed);
         done();
       }
-    };;
+    };
 
     banner = new FINN._webAds.Banner({
       name      : NAME,
@@ -69,7 +67,7 @@ buster.testCase("Banner", {
 
     banner.injectScript = function(idoc, iwin) {
       idoc.write('<div style="width:100px;height:100px;">Dummeh</div>');
-    }
+    };
 
     banner.insert();
   },
@@ -93,6 +91,7 @@ buster.testCase("Banner", {
       windowWidth : 50
     });
     var shouldNotBeCalled = sinon.spy();
+    banner.iframe = {};
     banner.iframe.makeIframe = shouldNotBeCalled
     banner.resolve = function() {
       refute(shouldNotBeCalled.called);
@@ -112,6 +111,7 @@ buster.testCase("Banner", {
     $("body").append('<div id="test3"></div>');
     var spy = sinon.spy();
     var spy2 = sinon.spy();
+    banner.iframe = {};
     banner.iframe.makeIframe = spy;
     // mock
     banner.iframe.$wrapper = {
@@ -184,7 +184,7 @@ buster.testCase("Banner", {
       done      : function(){
         assert.equals(banner.iframe.$wrapper.width(), $(window).width())
         done();
-      },
+      }
     });
 
 
@@ -193,29 +193,7 @@ buster.testCase("Banner", {
     }
     FINN.webAds.render('mobilebottom');
 
-  }/*,
+  }
 
-   "tracking should be async": function(done){
-   var banner = FINN.webAds.queue({
-   name      : 'testTracking',
-   container : 'banners',
-   url       : 'dummy',
-   trackingScriptUrl: 'localhost:3000/webAds.tracking.js',
-   done      : function(){
-   assert.equals(banner.trackingCalled , undefined);
-   setTimeout(function(){
-   assert.equals(banner.trackingCalled , true);
-   done();
-   }, 100);
-   },
-   });
-
-   banner.injectScript = function(idoc, iwin) {
-   this.doc = idoc;
-   idoc.write('<div style="width:320px;height:100px;">Dummeh</div>');
-   }
-
-   FINN.webAds.render('testTracking');
-   }*/
 
 });
