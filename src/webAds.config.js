@@ -110,7 +110,7 @@ var FINN = FINN || {};
       width: 240
     },
     "Middle": {
-      "extends": "tracking",
+      "extends": "normal",
       width: 580,
       height: 400,
       threshold: 291,
@@ -158,9 +158,9 @@ var FINN = FINN || {};
     "normal": {
       container : "banners"
     },
-    "tracking": {
-      "extends": "normal",
-      trackingScriptUrl: "http://measure.richmetrics.com/rfm/finn-eval/rich-finn-eval.js"
+    "Bildekarusell": {
+      width: 500,
+      height: 320
     },
     "all": {
       backend   : "helios"
