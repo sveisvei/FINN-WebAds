@@ -52,10 +52,12 @@ var FINN=FINN||{};
     $.each(list, function(){
       this.log('activating sticky');
       this.iframe.$wrapper.css({
-        position  : 'fixed',
-        top       : this.stickyPos + "px"
+        'position'  : 'fixed',
+        'top'       : this.stickyPos + "px",
+        'z-index' : '1'
       });
     });
+    FINN.webAds.triggerEvent('webads-stickied', [list]);
   }
   
   function unsetSticky(list){

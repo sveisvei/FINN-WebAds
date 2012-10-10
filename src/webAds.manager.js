@@ -40,6 +40,7 @@ var FINN = FINN||{};
 
   w.on = on;
   w.one = one;
+  w.triggerEvent = triggerEvent;
   function on(key, callback){
     return $(document).on(key, callback);
   }
