@@ -255,8 +255,8 @@
       var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
 
       // Only run the tag through 3rd party Burt Tracking if it has been loaded
-      if (this.trackBurt && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
-        ad = burt_api.site.trackFinnAd(this, ad);
+     if (this.params.trackBurt && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
+          ad = burt_api.site.trackFinnAd(this, ad);
       }
 
       idoc.write(ad);
@@ -298,7 +298,7 @@
     };
 
     Banner.prototype.isValid = function(){
-      this.log(2, 'Not valid if '+this.params.threshold+' is less than '+this.params.windowWidth);
+      this.log(2, 'Not valid if '+this.params.windowWidth+' is less than '+this.params.threshold);
       if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
         return false;
       }
