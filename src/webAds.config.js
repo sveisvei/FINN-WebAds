@@ -89,12 +89,14 @@ var FINN = FINN || {};
       threshold: 1050,
       height: 500,
       bodyClass: "has-dominant-campaign",
-      done: fixLeftPosition
+      done: fixLeftPosition,
+      trackBurt: true
     },
     "Right1": {
       "extends": "normal",
       width: 240,
-      threshold: 1025
+      threshold: 1025,
+      trackBurt: true
     },
     "Right2": {
       "extends": "normal",
@@ -102,19 +104,22 @@ var FINN = FINN || {};
       sticky: true,
       width: 240,
       height: 500,
-      before: setMaxWidth
+      before: setMaxWidth,
+      trackBurt: true
     },
     "Right3": {
       threshold: 1025,
       "extends": "normal",
-      width: 240
+      width: 240,
+      trackBurt: true
     },
     "Middle": {
       "extends": "normal",
       width: 580,
       height: 400,
       threshold: 291,
-      container: "banners-middle"
+      container: "banners-middle",
+      trackBurt: true
     },
     "Wallpaper": {
       "extends": "normal",
@@ -136,16 +141,20 @@ var FINN = FINN || {};
       container: "banners-inline2"
     },
     "BottomLeft": {
-      "extends": "bottomads"
+      "extends": "bottomads",
+      trackBurt: true
     },
     "BottomMiddle": {
-      "extends": "bottomads"
+      "extends": "bottomads",
+      trackBurt: true
     },
     "BottomRight": {
-      "extends": "bottomads"
+      "extends": "bottomads",
+      trackBurt: true
     },
     "BottomRight2": {
-      "extends": "bottomads"
+      "extends": "bottomads",
+      trackBurt: true
     },
     "bottomads": {
       container: "banners-bottom"
