@@ -608,7 +608,7 @@ var FINN = FINN || {};
     isSticky = true;
     $.each(list, function(){
       this.log('activating sticky');
-      this.iframe.$wrapper.css({
+      this.iframe.$wrapper.addClass('webad-multiple-sticky').css({
         'position'  : 'fixed',
         'top'       : this.stickyPos + "px",
         'z-index' : '1'
@@ -622,7 +622,7 @@ var FINN = FINN || {};
     isSticky = false;
     $.each(list, function(){
       this.log('de-activating sticky');      
-      this.iframe.$wrapper.css({
+      this.iframe.$wrapper.removeClass('webad-multiple-sticky').css({
         position  : 'static',
         top       : ''
       });
