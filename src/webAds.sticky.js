@@ -92,11 +92,11 @@ var FINN=FINN||{};
     }
     
     if (pageSelector){
-      var contentAndBanners = $(pageSelector).outerWidth() + 12 + 10 + result.maxWidth;
+      var contentAndBanners = $(pageSelector).outerWidth() + (result.maxWidth / 2 );
       var isNoRoom = $win.width() <= contentAndBanners;
       if (isNoRoom){ return false; }
     }
-    
+
     if (result.alwaysSticky) {
       checker();
     } else if (result.sticky.length > 0){

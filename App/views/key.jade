@@ -67,10 +67,6 @@ html(lang='no')
         FINN.webAds.contextBase = "/config/";
         FINN.webAds.iframeUrl   = "/iframe.html";
 
-        FINN.webAds.one('all-webads-resolved', function(){  
-          FINN.webAds.sticky('banners-right', '.page'); 
-        });
-        
         FINN.webAds.getFromServer('/config/#{key}/heliosAds', function(err, data){
             var renderAll = data.config.renderAll||"Top,Left1,Right2";
             if(data.config && data.config.setBodyClass){
@@ -84,11 +80,9 @@ html(lang='no')
 
             if (data.config.runMultipleStickies){
               FINN.webAds.on('all-webads-resolved', function(){
-                FINN.webAds.sticky('banners-right');
+                FINN.webAds.sticky('banners-right', '.page');
               });
             }
-
-
         });
         
         
