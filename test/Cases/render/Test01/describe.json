@@ -3,6 +3,7 @@
   "expectations": {
     "width" : 411,
     "height" : 111,
-    "retries" : 5
+    "retries" : 5,
+    "classes": "webad webad-test01 hurra1 hurra2 hurra3"
   }
 }

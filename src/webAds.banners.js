@@ -37,6 +37,9 @@
       var i         = document.createElement('iframe');
       innerDiv.className  = 'webad-inner';
       var divClasses = ['webad', 'webad-'+this.name];
+      if (this.options.customClasses){
+        divClasses.push(this.options.customClasses);
+      }
       if (this.options.hidden) {
         divClasses.push('webad-hidden');
         div.style.display = "none";

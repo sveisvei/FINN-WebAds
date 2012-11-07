@@ -52,7 +52,8 @@ function collectTestCases(cb){
       webAds.render(testCase.name, function(err, banner) {
         if (testCase['expectations']){
           $.each(testCase['expectations'], function(key, val){
-            assert.equals(banner[key], val, key);
+            if (key == 'classes') assert.equals(banner.iframe.$wrapper.attr('class'), val, key);
+            else assert.equals(banner[key], val, key);
           });
         }
         assert(banner.active);

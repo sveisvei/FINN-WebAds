@@ -8,7 +8,8 @@ var FINN = FINN || {};
       width: 500,
       height: 120,
       "extends": "Tests",
-      container: "banner-tab"
+      container: "banner-tab",
+      customClasses: "hurra1 hurra2 hurra3"
     },
     "Test02": {
       "extends": "Tests",
