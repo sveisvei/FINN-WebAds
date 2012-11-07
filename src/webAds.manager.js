@@ -351,10 +351,10 @@ var FINN = FINN||{};
         }
       } else {
         var name = priorityList.shift();
-        if(!bannerMap[name] || (bannerMap[name] && bannerMap[name].notValid === true)){
+        alreadyRendered.push(name);
+        if(!bannerMap[name] || (bannerMap[name] && (bannerMap[name].notValid === true || bannerMap[name].incomplete === true)) ){
           return loop();
         }
-        alreadyRendered.push(name);
         refresh(name, loop);
       }
     }

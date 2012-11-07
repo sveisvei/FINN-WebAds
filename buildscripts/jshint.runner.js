@@ -1,7 +1,7 @@
 require('colors');
 var jshint = require('jshint').JSHINT;
 
-console.log(jshint);
+//console.log(jshint);
 var options = {
 
   "node" : true,
