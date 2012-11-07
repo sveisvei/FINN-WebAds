@@ -1033,7 +1033,7 @@ var FINN = FINN || {};
         }
       } else {
         var name = priorityList.shift();
-        if(!bannerMap[name]){
+        if(!bannerMap[name] && bannerMap[name].notValid === true){
           return loop();
         }
         alreadyRendered.push(name);
