@@ -321,18 +321,26 @@ var FINN = FINN||{};
   }
 
   function refresh(name, cb){
-    bannerMap[name].refresh();
-    // .refresh command resets banner.resolved
-    if (cb && typeof cb === 'function'){
-      insertCallback(name, cb);
-    }
+    var banner = bannerMap[name];
+    // DO NOT render if banner is either incomplete or notvalid
+    if (banner && !(banner.notValid === true || banner.incomplete === true)){
+        banner.refresh();
+        // .refresh command resets banner.resolved
+        if (cb && typeof cb === 'function'){
+          insertCallback(name, cb);
+        }
+    } else {
+      if (banner) banner.log(1, 'Banner is ' + (banner.notValid ? ' out of threshold/notvalid' : ' incomplete') + ' and cannot be refreshed');
+      if (cb && typeof cb === 'function'){
+          cb();
+      }
+    }    
   }
 
   function refreshAll(commaList, callback){
     commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
     callback          = commaList && typeof commaList === 'function' ? commaList : callback;
     var priorityList  = commaList.split(',');
-
     var alreadyRendered = [];
     function shouldRefresh(key){
       var res = true;
@@ -352,9 +360,6 @@ var FINN = FINN||{};
       } else {
         var name = priorityList.shift();
         alreadyRendered.push(name);
-        if(!bannerMap[name] || (bannerMap[name] && (bannerMap[name].notValid === true || bannerMap[name].incomplete === true)) ){
-          return loop();
-        }
         refresh(name, loop);
       }
     }

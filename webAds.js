@@ -4,7 +4,596 @@
  * Includes: jquery.ui.position.js
  * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
 ;(function(a,b){a.ui=a.ui||{};var c=/left|center|right/,d=/top|center|bottom/,e="center",f={},g=a.fn.position,h=a.fn.offset;a.fn.position=function(b){if(!b||!b.of)return g.apply(this,arguments);b=a.extend({},b);var h=a(b.of),i=h[0],j=(b.collision||"flip").split(" "),k=b.offset?b.offset.split(" "):[0,0],l,m,n;return i.nodeType===9?(l=h.width(),m=h.height(),n={top:0,left:0}):i.setTimeout?(l=h.width(),m=h.height(),n={top:h.scrollTop(),left:h.scrollLeft()}):i.preventDefault?(b.at="left top",l=m=0,n={top:b.of.pageY,left:b.of.pageX}):(l=h.outerWidth(),m=h.outerHeight(),n=h.offset()),a.each(["my","at"],function(){var a=(b[this]||"").split(" ");a.length===1&&(a=c.test(a[0])?a.concat([e]):d.test(a[0])?[e].concat(a):[e,e]),a[0]=c.test(a[0])?a[0]:e,a[1]=d.test(a[1])?a[1]:e,b[this]=a}),j.length===1&&(j[1]=j[0]),k[0]=parseInt(k[0],10)||0,k.length===1&&(k[1]=k[0]),k[1]=parseInt(k[1],10)||0,b.at[0]==="right"?n.left+=l:b.at[0]===e&&(n.left+=l/2),b.at[1]==="bottom"?n.top+=m:b.at[1]===e&&(n.top+=m/2),n.left+=k[0],n.top+=k[1],this.each(function(){var c=a(this),d=c.outerWidth(),g=c.outerHeight(),h=parseInt(a.curCSS(this,"marginLeft",!0))||0,i=parseInt(a.curCSS(this,"marginTop",!0))||0,o=d+h+(parseInt(a.curCSS(this,"marginRight",!0))||0),p=g+i+(parseInt(a.curCSS(this,"marginBottom",!0))||0),q=a.extend({},n),r;b.my[0]==="right"?q.left-=d:b.my[0]===e&&(q.left-=d/2),b.my[1]==="bottom"?q.top-=g:b.my[1]===e&&(q.top-=g/2),f.fractions||(q.left=Math.round(q.left),q.top=Math.round(q.top)),r={left:q.left-h,top:q.top-i},a.each(["left","top"],function(c,e){a.ui.position[j[c]]&&a.ui.position[j[c]][e](q,{targetWidth:l,targetHeight:m,elemWidth:d,elemHeight:g,collisionPosition:r,collisionWidth:o,collisionHeight:p,offset:k,my:b.my,at:b.at})}),a.fn.bgiframe&&c.bgiframe(),c.offset(a.extend(q,{using:b.using}))})},a.ui.position={fit:{left:function(b,c){var d=a(window),e=c.collisionPosition.left+c.collisionWidth-d.width()-d.scrollLeft();b.left=e>0?b.left-e:Math.max(b.left-c.collisionPosition.left,b.left)},top:function(b,c){var d=a(window),e=c.collisionPosition.top+c.collisionHeight-d.height()-d.scrollTop();b.top=e>0?b.top-e:Math.max(b.top-c.collisionPosition.top,b.top)}},flip:{left:function(b,c){if(c.at[0]===e)return;var d=a(window),f=c.collisionPosition.left+c.collisionWidth-d.width()-d.scrollLeft(),g=c.my[0]==="left"?-c.elemWidth:c.my[0]==="right"?c.elemWidth:0,h=c.at[0]==="left"?c.targetWidth:-c.targetWidth,i=-2*c.offset[0];b.left+=c.collisionPosition.left<0?g+h+i:f>0?g+h+i:0},top:function(b,c){if(c.at[1]===e)return;var d=a(window),f=c.collisionPosition.top+c.collisionHeight-d.height()-d.scrollTop(),g=c.my[1]==="top"?-c.elemHeight:c.my[1]==="bottom"?c.elemHeight:0,h=c.at[1]==="top"?c.targetHeight:-c.targetHeight,i=-2*c.offset[1];b.top+=c.collisionPosition.top<0?g+h+i:f>0?g+h+i:0}}},a.offset.setOffset||(a.offset.setOffset=function(b,c){/static/.test(a.curCSS(b,"position"))&&(b.style.position="relative");var d=a(b),e=d.offset(),f=parseInt(a.curCSS(b,"top",!0),10)||0,g=parseInt(a.curCSS(b,"left",!0),10)||0,h={top:c.top-e.top+f,left:c.left-e.left+g};"using"in c?c.using.call(b,h):d.css(h)},a.fn.offset=function(b){var c=this[0];return!c||!c.ownerDocument?null:b?a.isFunction(b)?this.each(function(c){a(this).offset(b.call(this,c,a(this).offset()))}):this.each(function(){a.offset.setOffset(this,b)}):h.call(this)}),a.curCSS||(a.curCSS=a.css),function(){var b=document.getElementsByTagName("body")[0],c=document.createElement("div"),d,e,g,h,i;d=document.createElement(b?"div":"body"),g={visibility:"hidden",width:0,height:0,border:0,margin:0,background:"none"},b&&a.extend(g,{position:"absolute",left:"-1000px",top:"-1000px"});for(var j in g)d.style[j]=g[j];d.appendChild(c),e=b||document.documentElement,e.insertBefore(d,e.firstChild),c.style.cssText="position: absolute; left: 10.7432222px; top: 10.432325px; height: 30px; width: 201px;",h=a(c).offset(function(a,b){return b}).offset(),d.innerHTML="",e.removeChild(d),i=h.top+h.left+(b?2e3:0),f.fractions=i>21&&i<22}()})(jQuery);
-/*global document, window, jQuery, setTimeout, FINN */
+var FINN = FINN||{};
+
+(function(F, $){
+  var data          = F.data = F.data||{};
+  var defaultConfig = data.defaultConfig = data.defaultConfig||{};
+  var logger;
+  var loggerConfig  = function(){
+    if (logger) return logger;
+    if (!FINN.webAds||!FINN.webAds.logger) return {log:function(){}};
+    logger = FINN.webAds.logger('FINN WebAds');
+    return logger;
+  };
+
+  // exports
+  F.webAds = F.webAds||{};
+  var w = F.webAds;
+  w.renderContext         = renderContext;
+  w.queue                 = queue;
+  w.render                = render;
+  w.renderAll             = renderAll;
+  w.renderLazy            = renderLazy;
+  w.expose                = expose;
+  w.refresh               = refresh;
+  w.refreshAll            = refreshAll;
+  w.updateUrls            = updateUrls;
+  w.remove                = remove;
+  w.resolve               = resolve;
+  w.resolveOnload         = resolveOnload;
+  w.collectDataPositions  = collectDataPositions;
+  w.config                = config;
+  w.getFromServer         = getFromServer;
+  w.cleanUp               = cleanUp;
+  w.base                  = "/";
+
+  w.getBannerFlag         = getBannerFlag;
+  w.setBannerFlag         = setBannerFlag;
+  w._length               = bannerMapLength;
+  w._getBanner            = getBanner;
+  w.defaultReady          = defaultReady;
+
+  w.on = on;
+  w.one = one;
+  w.triggerEvent = triggerEvent;
+  function on(key, callback){
+    return $(document).on(key, callback);
+  }
+
+  function one(key, callback){
+    return $(document).one(key, callback);
+  }
+
+  function defaultReady(){
+    // Load banners
+    FINN.webAds.queue(FINN.data.banners);
+    // collect data
+    FINN.webAds.collectDataPositions();
+    FINN.webAds.renderAll('Top,Left1,Right2');
+  }
+
+  function triggerEvent(name, arg1){
+    $(document).trigger(name.toLowerCase(), arg1);
+  }
+
+  var globalExpose = {
+    _jQuery   : jQuery,
+    inDapIf   : true,
+    inFIF     : undefined,
+    webAds    : w,
+    helios_parameters : "", //TODO: remove this
+    tf_recordClickToUrl: window.tf_recordClickToUrl
+  };
+
+  var bannerMap   = {};
+  var bannerFlags = {};
+  var callbacks   = {};
+  var configMap   = {};
+  var onloadCallbacks = {};
+
+  function cleanUp(){
+    bannerMap   = {};
+    bannerFlags = {};
+    callbacks   = {};
+    configMap   = {};
+    onloadCallbacks = {};
+  }
+
+  function getBanner(name){
+    return bannerMap[name];
+  }
+
+  function getBannerFlag(key){
+    return (bannerFlags[key]||null);
+  }
+
+  function setBannerFlag(key, value){
+    if(!key) return null;
+    return (bannerFlags[key] = value);
+  }
+
+  function bannerMapLength(){
+    var i = 0;
+    for(var g in bannerMap){i++;}
+    return i;
+  }
+
+  function config(name, key, value){
+    configMap[name]       = configMap[name]||{};
+    var keys = key.split('.');
+    if (keys[1]){
+      configMap[name][keys[1]]  = value;
+    } else {
+      configMap[name][key]  = value;
+    }
+
+
+    if(bannerMap[name]){
+      bannerMap[name].config(key, value);
+    }
+  }
+
+  function updateUrls(urlMap){
+    for(var key in urlMap){
+      if (bannerMap[key]){
+        bannerMap[key].url = urlMap[key];
+      } else {
+        queue({name: key, url: urlMap[key]});
+      }
+    }
+  }
+
+  function getFromServer(url, callback, dontQueue){
+    var firstArgIsUsed = (typeof url === 'function');
+    dontQueue   = firstArgIsUsed ? callback     : dontQueue;
+    callback    = firstArgIsUsed ? url          : callback;
+    url         = firstArgIsUsed ? '/heliosAds' : url ||'/heliosAds';
+
+    $.getJSON(url, function(data){
+      if (typeof dontQueue === 'undefined') { queue(data.webAds); }
+      if (typeof callback == 'function') callback(null, data);
+    }, function(err){
+      if (typeof callback == 'function') callback(err, null);
+    });
+  }
+
+  var windowWidth;
+  function createConfig(obj){
+    var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
+    var defaults =  extending ? defaultConfig[extending] : null;
+    return $.extend({
+        windowWidth: windowWidth ? windowWidth : windowWidth = $(window).width()
+      },
+      loggerConfig(),
+      defaults,
+      defaultConfig.all,
+      defaultConfig [obj.name],
+      configMap     [obj.name],
+      obj);
+  }
+
+  function addToMap(){
+    var config = createConfig(this);
+    var banner = new F.webAds.Banner(config, globalExpose);
+    return (bannerMap[this.name] = banner);
+  }
+
+  function insertCallback(name, callback, list){
+    list = list||callbacks;
+    if (typeof callback === 'function'){
+      if (list[name] && $.isArray(list[name])){
+        list[name].push(callback);
+      } else {
+        list[name] = [callback];
+      }
+    }
+  }
+
+  function render(name, callback, force){
+    var secondIsFn = typeof callback === 'function';
+    force     = secondIsFn ? force : callback;
+    callback  = secondIsFn ? callback : force;
+
+    var banner = bannerMap[name];
+    if (!banner){
+      var error = new Error('Banner '+name+' not queued');
+      if (callback && typeof callback === 'function') {
+        callback(error, null);
+      } else {
+        resolveOnload(name, error);
+      }
+    } else if (!force && banner.active){
+      banner.log(1, 'banner is active');
+      if (callback && typeof callback === 'function') {
+        if (banner.resolved) {
+          banner.log(2, 'is resolved, calling callback direct');
+          callback(null, banner);
+        } else {
+          banner.log(2, 'deferring callback');
+          insertCallback(name, callback);
+        }
+      }
+      return banner;
+    } else {
+      banner.insert();
+      insertCallback(name, callback);
+      return banner;
+    }
+  }
+
+  function collectDataPositions(selector){
+    selector = selector||"body";
+    $(selector).find("div[data-webad-position]").each(function(){
+      var $this = $(this);
+      if ($this.data('webads') && $this.data('webads') !== 'lazy') {
+        config($this.data('webad-position'), 'container', $this);
+      }
+    });
+  }
+
+  function resolveOnload(name, error){
+    if (onloadCallbacks[name] && onloadCallbacks[name].length > 0){
+      $.each(onloadCallbacks[name], function(){
+        if (typeof this === 'function') {
+          if (error){
+            this(error, null);
+          } else {
+            this(null, bannerMap[name]);
+          }
+        }
+      });
+      onloadCallbacks[name] = null;
+    }
+    //triggerEvent('webad-onload-'+name, bannerMap[name]);
+    //triggerEvent('webad-onload', bannerMap[name]);
+  }
+
+  function resolve(name){
+    resolveOnload(name);
+    if (callbacks[name] && callbacks[name].length > 0){
+      $.each(callbacks[name], function(){
+        if (typeof this === 'function') this(null, bannerMap[name]);
+      });
+      callbacks[name] = null;
+    }
+    triggerEvent('webad-resolved-'+name, bannerMap[name]);
+    triggerEvent('webad-resolved', bannerMap[name]);
+    resolveAll();
+  }
+
+  function resolveAll(){
+    var allResolved = true;
+    var banner;
+    for(var key in bannerMap){
+      banner = bannerMap[key];
+      if (banner.resolved !== true && banner.incomplete !== true){
+        allResolved = false;
+        break;
+      }
+    }
+    if (allResolved){
+      var callbacksToCall = callbacks.all; // copy out the callbacks
+      callbacks.all = null; // reset map
+      if (callbacksToCall && callbacksToCall.length > 0){
+        $.each(callbacksToCall, function(){
+          if (typeof this === 'function') {
+            this(null, bannerMap);
+          }
+        });
+      }
+      triggerEvent('all-webads-resolved', bannerMap);
+      loggerConfig().log({name: 'WEBADS'}, 1, 'All webAds processed.');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function renderUntouched(){
+    var banner;
+    for(var key in bannerMap){
+      banner = bannerMap[key];
+      if (banner.insertCalled === false){
+        banner.insert();
+      }
+    }
+  }
+
+  function renderAll(commaList, callback){
+    var swapArgs = commaList && typeof commaList === 'function';
+    callback          = swapArgs ? commaList : callback;
+    commaList         = swapArgs ? "Top" : (commaList||"Top");
+
+    var priorityList  = commaList.split(',');
+    function loop(){
+      var name;
+      if (priorityList.length <= 0){
+        renderUntouched();
+      } else {
+        name = priorityList.shift();
+        insertCallback(name, loop, onloadCallbacks);
+        render(name);
+      }
+    }
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
+    loop();
+  }
+
+  function renderLazy(parent, callback){
+    $(parent).find('div[data-webads="lazy"]').attr('data-webads', 'true').data('webads', 'true');
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
+    renderContext(parent, true);
+  }
+
+  function queue(obj){
+    if ($.isArray(obj)){
+      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.length+' positions');
+      $.each(obj, addToMap);
+    } else {
+      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.name+'.');
+      return addToMap.call(obj);
+    }
+  }
+
+  function refresh(name, cb){
+    var banner = bannerMap[name];
+    // DO NOT render if banner is either incomplete or notvalid
+    if (banner && !(banner.notValid === true || banner.incomplete === true)){
+        banner.refresh();
+        // .refresh command resets banner.resolved
+        if (cb && typeof cb === 'function'){
+          insertCallback(name, cb);
+        }
+    } else {
+      if (banner) banner.log(1, 'Banner is ' + (banner.notValid ? ' out of threshold/notvalid' : ' incomplete') + ' and cannot be refreshed');
+      if (cb && typeof cb === 'function'){
+          cb();
+      }
+    }    
+  }
+
+  function refreshAll(commaList, callback){
+    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
+    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
+    var priorityList  = commaList.split(',');
+    var alreadyRendered = [];
+    function shouldRefresh(key){
+      var res = true;
+      $.each(alreadyRendered, function(i,val){
+        if (val == key){ return (res = false); }
+      });
+      return res;
+    }
+
+    function loop(){
+      if (priorityList.length <= 0){
+        for(var key in bannerMap){
+          if (shouldRefresh(key)){
+            refresh(key);
+          }
+        }
+      } else {
+        var name = priorityList.shift();
+        alreadyRendered.push(name);
+        refresh(name, loop);
+      }
+    }
+    if (callback && typeof callback === 'function') insertCallback('all', callback);
+    loop();
+  }
+
+  function remove(name){
+    return bannerMap[name] && bannerMap[name].remove();
+  }
+
+//  function removeAll(){
+//    for(var key in bannerMap){
+//      if (bannerMap[key]) bannerMap[key].remove();
+//    }
+//  }
+
+  function renderContext(selector, force){
+    collectDataPositions(selector);
+
+    $(selector).find("div[data-webads='true']").filter(function(){
+      return (force === true ? true : $(this).data('webads-processed') !== 'processed');
+    }).each(function(){
+      var $this = $(this);
+      $this.data('webads-processed', 'processed');
+      var position = $this.data('webad-position');
+      var id       = $this.attr('id');
+      if (position){
+        render(position, force);
+      } else if (id) {
+        renderAdsWithContainer(id, force);
+      }
+    });
+  }
+
+  function renderAdsWithContainer(container, force){
+    for(var key in bannerMap){
+      if (container === bannerMap[key].container){
+        render(key, force);
+      }
+    }
+  }
+
+  function expose(idocument, iwindow){
+    var name = idocument.location.hash.substring(2);
+    var list = bannerMap[name].expose();
+    $.each(list, function(k){ iwindow[k] = this; });
+  }
+
+})(FINN, jQuery);var FINN = FINN || {};
+
+(function(F, $) {
+  "use strict";
+
+  FINN.webAds = FINN.webAds || {};
+  FINN.data   = FINN.data   || {};
+
+  FINN.webAds.extend = function(obj){
+    if (typeof FINN.data.defaultConfig === 'undefined') {
+      FINN.data.defaultConfig = obj;
+    } else {
+      $.each(obj, function(k,v){ FINN.data.defaultConfig[k] = $.extend(FINN.data.defaultConfig[k]||{}, v); });
+    }
+  };
+
+  function fixTopPosition(banner) {
+    banner.log(2, "cb fixTopPosition");
+    if (banner.failed === true){
+      return;
+    }
+    var width           = banner.width;
+    var isSmallBanner   = width <= 768;
+    var isNotCompanion  = width >= 800 && width < 992;
+    var isDominant      = width > 992;
+
+    if (banner.params.bodyFailClass) {
+      $("body").removeClass(banner.params.bodyFailClass);
+    }
+    if (isSmallBanner || isNotCompanion) {
+      banner.iframe.$wrapper.css("width", "980px");
+    } else if (isDominant) {
+      banner.setBannerFlag('disableSticky', true);
+      banner.iframe.$wrapper.css("margin-left", "-12px");
+    }
+  }
+
+  function fixLeftPosition(banner) {
+    banner.log(2, "cb fixLeftBanner");
+    if (!banner.failed && banner.width > 50) {
+      banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
+    }
+  }
+
+  function fixWallpaper(banner) {
+    banner.log(2, "cb fixWallpaper");
+    if (banner.failed === true){ return;}
+    var bgImage = banner.iframe.$iframe.contents().find("img");
+    if (bgImage.size() > 0 && bgImage.width() !== 1) {
+      var src = bgImage.attr("src");
+      if (src !== "" && src.indexOf("empty.gif") === -1) {
+        var css = {
+          "background": " transparent url(\"" + src + "\") 50% 0% no-repeat",
+          "background-attachment": "fixed"
+        };
+        $("body").css(css).addClass("has-dominant-wallpaper");
+      }
+    }
+  }
+
+  function addCloseButton(banner){
+    banner.iframe.$wrapper.append('<button class=dismiss-sticky>X</button>');
+    banner.iframe.$wrapper.on("click", '.dismiss-sticky', function(){
+      banner.iframe.$wrapper.remove();
+    });
+  }
+
+  function setMaxWidth(banner){
+    if (banner.params.width){
+      var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;
+      var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
+      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;
+    }
+  }
+
+  FINN.webAds.extend({
+    "Top": {
+      "extends": "normal",
+      width: 992,
+      threshold: 769,
+      height: 150,
+      bodyFailClass: "top-position-collapsed",
+      done: fixTopPosition,
+      trackBurt: true
+    },
+    "Left1": {
+      "extends": "normal",
+      width: 240,
+      threshold: 1050,
+      height: 500,
+      bodyClass: "has-dominant-campaign",
+      done: fixLeftPosition,
+      trackBurt: true
+    },
+    "Right1": {
+      "extends": "normal",
+      width: 240,
+      threshold: 1025,
+      trackBurt: true
+    },
+    "Right2": {
+      "extends": "normal",
+      threshold: 1025,
+      sticky: true,
+      width: 240,
+      height: 500,
+      before: setMaxWidth,
+      trackBurt: true
+    },
+    "Right3": {
+      threshold: 1025,
+      "extends": "normal",
+      width: 240,
+      trackBurt: true
+    },
+    "Middle": {
+      "extends": "normal",
+      width: 580,
+      height: 400,
+      threshold: 291,
+      container: "banners-middle",
+      trackBurt: true
+    },
+    "Wallpaper": {
+      "extends": "normal",
+      hidden: true,
+      threshold: 1050,
+      done: fixWallpaper
+    },
+    "Survey": {
+      "extends": "normal",
+      hidden: true,
+      done: $.noop
+    },
+    "Inline1": {
+      width: 320,
+      container: "banners-inline1"
+    },
+    "Inline2": {
+      width: 320,
+      container: "banners-inline2"
+    },
+    "BottomLeft": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomMiddle": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomRight": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomRight2": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "bottomads": {
+      container: "banners-bottom"
+    },
+    "MobileBottom" : {
+      width: 320,
+      "extends": "normal",
+      done: addCloseButton
+    },
+    "normal": {
+      container : "banners"
+    },
+    "Bildekarusell": {
+      width: 500,
+      height: 320
+    },
+    "all": {
+      backend   : "helios"
+    }
+  });
+
+})(FINN, jQuery);/*global document, window, jQuery, setTimeout, FINN */
 (function(F, $) {
   "use strict";
   F.webAds = F.webAds || {};
@@ -387,185 +976,7 @@
   F.webAds.Iframe = Iframe;
 
 }).call(this, FINN, jQuery);
-var FINN = FINN || {};
-
-(function(F, $) {
-  "use strict";
-
-  FINN.webAds = FINN.webAds || {};
-  FINN.data   = FINN.data   || {};
-
-  FINN.webAds.extend = function(obj){
-    if (typeof FINN.data.defaultConfig === 'undefined') {
-      FINN.data.defaultConfig = obj;
-    } else {
-      $.each(obj, function(k,v){ FINN.data.defaultConfig[k] = $.extend(FINN.data.defaultConfig[k]||{}, v); });
-    }
-  };
-
-  function fixTopPosition(banner) {
-    banner.log(2, "cb fixTopPosition");
-    if (banner.failed === true){
-      return;
-    }
-    var width           = banner.width;
-    var isSmallBanner   = width <= 768;
-    var isNotCompanion  = width >= 800 && width < 992;
-    var isDominant      = width > 992;
-
-    if (banner.params.bodyFailClass) {
-      $("body").removeClass(banner.params.bodyFailClass);
-    }
-    if (isSmallBanner || isNotCompanion) {
-      banner.iframe.$wrapper.css("width", "980px");
-    } else if (isDominant) {
-      banner.setBannerFlag('disableSticky', true);
-      banner.iframe.$wrapper.css("margin-left", "-12px");
-    }
-  }
-
-  function fixLeftPosition(banner) {
-    banner.log(2, "cb fixLeftBanner");
-    if (!banner.failed && banner.width > 50) {
-      banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
-    }
-  }
-
-  function fixWallpaper(banner) {
-    banner.log(2, "cb fixWallpaper");
-    if (banner.failed === true){ return;}
-    var bgImage = banner.iframe.$iframe.contents().find("img");
-    if (bgImage.size() > 0 && bgImage.width() !== 1) {
-      var src = bgImage.attr("src");
-      if (src !== "" && src.indexOf("empty.gif") === -1) {
-        var css = {
-          "background": " transparent url(\"" + src + "\") 50% 0% no-repeat",
-          "background-attachment": "fixed"
-        };
-        $("body").css(css).addClass("has-dominant-wallpaper");
-      }
-    }
-  }
-
-  function addCloseButton(banner){
-    banner.iframe.$wrapper.append('<button class=dismiss-sticky>X</button>');
-    banner.iframe.$wrapper.on("click", '.dismiss-sticky', function(){
-      banner.iframe.$wrapper.remove();
-    });
-  }
-
-  function setMaxWidth(banner){
-    if (banner.params.width){
-      var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;
-      var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
-      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;
-    }
-  }
-
-  FINN.webAds.extend({
-    "Top": {
-      "extends": "normal",
-      width: 992,
-      threshold: 769,
-      height: 150,
-      bodyFailClass: "top-position-collapsed",
-      done: fixTopPosition,
-      trackBurt: true
-    },
-    "Left1": {
-      "extends": "normal",
-      width: 240,
-      threshold: 1050,
-      height: 500,
-      bodyClass: "has-dominant-campaign",
-      done: fixLeftPosition,
-      trackBurt: true
-    },
-    "Right1": {
-      "extends": "normal",
-      width: 240,
-      threshold: 1025,
-      trackBurt: true
-    },
-    "Right2": {
-      "extends": "normal",
-      threshold: 1025,
-      sticky: true,
-      width: 240,
-      height: 500,
-      before: setMaxWidth,
-      trackBurt: true
-    },
-    "Right3": {
-      threshold: 1025,
-      "extends": "normal",
-      width: 240,
-      trackBurt: true
-    },
-    "Middle": {
-      "extends": "normal",
-      width: 580,
-      height: 400,
-      threshold: 291,
-      container: "banners-middle",
-      trackBurt: true
-    },
-    "Wallpaper": {
-      "extends": "normal",
-      hidden: true,
-      threshold: 1050,
-      done: fixWallpaper
-    },
-    "Survey": {
-      "extends": "normal",
-      hidden: true,
-      done: $.noop
-    },
-    "Inline1": {
-      width: 320,
-      container: "banners-inline1"
-    },
-    "Inline2": {
-      width: 320,
-      container: "banners-inline2"
-    },
-    "BottomLeft": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomMiddle": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomRight": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomRight2": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "bottomads": {
-      container: "banners-bottom"
-    },
-    "MobileBottom" : {
-      width: 320,
-      "extends": "normal",
-      done: addCloseButton
-    },
-    "normal": {
-      container : "banners"
-    },
-    "Bildekarusell": {
-      width: 500,
-      height: 320
-    },
-    "all": {
-      backend   : "helios"
-    }
-  });
-
-})(FINN, jQuery);var FINN=FINN||{};
+var FINN=FINN||{};
 
 (function(F, $){
   
@@ -680,412 +1091,6 @@ var FINN = FINN || {};
     }    
   };
     
-})(FINN, jQuery);var FINN = FINN||{};
-
-(function(F, $){
-  var data          = F.data = F.data||{};
-  var defaultConfig = data.defaultConfig = data.defaultConfig||{};
-  var logger;
-  var loggerConfig  = function(){
-    if (logger) return logger;
-    if (!FINN.webAds||!FINN.webAds.logger) return {log:function(){}};
-    logger = FINN.webAds.logger('FINN WebAds');
-    return logger;
-  };
-
-  // exports
-  F.webAds = F.webAds||{};
-  var w = F.webAds;
-  w.renderContext         = renderContext;
-  w.queue                 = queue;
-  w.render                = render;
-  w.renderAll             = renderAll;
-  w.renderLazy            = renderLazy;
-  w.expose                = expose;
-  w.refresh               = refresh;
-  w.refreshAll            = refreshAll;
-  w.updateUrls            = updateUrls;
-  w.remove                = remove;
-  w.resolve               = resolve;
-  w.resolveOnload         = resolveOnload;
-  w.collectDataPositions  = collectDataPositions;
-  w.config                = config;
-  w.getFromServer         = getFromServer;
-  w.cleanUp               = cleanUp;
-  w.base                  = "/";
-
-  w.getBannerFlag         = getBannerFlag;
-  w.setBannerFlag         = setBannerFlag;
-  w._length               = bannerMapLength;
-  w._getBanner            = getBanner;
-  w.defaultReady          = defaultReady;
-
-  w.on = on;
-  w.one = one;
-  w.triggerEvent = triggerEvent;
-  function on(key, callback){
-    return $(document).on(key, callback);
-  }
-
-  function one(key, callback){
-    return $(document).one(key, callback);
-  }
-
-  function defaultReady(){
-    // Load banners
-    FINN.webAds.queue(FINN.data.banners);
-    // collect data
-    FINN.webAds.collectDataPositions();
-    FINN.webAds.renderAll('Top,Left1,Right2');
-  }
-
-  function triggerEvent(name, arg1){
-    $(document).trigger(name.toLowerCase(), arg1);
-  }
-
-  var globalExpose = {
-    _jQuery   : jQuery,
-    inDapIf   : true,
-    inFIF     : undefined,
-    webAds    : w,
-    helios_parameters : "", //TODO: remove this
-    tf_recordClickToUrl: window.tf_recordClickToUrl
-  };
-
-  var bannerMap   = {};
-  var bannerFlags = {};
-  var callbacks   = {};
-  var configMap   = {};
-  var onloadCallbacks = {};
-
-  function cleanUp(){
-    bannerMap   = {};
-    bannerFlags = {};
-    callbacks   = {};
-    configMap   = {};
-    onloadCallbacks = {};
-  }
-
-  function getBanner(name){
-    return bannerMap[name];
-  }
-
-  function getBannerFlag(key){
-    return (bannerFlags[key]||null);
-  }
-
-  function setBannerFlag(key, value){
-    if(!key) return null;
-    return (bannerFlags[key] = value);
-  }
-
-  function bannerMapLength(){
-    var i = 0;
-    for(var g in bannerMap){i++;}
-    return i;
-  }
-
-  function config(name, key, value){
-    configMap[name]       = configMap[name]||{};
-    var keys = key.split('.');
-    if (keys[1]){
-      configMap[name][keys[1]]  = value;
-    } else {
-      configMap[name][key]  = value;
-    }
-
-
-    if(bannerMap[name]){
-      bannerMap[name].config(key, value);
-    }
-  }
-
-  function updateUrls(urlMap){
-    for(var key in urlMap){
-      if (bannerMap[key]){
-        bannerMap[key].url = urlMap[key];
-      } else {
-        queue({name: key, url: urlMap[key]});
-      }
-    }
-  }
-
-  function getFromServer(url, callback, dontQueue){
-    var firstArgIsUsed = (typeof url === 'function');
-    dontQueue   = firstArgIsUsed ? callback     : dontQueue;
-    callback    = firstArgIsUsed ? url          : callback;
-    url         = firstArgIsUsed ? '/heliosAds' : url ||'/heliosAds';
-
-    $.getJSON(url, function(data){
-      if (typeof dontQueue === 'undefined') { queue(data.webAds); }
-      if (typeof callback == 'function') callback(null, data);
-    }, function(err){
-      if (typeof callback == 'function') callback(err, null);
-    });
-  }
-
-  var windowWidth;
-  function createConfig(obj){
-    var extending = (defaultConfig[obj.name] && defaultConfig[obj.name]["extends"]);
-    var defaults =  extending ? defaultConfig[extending] : null;
-    return $.extend({
-        windowWidth: windowWidth ? windowWidth : windowWidth = $(window).width()
-      },
-      loggerConfig(),
-      defaults,
-      defaultConfig.all,
-      defaultConfig [obj.name],
-      configMap     [obj.name],
-      obj);
-  }
-
-  function addToMap(){
-    var config = createConfig(this);
-    var banner = new F.webAds.Banner(config, globalExpose);
-    return (bannerMap[this.name] = banner);
-  }
-
-  function insertCallback(name, callback, list){
-    list = list||callbacks;
-    if (typeof callback === 'function'){
-      if (list[name] && $.isArray(list[name])){
-        list[name].push(callback);
-      } else {
-        list[name] = [callback];
-      }
-    }
-  }
-
-  function render(name, callback, force){
-    var secondIsFn = typeof callback === 'function';
-    force     = secondIsFn ? force : callback;
-    callback  = secondIsFn ? callback : force;
-
-    var banner = bannerMap[name];
-    if (!banner){
-      var error = new Error('Banner '+name+' not queued');
-      if (callback && typeof callback === 'function') {
-        callback(error, null);
-      } else {
-        resolveOnload(name, error);
-      }
-    } else if (!force && banner.active){
-      banner.log(1, 'banner is active');
-      if (callback && typeof callback === 'function') {
-        if (banner.resolved) {
-          banner.log(2, 'is resolved, calling callback direct');
-          callback(null, banner);
-        } else {
-          banner.log(2, 'deferring callback');
-          insertCallback(name, callback);
-        }
-      }
-      return banner;
-    } else {
-      banner.insert();
-      insertCallback(name, callback);
-      return banner;
-    }
-  }
-
-  function collectDataPositions(selector){
-    selector = selector||"body";
-    $(selector).find("div[data-webad-position]").each(function(){
-      var $this = $(this);
-      if ($this.data('webads') && $this.data('webads') !== 'lazy') {
-        config($this.data('webad-position'), 'container', $this);
-      }
-    });
-  }
-
-  function resolveOnload(name, error){
-    if (onloadCallbacks[name] && onloadCallbacks[name].length > 0){
-      $.each(onloadCallbacks[name], function(){
-        if (typeof this === 'function') {
-          if (error){
-            this(error, null);
-          } else {
-            this(null, bannerMap[name]);
-          }
-        }
-      });
-      onloadCallbacks[name] = null;
-    }
-    //triggerEvent('webad-onload-'+name, bannerMap[name]);
-    //triggerEvent('webad-onload', bannerMap[name]);
-  }
-
-  function resolve(name){
-    resolveOnload(name);
-    if (callbacks[name] && callbacks[name].length > 0){
-      $.each(callbacks[name], function(){
-        if (typeof this === 'function') this(null, bannerMap[name]);
-      });
-      callbacks[name] = null;
-    }
-    triggerEvent('webad-resolved-'+name, bannerMap[name]);
-    triggerEvent('webad-resolved', bannerMap[name]);
-    resolveAll();
-  }
-
-  function resolveAll(){
-    var allResolved = true;
-    var banner;
-    for(var key in bannerMap){
-      banner = bannerMap[key];
-      if (banner.resolved !== true && banner.incomplete !== true){
-        allResolved = false;
-        break;
-      }
-    }
-    if (allResolved){
-      var callbacksToCall = callbacks.all; // copy out the callbacks
-      callbacks.all = null; // reset map
-      if (callbacksToCall && callbacksToCall.length > 0){
-        $.each(callbacksToCall, function(){
-          if (typeof this === 'function') {
-            this(null, bannerMap);
-          }
-        });
-      }
-      triggerEvent('all-webads-resolved', bannerMap);
-      loggerConfig().log({name: 'WEBADS'}, 1, 'All webAds processed.');
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  function renderUntouched(){
-    var banner;
-    for(var key in bannerMap){
-      banner = bannerMap[key];
-      if (banner.insertCalled === false){
-        banner.insert();
-      }
-    }
-  }
-
-  function renderAll(commaList, callback){
-    var swapArgs = commaList && typeof commaList === 'function';
-    callback          = swapArgs ? commaList : callback;
-    commaList         = swapArgs ? "Top" : (commaList||"Top");
-
-    var priorityList  = commaList.split(',');
-    function loop(){
-      var name;
-      if (priorityList.length <= 0){
-        renderUntouched();
-      } else {
-        name = priorityList.shift();
-        insertCallback(name, loop, onloadCallbacks);
-        render(name);
-      }
-    }
-    if (callback && typeof callback === 'function') insertCallback('all', callback);
-    loop();
-  }
-
-  function renderLazy(parent, callback){
-    $(parent).find('div[data-webads="lazy"]').attr('data-webads', 'true').data('webads', 'true');
-    if (callback && typeof callback === 'function') insertCallback('all', callback);
-    renderContext(parent, true);
-  }
-
-  function queue(obj){
-    if ($.isArray(obj)){
-      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.length+' positions');
-      $.each(obj, addToMap);
-    } else {
-      loggerConfig().log({name: 'WEBADS'},2, 'Queued '+obj.name+'.');
-      return addToMap.call(obj);
-    }
-  }
-
-  function refresh(name, cb){
-    bannerMap[name].refresh();
-    // .refresh command resets banner.resolved
-    if (cb && typeof cb === 'function'){
-      insertCallback(name, cb);
-    }
-  }
-
-  function refreshAll(commaList, callback){
-    commaList         = commaList && typeof commaList === 'function' ? "Top" : (commaList||"Top");
-    callback          = commaList && typeof commaList === 'function' ? commaList : callback;
-    var priorityList  = commaList.split(',');
-
-    var alreadyRendered = [];
-    function shouldRefresh(key){
-      var res = true;
-      $.each(alreadyRendered, function(i,val){
-        if (val == key){ return (res = false); }
-      });
-      return res;
-    }
-
-    function loop(){
-      if (priorityList.length <= 0){
-        for(var key in bannerMap){
-          if (shouldRefresh(key)){
-            refresh(key);
-          }
-        }
-      } else {
-        var name = priorityList.shift();
-        alreadyRendered.push(name);
-        if(!bannerMap[name] || (bannerMap[name] && (bannerMap[name].notValid === true || bannerMap[name].incomplete === true)) ){
-          return loop();
-        }
-        refresh(name, loop);
-      }
-    }
-    if (callback && typeof callback === 'function') insertCallback('all', callback);
-    loop();
-  }
-
-  function remove(name){
-    return bannerMap[name] && bannerMap[name].remove();
-  }
-
-//  function removeAll(){
-//    for(var key in bannerMap){
-//      if (bannerMap[key]) bannerMap[key].remove();
-//    }
-//  }
-
-  function renderContext(selector, force){
-    collectDataPositions(selector);
-
-    $(selector).find("div[data-webads='true']").filter(function(){
-      return (force === true ? true : $(this).data('webads-processed') !== 'processed');
-    }).each(function(){
-      var $this = $(this);
-      $this.data('webads-processed', 'processed');
-      var position = $this.data('webad-position');
-      var id       = $this.attr('id');
-      if (position){
-        render(position, force);
-      } else if (id) {
-        renderAdsWithContainer(id, force);
-      }
-    });
-  }
-
-  function renderAdsWithContainer(container, force){
-    for(var key in bannerMap){
-      if (container === bannerMap[key].container){
-        render(key, force);
-      }
-    }
-  }
-
-  function expose(idocument, iwindow){
-    var name = idocument.location.hash.substring(2);
-    var list = bannerMap[name].expose();
-    $.each(list, function(k){ iwindow[k] = this; });
-  }
-
 })(FINN, jQuery);var FINN = FINN||{};
 
 (function(F, $){

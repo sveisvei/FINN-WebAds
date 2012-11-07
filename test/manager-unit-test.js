@@ -143,6 +143,12 @@ buster.testCase("Manager", {
       });
 
     },
+    "//refresh of notValid container should not call render": function(){
+      // set threshold to window width + % and force 
+    },
+    "//refreshAll should continue when notValid or incomplete banners": function(){
+      // should try to renderAll with multiple banners, with valid, incomplete and notValid bannerconfigs
+    },
     "configuring width and height after banner init should work": function(done){
       var lazyBanner = this.banner;
       refute.defined(lazyBanner.params.width);
