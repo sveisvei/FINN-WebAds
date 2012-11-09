@@ -86,11 +86,7 @@ var FINN = FINN||{};
           "message":"first plugin argument/options hash is not valid JSON"
         });
       }
-      //var params = { areaId : options.customer, orgid : options.area };
-      var params = {
-        'BANNER_ORGGROUPREF' : "kjede_privatmegleren",
-        'BANNER_AREAID' : "20045"
-      };
+      var params = { 'BANNER_ORGGROUPREF' : options.customer, 'BANNER_AREAID' : options.area };
       var req    = $.getJSON(FINN.webAds.base + this.dataUrl, params);
       req.success(function(list){
         handleResult({'list': list});
@@ -120,7 +116,7 @@ var FINN = FINN||{};
 
   /* overlay with iframe content, or wrap ad iframe*/
   F.webAds.registerPlugin('overlayOld', {
-    run: function(options, callback){
+    run: function(banner, options, callback){
       var w = options.width||'80%';
       var h = options.height||'400px';
 

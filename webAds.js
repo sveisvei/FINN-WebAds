@@ -4,7 +4,568 @@
  * Includes: jquery.ui.position.js
  * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
 ;(function(a,b){a.ui=a.ui||{};var c=/left|center|right/,d=/top|center|bottom/,e="center",f={},g=a.fn.position,h=a.fn.offset;a.fn.position=function(b){if(!b||!b.of)return g.apply(this,arguments);b=a.extend({},b);var h=a(b.of),i=h[0],j=(b.collision||"flip").split(" "),k=b.offset?b.offset.split(" "):[0,0],l,m,n;return i.nodeType===9?(l=h.width(),m=h.height(),n={top:0,left:0}):i.setTimeout?(l=h.width(),m=h.height(),n={top:h.scrollTop(),left:h.scrollLeft()}):i.preventDefault?(b.at="left top",l=m=0,n={top:b.of.pageY,left:b.of.pageX}):(l=h.outerWidth(),m=h.outerHeight(),n=h.offset()),a.each(["my","at"],function(){var a=(b[this]||"").split(" ");a.length===1&&(a=c.test(a[0])?a.concat([e]):d.test(a[0])?[e].concat(a):[e,e]),a[0]=c.test(a[0])?a[0]:e,a[1]=d.test(a[1])?a[1]:e,b[this]=a}),j.length===1&&(j[1]=j[0]),k[0]=parseInt(k[0],10)||0,k.length===1&&(k[1]=k[0]),k[1]=parseInt(k[1],10)||0,b.at[0]==="right"?n.left+=l:b.at[0]===e&&(n.left+=l/2),b.at[1]==="bottom"?n.top+=m:b.at[1]===e&&(n.top+=m/2),n.left+=k[0],n.top+=k[1],this.each(function(){var c=a(this),d=c.outerWidth(),g=c.outerHeight(),h=parseInt(a.curCSS(this,"marginLeft",!0))||0,i=parseInt(a.curCSS(this,"marginTop",!0))||0,o=d+h+(parseInt(a.curCSS(this,"marginRight",!0))||0),p=g+i+(parseInt(a.curCSS(this,"marginBottom",!0))||0),q=a.extend({},n),r;b.my[0]==="right"?q.left-=d:b.my[0]===e&&(q.left-=d/2),b.my[1]==="bottom"?q.top-=g:b.my[1]===e&&(q.top-=g/2),f.fractions||(q.left=Math.round(q.left),q.top=Math.round(q.top)),r={left:q.left-h,top:q.top-i},a.each(["left","top"],function(c,e){a.ui.position[j[c]]&&a.ui.position[j[c]][e](q,{targetWidth:l,targetHeight:m,elemWidth:d,elemHeight:g,collisionPosition:r,collisionWidth:o,collisionHeight:p,offset:k,my:b.my,at:b.at})}),a.fn.bgiframe&&c.bgiframe(),c.offset(a.extend(q,{using:b.using}))})},a.ui.position={fit:{left:function(b,c){var d=a(window),e=c.collisionPosition.left+c.collisionWidth-d.width()-d.scrollLeft();b.left=e>0?b.left-e:Math.max(b.left-c.collisionPosition.left,b.left)},top:function(b,c){var d=a(window),e=c.collisionPosition.top+c.collisionHeight-d.height()-d.scrollTop();b.top=e>0?b.top-e:Math.max(b.top-c.collisionPosition.top,b.top)}},flip:{left:function(b,c){if(c.at[0]===e)return;var d=a(window),f=c.collisionPosition.left+c.collisionWidth-d.width()-d.scrollLeft(),g=c.my[0]==="left"?-c.elemWidth:c.my[0]==="right"?c.elemWidth:0,h=c.at[0]==="left"?c.targetWidth:-c.targetWidth,i=-2*c.offset[0];b.left+=c.collisionPosition.left<0?g+h+i:f>0?g+h+i:0},top:function(b,c){if(c.at[1]===e)return;var d=a(window),f=c.collisionPosition.top+c.collisionHeight-d.height()-d.scrollTop(),g=c.my[1]==="top"?-c.elemHeight:c.my[1]==="bottom"?c.elemHeight:0,h=c.at[1]==="top"?c.targetHeight:-c.targetHeight,i=-2*c.offset[1];b.top+=c.collisionPosition.top<0?g+h+i:f>0?g+h+i:0}}},a.offset.setOffset||(a.offset.setOffset=function(b,c){/static/.test(a.curCSS(b,"position"))&&(b.style.position="relative");var d=a(b),e=d.offset(),f=parseInt(a.curCSS(b,"top",!0),10)||0,g=parseInt(a.curCSS(b,"left",!0),10)||0,h={top:c.top-e.top+f,left:c.left-e.left+g};"using"in c?c.using.call(b,h):d.css(h)},a.fn.offset=function(b){var c=this[0];return!c||!c.ownerDocument?null:b?a.isFunction(b)?this.each(function(c){a(this).offset(b.call(this,c,a(this).offset()))}):this.each(function(){a.offset.setOffset(this,b)}):h.call(this)}),a.curCSS||(a.curCSS=a.css),function(){var b=document.getElementsByTagName("body")[0],c=document.createElement("div"),d,e,g,h,i;d=document.createElement(b?"div":"body"),g={visibility:"hidden",width:0,height:0,border:0,margin:0,background:"none"},b&&a.extend(g,{position:"absolute",left:"-1000px",top:"-1000px"});for(var j in g)d.style[j]=g[j];d.appendChild(c),e=b||document.documentElement,e.insertBefore(d,e.firstChild),c.style.cssText="position: absolute; left: 10.7432222px; top: 10.432325px; height: 30px; width: 201px;",h=a(c).offset(function(a,b){return b}).offset(),d.innerHTML="",e.removeChild(d),i=h.top+h.left+(b?2e3:0),f.fractions=i>21&&i<22}()})(jQuery);
-var FINN = FINN||{};
+/*global document, window, jQuery, setTimeout, FINN */
+(function(F, $) {
+  "use strict";
+  F.webAds = F.webAds || {};
+  var Banner, Iframe;
+
+  var IFRAME_VERSION = 7;
+  var DEFAULTS = {
+    RETRIES: 5,
+    TIMEOUT: 200,
+    MINSIZE: 39,
+    ADCONTAINER: 'webAd'
+  };
+
+  Iframe = (function(document) {
+    function Iframe(name, options) {
+      this.name     = name;
+      this.options  = options !== null ? options : {};
+    }
+
+    Iframe.prototype.remove = function() {
+      this.$wrapper.remove();
+      return this;
+    };
+
+    Iframe.prototype.getUrl = function(src){
+      var url     = F.webAds.iframeUrl || '/html/banner/webad.html';
+      var sep     = url.indexOf('?') !== -1 ? '&' : '?';
+      var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
+      return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
+    };
+
+
+    Iframe.prototype.makeIframe = function() {
+      var div       = document.createElement('div');
+      var innerDiv  = document.createElement('div');
+      var i         = document.createElement('iframe');
+      innerDiv.className  = 'webad-inner';
+      var divClasses = ['webad', 'webad-'+this.name];
+      if (this.options.customClasses){
+        divClasses.push(this.options.customClasses);
+      }
+      if (this.options.hidden) {
+        divClasses.push('webad-hidden');
+        div.style.display = "none";
+      }
+      if (this.options.sticky && F.webAds.getBannerFlag('disableSticky') !== true) {
+        divClasses.push('webad-sticky');
+      }
+      div.className = (divClasses.join(' ')).toLowerCase();
+      i.src        = this.options.remoteUrl||this.getUrl();
+      i.scrolling  = 'no';
+      i.setAttribute('data-automation-id', this.name);
+      i.className  = 'webad-iframe';
+      // IE 7-8
+      i.marginWidth  = 0;
+      i.marginHeight = 0;
+      i.frameBorder  = '0';
+      i.allowTransparency = 'true';
+      //Safari will will not show iframe until scroll with width/height == 0px
+      i.width         = this.options.width || 100;
+      i.height        = this.options.height || 100;
+      i.style.width   = (this.options.width || 100) + 'px';
+      i.style.height  = (this.options.height || 100) + 'px';
+      i.style.border  = '0px';
+      // Wrap iframe inside 2 divs
+      innerDiv.appendChild(i);
+      div.appendChild(innerDiv);
+      // Add reference for selecting injected iframe
+      this.$iframe  = $(i);
+      this.$wrapper = $(div).data('webad', this.name);
+      return this;
+    };
+    return Iframe;
+  })(document);
+
+
+
+  Banner = (function() {
+    function Banner(params, expose) {
+      this.params         = params;
+      this.exposeObj      = expose !== null ? expose : {};
+      this.name           = this.params.name;
+      this.url            = this.params.url;
+      this.container      = this.params.container;
+      this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;
+      this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
+      this.width          = 0;
+      this.height         = 0;
+      this.refreshedTimes = 0;
+      this.active         = false;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
+      this.resolved       = false;
+      this.failed         = false;
+      this.incomplete     = false;
+      this.resized        = false;
+      this.notValid       = false;
+      this.ignoreOnload   = false;
+      this.insertCalled   = false;
+      this.log(1, 'Banner init. (new Banner({}))');
+    }
+
+    Banner.prototype.log = function(level, msg) {
+      if (!msg){
+        msg   = level;
+        level = 1;
+      }
+      if (this.params.log) this.params.log(this, level, msg);
+    };
+
+    Banner.prototype.config = function(key, value) {
+      this.log(3, key+' updated');
+      key = key.split('.');
+      if (key[1] && this[key[0]]){
+        this[key[0]][key[1]] = value;
+      } else {
+        this[key] = value;
+      }
+      return this;
+
+    };
+
+    Banner.prototype.onload = function() {
+      this.log(2, 'onload triggered on iframe');
+      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
+      if(this.ignoreOnload === true){
+        return this.resolve();
+      }
+      if (this.params.hidden || this.params.skipSizeCheck) {
+        this.log(2, 'HIDDEN ignoreSizeCheck');
+        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
+          return this.fail('pixel');
+        } else {
+          this.resolve();
+        }
+      } else {
+        this.processSize();
+      }
+      F.webAds.resolveOnload(this.name);
+      return this;
+    };
+
+    Banner.prototype.isValidSize = function(w, h){
+      return (w === null || w <= this.minSize || h === null || h <= this.minSize);
+    };
+
+    Banner.prototype.isEmptyPixel = function(){
+      return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
+    };
+
+    Banner.prototype.hasEmptyPixel = function(){
+      return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
+    };
+
+    Banner.prototype.processSize = function() {
+      var w = this.params.staticAvailableWidth||this.$webAd.width();
+      var h = this.$webAd.height();
+      //console.log('extracting size',this.name, w, h);
+      this.log(2, 'Checking if valid size: '+w+'x'+h);
+      if (this.isValidSize(w, h)) {
+        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
+          return this.fail('pixel');
+        }
+        return this.pollForNewSize(w, h);
+      }
+      this.resizeIfNotDefault(w, h);
+      this.resolve();
+      return this;
+    };
+
+    Banner.prototype.resolve = function() {
+      this.log(1, ' resolved as '+ (this.failed ? 'failed' : 'rendered'));
+      if (this.params.bodyClass && !this.failed) {
+        $("body").addClass(this.params.bodyClass);
+      }
+      if (this.params.done && typeof this.params.done === 'function') {
+        this.params.done(this);
+      }
+      if (!this.resolved) {
+        this.resolved = true;
+        this.log(2, 'Calling FINN.webAds.resolve()');
+        F.webAds.resolve(this.name);
+      }
+      // reset
+      this.refreshCalled = false;
+      return this;
+    };
+
+    Banner.prototype.fail = function(reason, dontSetClass) {
+      this.log(1, 'Failed:' + reason);
+      if (reason == 'timeout' && this.iframe && this.iframe.$iframe){
+        var html = this.iframe.$iframe.contents()
+          .find('#webAd').html().replace(/</gm, '&lt;').replace(/>/gmi, '&gt;');
+        this.log(2, 'html: ' + html);
+      }
+      if (!dontSetClass && this.iframe && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');
+      if (this.params.bodyFailClass) {
+        $("body").addClass(this.params.bodyFailClass);
+      }
+      this.failed = true;
+      return this.resolve();
+    };
+
+    Banner.prototype.pollForNewSize = function(width, height) {
+      var banner, cb;
+      this.log(2, 'pollForNewSize ' + this.timer + ' retries: ' + this.retries);
+      this.timer += this.timer;
+      this.retries -= 1;
+      banner = this;
+      if (this.retries > 0) {
+        cb = function() { banner.processSize(); };
+        setTimeout(cb, this.timer);
+        //console.log(this.name, this.timer);
+      } else {
+        this.width  = width;
+        this.height = height;
+        this.fail("timeout");
+      }
+      return this;
+    };
+
+    Banner.prototype.isDefaultSize = function(width, height){
+      if (this.resized){ return false; }
+      if (this.params.width > 0 && this.params.width === width && this.params.height === height ){
+        return true;
+      }
+    };
+
+    Banner.prototype.resizeIfNotDefault = function(w, h){
+      this.width  = w;
+      this.height = h;
+      if ( !this.isDefaultSize(w, h) ){ this.resize(); }
+      return this;
+    };
+
+    Banner.prototype.resize = function(w, h) {
+      if (typeof w !== 'undefined') this.width = w;
+      if (typeof h !== 'undefined') this.height = h;
+      this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
+      this.resized = true;
+      //console.log(this.name, 'resize', w, h, this.width, this.height);
+
+      this.log(1, 'resized to height:' + this.height + ' and width:' + this.width);
+      return this;
+    };
+
+    Banner.prototype.expose = function() {
+      return $.extend({}, this.exposeObj, { banner: this });
+    };
+
+    Banner.prototype.injectScript = function(idoc) {
+      if (typeof this.params.before === 'function'){
+        this.params.before(this);
+      }
+      this.log(3, 'injectScript');
+      this.doc = idoc;
+      var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
+
+
+
+      // Only run the tag through 3rd party Burt Tracking if it has been loaded
+     if (this.params.trackBurt && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
+       try {
+         var _ad = ad;
+         ad = burt_api.site.trackFinnAd(this, ad);
+       } catch(err){
+         ad = _ad;
+       }
+      }
+
+      idoc.write(ad);
+      return this;
+    };
+
+    Banner.prototype.refresh = function() {
+      if (this.incomplete){
+        this.fail('Cant refresh bacause of not valid config.');
+      }
+      this.refreshCalled  = true;
+      this.resolved       = false;
+      if (this.failed && this.iframe && this.iframe.$wrapper){
+        this.iframe.$wrapper.removeClass('webad-failed');
+      }
+      this.failed         = false;
+      this.retries        = DEFAULTS.RETRIES;
+      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
+
+      // if iframe is removed, this will throw
+      try {
+        var url = this.iframe.getUrl(this.doc.location.href);
+        this.doc.location.replace(url);
+      } catch (err) {
+        if (this.active) {
+          F.webAds.remove(this.name);
+          F.webAds.render(this.name);
+        }
+      }
+      this.refreshedTimes =  this.refreshedTimes + 1;
+      return this;
+    };
+
+    Banner.prototype.remove = function() {
+      this.active   = false;
+      this.resolved = false;
+      this.iframe.remove();
+      return this;
+    };
+
+    Banner.prototype.isValid = function(){
+      this.log(2, 'Not valid if '+this.params.windowWidth+' is less than '+this.params.threshold);
+      if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
+        return false;
+      }
+      return true;
+    };
+
+    Banner.prototype.getClassName = function(){
+      return "webad-" + this.name.toLowerCase();
+    };
+
+    Banner.prototype.insert = function() {
+      this.insertCalled = true;
+      this.log(3, 'Insert()');
+      if(!this.isValid()){
+        this.notValid = true;
+        this.fail('notValid');
+        return this;
+      }
+
+      if(!this.container){
+        this.incomplete = true;
+        this.failed     = true;
+        this.log(1, 'Missing container '+this.container);
+        this.resolve();
+        return this;
+      }
+      if (this.active && this.$webAd && $("."+this.getClassName()).length > 0) {
+        this.log(1, 'iframe present in page');
+        return this;
+      }
+
+      this.incomplete = false;
+      this.failed     = false;
+      this.resolved   = false;
+      this.active     = true;
+      var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
+      if ($container.size() <= 0) {
+        this.fail('Missing valid container on '+this.name, true);
+        return this;
+      }
+      this.log(3, 'Creating and inserting iframe/banner');
+      if (!this.iframe){
+        this.iframe = new Iframe(this.name, this.params);
+      }
+      this.iframe.makeIframe();
+      $container.data('webads-processed', 'processed');
+      this.iframe.$wrapper.appendTo($container);
+      return this;
+    };
+
+    Banner.prototype.getBannerFlag = function(key){
+      return F.webAds.getBannerFlag(key);
+    };
+
+    Banner.prototype.setBannerFlag = function(key, value){
+      return F.webAds.setBannerFlag(key, value);
+    };
+
+    Banner.prototype.plugin = function(name, a, b, c){
+      var plugin = F.webAds.getPlugin(name);
+      if (!plugin){ return plugin; }
+      plugin.called[this.name] = plugin.called[this.name] ? plugin.called[this.name] + 1 : 1;
+      return plugin.run.apply(plugin, [this, a, b, c]);
+    };
+
+    return Banner;
+  })();
+
+  F.webAds.Banner = Banner;
+  F.webAds.Iframe = Iframe;
+
+}).call(this, FINN, jQuery);
+var FINN = FINN || {};
+
+(function(F, $) {
+  "use strict";
+
+  FINN.webAds = FINN.webAds || {};
+  FINN.data   = FINN.data   || {};
+
+  FINN.webAds.extend = function(obj){
+    if (typeof FINN.data.defaultConfig === 'undefined') {
+      FINN.data.defaultConfig = obj;
+    } else {
+      $.each(obj, function(k,v){ FINN.data.defaultConfig[k] = $.extend(FINN.data.defaultConfig[k]||{}, v); });
+    }
+  };
+
+  function fixTopPosition(banner) {
+    banner.log(2, "cb fixTopPosition");
+    if (banner.failed === true){
+      return;
+    }
+    var width           = banner.width;
+    var isSmallBanner   = width <= 768;
+    var isNotCompanion  = width >= 800 && width < 992;
+    var isDominant      = width > 992;
+
+    if (banner.params.bodyFailClass) {
+      $("body").removeClass(banner.params.bodyFailClass);
+    }
+    if (isSmallBanner || isNotCompanion) {
+      banner.iframe.$wrapper.css("width", "980px");
+    } else if (isDominant) {
+      banner.setBannerFlag('disableSticky', true);
+      banner.iframe.$wrapper.css("margin-left", "-12px");
+    }
+  }
+
+  function fixLeftPosition(banner) {
+    banner.log(2, "cb fixLeftBanner");
+    if (!banner.failed && banner.width > 50) {
+      banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
+    }
+  }
+
+  function fixWallpaper(banner) {
+    banner.log(2, "cb fixWallpaper");
+    if (banner.failed === true){ return;}
+    var bgImage = banner.iframe.$iframe.contents().find("img");
+    if (bgImage.size() > 0 && bgImage.width() !== 1) {
+      var src = bgImage.attr("src");
+      if (src !== "" && src.indexOf("empty.gif") === -1) {
+        var css = {
+          "background": " transparent url(\"" + src + "\") 50% 0% no-repeat",
+          "background-attachment": "fixed"
+        };
+        $("body").css(css).addClass("has-dominant-wallpaper");
+      }
+    }
+  }
+
+  function addCloseButton(banner){
+    banner.iframe.$wrapper.append('<button class=dismiss-sticky>X</button>');
+    banner.iframe.$wrapper.on("click", '.dismiss-sticky', function(){
+      banner.iframe.$wrapper.remove();
+    });
+  }
+
+  function setMaxWidth(banner){
+    if (banner.params.width){
+      var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;
+      var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
+      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;
+    }
+  }
+
+  FINN.webAds.extend({
+    "Top": {
+      "extends": "normal",
+      width: 992,
+      threshold: 769,
+      height: 150,
+      bodyFailClass: "top-position-collapsed",
+      done: fixTopPosition,
+      trackBurt: true
+    },
+    "Left1": {
+      "extends": "normal",
+      width: 240,
+      threshold: 1050,
+      height: 500,
+      bodyClass: "has-dominant-campaign",
+      done: fixLeftPosition,
+      trackBurt: true
+    },
+    "Right1": {
+      "extends": "normal",
+      width: 240,
+      threshold: 1025,
+      trackBurt: true
+    },
+    "Right2": {
+      "extends": "normal",
+      threshold: 1025,
+      sticky: true,
+      width: 240,
+      height: 500,
+      before: setMaxWidth,
+      trackBurt: true
+    },
+    "Right3": {
+      threshold: 1025,
+      "extends": "normal",
+      width: 240,
+      trackBurt: true
+    },
+    "Middle": {
+      "extends": "normal",
+      width: 580,
+      height: 400,
+      threshold: 291,
+      container: "banners-middle",
+      trackBurt: true
+    },
+    "Wallpaper": {
+      "extends": "normal",
+      hidden: true,
+      threshold: 1050,
+      done: fixWallpaper
+    },
+    "Survey": {
+      "extends": "normal",
+      hidden: true,
+      done: $.noop
+    },
+    "Inline1": {
+      width: 320,
+      container: "banners-inline1"
+    },
+    "Inline2": {
+      width: 320,
+      container: "banners-inline2"
+    },
+    "BottomLeft": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomMiddle": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomRight": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomRight2": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "bottomads": {
+      container: "banners-bottom"
+    },
+    "MobileBottom" : {
+      width: 320,
+      "extends": "normal",
+      done: addCloseButton
+    },
+    "normal": {
+      container : "banners"
+    },
+    "Bildekarusell": {
+      width: 500,
+      height: 320
+    },
+    "all": {
+      backend   : "helios"
+    }
+  });
+
+})(FINN, jQuery);var FINN = FINN||{};
 
 (function(F, $){
   var data          = F.data = F.data||{};
@@ -415,568 +976,7 @@ var FINN = FINN||{};
     $.each(list, function(k){ iwindow[k] = this; });
   }
 
-})(FINN, jQuery);var FINN = FINN || {};
-
-(function(F, $) {
-  "use strict";
-
-  FINN.webAds = FINN.webAds || {};
-  FINN.data   = FINN.data   || {};
-
-  FINN.webAds.extend = function(obj){
-    if (typeof FINN.data.defaultConfig === 'undefined') {
-      FINN.data.defaultConfig = obj;
-    } else {
-      $.each(obj, function(k,v){ FINN.data.defaultConfig[k] = $.extend(FINN.data.defaultConfig[k]||{}, v); });
-    }
-  };
-
-  function fixTopPosition(banner) {
-    banner.log(2, "cb fixTopPosition");
-    if (banner.failed === true){
-      return;
-    }
-    var width           = banner.width;
-    var isSmallBanner   = width <= 768;
-    var isNotCompanion  = width >= 800 && width < 992;
-    var isDominant      = width > 992;
-
-    if (banner.params.bodyFailClass) {
-      $("body").removeClass(banner.params.bodyFailClass);
-    }
-    if (isSmallBanner || isNotCompanion) {
-      banner.iframe.$wrapper.css("width", "980px");
-    } else if (isDominant) {
-      banner.setBannerFlag('disableSticky', true);
-      banner.iframe.$wrapper.css("margin-left", "-12px");
-    }
-  }
-
-  function fixLeftPosition(banner) {
-    banner.log(2, "cb fixLeftBanner");
-    if (!banner.failed && banner.width > 50) {
-      banner.iframe.$wrapper.css("left", (-(banner.width + 12)) + "px");
-    }
-  }
-
-  function fixWallpaper(banner) {
-    banner.log(2, "cb fixWallpaper");
-    if (banner.failed === true){ return;}
-    var bgImage = banner.iframe.$iframe.contents().find("img");
-    if (bgImage.size() > 0 && bgImage.width() !== 1) {
-      var src = bgImage.attr("src");
-      if (src !== "" && src.indexOf("empty.gif") === -1) {
-        var css = {
-          "background": " transparent url(\"" + src + "\") 50% 0% no-repeat",
-          "background-attachment": "fixed"
-        };
-        $("body").css(css).addClass("has-dominant-wallpaper");
-      }
-    }
-  }
-
-  function addCloseButton(banner){
-    banner.iframe.$wrapper.append('<button class=dismiss-sticky>X</button>');
-    banner.iframe.$wrapper.on("click", '.dismiss-sticky', function(){
-      banner.iframe.$wrapper.remove();
-    });
-  }
-
-  function setMaxWidth(banner){
-    if (banner.params.width){
-      var $container = typeof banner.container === 'string' ? jQuery("#" + banner.container) : banner.container;
-      var availWidth = banner.params.windowWidth - (banner.iframe.$wrapper.position().left + $container.position().left);
-      banner.params.staticAvailableWidth = (availWidth-10) > banner.params.width ? (availWidth-10) : banner.params.width;
-    }
-  }
-
-  FINN.webAds.extend({
-    "Top": {
-      "extends": "normal",
-      width: 992,
-      threshold: 769,
-      height: 150,
-      bodyFailClass: "top-position-collapsed",
-      done: fixTopPosition,
-      trackBurt: true
-    },
-    "Left1": {
-      "extends": "normal",
-      width: 240,
-      threshold: 1050,
-      height: 500,
-      bodyClass: "has-dominant-campaign",
-      done: fixLeftPosition,
-      trackBurt: true
-    },
-    "Right1": {
-      "extends": "normal",
-      width: 240,
-      threshold: 1025,
-      trackBurt: true
-    },
-    "Right2": {
-      "extends": "normal",
-      threshold: 1025,
-      sticky: true,
-      width: 240,
-      height: 500,
-      before: setMaxWidth,
-      trackBurt: true
-    },
-    "Right3": {
-      threshold: 1025,
-      "extends": "normal",
-      width: 240,
-      trackBurt: true
-    },
-    "Middle": {
-      "extends": "normal",
-      width: 580,
-      height: 400,
-      threshold: 291,
-      container: "banners-middle",
-      trackBurt: true
-    },
-    "Wallpaper": {
-      "extends": "normal",
-      hidden: true,
-      threshold: 1050,
-      done: fixWallpaper
-    },
-    "Survey": {
-      "extends": "normal",
-      hidden: true,
-      done: $.noop
-    },
-    "Inline1": {
-      width: 320,
-      container: "banners-inline1"
-    },
-    "Inline2": {
-      width: 320,
-      container: "banners-inline2"
-    },
-    "BottomLeft": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomMiddle": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomRight": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "BottomRight2": {
-      "extends": "bottomads",
-      trackBurt: true
-    },
-    "bottomads": {
-      container: "banners-bottom"
-    },
-    "MobileBottom" : {
-      width: 320,
-      "extends": "normal",
-      done: addCloseButton
-    },
-    "normal": {
-      container : "banners"
-    },
-    "Bildekarusell": {
-      width: 500,
-      height: 320
-    },
-    "all": {
-      backend   : "helios"
-    }
-  });
-
-})(FINN, jQuery);/*global document, window, jQuery, setTimeout, FINN */
-(function(F, $) {
-  "use strict";
-  F.webAds = F.webAds || {};
-  var Banner, Iframe;
-
-  var IFRAME_VERSION = 7;
-  var DEFAULTS = {
-    RETRIES: 5,
-    TIMEOUT: 200,
-    MINSIZE: 39,
-    ADCONTAINER: 'webAd'
-  };
-
-  Iframe = (function(document) {
-    function Iframe(name, options) {
-      this.name     = name;
-      this.options  = options !== null ? options : {};
-    }
-
-    Iframe.prototype.remove = function() {
-      this.$wrapper.remove();
-      return this;
-    };
-
-    Iframe.prototype.getUrl = function(src){
-      var url     = F.webAds.iframeUrl || '/html/banner/webad.html';
-      var sep     = url.indexOf('?') !== -1 ? '&' : '?';
-      var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
-      return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
-    };
-
-
-    Iframe.prototype.makeIframe = function() {
-      var div       = document.createElement('div');
-      var innerDiv  = document.createElement('div');
-      var i         = document.createElement('iframe');
-      innerDiv.className  = 'webad-inner';
-      var divClasses = ['webad', 'webad-'+this.name];
-      if (this.options.customClasses){
-        divClasses.push(this.options.customClasses);
-      }
-      if (this.options.hidden) {
-        divClasses.push('webad-hidden');
-        div.style.display = "none";
-      }
-      if (this.options.sticky && F.webAds.getBannerFlag('disableSticky') !== true) {
-        divClasses.push('webad-sticky');
-      }
-      div.className = (divClasses.join(' ')).toLowerCase();
-      i.src        = this.options.remoteUrl||this.getUrl();
-      i.scrolling  = 'no';
-      i.setAttribute('data-automation-id', this.name);
-      i.className  = 'webad-iframe';
-      // IE 7-8
-      i.marginWidth  = 0;
-      i.marginHeight = 0;
-      i.frameBorder  = '0';
-      i.allowTransparency = 'true';
-      //Safari will will not show iframe until scroll with width/height == 0px
-      i.width         = this.options.width || 100;
-      i.height        = this.options.height || 100;
-      i.style.width   = (this.options.width || 100) + 'px';
-      i.style.height  = (this.options.height || 100) + 'px';
-      i.style.border  = '0px';
-      // Wrap iframe inside 2 divs
-      innerDiv.appendChild(i);
-      div.appendChild(innerDiv);
-      // Add reference for selecting injected iframe
-      this.$iframe  = $(i);
-      this.$wrapper = $(div).data('webad', this.name);
-      return this;
-    };
-    return Iframe;
-  })(document);
-
-
-
-  Banner = (function() {
-    function Banner(params, expose) {
-      this.params         = params;
-      this.exposeObj      = expose !== null ? expose : {};
-      this.name           = this.params.name;
-      this.url            = this.params.url;
-      this.container      = this.params.container;
-      this.adContainer    = this.params.adContainer||DEFAULTS.ADCONTAINER;
-      this.minSize        = this.params.minSize||DEFAULTS.MINSIZE;
-      this.width          = 0;
-      this.height         = 0;
-      this.refreshedTimes = 0;
-      this.active         = false;
-      this.retries        = DEFAULTS.RETRIES;
-      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
-      this.resolved       = false;
-      this.failed         = false;
-      this.incomplete     = false;
-      this.resized        = false;
-      this.notValid       = false;
-      this.ignoreOnload   = false;
-      this.insertCalled   = false;
-      this.log(1, 'Banner init. (new Banner({}))');
-    }
-
-    Banner.prototype.log = function(level, msg) {
-      if (!msg){
-        msg   = level;
-        level = 1;
-      }
-      if (this.params.log) this.params.log(this, level, msg);
-    };
-
-    Banner.prototype.config = function(key, value) {
-      this.log(3, key+' updated');
-      key = key.split('.');
-      if (key[1] && this[key[0]]){
-        this[key[0]][key[1]] = value;
-      } else {
-        this[key] = value;
-      }
-      return this;
-
-    };
-
-    Banner.prototype.onload = function() {
-      this.log(2, 'onload triggered on iframe');
-      this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      if(this.ignoreOnload === true){
-        return this.resolve();
-      }
-      if (this.params.hidden || this.params.skipSizeCheck) {
-        this.log(2, 'HIDDEN ignoreSizeCheck');
-        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
-          return this.fail('pixel');
-        } else {
-          this.resolve();
-        }
-      } else {
-        this.processSize();
-      }
-      F.webAds.resolveOnload(this.name);
-      return this;
-    };
-
-    Banner.prototype.isValidSize = function(w, h){
-      return (w === null || w <= this.minSize || h === null || h <= this.minSize);
-    };
-
-    Banner.prototype.isEmptyPixel = function(){
-      return !!($(this).attr('src').match(/.*(1x1|3x3|1x2).*/i));
-    };
-
-    Banner.prototype.hasEmptyPixel = function(){
-      return (this.$webAd.find('img').filter(this.isEmptyPixel).length > 0);
-    };
-
-    Banner.prototype.processSize = function() {
-      var w = this.params.staticAvailableWidth||this.$webAd.width();
-      var h = this.$webAd.height();
-      //console.log('extracting size',this.name, w, h);
-      this.log(2, 'Checking if valid size: '+w+'x'+h);
-      if (this.isValidSize(w, h)) {
-        if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
-          return this.fail('pixel');
-        }
-        return this.pollForNewSize(w, h);
-      }
-      this.resizeIfNotDefault(w, h);
-      this.resolve();
-      return this;
-    };
-
-    Banner.prototype.resolve = function() {
-      this.log(1, ' resolved as '+ (this.failed ? 'failed' : 'rendered'));
-      if (this.params.bodyClass && !this.failed) {
-        $("body").addClass(this.params.bodyClass);
-      }
-      if (this.params.done && typeof this.params.done === 'function') {
-        this.params.done(this);
-      }
-      if (!this.resolved) {
-        this.resolved = true;
-        this.log(2, 'Calling FINN.webAds.resolve()');
-        F.webAds.resolve(this.name);
-      }
-      // reset
-      this.refreshCalled = false;
-      return this;
-    };
-
-    Banner.prototype.fail = function(reason, dontSetClass) {
-      this.log(1, 'Failed:' + reason);
-      if (reason == 'timeout' && this.iframe && this.iframe.$iframe){
-        var html = this.iframe.$iframe.contents()
-          .find('#webAd').html().replace(/</gm, '&lt;').replace(/>/gmi, '&gt;');
-        this.log(2, 'html: ' + html);
-      }
-      if (!dontSetClass && this.iframe && this.iframe.$wrapper) this.iframe.$wrapper.addClass('webad-failed');
-      if (this.params.bodyFailClass) {
-        $("body").addClass(this.params.bodyFailClass);
-      }
-      this.failed = true;
-      return this.resolve();
-    };
-
-    Banner.prototype.pollForNewSize = function(width, height) {
-      var banner, cb;
-      this.log(2, 'pollForNewSize ' + this.timer + ' retries: ' + this.retries);
-      this.timer += this.timer;
-      this.retries -= 1;
-      banner = this;
-      if (this.retries > 0) {
-        cb = function() { banner.processSize(); };
-        setTimeout(cb, this.timer);
-        //console.log(this.name, this.timer);
-      } else {
-        this.width  = width;
-        this.height = height;
-        this.fail("timeout");
-      }
-      return this;
-    };
-
-    Banner.prototype.isDefaultSize = function(width, height){
-      if (this.resized){ return false; }
-      if (this.params.width > 0 && this.params.width === width && this.params.height === height ){
-        return true;
-      }
-    };
-
-    Banner.prototype.resizeIfNotDefault = function(w, h){
-      this.width  = w;
-      this.height = h;
-      if ( !this.isDefaultSize(w, h) ){ this.resize(); }
-      return this;
-    };
-
-    Banner.prototype.resize = function(w, h) {
-      if (typeof w !== 'undefined') this.width = w;
-      if (typeof h !== 'undefined') this.height = h;
-      this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
-      this.resized = true;
-      //console.log(this.name, 'resize', w, h, this.width, this.height);
-
-      this.log(1, 'resized to height:' + this.height + ' and width:' + this.width);
-      return this;
-    };
-
-    Banner.prototype.expose = function() {
-      return $.extend({}, this.exposeObj, { banner: this });
-    };
-
-    Banner.prototype.injectScript = function(idoc) {
-      if (typeof this.params.before === 'function'){
-        this.params.before(this);
-      }
-      this.log(3, 'injectScript');
-      this.doc = idoc;
-      var ad = '<scr' + 'ipt type="text/javascript" src="' + this.url + '"></scr' + 'ipt>';
-
-
-
-      // Only run the tag through 3rd party Burt Tracking if it has been loaded
-     if (this.params.trackBurt && window.burt_api && window.burt_api.site && typeof burt_api.site.trackFinnAd === 'function') {
-       try {
-         var _ad = ad;
-         ad = burt_api.site.trackFinnAd(this, ad);
-       } catch(err){
-         ad = _ad;
-       }
-      }
-
-      idoc.write(ad);
-      return this;
-    };
-
-    Banner.prototype.refresh = function() {
-      if (this.incomplete){
-        this.fail('Cant refresh bacause of not valid config.');
-      }
-      this.refreshCalled  = true;
-      this.resolved       = false;
-      if (this.failed && this.iframe && this.iframe.$wrapper){
-        this.iframe.$wrapper.removeClass('webad-failed');
-      }
-      this.failed         = false;
-      this.retries        = DEFAULTS.RETRIES;
-      this.timer          = this.params.timer||DEFAULTS.TIMEOUT;
-
-      // if iframe is removed, this will throw
-      try {
-        var url = this.iframe.getUrl(this.doc.location.href);
-        this.doc.location.replace(url);
-      } catch (err) {
-        if (this.active) {
-          F.webAds.remove(this.name);
-          F.webAds.render(this.name);
-        }
-      }
-      this.refreshedTimes =  this.refreshedTimes + 1;
-      return this;
-    };
-
-    Banner.prototype.remove = function() {
-      this.active   = false;
-      this.resolved = false;
-      this.iframe.remove();
-      return this;
-    };
-
-    Banner.prototype.isValid = function(){
-      this.log(2, 'Not valid if '+this.params.windowWidth+' is less than '+this.params.threshold);
-      if (typeof this.params.threshold !== 'undefined' && this.params.windowWidth <= this.params.threshold){
-        return false;
-      }
-      return true;
-    };
-
-    Banner.prototype.getClassName = function(){
-      return "webad-" + this.name.toLowerCase();
-    };
-
-    Banner.prototype.insert = function() {
-      this.insertCalled = true;
-      this.log(3, 'Insert()');
-      if(!this.isValid()){
-        this.notValid = true;
-        this.fail('notValid');
-        return this;
-      }
-
-      if(!this.container){
-        this.incomplete = true;
-        this.failed     = true;
-        this.log(1, 'Missing container '+this.container);
-        this.resolve();
-        return this;
-      }
-      if (this.active && this.$webAd && $("."+this.getClassName()).length > 0) {
-        this.log(1, 'iframe present in page');
-        return this;
-      }
-
-      this.incomplete = false;
-      this.failed     = false;
-      this.resolved   = false;
-      this.active     = true;
-      var $container = typeof this.container === 'string' ? jQuery("#" + this.container) : this.container;
-      if ($container.size() <= 0) {
-        this.fail('Missing valid container on '+this.name, true);
-        return this;
-      }
-      this.log(3, 'Creating and inserting iframe/banner');
-      if (!this.iframe){
-        this.iframe = new Iframe(this.name, this.params);
-      }
-      this.iframe.makeIframe();
-      $container.data('webads-processed', 'processed');
-      this.iframe.$wrapper.appendTo($container);
-      return this;
-    };
-
-    Banner.prototype.getBannerFlag = function(key){
-      return F.webAds.getBannerFlag(key);
-    };
-
-    Banner.prototype.setBannerFlag = function(key, value){
-      return F.webAds.setBannerFlag(key, value);
-    };
-
-    Banner.prototype.plugin = function(name, a, b, c){
-      var plugin = F.webAds.getPlugin(name);
-      if (!plugin){ return plugin; }
-      plugin.called[this.name] = plugin.called[this.name] ? plugin.called[this.name] + 1 : 1;
-      return plugin.run.apply(plugin, [this, a, b, c]);
-    };
-
-    return Banner;
-  })();
-
-  F.webAds.Banner = Banner;
-  F.webAds.Iframe = Iframe;
-
-}).call(this, FINN, jQuery);
-var FINN=FINN||{};
+})(FINN, jQuery);var FINN=FINN||{};
 
 (function(F, $){
   
@@ -1179,11 +1179,7 @@ var FINN=FINN||{};
           "message":"first plugin argument/options hash is not valid JSON"
         });
       }
-      //var params = { areaId : options.customer, orgid : options.area };
-      var params = {
-        'BANNER_ORGGROUPREF' : "kjede_privatmegleren",
-        'BANNER_AREAID' : "20045"
-      };
+      var params = { 'BANNER_ORGGROUPREF' : options.customer, 'BANNER_AREAID' : options.area };
       var req    = $.getJSON(FINN.webAds.base + this.dataUrl, params);
       req.success(function(list){
         handleResult({'list': list});
@@ -1213,7 +1209,7 @@ var FINN=FINN||{};
 
   /* overlay with iframe content, or wrap ad iframe*/
   F.webAds.registerPlugin('overlayOld', {
-    run: function(options, callback){
+    run: function(banner, options, callback){
       var w = options.width||'80%';
       var h = options.height||'400px';
 
