@@ -63,7 +63,7 @@ async.series(libs,
 
     }, function(err, result){
       console.log('File output:'.green, ' ', 'webAds.js'.bold.cyan);
-      webAdsMinified.write(mini(result.join(';\n\r')));
+      webAdsMinified.write(';'+mini(result.join(';\n\r')));
       console.log('File output:'.green, ' ', 'webAds.min.js'.bold.cyan);
       webAdsMinified.end();
       webAdsStream.end();
