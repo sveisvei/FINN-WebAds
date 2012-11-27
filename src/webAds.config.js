@@ -83,6 +83,15 @@ var FINN = FINN || {};
       done: fixTopPosition,
       trackBurt: true
     },
+    "Top_ipad": {
+      "extends": "normal",
+      width: 992,
+      threshold: 769,
+      height: 150,
+      bodyFailClass: "top-position-collapsed",
+      done: fixTopPosition,
+      trackBurt: true
+    },
     "Left1": {
       "extends": "normal",
       width: 240,
@@ -121,6 +130,14 @@ var FINN = FINN || {};
       container: "banners-middle",
       trackBurt: true
     },
+    "Middle_ipad": {
+      "extends": "normal",
+      width: 580,
+      height: 400,
+      threshold: 291,
+      container: "banners-middle",
+      trackBurt: true
+    },
     "Wallpaper": {
       "extends": "normal",
       hidden: true,
@@ -128,6 +145,11 @@ var FINN = FINN || {};
       done: fixWallpaper
     },
     "Survey": {
+      "extends": "normal",
+      hidden: true,
+      done: $.noop
+    },
+    "Survey_ipad": {
       "extends": "normal",
       hidden: true,
       done: $.noop
