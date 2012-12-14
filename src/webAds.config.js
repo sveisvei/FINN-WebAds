@@ -83,9 +83,9 @@ var FINN = FINN || {};
       done: fixTopPosition,
       trackBurt: true
     },
-    "Top_ipad": {
+    "Top_iad": {
       "extends": "normal",
-      width: 992,
+      width: 984,
       threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
@@ -166,7 +166,15 @@ var FINN = FINN || {};
       "extends": "bottomads",
       trackBurt: true
     },
+    "BottomLeft_ipad": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
     "BottomMiddle": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomMiddle_ipad": {
       "extends": "bottomads",
       trackBurt: true
     },
@@ -174,7 +182,15 @@ var FINN = FINN || {};
       "extends": "bottomads",
       trackBurt: true
     },
+    "BottomRight_ipad": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
     "BottomRight2": {
+      "extends": "bottomads",
+      trackBurt: true
+    },
+    "BottomRight2_ipad": {
       "extends": "bottomads",
       trackBurt: true
     },
