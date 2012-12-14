@@ -83,9 +83,9 @@ var FINN = FINN || {};
       done: fixTopPosition,
       trackBurt: true
     },
-    "Top_iad": {
+    "Top_ipad": {
       "extends": "normal",
-      width: 984,
+      width: 986,
       threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
