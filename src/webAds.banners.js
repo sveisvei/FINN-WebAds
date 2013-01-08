@@ -27,7 +27,7 @@
       var url     = F.webAds.iframeUrl || '/html/banner/webad.html';
       var sep     = url.indexOf('?') !== -1 ? '&' : '?';
       var refresh = src && src.indexOf('refreshWebAd') === -1 ? 'refreshWebAd=true&' : '';
-      return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#_" + this.name;
+      return url +  (sep + 'ver=' + IFRAME_VERSION + '&' ) + refresh + "#banner_" + this.name;
     };
 
 
