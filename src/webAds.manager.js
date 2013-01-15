@@ -404,7 +404,7 @@ var FINN = FINN||{};
   }
 
   function expose(idocument, iwindow){
-    var name = idocument.location.hash.substring(2);
+    var name = idocument.location.hash.substring(8);
     var list = bannerMap[name].expose();
     $.each(list, function(k){ iwindow[k] = this; });
   }

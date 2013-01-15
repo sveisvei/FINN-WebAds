@@ -153,7 +153,7 @@ var FINN = FINN||{};
       var name = 'overlayad'+banner.name;
       // Check if already loaded
       if ($(".webad-"+name.toLowerCase()).size() > 0){
-        if (typeof callback === 'function') callback()
+        if (typeof callback === 'function') callback();
         return true;
       }
 
@@ -211,9 +211,9 @@ var FINN = FINN||{};
 
 
 
-      if (typeof callback === 'function') callback(function(){
-        remove()
-      })
+      if (typeof callback === 'function') {
+        callback(function(){ remove(); });
+      }  
       return true;
 
     }
