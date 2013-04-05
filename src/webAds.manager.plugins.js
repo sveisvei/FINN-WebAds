@@ -86,7 +86,7 @@ var FINN = FINN||{};
           "message":"first plugin argument/options hash is not valid JSON"
         });
       }
-      var params = { 'BANNER_ORGGROUPREF' : options.customer, 'BANNER_AREAID' : options.area };
+      var params = { 'BANNER_ORGGROUPREF' : options.customer, 'BANNER_AREAID' : options.area, 'T' : (new Date).getTime()};
       var req    = $.getJSON(FINN.webAds.base + this.dataUrl, params);
       req.success(function(list){
         handleResult({'list': list});

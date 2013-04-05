@@ -9,7 +9,9 @@ var webAdsStream    = fs.createWriteStream(target + 'webads.js');
 var webAdsMinified  = fs.createWriteStream(target + 'webads.min.js');
 
 var libs = [
-  'lib/rich-finn-no-2.2.min.js'/*,
+  'lib/before.rich.js',
+  'lib/rich-finn-no-2.3.min.js',
+  'lib/after.rich.js'/*,
   'lib/jqueryui.position.min.js'*/
 ];
 
