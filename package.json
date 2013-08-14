@@ -5,7 +5,7 @@
     "express": "2.5.8",
     "jade": ">= 0.0.1",
     "underscore": "*",
-    "uglify-js": "*",
+    "uglify-js": "1.3.5",
     "colors": "*",
     "async": "~0.1.22",
     "jshint": "~0.9.1"

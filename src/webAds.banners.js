@@ -135,7 +135,7 @@
     var css = [
       'object, embed, div, img, iframe { display: block; vertical-align:bottom;}',
       'body,html { overflow: hidden; background: transparent; display: inline; }',
-      '#webAd {display: inline-block; vertical-align:bottom;}',
+      '#webAd {display: inline-block; vertical-align:bottom;}'
     ].join('\n');
 
     function insertCss(css, doc) {
