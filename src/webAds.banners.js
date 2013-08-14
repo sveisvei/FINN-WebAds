@@ -98,6 +98,7 @@
       this.notValid       = false;
       this.ignoreOnload   = false;
       this.insertCalled   = false;
+      this.responsive     = false;
       this.log(1, 'Banner init. (new Banner({}))');
     }
 
@@ -121,9 +122,45 @@
 
     };
 
+    var re_width = /width\s*\:\s*100%/i;
+    var re_height = /height\s*\:\s*225/i;
+    Banner.prototype.isResponsive = function(){
+      var collection = this.$webAd.find('div').filter(function(){
+        var style = $(this).attr('style');
+        return style && style.match(re_width) && style.match(re_height);
+      });
+       return collection.length > 0;     
+    };
+
+    var css = [
+      'object, embed, div, img, iframe { display: block; vertical-align:bottom;}',
+      'body,html { overflow: hidden; background: transparent; display: inline; }',
+      '#webAd {display: inline-block; vertical-align:bottom;}',
+    ].join('\n');
+
+    function insertCss(css, doc) {
+        doc = doc||document;
+        var head = doc.getElementsByTagName('head')[0];
+        var style = doc.createElement('style');
+        style.type = 'text/css';
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(doc.createTextNode(css));
+        }
+
+        head.appendChild(style);
+    }
+
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
+      if (!this.isResponsive()){
+        // inject CSS so sizechecking works
+        insertCss(css, this.doc);
+      } else {
+        this.responsive = true;
+      }
       if(this.ignoreOnload === true){
         return this.resolve();
       }
@@ -237,7 +274,8 @@
     Banner.prototype.resize = function(w, h) {
       if (typeof w !== 'undefined') this.width = w;
       if (typeof h !== 'undefined') this.height = h;
-      this.iframe.$iframe.css({ "height": this.height, "width": this.width}).attr('height', this.height).attr('width', this.width);
+      var width = this.responsive ? '100%' : this.width;
+      this.iframe.$iframe.css({ "height": this.height, "width": width}).attr('height', this.height).attr('width', width);
       this.resized = true;
       //console.log(this.name, 'resize', w, h, this.width, this.height);
 

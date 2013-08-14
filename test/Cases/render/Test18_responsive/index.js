@@ -1,0 +1,1 @@
+document.write('<div  style="height:225px;width:100%;background:yellow:color:black;text-align:center;">responsive</div>')
