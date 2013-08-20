@@ -1,0 +1,1 @@
+document.write('<a href="#"><img src="'+webAds.contextBase+'topright/Left1/AT750_3x3.gif" /></a>')

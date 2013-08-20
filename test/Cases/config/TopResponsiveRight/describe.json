@@ -1,0 +1,6 @@
+{
+  "expectations": {
+    "noBodyClass": ["has-dominant-campaign", "has-dominant-wallpaper"]    
+  },
+  "timeout": 600
+}

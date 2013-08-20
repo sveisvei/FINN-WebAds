@@ -2,8 +2,8 @@
   "name": "FINN-webAds",
   "version": "0.1.0",
   "dependencies": {
-    "express": "2.5.8",
-    "jade": ">= 0.0.1",
+    "express": "~2.5.8",
+    "jade": "0.34.1",
     "underscore": "*",
     "uglify-js": "1.3.5",
     "colors": "*",

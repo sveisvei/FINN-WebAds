@@ -1,0 +1,1 @@
+document.write('<div style="background:pink;width:'+banner.params.setWidth+';height:'+banner.params.setHeight+'px;">RESPONSIVE ISH'+banner.name+'</div>')
