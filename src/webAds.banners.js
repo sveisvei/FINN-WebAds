@@ -122,14 +122,10 @@
 
     };
 
-    var re_width = /width\s*\:\s*100%/i;
-    var re_height = /height\s*\:\s*225/i;
-    Banner.prototype.isResponsive = function(){
-      var collection = this.$webAd.find('div').filter(function(){
-        var style = $(this).attr('style');
-        return style && style.match(re_width) && style.match(re_height);
-      });
-       return collection.length > 0;     
+    
+    Banner.prototype.isResponsive = function(height){
+      this.responsive = (height === 225);
+      return this.responsive;
     };
 
     var css = [
@@ -155,7 +151,7 @@
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      if (!this.isResponsive()){
+      if (!this.isResponsive(this.$webAd.height())){
         // inject CSS so sizechecking works
         insertCss(css, this.doc);
       } else {

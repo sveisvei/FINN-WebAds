@@ -123,14 +123,10 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
 
     };
 
-    var re_width = /width\s*\:\s*100%/i;
-    var re_height = /height\s*\:\s*225/i;
-    Banner.prototype.isResponsive = function(){
-      var collection = this.$webAd.find('div').filter(function(){
-        var style = $(this).attr('style');
-        return style && style.match(re_width) && style.match(re_height);
-      });
-       return collection.length > 0;     
+    
+    Banner.prototype.isResponsive = function(height){
+      this.responsive = (height === 225);
+      return this.responsive;
     };
 
     var css = [
@@ -156,7 +152,7 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      if (!this.isResponsive()){
+      if (!this.isResponsive(this.$webAd.height())){
         // inject CSS so sizechecking works
         insertCss(css, this.doc);
       } else {
@@ -438,6 +434,11 @@ var FINN = FINN || {};
 
   function fixTopPosition(banner) {
     banner.log(2, "cb fixTopPosition");
+    if (banner.responsive === true){
+      banner.iframe.$wrapper.css({'width': '100%'});
+      $('#banners').css({'max-width': '100%'});
+      return;
+    }
     if (banner.failed === true){
       return;
     }
@@ -1076,7 +1077,7 @@ var FINN = FINN || {};
   function refresh(name, cb){
     var banner = bannerMap[name];
     // DO NOT render if banner is either incomplete or notvalid
-    if (banner && !(banner.notValid === true || banner.incomplete === true)){
+    if (banner && !(banner.notValid === true || banner.incomplete === true)){
         banner.refresh();
         // .refresh command resets banner.resolved
         if (cb && typeof cb === 'function'){

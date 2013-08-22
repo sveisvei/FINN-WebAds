@@ -323,7 +323,7 @@ var FINN = FINN||{};
   function refresh(name, cb){
     var banner = bannerMap[name];
     // DO NOT render if banner is either incomplete or notvalid
-    if (banner && !(banner.notValid === true || banner.incomplete === true)){
+    if (banner && !(banner.notValid === true || banner.incomplete === true)){
         banner.refresh();
         // .refresh command resets banner.resolved
         if (cb && typeof cb === 'function'){

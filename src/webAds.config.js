@@ -16,6 +16,11 @@ var FINN = FINN || {};
 
   function fixTopPosition(banner) {
     banner.log(2, "cb fixTopPosition");
+    if (banner.responsive === true){
+      banner.iframe.$wrapper.css({'width': '100%'});
+      $('#banners').css({'max-width': '100%'});
+      return;
+    }
     if (banner.failed === true){
       return;
     }
