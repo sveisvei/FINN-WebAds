@@ -125,6 +125,8 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
 
     
     Banner.prototype.isResponsive = function(height){
+      height = height||this.$webAd.height();
+      this.log(2, 'checking responsive height:'+ height);
       this.responsive = (height === 225);
       return this.responsive;
     };
@@ -152,12 +154,14 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-      if (!this.isResponsive(this.$webAd.height())){
+
+      if (!this.isResponsive()){
         // inject CSS so sizechecking works
         insertCss(css, this.doc);
       } else {
         this.responsive = true;
       }
+
       if(this.ignoreOnload === true){
         return this.resolve();
       }
@@ -190,7 +194,6 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
     Banner.prototype.processSize = function() {
       var w = this.params.staticAvailableWidth||this.$webAd.width();
       var h = this.$webAd.height();
-      //console.log('extracting size',this.name, w, h);
       this.log(2, 'Checking if valid size: '+w+'x'+h);
       if (this.isValidSize(w, h)) {
         if (this.retries === DEFAULTS.RETRIES && this.hasEmptyPixel()){
@@ -198,6 +201,7 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
         }
         return this.pollForNewSize(w, h);
       }
+      this.responsive = this.isResponsive(h);
       this.resizeIfNotDefault(w, h);
       this.resolve();
       return this;
@@ -435,6 +439,7 @@ var FINN = FINN || {};
   function fixTopPosition(banner) {
     banner.log(2, "cb fixTopPosition");
     if (banner.responsive === true){
+      banner.$webAd.css({'display':'block', 'width':'100%'});
       banner.iframe.$wrapper.css({'width': '100%'});
       $('#banners').css({'max-width': '100%'});
       return;

@@ -1,4 +1,5 @@
 {
   "setWidth": "100%",
-  "setHeight": 225
+  "setHeight": 225,
+  "forceDelay": 1000
 }
