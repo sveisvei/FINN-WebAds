@@ -144,6 +144,13 @@ var FINN = FINN || {};
       container: "banners-middle",
       trackBurt: true
     },
+    "Txt1": {
+      "extends": "normal",
+      width: 320,
+      threshold: 291,
+      container: "banners-txt1",
+      trackBurt: true
+    },
     "Wallpaper": {
       "extends": "normal",
       hidden: true,
