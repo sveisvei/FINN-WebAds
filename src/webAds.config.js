@@ -92,7 +92,6 @@ var FINN = FINN || {};
     "Top_ipad": {
       "extends": "normal",
       width: 986,
-      threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition,
