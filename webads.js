@@ -514,7 +514,6 @@ var FINN = FINN || {};
     "Top_ipad": {
       "extends": "normal",
       width: 986,
-      threshold: 769,
       height: 150,
       bodyFailClass: "top-position-collapsed",
       done: fixTopPosition,
@@ -564,6 +563,13 @@ var FINN = FINN || {};
       height: 400,
       threshold: 291,
       container: "banners-middle",
+      trackBurt: true
+    },
+    "Txt1": {
+      "extends": "normal",
+      width: 320,
+      threshold: 291,
+      container: "banners-txt1",
       trackBurt: true
     },
     "Wallpaper": {
