@@ -131,36 +131,10 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
       return this.responsive;
     };
 
-    var css = [
-      'object, embed, div, img, iframe { display: block; vertical-align:bottom;}',
-      'body,html { overflow: hidden; background: transparent; display: inline; }',
-      '#webAd {display: inline-block; vertical-align:bottom;}'
-    ].join('\n');
-
-    function insertCss(css, doc) {
-        doc = doc||document;
-        var head = doc.getElementsByTagName('head')[0];
-        var style = doc.createElement('style');
-        style.type = 'text/css';
-        if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-        } else {
-            style.appendChild(doc.createTextNode(css));
-        }
-
-        head.appendChild(style);
-    }
 
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-
-      if (!this.isResponsive()){
-        // inject CSS so sizechecking works
-        insertCss(css, this.doc);
-      } else {
-        this.responsive = true;
-      }
 
       if(this.ignoreOnload === true){
         return this.resolve();
@@ -201,7 +175,7 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
         }
         return this.pollForNewSize(w, h);
       }
-      this.responsive = this.isResponsive(h);
+      this.isResponsive(h);
       this.resizeIfNotDefault(w, h);
       this.resolve();
       return this;
@@ -268,7 +242,7 @@ var FINN = FINN||{};FINN.data = FINN.data||{};FINN.data.banner = FINN.data.banne
     Banner.prototype.resizeIfNotDefault = function(w, h){
       this.width  = w;
       this.height = h;
-      if ( !this.isDefaultSize(w, h) ){ this.resize(); }
+      if (this.responsive === false && !this.isDefaultSize(w, h) ){ this.resize(); }
       return this;
     };
 
@@ -438,12 +412,17 @@ var FINN = FINN || {};
 
   function fixTopPosition(banner) {
     banner.log(2, "cb fixTopPosition");
+
+    // temp hack for ipad top position
     if (banner.responsive === true){
       banner.$webAd.css({'display':'block', 'width':'100%'});
       banner.iframe.$wrapper.css({'width': '100%'});
+      banner.iframe.$iframe.css({'height': '225px'});
+      // make wrapper fill screen
       $('#banners').css({'max-width': '100%'});
       return;
     }
+
     if (banner.failed === true){
       return;
     }
