@@ -16,12 +16,17 @@ var FINN = FINN || {};
 
   function fixTopPosition(banner) {
     banner.log(2, "cb fixTopPosition");
+
+    // temp hack for ipad top position
     if (banner.responsive === true){
       banner.$webAd.css({'display':'block', 'width':'100%'});
       banner.iframe.$wrapper.css({'width': '100%'});
+      banner.iframe.$iframe.css({'height': '225px'});
+      // make wrapper fill screen
       $('#banners').css({'max-width': '100%'});
       return;
     }
+
     if (banner.failed === true){
       return;
     }

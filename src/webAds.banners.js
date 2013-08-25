@@ -130,36 +130,10 @@
       return this.responsive;
     };
 
-    var css = [
-      'object, embed, div, img, iframe { display: block; vertical-align:bottom;}',
-      'body,html { overflow: hidden; background: transparent; display: inline; }',
-      '#webAd {display: inline-block; vertical-align:bottom;}'
-    ].join('\n');
-
-    function insertCss(css, doc) {
-        doc = doc||document;
-        var head = doc.getElementsByTagName('head')[0];
-        var style = doc.createElement('style');
-        style.type = 'text/css';
-        if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-        } else {
-            style.appendChild(doc.createTextNode(css));
-        }
-
-        head.appendChild(style);
-    }
 
     Banner.prototype.onload = function() {
       this.log(2, 'onload triggered on iframe');
       this.$webAd = this.iframe.$iframe.contents().find("#"+this.adContainer);
-
-      if (!this.isResponsive()){
-        // inject CSS so sizechecking works
-        insertCss(css, this.doc);
-      } else {
-        this.responsive = true;
-      }
 
       if(this.ignoreOnload === true){
         return this.resolve();
@@ -200,7 +174,7 @@
         }
         return this.pollForNewSize(w, h);
       }
-      this.responsive = this.isResponsive(h);
+      this.isResponsive(h);
       this.resizeIfNotDefault(w, h);
       this.resolve();
       return this;
@@ -267,7 +241,7 @@
     Banner.prototype.resizeIfNotDefault = function(w, h){
       this.width  = w;
       this.height = h;
-      if ( !this.isDefaultSize(w, h) ){ this.resize(); }
+      if (this.responsive === false && !this.isDefaultSize(w, h) ){ this.resize(); }
       return this;
     };
 
