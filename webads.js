@@ -416,8 +416,8 @@ var FINN = FINN || {};
     // temp hack for ipad top position
     if (banner.responsive === true){
       banner.$webAd.css({'display':'block', 'width':'100%'});
-      banner.iframe.$wrapper.css({'width': '100%'});
-      banner.iframe.$iframe.css({'height': '225px'});
+      banner.iframe.$wrapper.css({'width': '100%'}).find('.webad-inner').css({'margin-right':'10px'});
+      banner.iframe.$iframe.css({'height': '225px', 'width': '100%'});
       // make wrapper fill screen
       $('#banners').css({'max-width': '100%'});
       return;
